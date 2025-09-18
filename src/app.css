@@ -1,0 +1,50 @@
+:root {
+	/* Colors */
+	--color-primary: #566F8F;
+	--color-secondary: #A8BFDC;
+	--color-accent: #DC6F41;
+	--color-accent-soft: #FCB89B;
+
+	/* Layout */
+	--max-width: 1200px;
+	--container-padding: 1rem;
+
+	/* Root level setting */
+	box-sizing: border-box;
+}
+
+@media (width >=768px) {
+	:root {
+		--container-padding: 2rem;
+	}
+}
+
+@media (width >=1024px) {
+	:root {
+		--container-padding: 3rem;
+	}
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+/* Container */
+.container {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: var(--max-width);
+	padding: 0 var(--container-padding);
+	margin: 0 auto;
+}
+
+.text-large {
+	font-family: 'Futura PT', sans-serif;
+	font-size: 70px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 90px;
+	text-align: center;
+	letter-spacing: 0.1em;
+}
