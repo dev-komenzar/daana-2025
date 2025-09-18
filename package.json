@@ -1,0 +1,42 @@
+{
+	"name": "daana-2025",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "eslint --fix .",
+		"lint:style": "stylelint --fix --ignore-path .gitignore '**/*.{css,svelte}'"
+	},
+	"devDependencies": {
+		"@eslint/compat": "^1.2.5",
+		"@eslint/js": "^9.22.0",
+		"@sveltejs/adapter-auto": "^6.0.0",
+		"@sveltejs/kit": "^2.22.0",
+		"@sveltejs/vite-plugin-svelte": "^6.0.0",
+		"@types/node": "^22",
+		"eslint": "^9.22.0",
+		"eslint-plugin-perfectionist": "^4.15.0",
+		"eslint-plugin-svelte": "^3.0.0",
+		"eslint-plugin-unicorn": "^61.0.2",
+		"globals": "^16.0.0",
+		"stylelint": "^16.24.0",
+		"stylelint-config-recess-order": "^7.3.0",
+		"stylelint-config-standard": "^39.0.0",
+		"svelte": "^5.0.0",
+		"svelte-check": "^4.0.0",
+		"typescript": "^5.0.0",
+		"typescript-eslint": "^8.20.0",
+		"vite": "^7.0.4"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
+	}
+}
