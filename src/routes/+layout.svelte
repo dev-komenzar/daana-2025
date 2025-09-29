@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+	import Header from '$lib/components/layout/header.svelte';
 
 	import '../app.css'
 
@@ -12,6 +13,7 @@
 
 <div class='layout'>
 	<main class='main-content'>
+		<Header />
 		{@render children?.()}
 	</main>
 </div>
