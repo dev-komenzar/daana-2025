@@ -128,7 +128,6 @@
 		text-align: center;
 		letter-spacing: 0.14em;
 		text-decoration: none;
-
 	}
 
 	.link-wrapper {
@@ -144,6 +143,7 @@
 
 		.list {
 			justify-content: end;
+			padding-bottom: 0%;
 		}
 	}
 </style>
