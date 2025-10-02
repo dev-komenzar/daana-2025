@@ -37,17 +37,34 @@ body {
 	box-sizing: border-box;
 	width: 100%;
 	max-width: var(--max-width);
-	padding: 0 var(--container-padding);
+	padding: 0;
 	margin: 0 auto;
 }
 
 .text-large {
+	max-width: 100%;
 	font-family: 'Futura PT', sans-serif;
-	font-size: 70px;
+	font-size: 56px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 90px;
 	text-align: center;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+}
+
+.text-medium {
+	font-family: 'Noto Sans JP', sans-serif;
+	font-size: 25px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 36px;
+	color: #000;
+	text-align: center;
+}
+
+@media screen and (width >= 768px){
+	.text-large {
+		font-size: 70px;
+	}
 }
