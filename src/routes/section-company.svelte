@@ -17,6 +17,14 @@
 
 <style>
 	.content {
-		max-width: 654px;
+		width: 92%;
+		max-width: 540px;
+	}
+
+	@media screen and (width >= 768px) {
+		.content {
+			width: 100%;
+			max-width: 540px;
+		}
 	}
 </style>
