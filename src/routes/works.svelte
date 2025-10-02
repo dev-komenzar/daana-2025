@@ -39,26 +39,34 @@
 			variant: 'secondary',
 		},
 ]
+
+/**
+ * Grid Area Helper
+ * @param index 
+ * @returns Area name
+ */
+function getGridArea(index: number) {
+	return ['a', 'b', 'c', 'd'][index]
+}
 	
 </script>
 
-<div class="works-container">
-	<div class="works-grid">
-		{#each works as work (work.name)}
-			<Card 
-				label={work.name}
-				position={work.position}
-				src={work.imageUrl}
-				variant={work.variant}
-			/>
-		{/each}
-	</div>
+<div class="works-grid">
+	{#each works as work, index (work.name)}
+		<Card
+			label={work.name}
+			position={work.position}
+			src={work.imageUrl}
+			style={`grid-area: ${getGridArea(index)}`}
+			variant={work.variant}
+		/>
+	{/each}
 </div>
 
 <style>
 	.works-grid {
-		display: grid;
-		grid-template-columns: 1fr;
+		display: flex;
+		flex-direction: column;
 		gap: 1.5rem;
 		justify-items: center;
 		margin-top: 1.5rem;
@@ -66,7 +74,28 @@
 
 	@media (width >= 768px) {
 		.works-grid {
-			grid-template-columns: repeat(2, 1fr);
+			display: grid;
+			grid-template: 
+				"a a a a a a b b b b b" 368px
+				"c c c c c d d d d d d" 368px /
+				1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			gap: 0;
+		}
+
+		.item1 {
+			grid-area: a;
+		}
+
+		.item2 {
+			grid-area: b;
+		}
+
+		.item3 {
+			grid-area: c;
+		}
+
+		.item4 {
+			grid-area: d;
 		}
 	}
 </style>

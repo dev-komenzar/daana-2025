@@ -3,13 +3,20 @@
 		label: string;
 		position: string;
 		src?: string;
+		style?: string;
 		variant: "primary" | "secondary";
 	};
 
-	let { label, position, src, variant = "primary" }: Properties = $props();
+	let { 
+		label,
+		position,
+		src,
+		style,
+		variant = "primary",
+	}: Properties = $props();
 </script>
 
-<div class={["works-card", variant]}>
+<div class={["works-card", variant]} style={style}>
 
 	{#if src}
 		<img {src} alt={label} class="image" />
@@ -25,8 +32,7 @@
 	.works-card {
 		position: relative;
 		width: 100%;
-		max-width: 416px;
-		aspect-ratio: 1 / 1;
+		height: 368px;
 		padding: 0%;
 		overflow: hidden;
 		border-radius: 52px;
