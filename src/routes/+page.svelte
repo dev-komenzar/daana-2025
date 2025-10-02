@@ -1,7 +1,9 @@
 <script lang="ts">
 	import SectionCompany from './section-company.svelte';
+	import SectionDonation from './section-donation.svelte';
 	import SectionEyecatch from './section-eyecatch.svelte';
 	import SectionMission from './section-mission.svelte';
+	import SectionNews from './section-news.svelte';
 	import SectionWorks from './section-works.svelte';
 </script>
 
@@ -12,3 +14,7 @@
 <SectionCompany />
 
 <SectionWorks />
+
+<SectionNews />
+
+<SectionDonation />
