@@ -1,5 +1,5 @@
 <section id="mission" class="mission-section">
-	<div class="container mission-container">
+	<div class="hero-container">
 		<div class="mission-content">
 			<h2 class='text-large'>Mission</h2>
 		</div>
@@ -16,18 +16,10 @@
 		flex-direction: column-reverse;
 		align-items: center;
 		justify-content: space-between;
-		min-height: 80lvh;
+		min-height: 92lvh;
 		color: white;
 		background-color: var(--color-primary);
 
-	}
-
-	.mission-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
 	}
 
 	.message {

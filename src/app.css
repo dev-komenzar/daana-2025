@@ -32,13 +32,29 @@ body {
 	margin: 0;
 }
 
-/* Container */
+/*
+Container
+セクションコンポーネントのトップレベルで使用する。
+*/
+.hero-container {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: var(--max-width);
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+
 .container {
 	box-sizing: border-box;
 	width: 100%;
 	max-width: var(--max-width);
 	padding: 0;
-	margin: 0 auto;
+	margin: 8rem auto 0;
 }
 
 .text-large {
@@ -63,8 +79,48 @@ body {
 	text-align: center;
 }
 
-@media screen and (width >= 768px){
+/* Full, Wide, Content classes */
+.content {
+	width: 92%;
+	max-width: 540px;
+	margin: 0 auto;
+}
+
+.wide-content {
+	width: 92%;
+	max-width: 650px;
+	margin: 0 auto;
+}
+
+.full-content {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+@media screen and (width >=768px) {
+	.container {
+		margin: 12rem auto 0;
+	}
+
 	.text-large {
 		font-size: 70px;
+	}
+
+	.content {
+		width: 540px;
+		margin: 0 auto;
+	}
+
+	.wide-content {
+		width: 922px;
+		max-width: 96%;
+		margin: 0 auto;
+	}
+
+	.full-content {
+		width: 100%;
+		max-width: 100%;
+		margin: 0 auto;
 	}
 }

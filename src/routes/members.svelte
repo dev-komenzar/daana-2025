@@ -42,20 +42,14 @@
 	];
 </script>
 
-<div class="members-container">
-	<div class="members-grid">
-		{#each members as member (member.name)}
-			<MemberCard label={member.name} position={member.position} src={member.imageUrl}
-			variant={member.variant} />
-		{/each}
-	</div>
+<div class="members-grid">
+	{#each members as member (member.name)}
+		<MemberCard label={member.name} position={member.position} src={member.imageUrl}
+		variant={member.variant} />
+	{/each}
 </div>
 
 <style>
-	.members-container {
-		margin-top: 2rem;
-	}
-
 	.members-grid {
 		display: grid;
 		grid-template-columns: 1fr;
