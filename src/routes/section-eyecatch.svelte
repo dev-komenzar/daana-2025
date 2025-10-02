@@ -2,9 +2,9 @@
 
 </script>
 
-<section id="hero" class="hero-section">
-	<div class="container hero-container">
-		<div class="hero-content">
+<section id="eyecatch" class="eyecatch-section">
+	<div class="hero-container eyecatch-container">
+		<div class="eyecatch-content">
 			<h1>仏教、かもしれない</h1>
 		</div>
 	</div>
@@ -12,7 +12,7 @@
 </section>
 
 <style>
-	.hero-section {
+	.eyecatch-section {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -20,16 +20,11 @@
 		padding: var(--space-16) 0;
 	}
 
-	.hero-container {
+	.eyecatch-container {
 		z-index: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
 	}
 
-	.hero-content {
+	.eyecatch-content {
 		max-width: 800px;
 	}
 </style>
