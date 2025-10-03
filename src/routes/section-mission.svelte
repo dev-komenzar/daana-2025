@@ -17,9 +17,9 @@
 		align-items: center;
 		justify-content: space-between;
 		min-height: 92lvh;
+		padding: 70px 70px 0;
 		color: white;
 		background-color: var(--color-primary);
-
 	}
 
 	.message {
