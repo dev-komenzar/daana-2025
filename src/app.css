@@ -17,7 +17,7 @@
 	/* Font */
 	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", 'Hiragino Mincho Pro', serif;
 	--font-gothic: "FuturaLTPro-Medium", "Futura", "ヒラギノ角ゴ Pro W3", "Meiryo", sans-serif;
-	--font-gothic-bold: "FuturaLTPro-Bold", "Futura", "ヒラギノ角ゴ Pro W6", "Meiryo", sans-serif;
+	--font-gothic-bold: "FuturaLTPro-Heavy", "Futura", "ヒラギノ角ゴ Pro W6", "Meiryo", sans-serif;
 }
 
 @media (width >=768px) {
