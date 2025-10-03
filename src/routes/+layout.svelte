@@ -9,6 +9,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<script src="https://webfont.fontplus.jp/accessor/script/fontplus.js?hQIULW9VvKs%3D&box=opQCTPJIssU%3D&aa=1&ab=2"></script>
 </svelte:head>
 
 <div class='layout'>
