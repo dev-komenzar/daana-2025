@@ -25,6 +25,5 @@
 	.message {
 		align-self: flex-end;
 		max-width: 24rem;
-		font-family: var(--font-gothic);
 	}
 </style>

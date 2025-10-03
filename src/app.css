@@ -35,6 +35,7 @@
 body {
 	padding: 0;
 	margin: 0;
+	font-family: var(--font-gothic);
 }
 
 /*
@@ -82,6 +83,10 @@ Container
 	line-height: 36px;
 	color: #000;
 	text-align: center;
+}
+
+.font-gothic {
+	font-family: var(--font-gothic);
 }
 
 .font-gothic-bold {
