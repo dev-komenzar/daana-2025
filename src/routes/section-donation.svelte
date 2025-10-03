@@ -5,7 +5,7 @@
 
 <section id="donation" class="container">
 	<div class="content">
-		<h2 class="text-large">DONATE</h2>
+		<h2 class="text-large font-gothic-bold">DONATE</h2>
 		<p>豊かで、巡りのよい、循環型の社会を創る為に、まず「寄付」と言うアクションを。
 あなたの力が我々の動力です。
 	</p>

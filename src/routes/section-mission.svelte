@@ -1,7 +1,7 @@
 <section id="mission" class="mission-section">
 	<div class="hero-container">
 		<div class="mission-content">
-			<h2 class='text-large'>Mission</h2>
+			<h2 class='text-large font-gothic-bold'>Mission</h2>
 		</div>
 	</div>
 	<div class="message">

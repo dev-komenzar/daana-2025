@@ -13,6 +13,11 @@
 
 	/* Root level setting */
 	box-sizing: border-box;
+
+	/* Font */
+	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", 'Hiragino Mincho Pro', serif;
+	--font-gothic: "FuturaLTPro-Medium", "Futura", "ヒラギノ角ゴ Pro W3", "Meiryo", sans-serif;
+	--font-gothic-bold: "FuturaLTPro-Bold", "Futura", "ヒラギノ角ゴ Pro W6", "Meiryo", sans-serif;
 }
 
 @media (width >=768px) {
@@ -77,6 +82,10 @@ Container
 	line-height: 36px;
 	color: #000;
 	text-align: center;
+}
+
+.font-gothic-bold {
+	font-family: var(--font-gothic-bold);
 }
 
 /* Full, Wide, Content classes */

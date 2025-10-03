@@ -5,7 +5,7 @@
 <section id="eyecatch" class="eyecatch-section">
 	<div class="hero-container eyecatch-container">
 		<div class="eyecatch-content">
-			<h1>仏教、かもしれない</h1>
+			<h1 class="eyecatch-title">仏教、かもしれない</h1>
 		</div>
 	</div>
 	
@@ -26,5 +26,15 @@
 
 	.eyecatch-content {
 		max-width: 800px;
+	}
+
+	.eyecatch-title {
+		padding: 0 var(--space-4);
+		margin: 0;
+		font-family: var(--font-mincho);
+		line-height: 1.4;
+		color: var(--color-white);
+		text-align: center;
+		letter-spacing: 0.05em;
 	}
 </style>
