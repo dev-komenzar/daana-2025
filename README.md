@@ -24,3 +24,22 @@ pnpm dev --open
 ## Depoy
 
 Githubにリポジトリを置き、Vercelにデプロイします。
+
+## フォント
+
+フォントプラスのwebフォントを利用している。英字のゴシックにはFuturaを指定。日本語ゴシックにはNoto Sans JPを指定。
+
+### 日本語ゴシックにはNoto Sans JP
+
+Googleフォントからダウンロードしたフォントを`static/fonts/`に配置する。~~可変フォントを使用している。~~可変フォントの使用はやめた。フォントプラスに合わせてフォント名でweightを指定する方針に定める。
+
+```css
+/* app.css */
+@font-face {
+ font-family: 'Noto Sans JP Light';
+ font-style: normal;
+ font-weight: 300;
+ src: local('Noto Sans JP Light'), url('/fonts/NotoSansJP-Light.ttf') format("truetype");
+ font-display: swap;
+}
+```
