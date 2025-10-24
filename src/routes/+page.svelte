@@ -1,5 +1,6 @@
 <script lang="ts">
-	import OpeningLayer from './opening-layer.svelte';
+	import OpeningLayer from '$lib/components/layout/opening-layer.svelte';
+
 	import SectionCompany from './section-company.svelte';
 	import SectionDonation from './section-donation.svelte';
 	import SectionEyecatch from './section-eyecatch.svelte';
