@@ -1,4 +1,5 @@
 <script lang="ts">
+	import OpeningLayer from './opening-layer.svelte';
 	import SectionCompany from './section-company.svelte';
 	import SectionDonation from './section-donation.svelte';
 	import SectionEyecatch from './section-eyecatch.svelte';
@@ -6,6 +7,8 @@
 	import SectionNews from './section-news.svelte';
 	import SectionWorks from './section-works.svelte';
 </script>
+
+<OpeningLayer />
 
 <SectionEyecatch />
 
