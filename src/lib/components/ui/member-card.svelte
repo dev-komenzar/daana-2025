@@ -24,10 +24,12 @@
 <style>
 	.member-card {
 		position: relative;
+		display: grid;
+		place-items: end;
 		width: 100%;
 		max-width: 416px;
 		aspect-ratio: 1 / 1;
-		padding: 0%;
+		padding: 0;
 		overflow: hidden;
 		border-radius: 52px;
 		transition: box-shadow 0.3s ease-in-out;
@@ -46,6 +48,7 @@
 	}
 
 	.image {
+		grid-area: 1 / 1;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -57,10 +60,9 @@
 	}
 
 	.description {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		width: 278px;
+		z-index: 1;
+		grid-area: 1 / 1;
+		width: min(278px, 100%);
 		height: 78px;
 		padding: 18px 36px;
 		background-color: white;
@@ -72,8 +74,6 @@
 	}
 
 	.position {
-		position: absolute;
-		bottom: 0;
 		margin: 0;
 	}
 </style>

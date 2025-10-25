@@ -2,6 +2,7 @@
 	import Staff01 from '$lib/assets/staff-01.png';
 	import Staff02 from '$lib/assets/staff-02.png';
 	import MemberCard from '$lib/components/ui/member-card.svelte';
+	import Modal from '$lib/components/ui/modal.svelte';
 
 
 	type Member = {
@@ -40,12 +41,27 @@
 			variant: "secondary",
 		}
 	];
+
+	let modalState = $state<boolean[]>([false, false, false, false]);
 </script>
 
 <div class="members-grid">
-	{#each members as member (member.name)}
-		<MemberCard label={member.name} position={member.position} src={member.imageUrl}
-		variant={member.variant} />
+	{#each members as member, index (member.name)}
+		<button
+			class='modal-button'
+			onclick={() => {
+				modalState[index] = true
+			}}>
+			<MemberCard
+				label={member.name}
+				position={member.position}
+				src={member.imageUrl}
+				variant={member.variant}
+			/>
+		</button>
+		<Modal bind:open={modalState[index]}>
+			<p>{member.description}</p>
+		</Modal>
 	{/each}
 </div>
 
@@ -62,5 +78,10 @@
 		.members-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
+	}
+
+	.modal-button {
+		width: 100%;
+		aspect-ratio: 1 / 1;
 	}
 </style>
