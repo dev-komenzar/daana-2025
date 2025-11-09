@@ -1,12 +1,12 @@
+import { MICROCMS_API_KEY } from '$env/static/private';
 import ky from 'ky';
-
 const CONTENTS_API_URL = 'https://samgha.microcms.io/api/v1/';
 
 const headers = {
 	Accept: 'application/json',
 	Charset: 'utf8',
 	'Content-type': 'application/json',
-	'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY,
+	'X-MICROCMS-API-KEY': MICROCMS_API_KEY,
 };
 
 export const api = ky.create({

@@ -23,7 +23,7 @@ export const NewsItemSchema = v.object({
 
 export type NewsItem = v.InferOutput<typeof NewsItemSchema>
 
-type NewsItemKey = keyof NewsItem
+export type NewsItemKey = keyof NewsItem
 
 const ReturnNewApi = v.object({
 	contents: v.array(NewsItemSchema),
