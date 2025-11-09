@@ -4,7 +4,8 @@
 	import { sineOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 
-	let visible = $state(false);
+	let overlayVisible = $state(true);
+	let contentVisible = $state(false);
 
 	/*
 	 * ウェルカムアニメーションの引数。
@@ -28,19 +29,22 @@
 	}
 
 	onMount(() => {
-		visible = true;
+		contentVisible = true;
 		setTimeout(() => {
-			visible = false;
+			contentVisible = false;
+			overlayVisible = false;
 		}, 2000);
 	});
 </script>
 
-{#if visible}
+{#if overlayVisible}
 	<div class="opening-layer" out:fade>
-		<!-- Add your opening layer content here -->
-		<div in:welcome={{ duration: 800 }} >
-			<img src={Logo} alt="Opening Logo" class='logo' />
-		</div>
+		{#if contentVisible}
+			<!-- Add your opening layer content here -->
+			<div in:welcome={{ duration: 800 }} >
+				<img src={Logo} alt="Opening Logo" class='logo' />
+			</div>
+		{/if}
 	</div>
 {/if}
 
