@@ -57,6 +57,23 @@ export async function getNewsAsync(
 	return data.contents;
 }
 
+export async function getNewsPost(id: string): Promise<NewsItem> {
+	const link = `news/${id}`;
+
+	// Fetch single news post
+	let data: NewsItem;
+	try {
+		data = await fetchCmsSingle<NewsItem>(link);
+	} catch (error) {
+		consola.error(`Error fetching news post ${id} from microCMS:`, error);
+		throw error;
+	}
+
+	consola.info(`Loaded news post: ${id}`)
+
+	return data;
+}
+
 export async function getNewsTotalCount(): Promise<number> {
 	const link = 'news?limit=1&fields=id';
 
@@ -84,7 +101,22 @@ async function fetchCms<T>(link: string, options?: Options): Promise<T> {
 	// バリデーションを追加
 	v.parse(ReturnNewApi, json);
 	consola.success(`fetching success: ${link}`);
-	 
+
+	return json;
+}
+
+/**
+ * Fetch a single content item from microCMS
+ * @param {string} link - Relative path.
+ * @param {Options} options - `ky` options: https://github.com/sindresorhus/ky?tab=readme-ov-file#searchparams
+ */
+async function fetchCmsSingle<T>(link: string, options?: Options): Promise<T> {
+	consola.start(`fetching microCMS: ${link}`);
+	const json = await api.get(link, options).json<T>();
+	// バリデーションを追加
+	v.parse(NewsItemSchema, json);
+	consola.success(`fetching success: ${link}`);
+
 	return json;
 }
 
