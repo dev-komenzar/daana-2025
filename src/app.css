@@ -10,6 +10,11 @@ button {
 	border: none;
 }
 
+h2 {
+	padding: 0;
+	margin: 0;
+}
+
 
 /* Loading font */
 @font-face {
