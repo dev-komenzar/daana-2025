@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { NewsItem } from "$lib/cms";
 
+	import { resolve } from "$app/paths";
+
 	interface Properties {
 		item: NewsItem;
 	}
@@ -14,7 +16,7 @@
 	});
 </script>
 
-<article class="news-card">
+<a href={resolve(`/news/${item.id}`)} class="news-card">
 	{#if item.thumbnail?.url}
 		<div class="card-thumbnail">
 			<img
@@ -33,7 +35,7 @@
 		<time class="card-date" datetime={item.publishedAt}>{formattedDate()}</time>
 		<h3 class="card-title">{item.title || '無題'}</h3>
 	</div>
-</article>
+</a>
 
 <style>
 	.news-card {
@@ -44,6 +46,8 @@
 		background-color: white;
 		border-radius: 16px;
 		box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+		text-decoration: none;
+		color: inherit;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { NewsItem } from "$lib/cms";
 
+	import { resolve } from "$app/paths";
 	import { onDestroy, onMount } from "svelte";
 
 	interface Properties {
@@ -60,7 +61,8 @@
 
 	<div class="carousel-content">
 		{#each items as item, index (item.id)}
-			<div
+			<a
+				href={resolve(`/news/${item.id}`)}
 				class="carousel-slide"
 				class:active={currentIndex === index}
 				class:exiting={previousIndex === index}
@@ -69,7 +71,7 @@
 				<div class="slide-overlay">
 					<h3 class="slide-title">{item.title}</h3>
 				</div>
-			</div>
+			</a>
 		{/each}
 	</div>
 </div>
@@ -130,12 +132,15 @@
 		top: 0;
 		left: 0;
 		visibility: hidden;
+		display: block;
 		width: 100%;
 		height: 100%;
 		pointer-events: none;
 		background-position: center;
 		background-size: cover;
 		opacity: 0;
+		text-decoration: none;
+		color: inherit;
 		transform: translateY(100%);
 		transition:
 			opacity 0.6s ease,
