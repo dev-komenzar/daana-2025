@@ -63,7 +63,7 @@
 	}
 
 	.logo {
-		width: 440px;
-		max-width: 80%;
+		width: 100%;
+		max-width: 440px;
 	}
 </style>
