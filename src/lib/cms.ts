@@ -50,8 +50,28 @@ export async function getNewsAsync(
 		throw error;
 	}
 
+	// Log how many news loaded
+	consola.info(`Loaded ${data.contents.length} news`)
+
 	// Return only the contents array
 	return data.contents;
+}
+
+export async function getNewsTotalCount(): Promise<number> {
+	const link = 'news?limit=1&fields=id';
+
+	// Fetch with minimal data to get totalCount
+	let data: ReturnNewApi;
+	try {
+		data = await fetchCms<ReturnNewApi>(link);
+	} catch (error) {
+		consola.error('Error fetching news total count from microCMS:', error);
+		throw error;
+	}
+
+	consola.info(`Total news count: ${data.totalCount}`)
+
+	return data.totalCount;
 }
 
 /**

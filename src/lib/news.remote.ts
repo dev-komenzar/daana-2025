@@ -1,7 +1,7 @@
 import type { NewsItemKey } from '$lib/cms';
 
 import { query } from '$app/server';
-import { getNewsAsync, NewsItemSchema } from '$lib/cms';
+import { getNewsAsync, getNewsTotalCount, NewsItemSchema } from '$lib/cms';
 import * as v from 'valibot';
 
 export const getNewsRemote = query(
@@ -16,5 +16,12 @@ export const getNewsRemote = query(
 	) => {
 		const contents = await getNewsAsync(offset, limit, fields);
 		return contents;
+	}
+)
+
+export const getNewsTotalCountRemote = query(
+	async () => {
+		const totalCount = await getNewsTotalCount();
+		return totalCount;
 	}
 )
