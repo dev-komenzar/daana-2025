@@ -16,7 +16,7 @@
 	});
 </script>
 
-<a href={resolve(`/news/${item.id}`)} class="news-card">
+<a href={resolve(`/news/${item.id}`)} class="news-card" data-sveltekit-preload-data='tap'>
 	{#if item.thumbnail?.url}
 		<div class="card-thumbnail">
 			<img

@@ -67,6 +67,7 @@
 				class:active={currentIndex === index}
 				class:exiting={previousIndex === index}
 				style:background-image={item.thumbnail?.url ? `url(${item.thumbnail.url})` : 'none'}
+				data-sveltekit-preload-data='tap'
 			>
 				<div class="slide-overlay">
 					<h3 class="slide-title">{item.title}</h3>
