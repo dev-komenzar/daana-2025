@@ -1,52 +1,32 @@
 <script lang="ts">
 	import Logo from '$lib/assets/opening-logo.png';
 	import { onMount } from "svelte";
-	import { sineOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
 
-	let overlayVisible = $state(true);
-	let contentVisible = $state(false);
-
-	/*
-	 * ウェルカムアニメーションの引数。
-	 */
-	interface WelcomeParameters {
-		duration: number;
-	}
-
-	/**
-	 * オープニングアニメーションを定義する。
-	 * @see https://svelte.jp/tutorial/svelte/custom-css-transitions
-	 */
-	function welcome(node: Element, { duration }: WelcomeParameters) {
-		return {
-			css: (t: number) => `
-				opacity: ${t};
-				transform: scale(${sineOut(t) * 0.02 + 0.98});
-			`,
-			duration,
-		}
-	}
+	let animationPhase = $state<'hidden' | 'hiding' | 'initial' | 'showing'>('initial');
 
 	onMount(() => {
-		contentVisible = true;
+		// Start showing the logo
+		requestAnimationFrame(() => {
+			animationPhase = 'showing';
+		});
+
+		// Start hiding after 2 seconds
 		setTimeout(() => {
-			contentVisible = false;
-			overlayVisible = false;
+			animationPhase = 'hiding';
 		}, 2000);
+
+		// Complete animation after fade out
+		setTimeout(() => {
+			animationPhase = 'hidden';
+		}, 2800); // 2000ms + 800ms fade duration
 	});
 </script>
 
-{#if overlayVisible}
-	<div class="opening-layer" out:fade>
-		{#if contentVisible}
-			<!-- Add your opening layer content here -->
-			<div in:welcome={{ duration: 800 }} >
-				<img src={Logo} alt="Opening Logo" class='logo' />
-			</div>
-		{/if}
+<div class="opening-layer" class:hiding={animationPhase === 'hiding'} class:hidden={animationPhase === 'hidden'}>
+	<div class="logo-wrapper" class:showing={animationPhase === 'showing'}>
+		<img src={Logo} alt="Opening Logo" class='logo' />
 	</div>
-{/if}
+</div>
 
 <style lang="css">
 	.opening-layer {
@@ -59,7 +39,33 @@
 		place-items: center;
 		width: 100vw;
 		height: 100lvh;
+		pointer-events: all;
 		background-color: white;
+		opacity: 1;
+		transition: opacity 800ms ease-out;
+	}
+
+	.opening-layer.hiding {
+		opacity: 0;
+	}
+
+	.opening-layer.hidden {
+		visibility: hidden;
+		pointer-events: none;
+		opacity: 0;
+	}
+
+	.logo-wrapper {
+		opacity: 0;
+		transform: scale(0.98);
+		transition:
+			opacity 800ms ease-out,
+			transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94); /* sineOut easing */
+	}
+
+	.logo-wrapper.showing {
+		opacity: 1;
+		transform: scale(1);
 	}
 
 	.logo {
