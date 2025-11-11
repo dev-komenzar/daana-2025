@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { NewsItem } from "$lib/cms";
 
+	import NewsCardSkeleton from "$lib/components/ui/news-card-skeleton.svelte";
 	import NewsCard from "$lib/components/ui/news-card.svelte";
 	import { getNewsRemote, getNewsTotalCountRemote } from "$lib/news.remote";
 
@@ -75,8 +76,10 @@
 				<p>ニュースの読み込みに失敗しました。</p>
 			</div>
 		{:else if query.loading}
-			<div class="loading-message">
-				<p>読み込み中...</p>
+			<div class="news-grid">
+				{#each [0, 1, 2] as index (index)}
+					<NewsCardSkeleton />
+				{/each}
 			</div>
 		{:else if displayedItems().length === 0}
 			<div class="empty-message">
@@ -143,17 +146,10 @@
 		margin-bottom: 40px;
 	}
 
-	.loading-message,
 	.error-message,
 	.empty-message {
 		padding: 40px 20px;
 		text-align: center;
-	}
-
-	.loading-message p {
-		font-family: "Noto Sans JP Light", sans-serif;
-		font-size: 16px;
-		color: #666;
 	}
 
 	.error-message p {
