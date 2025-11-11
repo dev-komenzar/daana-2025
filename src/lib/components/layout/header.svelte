@@ -414,8 +414,9 @@
 		}
 
 		.item-link {
+			font-family: "Noto Sans JP", sans-serif;
 			font-size: 13px;
-			font-weight: 600;
+			font-weight: 400;
 			line-height: 1.2;
 			letter-spacing: 0.08em;
 		}
