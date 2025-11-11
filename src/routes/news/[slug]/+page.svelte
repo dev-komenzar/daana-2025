@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import NewsDetailSkeleton from '$lib/components/ui/news-detail-skeleton.svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-
-	const newsPost = $derived(data.newsPost);
 
 	function formatDate(dateString: string | undefined): string {
 		if (!dateString) return '';
@@ -19,47 +18,70 @@
 	}
 </script>
 
-<MetaTags
-	title={newsPost.title || 'ニュース'}
-	titleTemplate='%s | 実験寺院 寳幢寺'
-/>
+{#await data.newsPost}
+	<MetaTags
+		title='ニュース'
+		titleTemplate='%s | 実験寺院 寳幢寺'
+	/>
+	<NewsDetailSkeleton />
+{:then newsPost}
+	<MetaTags
+		title={newsPost.title || 'ニュース'}
+		titleTemplate='%s | 実験寺院 寳幢寺'
+	/>
 
-<article class="container">
-	<div class="content">
-		<header class="article-header">
-			{#if newsPost.publishedAt}
-				<time datetime={newsPost.publishedAt} class="publish-date">
-					{formatDate(newsPost.publishedAt)}
-				</time>
+	<article class="container">
+		<div class="content">
+			<header class="article-header">
+				{#if newsPost.publishedAt}
+					<time datetime={newsPost.publishedAt} class="publish-date">
+						{formatDate(newsPost.publishedAt)}
+					</time>
+				{/if}
+				{#if newsPost.title}
+					<h1 class="article-title">{newsPost.title}</h1>
+				{/if}
+			</header>
+
+			{#if newsPost.thumbnail}
+				<div class="thumbnail">
+					<img
+						src={newsPost.thumbnail.url}
+						alt={newsPost.title || 'ニュース画像'}
+						width={newsPost.thumbnail.width}
+						height={newsPost.thumbnail.height}
+					/>
+				</div>
 			{/if}
-			{#if newsPost.title}
-				<h1 class="article-title">{newsPost.title}</h1>
+
+			{#if newsPost.content}
+				<div class="article-content">
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					{@html newsPost.content}
+				</div>
 			{/if}
-		</header>
 
-		{#if newsPost.thumbnail}
-			<div class="thumbnail">
-				<img
-					src={newsPost.thumbnail.url}
-					alt={newsPost.title || 'ニュース画像'}
-					width={newsPost.thumbnail.width}
-					height={newsPost.thumbnail.height}
-				/>
+			<div class="back-link">
+				<a href={resolve('/news')}>← ニュース一覧に戻る</a>
 			</div>
-		{/if}
-
-		{#if newsPost.content}
-			<div class="article-content">
-				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-				{@html newsPost.content}
-			</div>
-		{/if}
-
-		<div class="back-link">
-			<a href={resolve('/news')}>← ニュース一覧に戻る</a>
 		</div>
-	</div>
-</article>
+	</article>
+{:catch}
+	<MetaTags
+		title='エラー'
+		titleTemplate='%s | 実験寺院 寳幢寺'
+	/>
+	<article class="container">
+		<div class="content">
+			<div class="error-message">
+				<p>ニュースの読み込みに失敗しました。</p>
+			</div>
+			<div class="back-link">
+				<a href={resolve('/news')}>← ニュース一覧に戻る</a>
+			</div>
+		</div>
+	</article>
+{/await}
 
 <style>
 	.content {
@@ -163,6 +185,17 @@
 
 	.back-link a:hover {
 		color: var(--color-accent);
+	}
+
+	.error-message {
+		padding: 40px 20px;
+		text-align: center;
+	}
+
+	.error-message p {
+		font-family: var(--font-gothic-light);
+		font-size: 16px;
+		color: #d32f2f;
 	}
 
 	@media (width >= 768px) {
