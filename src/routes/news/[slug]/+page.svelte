@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { MetaTags } from 'svelte-meta-tags';
 
 	import type { PageData } from './$types';
 
@@ -18,9 +19,10 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{newsPost.title || 'ニュース'} | ほうどう寺</title>
-</svelte:head>
+<MetaTags
+	title={newsPost.title || 'ニュース'}
+	titleTemplate='%s | 実験寺院 寳幢寺'
+/>
 
 <article class="container">
 	<div class="content">

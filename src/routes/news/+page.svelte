@@ -63,10 +63,6 @@
 	}
 </script>
 
-<svelte:head>
-	<title>ニュース一覧 | ほうどう寺</title>
-</svelte:head>
-
 <div class="news-page">
 	<div class="container">
 		<header class="page-header">
