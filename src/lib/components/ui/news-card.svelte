@@ -16,7 +16,7 @@
 	});
 </script>
 
-<a href={resolve(`/news/${item.id}`)} class="news-card">
+<a href={resolve(`/news/${item.id}`)} class="news-card" data-sveltekit-preload-data='tap'>
 	{#if item.thumbnail?.url}
 		<div class="card-thumbnail">
 			<img
@@ -42,12 +42,12 @@
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
+		color: inherit;
+		text-decoration: none;
 		cursor: pointer;
 		background-color: white;
 		border-radius: 16px;
 		box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
-		text-decoration: none;
-		color: inherit;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 

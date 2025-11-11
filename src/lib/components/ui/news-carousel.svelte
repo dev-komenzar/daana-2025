@@ -67,6 +67,7 @@
 				class:active={currentIndex === index}
 				class:exiting={previousIndex === index}
 				style:background-image={item.thumbnail?.url ? `url(${item.thumbnail.url})` : 'none'}
+				data-sveltekit-preload-data='tap'
 			>
 				<div class="slide-overlay">
 					<h3 class="slide-title">{item.title}</h3>
@@ -131,16 +132,16 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		visibility: hidden;
 		display: block;
+		visibility: hidden;
 		width: 100%;
 		height: 100%;
+		color: inherit;
+		text-decoration: none;
 		pointer-events: none;
 		background-position: center;
 		background-size: cover;
 		opacity: 0;
-		text-decoration: none;
-		color: inherit;
 		transform: translateY(100%);
 		transition:
 			opacity 0.6s ease,
