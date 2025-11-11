@@ -62,7 +62,27 @@
 			label: "イベント",
 		},
 	];
+
+	let isMenuOpen = $state(false);
+
+	function openMenu() {
+		isMenuOpen = true;
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeMenu() {
+		isMenuOpen = false;
+		document.body.style.overflow = '';
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && isMenuOpen) {
+			closeMenu();
+		}
+	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <header class="header-container">
 	<div class="header-wrapper">
@@ -70,7 +90,29 @@
 			<img src={Logo} alt="日本仏教徒協会" class="logo" />
 		</a>
 
-		<nav class="list">
+		<!-- Mobile: Contact button and hamburger menu -->
+		<div class="mobile-controls">
+			<button class="contact-button" aria-label="お問い合わせ">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+					<path d="M6 8L12 13L18 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M6 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+			</button>
+			<button
+				class="hamburger-button"
+				onclick={openMenu}
+				aria-label="メニューを開く"
+				aria-expanded={isMenuOpen}
+			>
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+		</div>
+
+		<!-- Desktop navigation -->
+		<nav class="list desktop-nav">
 			{#each MenuItems as item (item.key)}
 				<div class="link-wrapper">
 					<a href={resolve(item.href)} class="item-link">
@@ -82,40 +124,137 @@
 	</div>
 </header>
 
+<!-- Mobile menu overlay -->
+<div class="menu-overlay" class:open={isMenuOpen}>
+	<div class="menu-header">
+		<a href={resolve("/")}>
+			<img src={Logo} alt="日本仏教徒協会" class="menu-logo" />
+		</a>
+		<div class="menu-header-controls">
+			<button class="contact-button" aria-label="お問い合わせ">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+					<path d="M6 8L12 13L18 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M6 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+			</button>
+			<button
+				class="close-button"
+				onclick={closeMenu}
+				aria-label="メニューを閉じる"
+			>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+			</button>
+		</div>
+	</div>
+
+	<nav class="menu-nav">
+		{#each MenuItems.filter(item => ['donate', 'mission', 'news', 'works'].includes(item.key)) as item, index (item.key)}
+			<a
+				href={resolve(item.href)}
+				class="menu-item"
+				style="
+
+--item-index: {index}"
+				onclick={closeMenu}
+			>
+				{item.label.toUpperCase()}
+			</a>
+		{/each}
+	</nav>
+</div>
+
 <style>
 	.header-container {
+		position: relative;
+		z-index: 100;
 		width: 100%;
 		background: #fff;
 		box-shadow: 0 4px 4px rgb(0 0 0 / 8%);
 	}
 
 	.header-wrapper {
+		box-sizing: border-box;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
 		max-width: 1200px;
+		padding: 18px;
 		margin: 0 auto;
 	}
 
 	.logo {
-		max-width: 200px;
+		max-width: 140px;
+		height: auto;
 	}
 
+	/* Mobile controls */
+	.mobile-controls {
+		display: flex;
+		gap: 24px;
+		align-items: center;
+	}
+
+	.contact-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		padding: 0;
+		color: #000;
+		cursor: pointer;
+		background: transparent;
+		border: none;
+		transition: opacity 0.2s;
+	}
+
+	.contact-button svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.contact-button:hover {
+		opacity: 0.7;
+	}
+
+	.hamburger-button {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 28px;
+		height: 20px;
+		padding: 0;
+		margin: -4px -4px -4px 0;
+		cursor: pointer;
+		background: transparent;
+		border: none;
+	}
+
+	.hamburger-button span {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background: #000;
+		border-radius: 2px;
+		transition: all 0.3s;
+	}
+
+	/* Navigation list styles */
 	.list {
 		display: flex;
 		flex-direction: row;
+		gap: 1rem;
 		align-items: center;
-		width: 100%;
-		padding-right: 1.5rem;
-		padding-bottom: 0.5rem;
-		padding-left: 1.5rem;
-		overflow-x: scroll
 	}
 
-	.list > * + * {
-		margin-left: 1rem;
+	/* Desktop navigation - hidden on mobile */
+	.list.desktop-nav {
+		display: none;
 	}
 
 	.item-link {
@@ -127,23 +266,158 @@
 		color: #000;
 		text-align: center;
 		letter-spacing: 0.14em;
+		white-space: nowrap;
 		text-decoration: none;
 	}
 
 	.link-wrapper {
 		width: max-content;
-		text-wrap-mode: nowrap;
 	}
 
+	/* Mobile menu overlay */
+	.menu-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 200;
+		visibility: hidden;
+		width: 100%;
+		height: 100vh;
+		overflow-y: auto;
+		background: #566F8F;
+		opacity: 0;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.menu-overlay.open {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.menu-header {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 18px;
+	}
+
+	.menu-logo {
+		max-width: 140px;
+		height: auto;
+		filter: brightness(0) invert(1);
+	}
+
+	.menu-header-controls {
+		display: flex;
+		gap: 24px;
+		align-items: center;
+	}
+
+	.close-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		padding: 0;
+		margin: -4px -4px -4px 0;
+		color: #fff;
+		cursor: pointer;
+		background: transparent;
+		border: none;
+		transition: opacity 0.2s;
+	}
+
+	.close-button svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.close-button:hover {
+		opacity: 0.7;
+	}
+
+	.menu-overlay .contact-button {
+		color: #fff;
+	}
+
+	.menu-overlay .contact-button svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.menu-nav {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		align-items: flex-start;
+		padding: 129px 60px 60px 18px;
+	}
+
+	.menu-item {
+		font-family: Jost, "Noto Sans JP", sans-serif;
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 1.2;
+		color: #fff;
+		text-align: left;
+		letter-spacing: 0.015em;
+		text-decoration: none;
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: opacity 0.4s ease, transform 0.4s ease;
+	}
+
+	.menu-item:hover {
+		opacity: 0.8;
+	}
+
+	.menu-overlay.open .menu-item {
+		opacity: 1;
+		transform: translateY(0);
+		transition-delay: calc(0.15s + var(--item-index) * 0.08s);
+	}
+
+	/* Desktop styles */
 	@media (width >= 768px) {
+		.mobile-controls {
+			display: none;
+		}
+
+		.list.desktop-nav {
+			display: flex;
+		}
+
+		.menu-overlay {
+			display: none;
+		}
+
 		.header-wrapper {
 			flex-direction: row;
-			justify-content: flex-end;
+			align-items: center;
+			justify-content: space-between;
+			padding: 16px 40px;
+		}
+
+		.logo {
+			max-width: 160px;
+			margin: 0;
 		}
 
 		.list {
-			justify-content: end;
-			padding-bottom: 0%;
+			gap: 32px;
+			justify-content: flex-end;
+			width: auto;
+			padding: 0;
+			overflow-x: visible;
+		}
+
+		.item-link {
+			font-size: 13px;
+			font-weight: 600;
+			line-height: 1.2;
+			letter-spacing: 0.08em;
 		}
 	}
 </style>
