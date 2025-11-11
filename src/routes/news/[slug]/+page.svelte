@@ -5,7 +5,7 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const { newsPost } = data;
+	const newsPost = $derived(data.newsPost);
 
 	function formatDate(dateString: string | undefined): string {
 		if (!dateString) return '';
