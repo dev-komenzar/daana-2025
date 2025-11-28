@@ -5,6 +5,8 @@
 	import { SITE_FULL_URL } from '$lib/constants';
 	import { MetaTags } from 'svelte-meta-tags';
 
+	import '../app.css';
+
 	let { children } = $props();
 </script>
 
