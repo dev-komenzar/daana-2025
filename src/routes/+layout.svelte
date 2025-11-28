@@ -1,19 +1,18 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
 	import Ogp from '$lib/assets/ogp.png';
+	import Favicon from '$lib/components/layout/favicon.svelte';
 	import Header from '$lib/components/layout/header.svelte';
 	import { SITE_FULL_URL } from '$lib/constants';
 	import { MetaTags } from 'svelte-meta-tags';
-
-	import '../app.css'
 
 	let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
 	<script src="https://webfont.fontplus.jp/accessor/script/fontplus.js?hQIULW9VvKs%3D&box=opQCTPJIssU%3D&aa=1&ab=2"></script>
 </svelte:head>
+
+<Favicon />
 
 <MetaTags
 	title='実験寺院 寳幢寺'
