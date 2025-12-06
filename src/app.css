@@ -138,7 +138,9 @@ Container
 	font-family: var(--font-gothic-bold);
 }
 
-/* Full, Wide, Content classes */
+/* Full, Wide, Content classes
+最終的に何個の`content`クラスが必要か確定していないため
+3個のクラスを用意している */
 .content {
 	width: 92%;
 	max-width: 540px;
