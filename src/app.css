@@ -15,38 +15,43 @@ h2 {
 	margin: 0;
 }
 
-
 /* Loading font */
 @font-face {
-	font-family: 'Noto Sans JP Light';
+	font-family: "Noto Sans JP Light";
 	font-style: normal;
 	font-weight: 300;
-	src: local('Noto Sans JP Light'), url('/fonts/NotoSansJP-Light.ttf') format("truetype");
+	src:
+		local("Noto Sans JP Light"),
+		url("/fonts/NotoSansJP-Light.ttf") format("truetype");
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Noto Sans JP Regular';
+	font-family: "Noto Sans JP Regular";
 	font-style: normal;
 	font-weight: 400;
-	src: local('Noto Sans JP Regular'), url('/fonts/NotoSansJP-Regular.ttf') format("truetype");
+	src:
+		local("Noto Sans JP Regular"),
+		url("/fonts/NotoSansJP-Regular.ttf") format("truetype");
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Noto Sans JP Bold';
+	font-family: "Noto Sans JP Bold";
 	font-style: normal;
 	font-weight: 700;
-	src: local('Noto Sans JP Bold'), url('/fonts/NotoSansJP-Bold.ttf') format("truetype");
+	src:
+		local("Noto Sans JP Bold"),
+		url("/fonts/NotoSansJP-Bold.ttf") format("truetype");
 	font-display: swap;
 }
 
 :root {
 	/* Colors */
-	--color-primary: #566F8F;
-	--color-secondary: #A8BFDC;
-	--color-accent: #DC6F41;
-	--color-accent-soft: #FCB89B;
+	--color-primary: #566f8f;
+	--color-secondary: #a8bfdc;
+	--color-accent: #dc6f41;
+	--color-accent-soft: #fcb89b;
 
 	/* Layout */
 	--max-width: 1200px;
@@ -56,11 +61,19 @@ h2 {
 	box-sizing: border-box;
 
 	/* Font */
-	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", 'Hiragino Mincho Pro', serif;
-	--font-gothic-light: "FuturaLTPro-Light", "Futura", 'Noto Sans JP Light', "ヒラギノ角ゴ Pro W3", "Meiryo", sans-serif;
-	--font-gothic: "FuturaLTPro-Book", "Futura", 'Noto Sans JP Regular', "ヒラギノ角ゴ Pro W4", "Meiryo", sans-serif;
-	--font-gothic-medium: "FuturaLTPro-Medium", "Futura", 'Noto Sans JP Medium', "ヒラギノ角ゴ Pro W5", "Meiryo", sans-serif;
-	--font-gothic-bold: "FuturaLTPro-Heavy", "Futura", 'Noto Sans JP Bold', "ヒラギノ角ゴ Pro W6", "Meiryo", sans-serif;
+	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", "Hiragino Mincho Pro", serif;
+	--font-gothic-light:
+		"FuturaLTPro-Light", "Futura", "Noto Sans JP Light",
+		"ヒラギノ角ゴ Pro W3", "Meiryo", sans-serif;
+	--font-gothic:
+		"FuturaLTPro-Book", "Futura", "Noto Sans JP Regular",
+		"ヒラギノ角ゴ Pro W4", "Meiryo", sans-serif;
+	--font-gothic-medium:
+		"FuturaLTPro-Medium", "Futura", "Noto Sans JP Medium",
+		"ヒラギノ角ゴ Pro W5", "Meiryo", sans-serif;
+	--font-gothic-bold:
+		"FuturaLTPro-Heavy", "Futura", "Noto Sans JP Bold",
+		"ヒラギノ角ゴ Pro W6", "Meiryo", sans-serif;
 }
 
 @media (width >=768px) {
@@ -110,7 +123,7 @@ Container
 
 .text-large {
 	max-width: 100%;
-	font-family: 'Futura PT', 'Noto Sans JP', sans-serif;
+	font-family: "Futura PT", "Noto Sans JP", sans-serif;
 	font-size: 56px;
 	font-style: normal;
 	font-weight: 500;
@@ -121,7 +134,7 @@ Container
 }
 
 .text-medium {
-	font-family: 'Noto Sans JP', sans-serif;
+	font-family: "Noto Sans JP", sans-serif;
 	font-size: 25px;
 	font-style: normal;
 	font-weight: 500;
