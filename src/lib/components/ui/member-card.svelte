@@ -1,79 +1,109 @@
 <script lang="ts">
-	type Properties = {
-		label: string;
-		position: string;
-		src?: string;
-		variant: "primary" | "secondary";
-	};
+	import type { Member } from "$lib/typing.d.ts";
 
-	let { label, position, src, variant = "primary" }: Properties = $props();
+	let { affiliation, bio, imageUrl, name, nameRomaji, position }: Member =
+		$props();
 </script>
 
-<div class={["member-card", variant]}>
-
-	{#if src}
-		<img {src} alt={label} class="image" />
-	{/if}
+<div class={["member-card"]}>
+	<img src={imageUrl} alt={name} class="image" />
 
 	<div class="description">
-		<h3 class='label'>{label}</h3>
 		<p class="position">{position}</p>
+		<h3 class="name">{name}</h3>
+		<p class="name-romaji">{nameRomaji}</p>
+		<p class="affiliation">{affiliation}</p>
+		<p class="bio">{bio}</p>
 	</div>
 </div>
 
 <style>
 	.member-card {
-		position: relative;
-		display: grid;
-		place-items: end;
-		width: 100%;
-		max-width: 416px;
-		aspect-ratio: 1 / 1;
 		padding: 0;
-		overflow: hidden;
-		border-radius: 52px;
-		transition: box-shadow 0.3s ease-in-out;
-	}
-
-	.member-card:hover {
-		box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
-	}
-
-	.primary {
-		background-color: #dc6f41;
-	}
-
-	.secondary {
-		background-color: #fcb89b;
+		margin: 95px auto 0;
 	}
 
 	.image {
-		grid-area: 1 / 1;
-		width: 100%;
-		height: 100%;
+		width: 512px;
+		height: 312px;
+		aspect-ratio: 512 / 312;
 		object-fit: cover;
 		transition: transform 0.3s ease-in-out;
+	}
+
+	.description {
+		font-family: var(--font-gothic-bold);
+		text-align: left;
 	}
 
 	.member-card:hover .image {
 		transform: scale(1.02);
 	}
 
-	.description {
-		z-index: 1;
-		grid-area: 1 / 1;
-		width: min(278px, 100%);
-		height: 78px;
-		padding: 18px 36px;
-		background-color: white;
-		border-radius: 26px 0 0;
-	}
-
-	.label {
-		margin: 0;
-	}
-
 	.position {
+		/* 代表理事 */
 		margin: 0;
+		font-family: var(--font-gothic-bold);
+		font-size: 13px;
+		line-height: 19px;
+		color: #000;
+		letter-spacing: 0.06em;
+	}
+
+	.name {
+		/* 藏本龍介 */
+		margin: 13px auto 0;
+		font-family: var(--font-gothic-bold);
+		font-size: 25px;
+		line-height: 48px;
+		color: #000;
+		letter-spacing: 0.12em;
+	}
+
+	.name-romaji {
+		/* Kuramoto Ryosuke */
+		font-family: var(--font-gothic-bold);
+		font-size: 13px;
+		line-height: 24px;
+		color: #000;
+		letter-spacing: 0.06em;
+	}
+
+	.affiliation {
+		/* 東京大学東洋文化研究所・准教授 */
+		margin: 6px auto 0;
+		font-family: var(--font-gothic-bold);
+		font-size: 13px;
+		line-height: 24px;
+		color: #000;
+		letter-spacing: 0.06em;
+	}
+
+	.bio {
+		/* 1979年生まれ... */
+		margin: 14px auto 0;
+		font-family: var(--font-gothic-bold);
+		font-size: 11px;
+		line-height: 24px;
+		color: #000;
+		letter-spacing: 0.06em;
+	}
+
+	@media (width >= 768px) {
+		.member-card {
+			display: flex;
+			flex-direction: row-reverse;
+			column-gap: 60px;
+			align-items: flex-start;
+		}
+
+		/* image, descriptionはmember-cardの子要素 */
+		.image {
+			flex-basis: 512px;
+		}
+
+		.description {
+			flex-basis: 390px;
+		}
 	}
 </style>

@@ -1,17 +1,33 @@
+<!-- TODO: Delete members.svelte, members-card.svelte -->
+
 <script lang="ts">
 	import Members from "./members.svelte";
 </script>
 
 <section id="company" class="container">
-	<div class="content">
-		<h2 class="text-large font-gothic-bold">Company</h2>
-		<h3 class="text-medium">一般社団法人 日本仏教徒協会運営メンバー</h3>
-		<p>
-			いつ頃より発足し、どのような陣営で組織・運営が行われているか。海は昼眠る、夜も眠る、ごうごう、いびきをかいて眠る。昔、昔、おお昔、海がはじめて、口開けて、笑ったときに、太陽は、目をまわして驚いた。かわいい花や、人たちを、海がのんでしまおうと、やさしく光る太陽は、魔術で、海を眠らした。海は昼眠る、夜も眠る。ごうごう、いびきをかいて眠る。
-		</p>
+	<div class="wide-content">
+		<h2 class="text-large section-header">Company</h2>
+		<h3 class="text-medium section-header-japanese">日本仏教徒協会_理事</h3>
 	</div>
 	<div class="wide-content">
 		<Members />
 	</div>
 </section>
 
+<style>
+	.text-left {
+		text-align: left;
+	}
+
+	.section-header {
+		font-family: var(--font-sans-medium);
+		line-height: 44px;
+		text-align: left;
+	}
+
+	.section-header-japanese {
+		font-family: var(--font-gothic-bold);
+		color: #3c87c0;
+		text-align: left;
+	}
+</style>
