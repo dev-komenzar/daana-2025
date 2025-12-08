@@ -46,6 +46,48 @@ h2 {
 	font-display: swap;
 }
 
+@font-face {
+	font-family: "Jost SemiBold";
+	font-style: normal;
+	font-weight: 600;
+	src:
+		local("Jost SemiBold"),
+		url("/fonts/Jost-SemiBold.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Zen Kaku Gothic Antique Light";
+	src:
+		local("Zen Kaku Gothic Antique Light"),
+		url("/fonts/ZenKakuGothicAntique-Light.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Zen Kaku Gothic Antique Regular";
+	src:
+		local("Zen Kaku Gothic Antique"),
+		url("/fonts/ZenKakuGothicAntique-Regular.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Zen Kaku Gothic Antique Medium";
+	src:
+		local("Zen Kaku Gothic Antique"),
+		url("/fonts/ZenKakuGothicAntique-Medium.ttf") format("truetype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Zen Kaku Gothic Antique Bold";
+	src:
+		local("Zen Kaku Gothic Antique"),
+		url("/fonts/ZenKakuGothicAntique-Bold.ttf") format("truetype");
+	font-display: swap;
+}
+
 :root {
 	/* Colors */
 	--color-primary: #566f8f;
@@ -60,20 +102,26 @@ h2 {
 	/* Root level setting */
 	box-sizing: border-box;
 
-	/* Font */
+	/* Enlish Font */
+	--font-sans-light: "FuturaLTPro-Light", "Futura", sans-serif;
+	--font-sans: "FuturaLTPro-Book", "Futura", sans-serif;
+	--font-sans-medium: "FuturaLTPro-Medium", "Futura", sans-serif;
+	--font-sans-bold: "Jost SemiBold", sans-serif;
+
+	/* Japanese Font */
 	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", "Hiragino Mincho Pro", serif;
 	--font-gothic-light:
-		"FuturaLTPro-Light", "Futura", "Noto Sans JP Light",
-		"ヒラギノ角ゴ Pro W3", "Meiryo", sans-serif;
+		"Zen Kaku Gothic Antique Light", "ヒラギノ角ゴ Pro W3", "Meiryo",
+		sans-serif;
 	--font-gothic:
-		"FuturaLTPro-Book", "Futura", "Noto Sans JP Regular",
-		"ヒラギノ角ゴ Pro W4", "Meiryo", sans-serif;
+		"Zen Kaku Gothic Antique Regular", "ヒラギノ角ゴ Pro W4", "Meiryo",
+		sans-serif;
 	--font-gothic-medium:
-		"FuturaLTPro-Medium", "Futura", "Noto Sans JP Medium",
-		"ヒラギノ角ゴ Pro W5", "Meiryo", sans-serif;
+		"Zen Kaku Gothic Antique Medium", "ヒラギノ角ゴ Pro W5", "Meiryo",
+		sans-serif;
 	--font-gothic-bold:
-		"FuturaLTPro-Heavy", "Futura", "Noto Sans JP Bold",
-		"ヒラギノ角ゴ Pro W6", "Meiryo", sans-serif;
+		"Zen Kaku Gothic Antique Bold", "ヒラギノ角ゴ Pro W6", "Meiryo",
+		sans-serif;
 }
 
 @media (width >=768px) {
@@ -123,7 +171,6 @@ Container
 
 .text-large {
 	max-width: 100%;
-	font-family: "Futura PT", "Noto Sans JP", sans-serif;
 	font-size: 56px;
 	font-style: normal;
 	font-weight: 500;
@@ -134,7 +181,6 @@ Container
 }
 
 .text-medium {
-	font-family: "Noto Sans JP", sans-serif;
 	font-size: 25px;
 	font-style: normal;
 	font-weight: 500;
