@@ -1,14 +1,83 @@
 <script lang="ts">
 	import type { Member } from "$lib/typing.d.ts";
 
+	import { inView, spring } from "motion";
+	import { animate } from "motion/mini";
+	import { onMount } from "svelte";
+
 	let { affiliation, bio, imageUrl, name, nameRomaji, position }: Member =
 		$props();
+
+	let imageElement: HTMLImageElement;
+	let descriptionElement: HTMLElement;
+
+	onMount(() => {
+		// 初期スケールを0.96に設定
+		imageElement.style.scale = "0.96";
+
+		// ビューポート検出開始
+		const stopObserver = inView(
+			imageElement,
+			() => {
+				// 進入時: 0.96 → 1 (spring)
+				animate(
+					imageElement,
+					{ scale: 1 },
+					{ bounce: 0.3, duration: 0.8, type: spring },
+				);
+
+				// 退出時: 1 → 0.96 (spring)
+				return () => {
+					animate(
+						imageElement,
+						{ scale: 0.96 },
+						{ bounce: 0.2, duration: 0.6, type: spring },
+					);
+				};
+			},
+			{
+				amount: 0.7, // 70%表示でトリガー
+			},
+		);
+
+		// description要素のアニメーション設定
+		descriptionElement.style.opacity = "0";
+		descriptionElement.style.transform = "translateX(-10px)";
+
+		const stopDescriptionObserver = inView(
+			descriptionElement,
+			() => {
+				// 進入時: 左から右へスライド + フェードイン
+				animate(
+					descriptionElement,
+					{ opacity: 1, transform: "translateX(0)" },
+					{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+				);
+
+				// 退出時: 右から左へスライド + フェードアウト
+				return () => {
+					animate(
+						descriptionElement,
+						{ opacity: 0, transform: "translateX(-10px)" },
+						{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+					);
+				};
+			},
+			{ amount: 0.7 },
+		);
+
+		// コンポーネント破棄時のクリーンアップ
+		return () => {
+			stopObserver();
+			stopDescriptionObserver();
+		};
+	});
 </script>
 
 <div class={["member-card"]}>
-	<img src={imageUrl} alt={name} class="image" />
+	<img bind:this={imageElement} src={imageUrl} alt={name} class="image" />
 
-	<div class="description">
+	<div class="description" bind:this={descriptionElement}>
 		<p class="position">{position}</p>
 		<h3 class="name">{name}</h3>
 		<p class="name-romaji">{nameRomaji}</p>
@@ -28,16 +97,13 @@
 		height: 312px;
 		aspect-ratio: 512 / 312;
 		object-fit: cover;
-		transition: transform 0.3s ease-in-out;
+		transform-origin: center center;
+		will-change: transform;
 	}
 
 	.description {
 		font-family: var(--font-gothic-bold);
 		text-align: left;
-	}
-
-	.member-card:hover .image {
-		transform: scale(1.02);
 	}
 
 	.position {

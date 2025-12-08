@@ -52,6 +52,7 @@
 	"dependencies": {
 		"consola": "^3.4.2",
 		"ky": "^1.14.0",
+		"motion": "^12.23.25",
 		"valibot": "^1.1.0"
 	}
 }
