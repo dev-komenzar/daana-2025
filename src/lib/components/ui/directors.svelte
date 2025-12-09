@@ -25,6 +25,8 @@
 	];
 </script>
 
+<h3 class="text-medium section-header-japanese">日本仏教徒協会_理事</h3>
+
 {#each directors as member (member.name)}
 	<DirectorCard
 		affiliation={member.affiliation}

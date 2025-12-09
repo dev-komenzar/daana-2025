@@ -26,11 +26,11 @@ h3 {
 
 	/* color: inherit; */
 
- /* Inherits color from parent */
+	/* Inherits color from parent */
 
 	/* text-decoration: none; */
 
- /* Removes any default underlines if applicable */
+	/* Removes any default underlines if applicable */
 }
 
 p {
@@ -239,6 +239,12 @@ Container
 	width: 100%;
 	max-width: 100%;
 	margin: 0 auto;
+}
+
+.section-header-japanese {
+	font-family: var(--font-gothic-bold);
+	color: #3c87c0;
+	text-align: left;
 }
 
 @media screen and (width >=768px) {
