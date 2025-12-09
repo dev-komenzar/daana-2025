@@ -25,15 +25,13 @@
 	];
 </script>
 
-<div>
-	{#each directors as member (member.name)}
-		<DirectorCard
-			affiliation={member.affiliation}
-			bio={member.bio}
-			name={member.name}
-			nameRomaji={member.nameRomaji}
-			position={member.position}
-			imageUrl={member.imageUrl}
-		/>
-	{/each}
-</div>
+{#each directors as member (member.name)}
+	<DirectorCard
+		affiliation={member.affiliation}
+		bio={member.bio}
+		name={member.name}
+		nameRomaji={member.nameRomaji}
+		position={member.position}
+		imageUrl={member.imageUrl}
+	/>
+{/each}
