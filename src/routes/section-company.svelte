@@ -1,7 +1,7 @@
 <!-- TODO: Delete members.svelte, members-card.svelte -->
 
 <script lang="ts">
-	import Members from "./members.svelte";
+	import Directors from "./directors.svelte";
 </script>
 
 <section id="company" class="container">
@@ -10,7 +10,7 @@
 		<h3 class="text-medium section-header-japanese">日本仏教徒協会_理事</h3>
 	</div>
 	<div class="wide-content">
-		<Members />
+		<Directors />
 	</div>
 </section>
 

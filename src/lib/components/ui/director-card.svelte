@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Member } from "$lib/typing.d.ts";
+	import type { Director } from "$lib/typing.d.ts";
 
 	import { inView, spring } from "motion";
 	import { animate } from "motion/mini";
 	import { onMount } from "svelte";
 
-	let { affiliation, bio, imageUrl, name, nameRomaji, position }: Member =
+	let { affiliation, bio, imageUrl, name, nameRomaji, position }: Director =
 		$props();
 
 	let imageElement: HTMLImageElement;
