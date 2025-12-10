@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Photo from "$lib/assets/ryugen.jpg";
+	import Link from "$lib/components/ui/link.svelte";
 
 	const p = {
 		bio: `
@@ -29,6 +30,9 @@
 				<h3 class="name">{p.name}</h3>
 				<p class="name-romaji">{p.nameRomaji}</p>
 				<p class="bio">{p.bio}</p>
+				<div class="link">
+					<Link href="/" textContent="VIEW MORE" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -96,5 +100,9 @@
 		line-height: 24px;
 		color: #000;
 		letter-spacing: 0.06em;
+	}
+
+	.link {
+		margin: 35px auto 0;
 	}
 </style>
