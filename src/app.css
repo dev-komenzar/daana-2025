@@ -241,6 +241,12 @@ Container
 	margin: 0 auto;
 }
 
+.section-header {
+	font-family: var(--font-sans-medium);
+	line-height: 44px;
+	text-align: left;
+}
+
 .section-header-japanese {
 	font-family: var(--font-gothic-bold);
 	color: #3c87c0;

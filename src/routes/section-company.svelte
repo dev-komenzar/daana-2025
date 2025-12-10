@@ -18,16 +18,6 @@
 </section>
 
 <style>
-	.text-left {
-		text-align: left;
-	}
-
-	.section-header {
-		font-family: var(--font-sans-medium);
-		line-height: 44px;
-		text-align: left;
-	}
-
 	.staffs {
 		margin: calc(95px * 2) auto 0;
 	}

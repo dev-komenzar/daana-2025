@@ -121,7 +121,7 @@
 		margin: 13px auto 0;
 		font-family: var(--font-gothic-bold);
 		font-size: 25px;
-		line-height: 48px;
+		line-height: 36px;
 		color: #000;
 		letter-spacing: 0.12em;
 	}
@@ -130,14 +130,14 @@
 		/* Kuramoto Ryosuke */
 		font-family: var(--font-gothic-bold);
 		font-size: 13px;
-		line-height: 24px;
+		line-height: 16px;
 		color: #000;
 		letter-spacing: 0.06em;
 	}
 
 	.affiliation {
 		/* 東京大学東洋文化研究所・准教授 */
-		margin: 6px auto 0;
+		margin: 13px auto 0;
 		font-family: var(--font-gothic-bold);
 		font-size: 13px;
 		line-height: 24px;
