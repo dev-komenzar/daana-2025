@@ -51,7 +51,8 @@
 		border-radius: 11px;
 		transition:
 			background 0.3s,
-			color 0.3s;
+			color 0.3s,
+			transform 0.3s;
 	}
 
 	.inner {
@@ -101,5 +102,13 @@
 
 	.outer:hover .inner {
 		border-color: #fff;
+	}
+
+	.outer:active {
+		transform: scale(0.96);
+		transition:
+			background 0.3s,
+			color 0.3s,
+			transform 0.3s;
 	}
 </style>
