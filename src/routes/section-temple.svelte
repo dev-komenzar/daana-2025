@@ -2,6 +2,75 @@
 	import Photo from "$lib/assets/ryugen.jpg";
 	import Link from "$lib/components/ui/link.svelte";
 
+	import { inView, spring } from "motion";
+	import { animate } from "motion/mini";
+	import { onMount } from "svelte";
+
+	let imageElement: HTMLImageElement;
+	let descriptionElement: HTMLElement;
+
+	onMount(() => {
+		// 初期スケールを0.96に設定
+		imageElement.style.scale = "0.96";
+
+		// ビューポート検出開始
+		const stopObserver = inView(
+			imageElement,
+			() => {
+				// 進入時: 0.96 → 1 (spring)
+				animate(
+					imageElement,
+					{ scale: 1 },
+					{ bounce: 0.3, duration: 0.8, type: spring },
+				);
+
+				// 退出時: 1 → 0.96 (spring)
+				return () => {
+					animate(
+						imageElement,
+						{ scale: 0.96 },
+						{ bounce: 0.2, duration: 0.6, type: spring },
+					);
+				};
+			},
+			{
+				amount: 0.7, // 70%表示でトリガー
+			},
+		);
+
+		// description要素のアニメーション設定
+		descriptionElement.style.opacity = "0";
+		descriptionElement.style.transform = "translateX(-10px)";
+
+		const stopDescriptionObserver = inView(
+			descriptionElement,
+			() => {
+				// 進入時: 左から右へスライド + フェードイン
+				animate(
+					descriptionElement,
+					{ opacity: 1, transform: "translateX(0)" },
+					{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+				);
+
+				// 退出時: 右から左へスライド + フェードアウト
+				return () => {
+					animate(
+						descriptionElement,
+						{ opacity: 0, transform: "translateX(-10px)" },
+						{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+					);
+				};
+			},
+			{ amount: 0.5 },
+		);
+
+		// コンポーネント破棄時のクリーンアップ
+		return () => {
+			stopObserver();
+			stopDescriptionObserver();
+		};
+	});
+
 	const p = {
 		bio: `
 ミャンマー仏教の文化人類学的研究を行う中で、研究より実践に惹かれ仏教者として生きることを志す。当初日本仏教界に縁がなく、武術の指導者として世に向かおうとするも2010年に縁を得て出家・修行（真言律宗総本山西大寺）。伝統や学術を大切にしつつも、囚われない「今に活きる仏教思想」の社会実装を提唱し、実験寺院の概念と方法論を創案。日本仏教徒協会設立の礎となる。
@@ -23,9 +92,9 @@
 	</div>
 	<div class="wide-content body">
 		<div class="card">
-			<img src={p.imageUrl} alt={p.name} />
+			<img bind:this={imageElement} src={p.imageUrl} alt={p.name} />
 
-			<div class="description">
+			<div class="description" bind:this={descriptionElement}>
 				<p class="position">{p.position}</p>
 				<h3 class="name">{p.name}</h3>
 				<p class="name-romaji">{p.nameRomaji}</p>
@@ -56,6 +125,11 @@
 		flex-direction: row;
 		column-gap: 95px;
 		align-items: flex-start;
+	}
+
+	.card img {
+		transform-origin: center center;
+		will-change: transform;
 	}
 
 	.description {
