@@ -39,23 +39,23 @@
 
 		// description要素のアニメーション設定
 		descriptionElement.style.opacity = "0";
-		descriptionElement.style.transform = "translateX(-10px)";
+		descriptionElement.style.transform = "translateX(10px)";
 
 		const stopDescriptionObserver = inView(
 			descriptionElement,
 			() => {
-				// 進入時: 左から右へスライド + フェードイン
+				// 進入時: 右から左へスライド + フェードイン
 				animate(
 					descriptionElement,
 					{ opacity: 1, transform: "translateX(0)" },
 					{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
 				);
 
-				// 退出時: 右から左へスライド + フェードアウト
+				// 退出時: 左から右へスライド + フェードアウト
 				return () => {
 					animate(
 						descriptionElement,
-						{ opacity: 0, transform: "translateX(-10px)" },
+						{ opacity: 0, transform: "translateX(10px)" },
 						{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
 					);
 				};
