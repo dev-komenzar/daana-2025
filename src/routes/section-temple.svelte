@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Photo from "$lib/assets/ryugen.jpg";
 	import Link from "$lib/components/ui/link.svelte";
-
 	import { inView, spring } from "motion";
 	import { animate } from "motion/mini";
 	import { onMount } from "svelte";
