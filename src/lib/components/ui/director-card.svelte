@@ -136,7 +136,7 @@
 	}
 
 	.affiliation {
-		/* 東京大学東洋文化研究所・准教授 */
+		/* 東京大学東洋文化研究所・教授 */
 		margin: 13px auto 0;
 		font-family: var(--font-gothic-bold);
 		font-size: 13px;
