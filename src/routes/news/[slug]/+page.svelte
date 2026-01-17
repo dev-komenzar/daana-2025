@@ -96,14 +96,14 @@
 	.publish-date {
 		display: block;
 		margin-bottom: 1rem;
-		font-family: var(--font-gothic-light);
+		font-family: var(--font-body-light);
 		font-size: 14px;
 		color: #666;
 	}
 
 	.article-title {
 		margin: 0;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 28px;
 		font-weight: bold;
 		line-height: 1.5;
@@ -124,7 +124,7 @@
 
 	.article-content {
 		margin: 2rem 0;
-		font-family: var(--font-gothic);
+		font-family: var(--font-body);
 		font-size: 16px;
 		line-height: 1.8;
 		color: #333;
@@ -132,7 +132,7 @@
 
 	.article-content :global(h2) {
 		margin: 2rem 0 1rem;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 24px;
 		font-weight: bold;
 		line-height: 1.5;
@@ -141,7 +141,7 @@
 
 	.article-content :global(h3) {
 		margin: 1.5rem 0 0.75rem;
-		font-family: var(--font-gothic-medium);
+		font-family: var(--font-body-medium);
 		font-size: 20px;
 		font-weight: 600;
 		line-height: 1.5;
@@ -176,7 +176,7 @@
 	}
 
 	.back-link a {
-		font-family: var(--font-gothic);
+		font-family: var(--font-body);
 		font-size: 16px;
 		color: var(--color-primary);
 		text-decoration: none;
@@ -193,7 +193,7 @@
 	}
 
 	.error-message p {
-		font-family: var(--font-gothic-light);
+		font-family: var(--font-body-light);
 		font-size: 16px;
 		color: #d32f2f;
 	}

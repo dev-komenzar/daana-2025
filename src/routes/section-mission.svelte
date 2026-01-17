@@ -66,7 +66,7 @@
 	}
 
 	.text {
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 25px;
 		line-height: normal;
 		letter-spacing: 0.06em;

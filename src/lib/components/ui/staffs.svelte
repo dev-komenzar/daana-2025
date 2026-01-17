@@ -86,7 +86,7 @@
 <style>
 	table {
 		margin: 26px 0 0;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 13px;
 		line-height: 19px;
 		color: #000;

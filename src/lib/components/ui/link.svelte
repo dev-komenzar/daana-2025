@@ -69,7 +69,7 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		font-family: var(--font-sans-bold);
+		font-family: var(--font-heading-bold);
 		font-size: 16px;
 		line-height: 23px;
 		letter-spacing: 0.02em;

@@ -1,9 +1,14 @@
 <script lang="ts">
+	import Daana from '$lib/assets/daanas-for-good.png';
+	import Hodoji from '$lib/assets/hodoji.png';
+	import Philo from '$lib/assets/philosophy-collective.png';
+	import Sokubutsu from '$lib/assets/sokubutsu-daigaku.png';
 	import Card from '$lib/components/ui/works-card.svelte';
 
 	type Work = {
 		description: string;
 		imageUrl?: string;
+		isLabelReversed: boolean
 		name: string;
 		position: string;
 		variant: "primary" | "secondary";
@@ -11,32 +16,36 @@
 
 	const works: Work[] = [
 		{
-			description: '',
-			imageUrl: '',
-			name: 'sample1',
+			description: '簡単な説明分など簡単な説明分など簡単な説明分など',
+			imageUrl: Hodoji,
+			isLabelReversed: false,
+			name: '実験寺院プロジェクト',
 			position: '',
 			variant: 'primary',
 		},
 		{
-			description: '',
-			imageUrl: '',
-			name: 'sample2',
+			description: '簡単な説明分など簡単な説明分など簡単な説明分など',
+			imageUrl: Philo,
+			isLabelReversed: false,
+			name: 'Philosophy Collectives Network',
 			position: '',
 			variant: 'secondary',
 		},
 		{
-			description: '',
-			imageUrl: '',
-			name: 'sample3',
+			description: '簡単な説明分など簡単な説明分など簡単な説明分など',
+			imageUrl: Sokubutsu,
+			isLabelReversed: true,
+			name: '即仏大学',
 			position: '',
-			variant: 'primary',
+			variant: 'primary'
 		},
 		{
-			description: '',
-			imageUrl: '',
-			name: 'sample4',
+			description: '簡単な説明分など簡単な説明分など簡単な説明分など',
+			imageUrl: Daana,
+			isLabelReversed: true,
+			name: `DaNA's for Good`,
 			position: '',
-			variant: 'secondary',
+			variant: 'secondary'
 		},
 ]
 
@@ -55,10 +64,11 @@ function getGridArea(index: number) {
 	{#each works as work, index (work.name)}
 		<Card
 			label={work.name}
-			position={work.position}
+			description={work.description}
 			src={work.imageUrl}
 			style={`grid-area: ${getGridArea(index)}`}
 			variant={work.variant}
+			isLabelReversed={work.isLabelReversed}
 		/>
 	{/each}
 </div>

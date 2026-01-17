@@ -124,24 +124,38 @@ p {
 	/* Root level setting */
 	box-sizing: border-box;
 
-	/* Enlish Font */
-	--font-sans-light: "FuturaLTPro-Light", "Futura", sans-serif;
-	--font-sans: "FuturaLTPro-Book", "Futura", sans-serif;
-	--font-sans-medium: "FuturaLTPro-Medium", "Futura", sans-serif;
-	--font-sans-bold: "Jost SemiBold", sans-serif;
-
-	/* Japanese Font */
-	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", "Hiragino Mincho Pro", serif;
-	--font-gothic-light:
+	/* Heading Font */
+	--font-heading-light:
+		/* English sans */
+		"FuturaLTPro-Light", "Futura",
+		/* Japanese gothic */
 		"Zen Kaku Gothic Antique Light", "ヒラギノ角ゴ Pro W3", "Meiryo",
 		sans-serif;
-	--font-gothic:
+	--font-sans:
+		"FuturaLTPro-Book", "Futura",
 		"Zen Kaku Gothic Antique Regular", "ヒラギノ角ゴ Pro W4", "Meiryo",
 		sans-serif;
-	--font-gothic-medium:
+	--font-heading-medium:
+		"FuturaLTPro-Medium", "Futura",
 		"Zen Kaku Gothic Antique Medium", "ヒラギノ角ゴ Pro W5", "Meiryo",
 		sans-serif;
-	--font-gothic-bold:
+	--font-heading-bold:
+		"Jost SemiBold",
+		"Zen Kaku Gothic Antique Bold", "ヒラギノ角ゴ Pro W6", "Meiryo",
+		sans-serif;
+
+	/* body Font */
+	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", "Hiragino Mincho Pro", serif;
+	--font-body-light:
+		"Zen Kaku Gothic Antique Light", "ヒラギノ角ゴ Pro W3", "Meiryo",
+		sans-serif;
+	--font-body:
+		"Zen Kaku Gothic Antique Regular", "ヒラギノ角ゴ Pro W4", "Meiryo",
+		sans-serif;
+	--font-body-medium:
+		"Zen Kaku Gothic Antique Medium", "ヒラギノ角ゴ Pro W5", "Meiryo",
+		sans-serif;
+	--font-body-bold:
 		"Zen Kaku Gothic Antique Bold", "ヒラギノ角ゴ Pro W6", "Meiryo",
 		sans-serif;
 }
@@ -163,7 +177,7 @@ body {
 	margin: 0;
 
 	/* Light Gothic Font */
-	font-family: var(--font-gothic-light);
+	font-family: var(--font-body-light);
 }
 
 /*
@@ -213,11 +227,11 @@ Container
 }
 
 .font-gothic {
-	font-family: var(--font-gothic);
+	font-family: var(--font-body);
 }
 
 .font-gothic-bold {
-	font-family: var(--font-gothic-bold);
+	font-family: var(--font-body-bold);
 }
 
 /* Full, Wide, Content classes
@@ -242,13 +256,13 @@ Container
 }
 
 .section-header {
-	font-family: var(--font-sans-medium);
+	font-family: var(--font-heading-medium);
 	line-height: 44px;
 	text-align: left;
 }
 
 .section-header-japanese {
-	font-family: var(--font-gothic-bold);
+	font-family: var(--font-body-bold);
 	color: #3c87c0;
 	text-align: left;
 }
@@ -268,9 +282,9 @@ Container
 	}
 
 	.wide-content {
-		width: 922px;
-		max-width: 96%;
-		margin: 0 auto;
+		width: 100%;
+		max-width: 1200px;
+		margin: 0;
 	}
 
 	.full-content {

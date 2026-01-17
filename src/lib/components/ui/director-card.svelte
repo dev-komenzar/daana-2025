@@ -117,14 +117,14 @@
 	}
 
 	.description {
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		text-align: left;
 	}
 
 	.position {
 		/* 代表理事 */
 		margin: 0;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 13px;
 		line-height: 19px;
 		color: #000;
@@ -134,7 +134,7 @@
 	.name {
 		/* 藏本龍介 */
 		margin: 13px auto 0;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 25px;
 		line-height: 36px;
 		color: #000;
@@ -143,7 +143,7 @@
 
 	.name-romaji {
 		/* Kuramoto Ryosuke */
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 13px;
 		line-height: 16px;
 		color: #000;
@@ -153,7 +153,7 @@
 	.affiliation {
 		/* 東京大学東洋文化研究所・教授 */
 		margin: 13px auto 0;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 13px;
 		line-height: 24px;
 		color: #000;
@@ -163,7 +163,7 @@
 	.bio {
 		/* 1979年生まれ... */
 		margin: 14px auto 0;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 11px;
 		line-height: 24px;
 		color: #000;

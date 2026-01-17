@@ -1,15 +1,17 @@
 <script lang="ts">
 	type Properties = {
+		description: string;
+		isLabelReversed?: boolean;
 		label: string;
-		position: string;
 		src?: string;
 		style?: string;
 		variant: "primary" | "secondary";
 	};
 
-	let { 
+	let {
+		description,
+		isLabelReversed = false,
 		label,
-		position,
 		src,
 		style,
 		variant = "primary",
@@ -22,9 +24,9 @@
 		<img {src} alt={label} class="image" />
 	{/if}
 
-	<div class="description">
-		<h3 class='label'>{label}</h3>
-		<p class="position">{position}</p>
+	<div class={["label-box", isLabelReversed && "reversed"]}>
+		<h3 class="label">{label}</h3>
+		<p class="description">{description}</p>
 	</div>
 </div>
 
@@ -38,6 +40,12 @@
 		border-radius: 52px;
 		transition: box-shadow 0.3s ease-in-out;
 	}
+
+		@media (width >= 768px) {
+			.works-card {
+				border-radius: 0;
+			}
+		}
 
 	.works-card:hover {
 		box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
@@ -62,24 +70,41 @@
 		transform: scale(1.02);
 	}
 
-	.description {
+	.label-box {
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: 278px;
-		height: 78px;
-		padding: 18px 36px;
+		width: 335px;
+		height: 51px;
+		padding: 10px 0 10px 30px;
 		background-color: white;
 		border-radius: 0 26px 0 0;
 	}
 
-	.label {
-		margin: 0;
+	.label-box.reversed {
+		right: 0;
+		left: auto;
+		padding: 10px 30px 10px 0;
+		text-align: right;
+		border-radius: 26px 0 0;
 	}
 
-	.position {
-		position: absolute;
-		bottom: 0;
+	.label {
 		margin: 0;
+		font-family: var(--font-heading-bold);
+		font-size: 14px;
+		line-height: 20px;
+		letter-spacing: -0.01em;
+	}
+
+	.description {
+		font-family: var(--font-heading);
+		font-size: 8px;
+		line-height: 10px;
+		letter-spacing: 0.06em;
+	}
+
+	.label + .description {
+		margin-top: 6px;
 	}
 </style>

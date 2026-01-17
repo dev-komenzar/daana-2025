@@ -43,7 +43,7 @@
 
 	.eyecatch-meta{
 		margin-bottom: 32px;
-		font-family: var(--font-sans-bold);
+		font-family: var(--font-heading-bold);
 		font-size: 36px;
 		line-height: 44px;
 		letter-spacing: -0.01em;
@@ -52,7 +52,7 @@
 	.eyecatch-title {
 		padding: 0 var(--space-4);
 		margin: 0 0 33px;
-		font-family: var(--font-gothic-bold);
+		font-family: var(--font-body-bold);
 		font-size: 25px;
 		line-height: 1.4;
 		color: var(--color-white);
@@ -61,7 +61,7 @@
 	}
 
 	.eyecatch-description {
-		font-family: var(--font-gothic);
+		font-family: var(--font-body);
 		font-size: 14px;
 		line-height: 24px;
 		letter-spacing: 0.06em;
