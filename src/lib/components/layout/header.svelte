@@ -61,7 +61,7 @@
 			key: "events",
 			label: "イベント",
 		},
-	];
+	] as const;
 
 	let isMenuOpen = $state(false);
 
@@ -380,7 +380,7 @@
 	}
 
 	/* Desktop styles */
-	@media (width >= 768px) {
+	@media (width >= 1024px) {
 		.mobile-controls {
 			display: none;
 		}
