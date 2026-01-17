@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import Logo from "$lib/assets/jba-black.png";
+	import EnhancedImage from "$lib/components/ui/enhanced-image.svelte";
 	import * as v from "valibot";
 
 	const HeaderMenuItem = v.object({
@@ -87,7 +88,7 @@
 <header class="header-container">
 	<div class="header-wrapper">
 		<a href={resolve("/")}>
-			<img src={Logo} alt="日本仏教徒協会" class="logo" />
+			<EnhancedImage src={Logo} alt="日本仏教徒協会" class="logo" loading="eager" fetchpriority="high" />
 		</a>
 
 		<!-- Mobile: Contact button and hamburger menu -->
@@ -128,7 +129,7 @@
 <div class="menu-overlay" class:open={isMenuOpen}>
 	<div class="menu-header">
 		<a href={resolve("/")}>
-			<img src={Logo} alt="日本仏教徒協会" class="menu-logo" />
+			<EnhancedImage src={Logo} alt="日本仏教徒協会" class="menu-logo" loading="eager" />
 		</a>
 		<div class="menu-header-controls">
 			<button class="contact-button" aria-label="お問い合わせ">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Logo from '$lib/assets/opening-logo.png';
+	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
 	import { onMount } from "svelte";
 	import { sineOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
@@ -42,7 +43,7 @@
 		{#if contentVisible}
 			<!-- Add your opening layer content here -->
 			<div in:welcome={{ duration: 800 }} >
-				<img src={Logo} alt="Opening Logo" class='logo' />
+				<EnhancedImage src={Logo} alt="Opening Logo" class="logo" loading="eager" />
 			</div>
 		{/if}
 	</div>

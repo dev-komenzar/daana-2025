@@ -106,6 +106,15 @@ Required environment variable:
 - **Husky + lint-staged**: Pre-commit hooks run linting automatically
 - **svelte-check**: Type-checking for Svelte components
 
+### Image Handling
+
+- **Static assets**: Use `EnhancedImage` component (`src/lib/components/ui/enhanced-image.svelte`) instead of raw `<img>` tags
+  - Automatically converts images to AVIF/WebP formats
+  - Generates multiple sizes for responsive images
+  - Prevents layout shift by auto-setting width/height
+  - Images must be imported from `$lib/assets/`
+- **External URLs** (e.g., microCMS): Use standard `<img>` tags with explicit `width` and `height` attributes
+
 ### Important Notes
 
 - All routes are organized as section components imported into the main page

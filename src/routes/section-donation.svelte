@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import Button from '$lib/assets/donation-button.png';
+	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
 </script>
 
 <section id="donation" class="container">
@@ -11,7 +12,7 @@
 	</p>
 	</div>
 	<a href={resolve('/donation')} class="donation-link">
-		<img src={Button} alt="寄付ボタン">
+		<EnhancedImage src={Button} alt="寄付ボタン" class="donation-button" />
 	</a>
 </section>
 
@@ -22,7 +23,7 @@
 		align-items: center;
 	}
 
-	img {
+	.donation-button {
 		width: 304px;
 		height: 127px;
 	}

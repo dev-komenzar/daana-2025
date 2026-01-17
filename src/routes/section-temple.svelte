@@ -1,24 +1,25 @@
 <script lang="ts">
 	import Photo from "$lib/assets/ryugen.jpg";
+	import EnhancedImage from "$lib/components/ui/enhanced-image.svelte";
 	import Link from "$lib/components/ui/link.svelte";
 	import { inView, spring } from "motion";
 	import { animate } from "motion/mini";
 	import { onMount } from "svelte";
 
-	let imageElement: HTMLImageElement;
+	let imageWrapper: HTMLElement;
 	let descriptionElement: HTMLElement;
 
 	onMount(() => {
 		// 初期スケールを0.96に設定
-		imageElement.style.scale = "0.96";
+		imageWrapper.style.scale = "0.96";
 
 		// ビューポート検出開始
 		const stopObserver = inView(
-			imageElement,
+			imageWrapper,
 			() => {
 				// 進入時: 0.96 → 1 (spring)
 				animate(
-					imageElement,
+					imageWrapper,
 					{ scale: 1 },
 					{ bounce: 0.3, duration: 0.8, type: spring },
 				);
@@ -26,7 +27,7 @@
 				// 退出時: 1 → 0.96 (spring)
 				return () => {
 					animate(
-						imageElement,
+						imageWrapper,
 						{ scale: 0.96 },
 						{ bounce: 0.2, duration: 0.6, type: spring },
 					);
@@ -91,7 +92,9 @@
 	</div>
 	<div class="wide-content body">
 		<div class="card">
-			<img bind:this={imageElement} src={p.imageUrl} alt={p.name} />
+			<div bind:this={imageWrapper} class="image-wrapper">
+				<EnhancedImage src={p.imageUrl} alt={p.name} />
+			</div>
 
 			<div class="description" bind:this={descriptionElement}>
 				<p class="position">{p.position}</p>
@@ -126,12 +129,22 @@
 		align-items: flex-start;
 	}
 
-	.card img {
+	.image-wrapper {
+		width: 490px;
+		height: 330px;
+		overflow: hidden;
 		transform-origin: center center;
 		will-change: transform;
 	}
 
+	.image-wrapper :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
 	.description {
+		width: 372px;
 		font-family: var(--font-gothic-bold);
 		text-align: left;
 	}

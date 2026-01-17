@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Director } from "$lib/typing.d.ts";
 
+	import EnhancedImage from "$lib/components/ui/enhanced-image.svelte";
 	import { inView, spring } from "motion";
 	import { animate } from "motion/mini";
 	import { onMount } from "svelte";
@@ -15,20 +16,20 @@
 		reversed = false,
 	}: Director = $props();
 
-	let imageElement: HTMLImageElement;
+	let imageWrapper: HTMLElement;
 	let descriptionElement: HTMLElement;
 
 	onMount(() => {
 		// 初期スケールを0.96に設定
-		imageElement.style.scale = "0.96";
+		imageWrapper.style.scale = "0.96";
 
 		// ビューポート検出開始
 		const stopObserver = inView(
-			imageElement,
+			imageWrapper,
 			() => {
 				// 進入時: 0.96 → 1 (spring)
 				animate(
-					imageElement,
+					imageWrapper,
 					{ scale: 1 },
 					{ bounce: 0.3, duration: 0.8, type: spring },
 				);
@@ -36,7 +37,7 @@
 				// 退出時: 1 → 0.96 (spring)
 				return () => {
 					animate(
-						imageElement,
+						imageWrapper,
 						{ scale: 0.96 },
 						{ bounce: 0.2, duration: 0.6, type: spring },
 					);
@@ -82,7 +83,9 @@
 </script>
 
 <div class={["member-card", reversed && "reversed"]}>
-	<img bind:this={imageElement} src={imageUrl} alt={name} class="image" />
+	<div bind:this={imageWrapper} class="image">
+		<EnhancedImage src={imageUrl} alt={name} />
+	</div>
 
 	<div class="description" bind:this={descriptionElement}>
 		<p class="position">{position}</p>
@@ -102,10 +105,15 @@
 	.image {
 		width: 512px;
 		height: 312px;
-		aspect-ratio: 512 / 312;
-		object-fit: cover;
+		overflow: hidden;
 		transform-origin: center center;
 		will-change: transform;
+	}
+
+	.image :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.description {
