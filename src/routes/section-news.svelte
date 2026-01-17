@@ -17,15 +17,13 @@
 		</div>
 		<div class="carousel">
 			{#if query.error}
-				<p>記事が見つかりませんでした。</p>
+				<p class="no-news-message">ニュースが取得できません</p>
 			{:else if query.loading}
 				<p>Loading...</p>
+			{:else if !query.current || query.current.length === 0}
+				<p class="no-news-message">ニュースが取得できません</p>
 			{:else}
-				{#if !query.current}
-					<p>記事が見つかりませんでした。</p>
-				{:else}
 				<NewsCarousel items={query.current} />
-				{/if}
 			{/if}
 		</div>
 	</div>

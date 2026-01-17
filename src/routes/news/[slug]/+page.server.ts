@@ -5,11 +5,11 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
+	const newsPost = await getNewsPost(slug);
 
-	return {
-		newsPost: getNewsPost(slug).catch((error_) => {
-			console.error(`Failed to load news post with id: ${slug}`, error_);
-			throw error(404, 'ニュースが見つかりませんでした');
-		}),
-	};
+	if (!newsPost) {
+		throw error(404, 'ニュースが見つかりませんでした');
+	}
+
+	return { newsPost };
 };

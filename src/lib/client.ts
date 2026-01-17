@@ -1,6 +1,9 @@
 import { MICROCMS_API_KEY } from '$env/static/private';
 import ky from 'ky';
+
 const CONTENTS_API_URL = 'https://samgha.microcms.io/api/v1/';
+
+export const isApiConfigured = Boolean(MICROCMS_API_KEY && MICROCMS_API_KEY.trim() !== '');
 
 const headers = {
 	Accept: 'application/json',

@@ -3,7 +3,7 @@ import type { Options } from 'ky';
 import consola from 'consola';
 import * as v from 'valibot';
 
-import { api } from './client';
+import { api, isApiConfigured } from './client';
 
 export const NewsItemSchema = v.object({
 	content: v.optional(v.string()),
@@ -39,6 +39,11 @@ export async function getNewsAsync(
 	limit: number,
 	fields: NewsItemKey[],
 ): Promise<NewsItem[]> {
+	if (!isApiConfigured) {
+		consola.warn('MICROCMS_API_KEY is not configured. Returning empty news list.');
+		return [];
+	}
+
 	const link = generateLink(offset, limit, fields);
 
 	// Fetch and validate data from microCMS
@@ -47,7 +52,7 @@ export async function getNewsAsync(
 		data = await fetchCms<ReturnNewApi>(link);
 	} catch (error) {
 		consola.error('Error fetching news from microCMS:', error);
-		throw error;
+		return [];
 	}
 
 	// Log how many news loaded
@@ -57,7 +62,12 @@ export async function getNewsAsync(
 	return data.contents;
 }
 
-export async function getNewsPost(id: string): Promise<NewsItem> {
+export async function getNewsPost(id: string): Promise<NewsItem | undefined> {
+	if (!isApiConfigured) {
+		consola.warn('MICROCMS_API_KEY is not configured. Cannot fetch news post.');
+		return undefined;
+	}
+
 	const link = `news/${id}`;
 
 	// Fetch single news post
@@ -66,7 +76,7 @@ export async function getNewsPost(id: string): Promise<NewsItem> {
 		data = await fetchCmsSingle<NewsItem>(link);
 	} catch (error) {
 		consola.error(`Error fetching news post ${id} from microCMS:`, error);
-		throw error;
+		return undefined;
 	}
 
 	consola.info(`Loaded news post: ${id}`)
@@ -75,6 +85,11 @@ export async function getNewsPost(id: string): Promise<NewsItem> {
 }
 
 export async function getNewsTotalCount(): Promise<number> {
+	if (!isApiConfigured) {
+		consola.warn('MICROCMS_API_KEY is not configured. Returning zero count.');
+		return 0;
+	}
+
 	const link = 'news?limit=1&fields=id';
 
 	// Fetch with minimal data to get totalCount
@@ -83,7 +98,7 @@ export async function getNewsTotalCount(): Promise<number> {
 		data = await fetchCms<ReturnNewApi>(link);
 	} catch (error) {
 		consola.error('Error fetching news total count from microCMS:', error);
-		throw error;
+		return 0;
 	}
 
 	consola.info(`Total news count: ${data.totalCount}`)
