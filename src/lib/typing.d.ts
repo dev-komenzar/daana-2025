@@ -7,6 +7,8 @@ export type Director = {
 	/** 氏名（ローマ字） */
 	nameRomaji: string;
 	position: string;
+	/** 画像と説明の配置を反転するか */
+	reversed?: boolean;
 };
 
 export type Staff = {

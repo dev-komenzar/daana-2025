@@ -5,8 +5,15 @@
 	import { animate } from "motion/mini";
 	import { onMount } from "svelte";
 
-	let { affiliation, bio, imageUrl, name, nameRomaji, position }: Director =
-		$props();
+	let {
+		affiliation,
+		bio,
+		imageUrl,
+		name,
+		nameRomaji,
+		position,
+		reversed = false,
+	}: Director = $props();
 
 	let imageElement: HTMLImageElement;
 	let descriptionElement: HTMLElement;
@@ -74,7 +81,7 @@
 	});
 </script>
 
-<div class={["member-card"]}>
+<div class={["member-card", reversed && "reversed"]}>
 	<img bind:this={imageElement} src={imageUrl} alt={name} class="image" />
 
 	<div class="description" bind:this={descriptionElement}>
@@ -161,6 +168,10 @@
 			flex-direction: row-reverse;
 			column-gap: 60px;
 			align-items: flex-start;
+		}
+
+		.member-card.reversed {
+			flex-direction: row;
 		}
 
 		/* image, descriptionはmember-cardの子要素 */

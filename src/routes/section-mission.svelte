@@ -33,35 +33,42 @@
 </script>
 
 <section id="mission" class="mission-section" bind:this={missionSection}>
-	<div class="hero-container">
-		<div class="mission-content">
-			<h2 class="text-large font-gothic-bold">Mission</h2>
-		</div>
-	</div>
 	<div class="message">
-		<h3>コーポレートメッセージ</h3>
+		<h2 class="text font-gothic-bold">全く新しい「仏教に可能性を見出す人々」を繋ぐ団体</h2>
 		<p>
-			海は昼眠る、夜も眠る、ごうごう、いびきをかいて眠る。昔、昔、おお昔、海がはじめて、口開けて、笑ったときに、太陽は、目をまわして驚いた。かわいい花や、人たちを、海がのんでしまおうと、やさしく光る太陽は、魔術で、海を眠らした。海は昼眠る、夜も眠る。ごうごう、いびきをかいて眠る。
+			日本仏教徒協会は平成29年に設立された、とても新しい団体です。<br/>
+			お寺や僧侶といった「伝統の担い手側」ではなく、また「信仰や宗教」でもなく。<br/>
+			仏教を「思想・哲学」として社会に生かしたい。<br/>
+			西洋思想こそが文明であり正義であった時代は終わりを迎えつつあるように感じます。<br/>
+			次の時代の世界のOSは「仏教かもしれない」。そう考えると我が国日本には大きなアドバンテージがあるはずです。<br/>
+			仏教を真に活かし、使える思想とするために「宗教家」や「信仰者」ではない、大多数の「普通の人々」が、本物の仏教思想に触れ、学びと情報交換が出来るように。日本の「仏教徒」の意味をアップデートしたい。<br/>
+			「仏教に可能性を見出す人々＝仏教徒」を繋いで世界の公益に資することができるように。我々の使命はそこにあります。
 		</p>
 	</div>
 </section>
 
 <style>
 	.mission-section {
-		display: flex;
-		flex-direction: column-reverse;
-		align-items: center;
-		justify-content: space-between;
-		min-height: 92lvh;
+		position: relative;
+		height: 92lvh;
+		min-height: 800px;
 		padding: 70px 70px 0;
 		color: white;
 		background-color: var(--color-primary);
-		transform-origin: center center;
 		will-change: transform;
 	}
 
 	.message {
-		align-self: flex-end;
-		max-width: 24rem;
+		position: absolute;
+		top: 330px;
+		left: 95px;
+		width: min(100%, 733px);
+	}
+
+	.text {
+		font-family: var(--font-gothic-bold);
+		font-size: 25px;
+		line-height: normal;
+		letter-spacing: 0.06em;
 	}
 </style>
