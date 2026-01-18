@@ -176,6 +176,8 @@
 			flex-direction: row-reverse;
 			column-gap: 60px;
 			align-items: flex-start;
+			justify-content: space-between;
+			width: 100%;
 		}
 
 		.member-card.reversed {
@@ -188,6 +190,7 @@
 		}
 
 		.description {
+			flex-shrink: 0;
 			flex-basis: 390px;
 		}
 	}

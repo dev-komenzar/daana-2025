@@ -111,7 +111,8 @@
 
 <style>
 	#houdouji {
-		margin-top: calc(95px * 2);
+		padding-bottom: 300px;
+		margin-top: calc(95px + 200px);
 	}
 
 	.houdouji {

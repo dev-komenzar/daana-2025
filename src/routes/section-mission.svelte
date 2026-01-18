@@ -50,9 +50,7 @@
 <style>
 	.mission-section {
 		position: relative;
-		height: 92lvh;
-		min-height: 800px;
-		padding: 70px 70px 0;
+		height: 820px;
 		color: white;
 		background-color: var(--color-primary);
 		will-change: transform;
