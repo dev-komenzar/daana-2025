@@ -21,7 +21,7 @@
 		},
 		{
 			name: "加藤諒佑",
-			nameRomaji: "Ryosuke Katou",
+			nameRomaji: "Ryosuke Kato",
 			position: "スタッフ",
 		},
 	];
