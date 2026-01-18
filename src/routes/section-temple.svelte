@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Photo from "$lib/assets/ryugen.jpg";
+	import Photo from "$lib/assets/ryugen-converted.png";
 	import EnhancedImage from "$lib/components/ui/enhanced-image.svelte";
 	import Link from "$lib/components/ui/link.svelte";
 	import { inView, spring } from "motion";
