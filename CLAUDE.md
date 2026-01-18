@@ -121,3 +121,12 @@ Required environment variable:
 - The project uses Svelte 5's latest features
 - microCMS is used as the headless CMS for content management
 - Remote functions require server-side execution; they cannot run in pure client context
+
+### Space Handling
+
+General principles for managing spacing between elements:
+
+- **Uniform spacing (siblings/children)**: Use the owl selector (`* + *`) to apply consistent margins between adjacent sibling elements
+- **Non-uniform spacing**:
+  - **Vertical spacing**: Apply margin/padding to the **bottom element** (use `margin-top` on the element below)
+  - **Horizontal spacing**: Apply margin/padding to the **right element** (use `margin-left` on the element to the right)
