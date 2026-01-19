@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import Button from '$lib/assets/donation-button.png';
+	import Button from '$lib/assets/donation_button.png';
 	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
 </script>
 

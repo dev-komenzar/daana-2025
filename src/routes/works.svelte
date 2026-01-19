@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Daana from '$lib/assets/daanas-for-good.png';
-	import Hodoji from '$lib/assets/hodoji.png';
-	import Philo from '$lib/assets/philosophy-collective.png';
-	import Sokubutsu from '$lib/assets/sokubutsu-daigaku.png';
+	import Daana from '$lib/assets/daanas_for_good-c.png';
+	import Hodoji from '$lib/assets/hodoji-c.png';
+	import Philo from '$lib/assets/philosophy_collective-c.png';
+	import Sokubutsu from '$lib/assets/sokubutsu_daigaku-c.png';
 	import Card from '$lib/components/ui/works-card.svelte';
 
 	type Work = {
