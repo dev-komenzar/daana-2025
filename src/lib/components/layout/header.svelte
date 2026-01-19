@@ -188,7 +188,8 @@
 		margin: 0 auto;
 	}
 
-	.logo {
+	/* EnhancedImage コンポーネント内の img に適用するため :global() を使用 */
+	:global(.logo) {
 		max-width: 140px;
 		height: auto;
 	}
@@ -303,7 +304,7 @@
 		padding: 18px;
 	}
 
-	.menu-logo {
+	:global(.menu-logo) {
 		max-width: 140px;
 		height: auto;
 		filter: brightness(0) invert(1);
@@ -401,7 +402,7 @@
 			padding: 16px 40px;
 		}
 
-		.logo {
+		:global(.logo) {
 			max-width: 160px;
 			margin: 0;
 		}
