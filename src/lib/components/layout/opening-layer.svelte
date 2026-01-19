@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Logo from '$lib/assets/opening-logo.png';
+	import Logo from '$lib/assets/opening_logo.png';
 	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
 	import { onMount } from "svelte";
 	import { sineOut } from 'svelte/easing';
