@@ -2,6 +2,7 @@
 
 <script lang="ts">
 	import Directors from "$lib/components/ui/directors.svelte";
+	import HorizontalDivider from "$lib/components/ui/horizontal-divider.svelte";
 	import Staffs from "$lib/components/ui/staffs.svelte";
 </script>
 
@@ -12,13 +13,15 @@
 	<div class="wide-content">
 		<Directors />
 	</div>
+	<HorizontalDivider marginTop={95} />
 	<div class="wide-content staffs">
 		<Staffs />
 	</div>
+	<HorizontalDivider marginTop={95} />
 </section>
 
 <style>
 	.staffs {
-		margin: calc(95px * 2) auto 0;
+		margin: 95px auto 0; /* CLAUDE.md原則: 下の要素にmargin-topを適用 */
 	}
 </style>
