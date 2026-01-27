@@ -205,6 +205,16 @@ Container
 	margin: 10rem auto 0;
 }
 
+.container-bg-colored {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 calc((100% - var(--max-width)) / 2) 200px;
+	margin: 0;
+	color: #FFF;
+	background: #08192D;
+
+}
+
 .text-large {
 	max-width: 100%;
 	font-size: 36px;
