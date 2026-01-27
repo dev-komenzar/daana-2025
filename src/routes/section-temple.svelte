@@ -73,21 +73,25 @@
 
 	const p = {
 		bio: `
-ミャンマー仏教の文化人類学的研究を行う中で、研究より実践に惹かれ仏教者として生きることを志す。当初日本仏教界に縁がなく、武術の指導者として世に向かおうとするも2010年に縁を得て出家・修行（真言律宗総本山西大寺）。伝統や学術を大切にしつつも、囚われない「今に活きる仏教思想」の社会実装を提唱し、実験寺院の概念と方法論を創案。日本仏教徒協会設立の礎となる。
+大阪外国語大学（現：大阪大学）外国語学部卒、同大大学院東南アジア・オセアニア地域言語社会研究科博士前期課程修了、修士(学術)。ミャンマー仏教の文化人類学的研究を行う中で、研究より実践に惹かれ仏教者として生きることを志す。当初日本仏教界に縁がなく、武術の指導者として世に向かおうとするも2010年に縁を得て出家・修行（真言律宗総本山西大寺）。伝統や学術を大切にしつつも、囚われない「今に活きる仏教思想」の社会実装を提唱し、実験寺院の概念と方法論を創案。日本仏教徒協会設立の礎となる。
 多くの起業家、経営者、医師や学生などの精神的指導者として信頼を寄せられている。
 `,
 		imageUrl: Photo,
 		name: "松波龍源",
 		nameRomaji: "Ryugen Matsunami",
-		position: "実験寺院 寳幢寺 僧院長",
+		positions: [
+			"日本仏教徒協会 最高顧問 / Principal Advisor, Japan Buddhist Association",
+			"実験寺院グループ 総監    / Master of the Order , Experimental Buddhism Order",
+			"実験寺院 寳幢寺 僧院長 / Temple Master , Hōdō-ji Temple",
+		],
 	};
 </script>
 
-<section id="houdouji">
+<section id="houdouji" class="container">
 	<div class="wide-content">
-		<h2 class="text-large section-header">Houdouji</h2>
+		<h2 class="text-large section-header">Experimental Buddhism Order</h2>
 		<h3 class="text-medium section-header-japanese houdouji">
-			実験寺院寳幢寺
+			実験寺院グループ_執行部
 		</h3>
 	</div>
 	<div class="wide-content body">
@@ -97,9 +101,11 @@
 			</div>
 
 			<div class="description" bind:this={descriptionElement}>
-				<p class="position">{p.position}</p>
 				<h3 class="name">{p.name}</h3>
 				<p class="name-romaji">{p.nameRomaji}</p>
+				{#each p.positions as position (position)}
+					<p class="position" >{position}</p>
+				{/each}
 				<p class="bio">{p.bio}</p>
 				<div class="link">
 					<Link href="/" textContent="VIEW MORE" />
@@ -120,7 +126,7 @@
 	}
 
 	.body {
-		margin: 30px auto 0;
+		margin-top: 30px;
 	}
 
 	.card {
@@ -145,23 +151,13 @@
 	}
 
 	.description {
-		width: 372px;
+		width: 424px;
 		font-family: var(--font-body-bold);
 		text-align: left;
 	}
 
-	.position {
-		/* 代表理事 */
-		margin: 0;
-		font-family: var(--font-body-bold);
-		font-size: 13px;
-		line-height: 19px;
-		color: #000;
-		letter-spacing: 0.06em;
-	}
-
 	.name {
-		/* 藏本龍介 */
+		/* 松波龍源 */
 		margin: 13px auto 0;
 		font-family: var(--font-body-bold);
 		font-size: 25px;
@@ -171,7 +167,7 @@
 	}
 
 	.name-romaji {
-		/* Kuramoto Ryosuke */
+		/* Matsunami Ryugen */
 		font-family: var(--font-body-bold);
 		font-size: 13px;
 		line-height: 16px;
@@ -179,9 +175,21 @@
 		letter-spacing: 0.06em;
 	}
 
+	.position {
+		font-family: var(--font-body-bold);
+		font-size: 10px;
+		line-height: 18px;
+		letter-spacing: 0.05em;
+	}
+
+	.name-romaji + .position {
+		margin-top: 18px;
+	}
+
 	.bio {
 		/* 1979年生まれ... */
-		margin: 14px auto 0;
+		width: 372px;
+		margin: 14px auto 0 0;
 		font-family: var(--font-body-bold);
 		font-size: 11px;
 		line-height: 24px;

@@ -5,7 +5,7 @@
 
 <section id="works" class="container">
 	<div class="wide-content">
-		<h2 class="text-large heading">Works</h2>
+		<h2 class="text-large heading">WORKS</h2>
 	</div>
 
 	<div class="full-content">
@@ -14,7 +14,7 @@
 
 	<div class="bg-second">
 		<div class="wide-content">
-			<h2 class="text-large heading two">Works</h2>
+			<h2 class="text-large heading two">WORKS</h2>
 		</div>
 
 		<div class="full-content">

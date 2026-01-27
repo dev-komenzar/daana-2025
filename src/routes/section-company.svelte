@@ -7,7 +7,7 @@
 
 <section id="company" class="container">
 	<div class="wide-content">
-		<h2 class="text-large section-header">Company</h2>
+		<h2 class="text-large section-header">COMPANY</h2>
 	</div>
 	<div class="wide-content">
 		<Directors />
