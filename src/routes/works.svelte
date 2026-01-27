@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Daana from '$lib/assets/daanas_for_good-c.png';
-	import Hodoji from '$lib/assets/hodoji-c.png';
 	import Philo from '$lib/assets/philosophy_collective-c.png';
 	import Sokubutsu from '$lib/assets/sokubutsu_daigaku-c.png';
+	import Temple from '$lib/assets/temple-group-photo-c.jpg';
 	import Card from '$lib/components/ui/works-card.svelte';
 
 	type Work = {
@@ -17,7 +17,7 @@
 	const works: Work[] = [
 		{
 			description: '簡単な説明分など簡単な説明分など簡単な説明分など',
-			imageUrl: Hodoji,
+			imageUrl: Temple,
 			isLabelReversed: false,
 			name: '実験寺院プロジェクト',
 			position: '',
