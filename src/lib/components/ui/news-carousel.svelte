@@ -5,12 +5,11 @@
 	import { onDestroy, onMount } from "svelte";
 
 	interface Properties {
+		currentIndex?: number;
 		items: NewsItem[];
 	}
 
-	let { items }: Properties = $props();
-
-	let currentIndex = $state(0);
+	let { currentIndex = $bindable(0), items }: Properties = $props();
 	let previousIndex = $state<number>(-1);
 	let intervalId: ReturnType<typeof setInterval> | undefined;
 
