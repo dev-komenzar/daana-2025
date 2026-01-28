@@ -63,7 +63,7 @@
 		background-color: white;
 	}
 
-	.logo {
+	.opening-layer :global(.logo) {
 		width: 100%;
 		max-width: 440px;
 	}
