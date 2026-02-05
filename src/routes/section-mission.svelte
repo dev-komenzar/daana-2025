@@ -34,36 +34,68 @@
 
 <section id="mission" class="mission-section" bind:this={missionSection}>
 	<div class="message">
-		<h2 class="text font-gothic-bold">全く新しい「仏教に可能性を見出す人々」を繋ぐ団体</h2>
-		<p>
-			日本仏教徒協会は平成29年に設立された、とても新しい団体です。<br/>
-			お寺や僧侶といった「伝統の担い手側」ではなく、また「信仰や宗教」でもなく。<br/>
-			仏教を「思想・哲学」として社会に生かしたい。<br/>
-			西洋思想こそが文明であり正義であった時代は終わりを迎えつつあるように感じます。<br/>
-			次の時代の世界のOSは「仏教かもしれない」。そう考えると我が国日本には大きなアドバンテージがあるはずです。<br/>
-			仏教を真に活かし、使える思想とするために「宗教家」や「信仰者」ではない、大多数の「普通の人々」が、本物の仏教思想に触れ、学びと情報交換が出来るように。日本の「仏教徒」の意味をアップデートしたい。<br/>
-			「仏教に可能性を見出す人々＝仏教徒」を繋いで世界の公益に資することができるように。我々の使命はそこにあります。
-		</p>
+		<h2 class="heading font-gothic-bold">全く新しい「仏教に可能性を見出す人々」を繋ぐ団体</h2>
+		<div class="text">
+			<p>日本仏教徒協会は平成29年に設立された、とても新しい団体です。</p>
+			<p>お寺や僧侶といった「伝統の担い手側」ではなく、また「信仰や宗教」でもなく。</p>
+			<p>仏教を「思想・哲学」として社会に生かしたい。</p>
+			<p>西洋思想こそが文明であり正義であった時代は終わりを迎えつつあるように感じます。</p>
+			<p>次の時代の世界のOSは「仏教かもしれない」。そう考えると我が国日本には大きなアドバンテージがあるはずです。</p>
+			<p>仏教を真に活かし、使える思想とするために「宗教家」や「信仰者」ではない、大多数の「普通の人々」が、本物の仏教思想に触れ、学びと情報交換が出来るように。日本の「仏教徒」の意味をアップデートしたい。</p>
+			<p>「仏教に可能性を見出す人々＝仏教徒」を繋いで世界の公益に資することができるように。我々の使命はそこにあります。</p>
+		</div>
 	</div>
 </section>
 
 <style>
 	.mission-section {
 		position: relative;
-		height: 820px;
+		height: auto;
 		color: white;
 		background-color: var(--color-primary);
 		will-change: transform;
 	}
 
 	.message {
-		position: absolute;
-		top: 330px;
-		left: 95px;
-		width: min(100%, 733px);
+		padding: 240px 16px 200px;
 	}
 
 	.text {
+		padding-top: 72px;
+	}
+
+	.text p + p {
+		margin-top: 2em;
+	}
+
+	@media (width >= 768px) {
+		.text p + p {
+			margin-top: 0;
+		}
+	}
+
+	@media (width >= 768px) {
+			.message {
+				padding: 240px 24px 200px;
+			}
+	}
+
+	@media (width >= 1024px) {
+		.mission-section {
+			height: 820px;
+
+		}
+
+		.message {
+			position: absolute;
+			top: 330px;
+			left: 95px;
+			width: min(100%, 733px);
+			padding: 0;
+		}
+	}
+
+	.heading {
 		font-family: var(--font-body-bold);
 		font-size: 25px;
 		line-height: normal;
