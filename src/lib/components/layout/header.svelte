@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
+	import HeaderIcon from '$lib/assets/header-icon.svg';
 	import Logo from "$lib/assets/jba-black.png";
 	import EnhancedImage from "$lib/components/ui/enhanced-image.svelte";
 	import * as v from "valibot";
@@ -15,52 +16,34 @@
 
 	const MenuItems: HeaderMenuItem[] = [
 		{
-			href: "/",
-			isExternal: false,
-			key: "top",
-			label: "Top",
-		},
-		{
-			href: "/exprimental-temple",
-			isExternal: false,
-			key: "experimental-temple",
-			label: "実験寺院寳幢寺",
-		},
-		{
-			href: "/mission",
+			href: "/#mission",
 			isExternal: false,
 			key: "mission",
-			label: "Mission",
+			label: "mission",
 		},
 		{
-			href: "/works",
+			href: "/#company",
+			isExternal: false,
+			key: "company",
+			label: "company",
+		},
+		{
+			href: "/#works",
 			isExternal: false,
 			key: "works",
 			label: "Works",
 		},
 		{
-			href: "/news",
+			href: "/#news",
 			isExternal: false,
 			key: "news",
-			label: "News",
+			label: "news",
 		},
 		{
 			href: "/donate",
 			isExternal: false,
 			key: "donate",
-			label: "Donate",
-		},
-		{
-			href: "/access",
-			isExternal: false,
-			key: "access",
-			label: "アクセス",
-		},
-		{
-			href: "https://samgha.square.site/",
-			isExternal: true,
-			key: "events",
-			label: "イベント",
+			label: "donate",
 		},
 	] as const;
 
@@ -94,11 +77,7 @@
 		<!-- Mobile: Contact button and hamburger menu -->
 		<div class="mobile-controls">
 			<button class="contact-button" aria-label="お問い合わせ">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
-					<path d="M6 8L12 13L18 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M6 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-				</svg>
+				<img src={HeaderIcon} alt='お問合せフォーム' />
 			</button>
 			<button
 				class="hamburger-button"
@@ -121,7 +100,10 @@
 					</a>
 				</div>
 			{/each}
+		<img src={HeaderIcon} alt='お問合せフォーム'/>
+
 		</nav>
+
 	</div>
 </header>
 
@@ -173,7 +155,6 @@
 		z-index: 100;
 		width: 100%;
 		background: #fff;
-		box-shadow: 0 4px 4px rgb(0 0 0 / 8%);
 	}
 
 	.header-wrapper {
@@ -408,7 +389,7 @@
 		}
 
 		.list {
-			gap: 32px;
+			gap: 18px;
 			justify-content: flex-end;
 			width: auto;
 			padding: 0;
@@ -416,11 +397,15 @@
 		}
 
 		.item-link {
-			font-family: "Noto Sans JP", sans-serif;
-			font-size: 13px;
-			font-weight: 400;
-			line-height: 1.2;
-			letter-spacing: 0.08em;
+			/* MISSION COMPANY WORKS NEWS DONATE */
+			font-family: var(--font-heading-bold);
+			font-size: 14px;
+			line-height: 44px;
+			color: #000;
+			text-transform: uppercase;
+
+			/* identical to box height, or 314% */
+			letter-spacing: 0.015em;
 		}
 	}
 </style>
