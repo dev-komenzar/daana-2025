@@ -128,16 +128,12 @@
 		margin-top: 30px;
 	}
 
-	.card {
-		display: flex;
-		flex-direction: row;
-		column-gap: 95px;
-		align-items: flex-start;
-	}
 
 	.image-wrapper {
 		width: 490px;
-		height: 330px;
+		max-width: 100%;
+		height: auto;
+		aspect-ratio: 490 / 330;
 		overflow: hidden;
 		transform-origin: center center;
 		will-change: transform;
@@ -150,7 +146,7 @@
 	}
 
 	.description {
-		width: 424px;
+		width: 100%;
 		font-family: var(--font-body-bold);
 		text-align: left;
 	}
@@ -187,7 +183,7 @@
 
 	.bio {
 		/* 1979年生まれ... */
-		width: 372px;
+		width: 100%;
 		margin: 14px auto 0 0;
 		font-family: var(--font-body-bold);
 		font-size: 11px;
@@ -198,5 +194,30 @@
 
 	.link {
 		margin: 35px auto 0;
+	}
+
+	@media (width >= 1024px) {
+		.card {
+			display: flex;
+			flex-direction: row;
+			column-gap: 95px;
+			align-items: flex-start;
+		}
+
+		.image-wrapper {
+			width: 490px;
+			height: 330px;
+			overflow: hidden;
+			transform-origin: center center;
+			will-change: transform;
+		}
+
+		.description {
+			width: 424px;
+		}
+
+		.bio {
+			width: 372px;
+		}
 	}
 </style>

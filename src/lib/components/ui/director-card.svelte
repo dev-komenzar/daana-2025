@@ -111,7 +111,9 @@
 
 	.image {
 		width: 512px;
-		height: 312px;
+		max-width: 100%;
+		height: auto;
+		aspect-ratio: 512 / 312;
 		overflow: hidden;
 		transform-origin: center center;
 		will-change: transform;
@@ -124,6 +126,7 @@
 	}
 
 	.description {
+		padding-top: 24px;
 		font-family: var(--font-body-bold);
 		text-align: left;
 	}
@@ -177,7 +180,7 @@
 		letter-spacing: 0.06em;
 	}
 
-	@media (width >= 768px) {
+	@media (width >= 1024px) {
 		.member-card {
 			display: flex;
 			flex-direction: row-reverse;
@@ -194,6 +197,17 @@
 		/* image, descriptionはmember-cardの子要素 */
 		.image {
 			flex-basis: 512px;
+			width: 512px;
+			height: 312px;
+			overflow: hidden;
+			transform-origin: center center;
+			will-change: transform;
+		}
+
+		.image :global(img) {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 
 		.description {

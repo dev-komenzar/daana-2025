@@ -152,7 +152,7 @@
 
 	.article-description {
 		display: -webkit-box;
-		width: 384px;
+		width: 360px;
 		overflow: hidden;
 		-webkit-line-clamp: 4;
 		line-clamp: 4;
@@ -167,7 +167,9 @@
 		width: 100%;
 	}
 
-	@media (width >= 768px) {
+	/* 他セクションは1024pxだが、カルーセル(500px)とニュースリストの両方を
+	   横並びで収めるため、このセクションのみ1100pxに設定 */
+	@media (width >= 1100px) {
 		.wide-content {
 			flex-direction: row;
 			align-items: center;
@@ -182,6 +184,10 @@
 		.carousel {
 			flex-shrink: 0;
 			width: 500px;
+		}
+
+		.article-description {
+			width: 360px;
 		}
 	}
 </style>

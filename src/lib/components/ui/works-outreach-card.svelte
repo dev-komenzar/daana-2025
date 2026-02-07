@@ -37,15 +37,8 @@
 		height: 368px;
 		padding: 0%;
 		overflow: hidden;
-		border-radius: 52px;
 		transition: box-shadow 0.3s ease-in-out;
 	}
-
-		@media (width >= 768px) {
-			.works-card {
-				border-radius: 0;
-			}
-		}
 
 	.works-card:hover {
 		box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
