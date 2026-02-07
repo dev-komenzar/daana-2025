@@ -16,37 +16,42 @@
 		reversed = false,
 	}: Director = $props();
 
-	let imageWrapper: HTMLElement;
-	let descriptionElement: HTMLElement;
+	let imageWrapper: HTMLElement = $state()!;
+	let descriptionElement: HTMLElement = $state()!;
 
 	onMount(() => {
-		// 初期スケールを0.96に設定
-		imageWrapper.style.scale = "0.96";
+		let stopObserver: (() => void) | undefined;
 
-		// ビューポート検出開始
-		const stopObserver = inView(
-			imageWrapper,
-			() => {
-				// 進入時: 0.96 → 1 (spring)
-				animate(
-					imageWrapper,
-					{ scale: 1 },
-					{ bounce: 0.3, duration: 0.8, type: spring },
-				);
+		// 画像がある場合のみアニメーション設定
+		if (imageWrapper) {
+			// 初期スケールを0.96に設定
+			imageWrapper.style.scale = "0.96";
 
-				// 退出時: 1 → 0.96 (spring)
-				return () => {
+			// ビューポート検出開始
+			stopObserver = inView(
+				imageWrapper,
+				() => {
+					// 進入時: 0.96 → 1 (spring)
 					animate(
 						imageWrapper,
-						{ scale: 0.96 },
-						{ bounce: 0.2, duration: 0.6, type: spring },
+						{ scale: 1 },
+						{ bounce: 0.3, duration: 0.8, type: spring },
 					);
-				};
-			},
-			{
-				amount: 0.7, // 70%表示でトリガー
-			},
-		);
+
+					// 退出時: 1 → 0.96 (spring)
+					return () => {
+						animate(
+							imageWrapper,
+							{ scale: 0.96 },
+							{ bounce: 0.2, duration: 0.6, type: spring },
+						);
+					};
+				},
+				{
+					amount: 0.7, // 70%表示でトリガー
+				},
+			);
+		}
 
 		// description要素のアニメーション設定
 		descriptionElement.style.opacity = "0";
@@ -76,16 +81,18 @@
 
 		// コンポーネント破棄時のクリーンアップ
 		return () => {
-			stopObserver();
+			stopObserver?.();
 			stopDescriptionObserver();
 		};
 	});
 </script>
 
 <div class={["member-card", reversed && "reversed"]}>
-	<div bind:this={imageWrapper} class="image">
-		<EnhancedImage src={imageUrl} alt={name} />
-	</div>
+	{#if imageUrl}
+		<div bind:this={imageWrapper} class="image">
+			<EnhancedImage src={imageUrl} alt={name} />
+		</div>
+	{/if}
 
 	<div class="description" bind:this={descriptionElement}>
 		<p class="position">{position}</p>
