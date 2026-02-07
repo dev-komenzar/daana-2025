@@ -167,9 +167,7 @@
 		width: 100%;
 	}
 
-	/* 他セクションは1024pxだが、カルーセル(500px)とニュースリストの両方を
-	   横並びで収めるため、このセクションのみ1100pxに設定 */
-	@media (width >= 1100px) {
+	@media (width >= 1024px) {
 		.wide-content {
 			flex-direction: row;
 			align-items: center;
@@ -187,7 +185,7 @@
 		}
 
 		.article-description {
-			width: 360px;
+			width: 384px;
 		}
 	}
 </style>

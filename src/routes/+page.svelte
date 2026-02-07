@@ -3,7 +3,6 @@
 	import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte';
 
 	import SectionCompany from "./section-company.svelte";
-	import SectionDonation from "./section-donation.svelte";
 	import SectionEyecatch from "./section-eyecatch.svelte";
 	import SectionMission from "./section-mission.svelte";
 	import SectionNews from "./section-news.svelte";
@@ -26,5 +25,3 @@
 <SectionWorks />
 
 <SectionNews />
-
-<SectionDonation />

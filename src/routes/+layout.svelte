@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Ogp from '$lib/assets/ogp.png';
 	import Favicon from '$lib/components/layout/favicon.svelte';
+	import Footer from '$lib/components/layout/footer.svelte';
 	import Header from '$lib/components/layout/header.svelte';
 	import { SITE_FULL_URL } from '$lib/constants';
 	import { MetaTags } from 'svelte-meta-tags';
@@ -41,6 +42,7 @@
 		<Header />
 		{@render children?.()}
 	</main>
+	<Footer />
 </div>
 
 <style>

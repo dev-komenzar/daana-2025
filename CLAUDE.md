@@ -43,7 +43,7 @@ npx vitest            # Run tests (vitest is available but no test scripts confi
 ### Tech Stack
 - **Framework**: SvelteKit with Svelte 5
 - **Language**: TypeScript with strict mode
-- **Styling**: Pure CSS (no CSS frameworks)
+- **Styling**: Pure CSS (no CSS frameworks), **Mobile First** approach
 - **HTTP Client**: ky
 - **Validation**: valibot
 - **Logging**: consola
@@ -121,6 +121,33 @@ Required environment variable:
 - The project uses Svelte 5's latest features
 - microCMS is used as the headless CMS for content management
 - Remote functions require server-side execution; they cannot run in pure client context
+
+### CSS Architecture - Mobile First
+
+This project uses a **Mobile First** approach for responsive design:
+
+- **Default styles**: Written for mobile devices (smallest viewport)
+- **Media queries**: Use `@media screen and (width >= 768px)` to add styles for larger screens
+- **Breakpoints**:
+  - Mobile: default (< 768px)
+  - Tablet and above: `width >= 768px`
+
+```css
+/* Mobile First Example */
+.element {
+  padding: 24px;        /* Mobile default */
+  font-size: 14px;
+}
+
+@media screen and (width >= 768px) {
+  .element {
+    padding: 48px;      /* Tablet and above */
+    font-size: 16px;
+  }
+}
+```
+
+**Important**: Do NOT use `max-width` or `width < 768px` media queries. Always start with mobile styles and progressively enhance for larger screens.
 
 ### Space Handling
 
