@@ -108,7 +108,7 @@
 				{/each}
 				<p class="bio">{p.bio}</p>
 				<div class="link">
-					<Link href="/" textContent="VIEW MORE" />
+					<Link href="/interview" textContent="VIEW MORE" />
 				</div>
 			</div>
 		</div>
