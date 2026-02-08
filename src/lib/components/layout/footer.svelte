@@ -63,6 +63,7 @@
 					<path d="M10 8L14 12L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</a>
+			<a href={resolve('/llm.txt')} class="llm-link">llm.txt</a>
 		</div>
 	</div>
 </footer>
@@ -156,8 +157,9 @@
 	.footer-contact {
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
 		height: 70px;
-		padding-left: 24px;
+		padding: 0 24px;
 	}
 
 	.contact-link {
@@ -186,6 +188,17 @@
 
 	.contact-email {
 		color: rgb(255 255 255 / 70%);
+	}
+
+	.llm-link {
+		font-family: var(--font-heading);
+		font-size: 12px;
+		color: rgb(255 255 255 / 50%);
+		text-decoration: none;
+	}
+
+	.llm-link:hover {
+		color: rgb(255 255 255 / 80%);
 	}
 
 	/* Tablet and above */
@@ -222,7 +235,7 @@
 
 		.footer-contact {
 			height: 95px;
-			padding-left: 85px;
+			padding: 0 85px;
 		}
 
 		.contact-link {
