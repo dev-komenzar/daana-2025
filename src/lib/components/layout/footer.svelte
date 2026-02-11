@@ -32,14 +32,7 @@
 
 				<div class="address-list">
 					<div class="address-item">
-						<p class="org-label">一般社団法人  日本仏教徒協会（運営）</p>
-						<p class="address">
-							Email: info@samgha.org
-						</p>
-					</div>
-
-					<div class="address-item">
-						<p class="org-label">実験寺院寳幢寺</p>
+						<p class="org-label">一般社団法人  日本仏教徒協会</p>
 						<p class="address">
 							〒602-0052<br />
 							京都市上京区上小川町120-3
@@ -47,23 +40,22 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<HorizontalDivider color="rgba(255, 255, 255, 0.2)" />
-		<div class="footer-contact">
-			<a href="mailto:info@houdouji.inc" class="contact-link">
-				<svg class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
-					<path d="M2 7L12 13L22 7" stroke="currentColor" stroke-width="1.5"/>
-				</svg>
-				<span class="contact-label">Contact us</span>
-				<span class="contact-email">@Houdouji.inc</span>
-				<svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-					<path d="M10 8L14 12L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-			</a>
-			<a href={resolve('/llm.txt')} class="llm-link">llm.txt</a>
+			<div class="contact-row">
+				<a href="mailto:info@houdouji.inc" class="contact-link">
+					<svg class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+						<path d="M2 7L12 13L22 7" stroke="currentColor" stroke-width="1.5"/>
+					</svg>
+					<span class="contact-label">Contact us</span>
+					<span class="contact-email">@Houdouji.inc</span>
+					<svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+						<path d="M10 8L14 12L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</a>
+				<a href={resolve('/llm.txt')} class="llm-link">llm.txt</a>
+			</div>
 		</div>
 	</div>
 </footer>
@@ -153,13 +145,12 @@
 		line-height: 1.6;
 	}
 
-	/* Contact Bar */
-	.footer-contact {
+	/* Contact Row */
+	.contact-row {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 70px;
-		padding: 0 24px;
+		margin-top: 32px;
 	}
 
 	.contact-link {
@@ -233,9 +224,8 @@
 			margin-bottom: 40px;
 		}
 
-		.footer-contact {
-			height: 95px;
-			padding: 0 85px;
+		.contact-row {
+			margin-top: 48px;
 		}
 
 		.contact-link {
