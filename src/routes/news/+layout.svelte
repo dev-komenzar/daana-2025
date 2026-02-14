@@ -8,7 +8,7 @@
 
 <MetaTags
 	title='お知らせ一覧'
-	titleTemplate='%s | 実験寺院 寳幢寺'
+	titleTemplate='%s | 日本仏教徒協会'
 	canonical={`${SITE_FULL_URL}/news`}
 />
 

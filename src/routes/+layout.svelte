@@ -18,21 +18,21 @@
 <Favicon />
 
 <MetaTags
-	title='実験寺院 寳幢寺'
+	title='日本仏教徒協会'
 	description='仏教の社会実装のために新しい挑戦をするお寺・寳幢（ほうどう）寺のウェブサイトです。'
 	canonical={SITE_FULL_URL}
 	openGraph={{
 		description: '仏教の社会実装のために新しい挑戦をするお寺・寳幢（ほうどう）寺のウェブサイトです。',
 		images: [
 			{
-				alt: '実験寺院 寳幢寺',
+				alt: '日本仏教徒協会',
 				height: 600,
 				url: Ogp,
 				width: 800
 			}
 		],
-		siteName: '実験寺院 寳幢寺',
-		title: '実験寺院 寳幢寺',
+		siteName: '実日本仏教徒協会',
+		title: '日本仏教徒協会',
 		url: SITE_FULL_URL
 	}}
 />

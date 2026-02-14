@@ -21,13 +21,13 @@
 {#await data.newsPost}
 	<MetaTags
 		title='ニュース'
-		titleTemplate='%s | 実験寺院 寳幢寺'
+		titleTemplate='%s | 日本仏教徒協会'
 	/>
 	<NewsDetailSkeleton />
 {:then newsPost}
 	<MetaTags
 		title={newsPost.title || 'ニュース'}
-		titleTemplate='%s | 実験寺院 寳幢寺'
+		titleTemplate='%s | 日本仏教徒協会'
 	/>
 
 	<article class="container">
@@ -69,7 +69,7 @@
 {:catch}
 	<MetaTags
 		title='エラー'
-		titleTemplate='%s | 実験寺院 寳幢寺'
+		titleTemplate='%s | 日本仏教徒協会'
 	/>
 	<article class="container">
 		<div class="content">
