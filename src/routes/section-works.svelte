@@ -1,6 +1,10 @@
 <script lang="ts">
+	import Link from '$lib/components/ui/link.svelte';
+
 	import WorksOutreach from './works-outreach.svelte';
 	import WorksCreation from './works.svelte';
+
+	const FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4mQvkGNrdDcYXxBxw893GTe9WRjS4tQ/viewform?usp=publish-editor"
 </script>
 
 <section id="works">
@@ -25,15 +29,20 @@
 		</div>
 	</div>
 
-	<div class="container-bg-colored">
-		<div class="">
-			<div class="wide-content">
-				<h2 class="text-large heading two">WORKS</h2>
-			</div>
+	<div class="">
+		<div class="wide-content">
+			<h3>「実装」領域</h3>
+			<p class="summary">社会に広く「仏教の価値」を実装する</p>
+			<p class="works-body">今、あらゆる分野で「仏教哲学」という知識体系の社会実装が求められています。</p>
+			<p class="works-body">「経済成長こそが善をもたらす」という神話が崩壊しつつある現代、仏教はあらゆる領域に指針を与える「実践的な智慧」として活用されるべきと考えます。</p>
+			<p class="works-body">当協会は、企業研修や経営者向けの「問答」によるコーチング、顧問契約、行政・学術機関との連携など、多様な領域で公益活動を行っています。</p>
+			<!-- 例外スペーサー -->
+			<div class="space"></div>
+			<Link href={FORM_LINK} textContent='CONTACT US'/>
+		</div>
 
-			<div class="full-content">
-				<WorksOutreach />
-			</div>
+		<div class="full-content">
+			<WorksOutreach />
 		</div>
 	</div>
 </section>
@@ -80,5 +89,9 @@
 
 	ol{
 		padding-inline-start: 1.4em;
+	}
+
+	div.space{
+		height: 37px;
 	}
 </style>

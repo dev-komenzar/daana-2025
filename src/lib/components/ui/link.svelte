@@ -4,14 +4,23 @@
 	import { resolve } from "$app/paths";
 
 	type Properties = {
-		href: Pathname;
+		class?: string;
+		href: Pathname | (string & {});
 		textContent: string;
 	};
 
-	let { href, textContent }: Properties = $props();
+	let { class: className, href, textContent }: Properties = $props();
+
+	const isExternal =
+		typeof href === 'string' && (href.startsWith('http://') || href.startsWith('https://'));
 </script>
 
-<a href={resolve(href)}>
+<a
+	href={resolve(href as Pathname)}
+	target={isExternal ? '_blank' : undefined}
+	rel={isExternal ? 'noopener noreferrer' : undefined}
+	class={className}
+>
 	<div class="outer">
 		<div class="inner">
 			<span class="text">{textContent}</span>
