@@ -307,3 +307,31 @@ Container
 		margin: 0 auto;
 	}
 }
+
+/* Temple page - transparent header overlay */
+:has(.temple-layout) .header-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: transparent;
+}
+
+:has(.temple-layout) .header-container .logo {
+	filter: brightness(0) invert(1);
+}
+
+:has(.temple-layout) .hamburger-button span {
+	background: #fff;
+}
+
+:has(.temple-layout) .header-container .contact-button img {
+	filter: invert(1);
+}
+
+:has(.temple-layout) .header-container .item-link {
+	color: #fff;
+}
+
+:has(.temple-layout) .header-container .desktop-nav img {
+	filter: invert(1);
+}

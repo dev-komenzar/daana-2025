@@ -11,4 +11,13 @@
 	canonical={`${SITE_FULL_URL}/temple`}
 />
 
-{@render children?.()}
+<div class="temple-layout">
+	{@render children?.()}
+</div>
+
+<style>
+	.temple-layout {
+		/* ヘッダーをオーバーレイさせるため、コンテンツを上に移動 */
+		margin-top: -72px;
+	}
+</style>
