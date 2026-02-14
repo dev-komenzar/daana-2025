@@ -157,3 +157,38 @@ General principles for managing spacing between elements:
 - **Non-uniform spacing**:
   - **Vertical spacing**: Apply margin/padding to the **bottom element** (use `margin-top` on the element below)
   - **Horizontal spacing**: Apply margin/padding to the **right element** (use `margin-left` on the element to the right)
+
+### Scroll Animations
+
+Use the `floatUp` Svelte action for scroll-triggered "floating up" animations. This action uses the Motion library (`motion.dev`) which is already installed in the project.
+
+**Location**: `src/lib/actions/float-up.ts`
+
+**Usage**:
+```svelte
+<script>
+  import { floatUp } from '$lib/actions';
+</script>
+
+<h2 use:floatUp>タイトル</h2>
+<p use:floatUp>コンテンツ</p>
+<div use:floatUp={{ translateY: 10, bounce: 0.5 }}>カスタム設定</div>
+```
+
+**Animation Effect**:
+- Fade in (opacity: 0 → 1)
+- Translate up (Y: 6px → 0)
+- Scale up with spring (scale: 0.98 → 1)
+- Triggers on both viewport enter and exit
+
+**Available Options**:
+| Option | Default | Description |
+|--------|---------|-------------|
+| `translateY` | 6 | Y-axis movement in px |
+| `scaleFrom` | 0.98 | Initial scale value |
+| `bounce` | 0.3 | Spring bounce for scale |
+| `durationEnter` | 0.5 | Enter animation duration (seconds) |
+| `durationExit` | 0.35 | Exit animation duration (seconds) |
+| `threshold` | 0.3 | Viewport visibility ratio to trigger (0-1) |
+
+**Important**: When adding scroll animations to new pages, follow the pattern used in `src/routes/interview/+page.svelte`.
