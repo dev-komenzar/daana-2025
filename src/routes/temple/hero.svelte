@@ -12,7 +12,7 @@
 		fetchpriority="high"
 		sizes="100vw"
 		objectFit="cover"
-		objectPosition="center 30%"
+		objectPosition="var(--hero-object-position)"
 	/>
 
 	<div class="overlay">
@@ -25,6 +25,8 @@
 
 <style>
 	.hero {
+		--hero-object-position: 70% 50%;
+
 		position: relative;
 		width: 100vw;
 		height: calc(100lvh + 72px);
@@ -37,7 +39,6 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: center 30%;
 	}
 
 	.overlay {
@@ -68,8 +69,8 @@
 	}
 
 	@media screen and (width >= 768px) {
-		.hero :global(.hero-image) {
-			object-position: center center;
+		.hero {
+			--hero-object-position: center center;
 		}
 
 		.overlay {
