@@ -2,8 +2,8 @@
 	import { floatUp } from '$lib/actions';
 	import Link from '$lib/components/ui/link.svelte';
 
+	import WorksCreation from './works-creation.svelte';
 	import WorksOutreach from './works-outreach.svelte';
-	import WorksCreation from './works.svelte';
 
 	const FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4mQvkGNrdDcYXxBxw893GTe9WRjS4tQ/viewform?usp=publish-editor"
 </script>
