@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { floatUp } from '$lib/actions';
 	import Button from '$lib/assets/footer/donation-button.png';
 	import JbaLogo from '$lib/assets/jba-black.png';
 	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
@@ -10,13 +11,13 @@
 	<!-- SectionDonation -->
 	<section id="donation" class="donation-section">
 		<div class="donation-content">
-			<p class="donation-text">
+			<p class="donation-text" use:floatUp>
 				「寄付」というアクションを
 				<br />
 				あなたの力が我々の動力です
 			</p>
 		</div>
-		<a href={resolve('/donation')} class="donation-link">
+		<a href={resolve('/donation')} class="donation-link" use:floatUp>
 			<EnhancedImage src={Button} alt="寄付ボタン" class="donation-button" />
 		</a>
 	</section>
@@ -26,14 +27,14 @@
 	<div class="footer-info">
 		<div class="footer-main">
 			<div class="organization">
-				<div class="logo-row">
+				<div class="logo-row" use:floatUp>
 					<EnhancedImage src={JbaLogo} alt="日本仏教徒協会" class="jba-logo" />
 				</div>
 
 				<div class="address-list">
 					<div class="address-item">
-						<p class="org-label">一般社団法人  日本仏教徒協会</p>
-						<p class="address">
+						<p class="org-label" use:floatUp>一般社団法人  日本仏教徒協会</p>
+						<p class="address" use:floatUp>
 							〒602-0052<br />
 							京都市上京区上小川町120-3
 						</p>
@@ -41,7 +42,7 @@
 				</div>
 			</div>
 
-			<div class="contact-row">
+			<div class="contact-row" use:floatUp>
 				<a href="mailto:info@houdouji.inc" class="contact-link">
 					<svg class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>

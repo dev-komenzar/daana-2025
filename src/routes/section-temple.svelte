@@ -1,75 +1,8 @@
 <script lang="ts">
+	import { floatUp } from "$lib/actions";
 	import Photo from "$lib/assets/ryugen-converted.png";
 	import EnhancedImage from "$lib/components/ui/enhanced-image.svelte";
 	import Link from "$lib/components/ui/link.svelte";
-	import { inView, spring } from "motion";
-	import { animate } from "motion/mini";
-	import { onMount } from "svelte";
-
-	let imageWrapper: HTMLElement;
-	let descriptionElement: HTMLElement;
-
-	onMount(() => {
-		// 初期スケールを0.96に設定
-		imageWrapper.style.scale = "0.96";
-
-		// ビューポート検出開始
-		const stopObserver = inView(
-			imageWrapper,
-			() => {
-				// 進入時: 0.96 → 1 (spring)
-				animate(
-					imageWrapper,
-					{ scale: 1 },
-					{ bounce: 0.3, duration: 0.8, type: spring },
-				);
-
-				// 退出時: 1 → 0.96 (spring)
-				return () => {
-					animate(
-						imageWrapper,
-						{ scale: 0.96 },
-						{ bounce: 0.2, duration: 0.6, type: spring },
-					);
-				};
-			},
-			{
-				amount: 0.7, // 70%表示でトリガー
-			},
-		);
-
-		// description要素のアニメーション設定
-		descriptionElement.style.opacity = "0";
-		descriptionElement.style.transform = "translateX(10px)";
-
-		const stopDescriptionObserver = inView(
-			descriptionElement,
-			() => {
-				// 進入時: 右から左へスライド + フェードイン
-				animate(
-					descriptionElement,
-					{ opacity: 1, transform: "translateX(0)" },
-					{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
-				);
-
-				// 退出時: 左から右へスライド + フェードアウト
-				return () => {
-					animate(
-						descriptionElement,
-						{ opacity: 0, transform: "translateX(10px)" },
-						{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
-					);
-				};
-			},
-			{ amount: 0.5 },
-		);
-
-		// コンポーネント破棄時のクリーンアップ
-		return () => {
-			stopObserver();
-			stopDescriptionObserver();
-		};
-	});
 
 	const p = {
 		bio: `
@@ -89,25 +22,25 @@
 
 <section id="houdouji" class="container">
 	<div class="wide-content">
-		<h2 class="text-large section-header">Experimental Buddhism Order</h2>
-		<h3 class="text-medium section-header-japanese houdouji">
+		<h2 class="text-large section-header" use:floatUp>Experimental Buddhism Order</h2>
+		<h3 class="text-medium section-header-japanese houdouji" use:floatUp>
 			実験寺院グループ_執行部
 		</h3>
 	</div>
 	<div class="wide-content body">
 		<div class="card">
-			<div bind:this={imageWrapper} class="image-wrapper">
+			<div class="image-wrapper" use:floatUp>
 				<EnhancedImage src={p.imageUrl} alt={p.name} />
 			</div>
 
-			<div class="description" bind:this={descriptionElement}>
-				<h3 class="name">{p.name}</h3>
-				<p class="name-romaji">{p.nameRomaji}</p>
+			<div class="description">
+				<h3 class="name" use:floatUp>{p.name}</h3>
+				<p class="name-romaji" use:floatUp>{p.nameRomaji}</p>
 				{#each p.positions as position (position)}
-					<p class="position" >{position}</p>
+					<p class="position" use:floatUp>{position}</p>
 				{/each}
-				<p class="bio">{p.bio}</p>
-				<div class="link">
+				<p class="bio" use:floatUp>{p.bio}</p>
+				<div class="link" use:floatUp>
 					<Link href="/interview" textContent="VIEW MORE" />
 				</div>
 			</div>
@@ -135,8 +68,6 @@
 		height: auto;
 		aspect-ratio: 490 / 330;
 		overflow: hidden;
-		transform-origin: center center;
-		will-change: transform;
 	}
 
 	.image-wrapper :global(img) {
@@ -208,8 +139,6 @@
 			width: 490px;
 			height: 330px;
 			overflow: hidden;
-			transform-origin: center center;
-			will-change: transform;
 		}
 
 		.description {

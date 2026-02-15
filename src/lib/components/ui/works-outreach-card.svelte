@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { floatUp } from '$lib/actions';
+
 	type Properties = {
 		description: string;
 		isLabelReversed?: boolean;
@@ -18,7 +20,7 @@
 	}: Properties = $props();
 </script>
 
-<div class={["works-card", variant]} style={style}>
+<div class={["works-card", variant]} style={style} use:floatUp>
 
 	{#if src}
 		<img {src} alt={label} class="image" />

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Director } from "$lib/typing.d.ts";
 
+	import { floatUp } from "$lib/actions";
 	import PhotoKuramoto from "$lib/assets/kuramoto-converted.jpg";
 	import PhotoYamasaki from "$lib/assets/yamazaki-converted.jpeg";
 	import DirectorCard from "$lib/components/ui/director-card.svelte";
@@ -28,7 +29,7 @@
 	];
 </script>
 
-<h3 class="text-medium section-header-japanese">日本仏教徒協会_理事</h3>
+<h3 class="text-medium section-header-japanese" use:floatUp>日本仏教徒協会_理事</h3>
 
 {#each directors as member (member.name)}
 	<DirectorCard

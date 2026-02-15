@@ -167,7 +167,7 @@
 		width: 100%;
 	}
 
-	@media (width >= 1024px) {
+	@media (width >= 1070px) {
 		.wide-content {
 			flex-direction: row;
 			align-items: center;

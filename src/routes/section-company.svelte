@@ -1,6 +1,7 @@
 <!-- TODO: Delete members.svelte, members-card.svelte -->
 
 <script lang="ts">
+	import { floatUp } from '$lib/actions';
 	import Directors from "$lib/components/ui/directors.svelte";
 	import HorizontalDivider from "$lib/components/ui/horizontal-divider.svelte";
 	import Staffs from "$lib/components/ui/staffs.svelte";
@@ -8,7 +9,7 @@
 
 <section id="company" class="container">
 	<div class="wide-content">
-		<h2 class="text-large section-header">COMPANY</h2>
+		<h2 class="text-large section-header" use:floatUp>COMPANY</h2>
 	</div>
 	<div class="wide-content">
 		<Directors />
