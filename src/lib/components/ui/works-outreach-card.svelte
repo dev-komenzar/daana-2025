@@ -1,10 +1,13 @@
 <script lang="ts">
+	import type { Pathname } from "$app/types";
+
 	import { floatUp } from '$lib/actions';
 
 	type Properties = {
 		description: string;
 		isLabelReversed?: boolean;
 		label: string;
+		path: Pathname | undefined;
 		src?: string;
 		style?: string;
 		variant: "primary" | "secondary";
@@ -14,13 +17,14 @@
 		description,
 		isLabelReversed = false,
 		label,
+		path,
 		src,
 		style,
 		variant = "primary",
 	}: Properties = $props();
 </script>
 
-<div class={["works-card", variant]} style={style} use:floatUp>
+<svelte:element this={path ? "a" : "div"} href={path} class={["works-card", variant]} style={style} use:floatUp>
 
 	{#if src}
 		<img {src} alt={label} class="image" />
@@ -30,7 +34,7 @@
 		<h3 class="label">{label}</h3>
 		<p class="description">{description}</p>
 	</div>
-</div>
+</svelte:element>
 
 <style>
 	.works-card {
@@ -44,6 +48,12 @@
 
 	.works-card:hover {
 		box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
+	}
+
+	a.works-card {
+		display: block;
+		color: inherit;
+		text-decoration: none;
 	}
 
 	.primary {
@@ -89,6 +99,7 @@
 		font-family: var(--font-heading-bold);
 		font-size: 14px;
 		line-height: 20px;
+		color: #FFF;
 		letter-spacing: -0.01em;
 	}
 
@@ -96,10 +107,33 @@
 		font-family: var(--font-heading);
 		font-size: 8px;
 		line-height: 10px;
+		color: #FFF;
 		letter-spacing: 0.06em;
 	}
 
 	.label + .description {
 		margin-top: 6px;
+	}
+
+	a.works-card .label {
+		position: relative;
+		display: inline-block;
+	}
+
+	a.works-card .label::after {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		content: "";
+		background-color: currentcolor;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s ease-in-out;
+	}
+
+	a.works-card:hover .label::after {
+		transform: scaleX(1);
 	}
 </style>
