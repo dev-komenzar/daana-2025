@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { floatUp } from '$lib/actions';
 	import heroImage from '$lib/assets/temple/group_photo-c.jpg';
 	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
 </script>
@@ -16,10 +17,10 @@
 	/>
 
 	<div class="overlay">
-		<h1>実験寺院プロジェクト</h1>
-		<p>歴史や文化、伝統という言葉で仏教を語らない。</p>
-		<p>実践哲学としての仏教を「再導入」する<wbr>というプロジェクト。</p>
-		<p>宗教や信仰ではない、<wbr>哲学としての仏教の拠点を作りたい。</p>
+		<h1 use:floatUp>実験寺院プロジェクト</h1>
+		<p use:floatUp>歴史や文化、伝統という言葉で仏教を語らない。</p>
+		<p use:floatUp>実践哲学としての仏教を「再導入」する<wbr>というプロジェクト。</p>
+		<p use:floatUp>宗教や信仰ではない、<wbr>哲学としての仏教の拠点を作りたい。</p>
 	</div>
 </section>
 

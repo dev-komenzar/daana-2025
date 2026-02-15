@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import { floatUp } from '$lib/actions';
 	import PhotoEngawa from '$lib/assets/temple/zengain_engawa-c.jpg';
 	import PhotoGroup from '$lib/assets/temple/zengain_group-c.jpg';
 	import PhotoIrori from '$lib/assets/temple/zengain_irori-c.jpg';
@@ -9,20 +10,30 @@
 
 <div class="full-content wrapper">
 	<div class="zenga-grid">
-		<EnhancedImage src={PhotoGroup} alt='禅河院 集合写真' class='zenga-grid-group'/>
-		<EnhancedImage src={PhotoEngawa} alt='縁側で' class='zenga-grid-engawa'/>
-		<EnhancedImage src={PhotoKaki} alt='庭になる柿' class='zenga-grid-kaki'/>
-		<EnhancedImage src={PhotoIrori} alt='囲炉裏で団欒' class='zenga-grid-irori'/>
-		<EnhancedImage src={PhotoLecture} alt='講義の様子' class='zenga-grid-lecture'/>
+		<div class="zenga-grid-group" use:floatUp>
+			<EnhancedImage src={PhotoGroup} alt='禅河院 集合写真' />
+		</div>
+		<div class="zenga-grid-engawa" use:floatUp>
+			<EnhancedImage src={PhotoEngawa} alt='縁側で' />
+		</div>
+		<div class="zenga-grid-kaki" use:floatUp>
+			<EnhancedImage src={PhotoKaki} alt='庭になる柿' />
+		</div>
+		<div class="zenga-grid-irori" use:floatUp>
+			<EnhancedImage src={PhotoIrori} alt='囲炉裏で団欒' />
+		</div>
+		<div class="zenga-grid-lecture" use:floatUp>
+			<EnhancedImage src={PhotoLecture} alt='講義の様子' />
+		</div>
 	</div>
 	<div class="description">
-		<h3>禅河院</h3>
-		<span class="zengain-label">Zenga-in</span>
-		<p>所在：兵庫県西脇市</p>
-		<p>築150年以上の古民家</p>
-		<p>本尊：釈迦如来絵像・普賢菩薩絵像</p>
-		<p class="space-top">実験寺院第二号で団体での研修や長期のリトリートなど、滞在型の企画に使用されています。</p>
-		<p>田畑に囲まれた静かな集落に位置し、瞑想などに最高の環境です。</p>
+		<h3 use:floatUp>禅河院</h3>
+		<span class="zengain-label" use:floatUp>Zenga-in</span>
+		<p use:floatUp>所在：兵庫県西脇市</p>
+		<p use:floatUp>築150年以上の古民家</p>
+		<p use:floatUp>本尊：釈迦如来絵像・普賢菩薩絵像</p>
+		<p class="space-top" use:floatUp>実験寺院第二号で団体での研修や長期のリトリートなど、滞在型の企画に使用されています。</p>
+		<p use:floatUp>田畑に囲まれた静かな集落に位置し、瞑想などに最高の環境です。</p>
 	</div>
 </div>
 
@@ -42,29 +53,34 @@
 		margin-top: 60px;
 	}
 
-	:global(.zenga-grid-group){
+	.zenga-grid-group {
 		grid-row: 1 / 2;
 		grid-column: 1 / 4;
 	}
 
-	:global(.zenga-grid-engawa){
+	.zenga-grid-engawa {
 		grid-row: 2 / 3;
 		grid-column: 1 / 3;
 	}
 
-	:global(.zenga-grid-kaki){
+	.zenga-grid-kaki {
 		grid-row: 2 / 3;
 		grid-column: 3 / 4;
 	}
 
-	:global(.zenga-grid-irori){
+	.zenga-grid-irori {
 		grid-row: 3 / 4;
 		grid-column: 1 / 2;
 	}
 
-	:global(.zenga-grid-lecture){
+	.zenga-grid-lecture {
 		grid-row: 3 / 4;
 		grid-column: 2 / 4;
+	}
+
+	.zenga-grid > div > :global(img) {
+		width: 100%;
+		height: auto;
 	}
 
 	.description {
