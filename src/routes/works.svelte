@@ -1,15 +1,19 @@
 <script lang="ts">
+	import type { Pathname } from "$app/types";
+
 	import Daana from '$lib/assets/daanas_for_good-c.png';
 	import Philo from '$lib/assets/philosophy_collective-c.png';
 	import Sokubutsu from '$lib/assets/sokubutsu_daigaku-c.png';
 	import Temple from '$lib/assets/temple-group-photo-c.jpg';
 	import Card from '$lib/components/ui/works-card.svelte';
 
+
 	type Work = {
 		description: string;
 		imageUrl?: string;
 		isLabelReversed: boolean
 		name: string;
+		path?: Pathname | undefined;
 		position: string;
 		variant: "primary" | "secondary";
 	};
@@ -20,6 +24,7 @@
 			imageUrl: Temple,
 			isLabelReversed: false,
 			name: '実験寺院プロジェクト',
+			path: '/temple',
 			position: '',
 			variant: 'primary',
 		},
@@ -69,6 +74,7 @@ function getGridArea(index: number) {
 			style={`grid-area: ${getGridArea(index)}`}
 			variant={work.variant}
 			isLabelReversed={work.isLabelReversed}
+			path={work.path}
 		/>
 	{/each}
 </div>
