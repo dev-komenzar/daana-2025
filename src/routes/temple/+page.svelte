@@ -2,6 +2,7 @@
 	import Hero from './hero.svelte';
 	import Houdouji from './houdouji.svelte';
 	import Intro from './intro.svelte';
+	import Message from './message.svelte';
 	import ZengaIn from './zenga-in.svelte';
 </script>
 
@@ -12,5 +13,6 @@
 	<Intro/>
 	<Houdouji/>
 	<ZengaIn/>
+	<Message/>
 </section>
 
