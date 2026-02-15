@@ -2,6 +2,8 @@
 	import type { Pathname } from "$app/types";
 
 	import { floatUp } from '$lib/actions';
+	import { spring } from "motion";
+	import { animate } from "motion/mini";
 
 	type Properties = {
 		description: string;
@@ -22,15 +24,44 @@
 		style,
 		variant = "primary",
 	}: Properties = $props();
+
+	let labelBoxElement: HTMLDivElement;
+
+	function handleMouseEnter() {
+		if (!labelBoxElement) return;
+		animate(
+			labelBoxElement,
+			{ scale: 1.02 },
+			{ bounce: 0.4, duration: 0.6, type: spring }
+		);
+	}
+
+	function handleMouseLeave() {
+		if (!labelBoxElement) return;
+		animate(
+			labelBoxElement,
+			{ scale: 1 },
+			{ bounce: 0.3, duration: 0.5, type: spring }
+		);
+	}
 </script>
 
-<svelte:element this={path ? "a" : "div"} href={path} class={["works-card", variant]} style={style} use:floatUp>
+<svelte:element
+	this={path ? "a" : "div"}
+	href={path}
+	class={["works-card", variant]}
+	style={style}
+	role={path ? undefined : "group"}
+	use:floatUp
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+>
 
 	{#if src}
 		<img {src} alt={label} class="image" />
 	{/if}
 
-	<div class={["label-box", isLabelReversed && "reversed"]}>
+	<div bind:this={labelBoxElement} class={["label-box", isLabelReversed && "reversed"]}>
 		<h3 class="label">{label}</h3>
 		<p class="description">{description}</p>
 	</div>
@@ -68,10 +99,13 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.3s ease-in-out;
+		transition:
+			transform 0.3s ease-in-out,
+			filter 0.3s ease-in-out;
 	}
 
 	.works-card:hover .image {
+		filter: brightness(1.2);
 		transform: scale(1.02);
 	}
 
@@ -84,6 +118,7 @@
 		padding: 10px 0 10px 30px;
 		background-color: #08192D;
 		border-radius: 0 26px 0 0;
+		transform-origin: bottom left;
 	}
 
 	.label-box.reversed {
@@ -92,6 +127,7 @@
 		padding: 10px 30px 10px 0;
 		text-align: right;
 		border-radius: 26px 0 0;
+		transform-origin: bottom right;
 	}
 
 	.label {
