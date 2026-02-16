@@ -98,19 +98,19 @@ function getGridArea(index: number) {
 			gap: 0;
 		}
 
-		.item1 {
+		:global(.item1) {
 			grid-area: a;
 		}
 
-		.item2 {
+		:global(.item2) {
 			grid-area: b;
 		}
 
-		.item3 {
+		:global(.item3) {
 			grid-area: c;
 		}
 
-		.item4 {
+		:global(.item4) {
 			grid-area: d;
 		}
 	}
