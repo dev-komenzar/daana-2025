@@ -104,7 +104,7 @@
 
 	p {
 		font-family: var(--font-body-bold);
-		font-size: 11px;
+		font-size: 12px;
 		line-height: 24px;
 		letter-spacing: 0.06em;
 	}
