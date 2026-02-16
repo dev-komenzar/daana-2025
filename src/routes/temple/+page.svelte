@@ -9,7 +9,7 @@
 
 <Hero/>
 
-<section id='temple'>
+<section id='temple' class="container">
 	<Intro/>
 	<Houdouji/>
 	<ZengaIn/>

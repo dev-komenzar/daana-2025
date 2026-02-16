@@ -119,7 +119,7 @@
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-			justify-content: space-between;
+			justify-content: flex-start;
 			margin-top: 160px;
 		}
 
@@ -131,6 +131,7 @@
 		.description {
 			max-width: 390px;
 			padding-right: 60px;
+			padding-left: 72px;
 		}
 	}
 </style>

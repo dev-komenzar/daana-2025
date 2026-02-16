@@ -113,14 +113,14 @@
 		.wrapper {
 			display: flex;
 			flex-direction: row;
-			justify-content: space-between;
+			justify-content: flex-end;
 			margin-top: 246px;
 		}
 
 		.description {
 			max-width: 390px;
-			padding-right: 0;
-			padding-left: 60px;
+			margin-right: 94px;
+			margin-left: 60px;
 		}
 
 		.houdouji-grid {

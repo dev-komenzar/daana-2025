@@ -51,6 +51,10 @@
 </section>
 
 <style>
+	.container {
+		margin-top: 10rem;
+	}
+
 	.heading {
 		font-family: var(--font-heading-bold);
 		text-align: left;
@@ -96,5 +100,11 @@
 
 	div.space{
 		height: 37px;
+	}
+
+	@media screen and (width >= 768px) {
+		.container {
+			margin-top: 300px;
+		}
 	}
 </style>

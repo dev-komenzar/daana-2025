@@ -22,6 +22,10 @@
 </article>
 
 <style>
+	.container {
+		margin-top: 10rem;
+	}
+
 	.content {
 		padding: 2rem 1rem;
 	}
@@ -103,6 +107,10 @@
 	}
 
 	@media (width >= 768px) {
+		.container {
+			margin-top: 300px;
+		}
+
 		.content {
 			padding: 3rem 2rem;
 		}

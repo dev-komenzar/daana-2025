@@ -87,6 +87,10 @@
 </section>
 
 <style>
+	#news {
+		margin-top: 10rem;
+	}
+
 	.news {
 		display: flex;
 		flex-direction: column;
@@ -165,6 +169,12 @@
 
 	.carousel {
 		width: 100%;
+	}
+
+	@media screen and (width >= 768px) {
+		#news {
+			margin-top: 300px;
+		}
 	}
 
 	@media (width >= 1070px) {

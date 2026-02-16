@@ -22,7 +22,17 @@
 </section>
 
 <style>
+	#company {
+		margin-top: 10rem;
+	}
+
 	.staffs {
 		margin: 95px auto 0; /* CLAUDE.md原則: 下の要素にmargin-topを適用 */
+	}
+
+	@media screen and (width >= 768px) {
+		#company {
+			margin-top: 300px;
+		}
 	}
 </style>

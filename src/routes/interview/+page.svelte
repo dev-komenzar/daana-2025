@@ -145,6 +145,9 @@
 </section>
 
 <style>
+	.container {
+		margin-top: 10rem;
+	}
 
 	.pre-heading {
 		/* 実験寺院の取り組みについて、 実験寺院グループ総監にインタビューしてみました。 */
@@ -232,6 +235,12 @@
 		font-size: 16px;
 		line-height: 30px;
 		letter-spacing: 0.06em;
+	}
+
+	@media screen and (width >= 768px) {
+		.container {
+			margin-top: 300px;
+		}
 	}
 
 	@media screen and (width >= 1024px) {
