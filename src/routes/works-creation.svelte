@@ -69,7 +69,6 @@ function getGridArea(index: number) {
 	{#each works as work, index (work.name)}
 		<Card
 			label={work.name}
-			description={work.description}
 			src={work.imageUrl}
 			style={`grid-area: ${getGridArea(index)}`}
 			variant={work.variant}

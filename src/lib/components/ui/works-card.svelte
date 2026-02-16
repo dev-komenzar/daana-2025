@@ -7,7 +7,6 @@
 
 
 	type Properties = {
-		description: string;
 		isLabelReversed?: boolean;
 		label: string;
 		path?: Pathname;
@@ -17,7 +16,6 @@
 	};
 
 	let {
-		description,
 		isLabelReversed = false,
 		label,
 		path,
@@ -64,7 +62,6 @@
 
 	<div bind:this={labelBoxElement} class={["label-box", isLabelReversed && "reversed"]}>
 		<h3 class="label">{label}</h3>
-		<p class="description">{description}</p>
 	</div>
 </svelte:element>
 
@@ -114,6 +111,8 @@
 		position: absolute;
 		bottom: 0;
 		left: 0;
+		display: flex;
+		align-items: center;
 		width: 335px;
 		height: 51px;
 		padding: 10px 0 10px 30px;
@@ -125,8 +124,8 @@
 	.label-box.reversed {
 		right: 0;
 		left: auto;
+		justify-content: flex-end;
 		padding: 10px 30px 10px 0;
-		text-align: right;
 		border-radius: 26px 0 0;
 		transform-origin: bottom right;
 	}
@@ -134,20 +133,9 @@
 	.label {
 		margin: 0;
 		font-family: var(--font-heading-bold);
-		font-size: 14px;
+		font-size: 18px;
 		line-height: 20px;
 		letter-spacing: -0.01em;
-	}
-
-	.description {
-		font-family: var(--font-heading);
-		font-size: 8px;
-		line-height: 10px;
-		letter-spacing: 0.06em;
-	}
-
-	.label + .description {
-		margin-top: 6px;
 	}
 
 	a.works-card .label {

@@ -6,7 +6,7 @@
 	import Card from '$lib/components/ui/works-outreach-card.svelte';
 
 	type Work = {
-		description: string;
+		description?: string;
 		imageUrl?: string;
 		isLabelReversed: boolean
 		name: string;
@@ -64,7 +64,6 @@ function getGridArea(index: number) {
 	{#each works as work, index (work.name)}
 		<Card
 			label={work.name}
-			description={work.description}
 			src={work.imageUrl}
 			style={`grid-area: ${getGridArea(index)}`}
 			variant={work.variant}
@@ -91,19 +90,19 @@ function getGridArea(index: number) {
 				1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 		}
 
-		.item1 {
+		:global(.item1) {
 			grid-area: a;
 		}
 
-		.item2 {
+		:global(.item2) {
 			grid-area: b;
 		}
 
-		.item3 {
+		:global(.item3) {
 			grid-area: c;
 		}
 
-		.item4 {
+		:global(.item4) {
 			grid-area: d;
 		}
 	}
