@@ -77,7 +77,7 @@ function getGridArea(index: number) {
 	.works-grid {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 0;
 		justify-items: center;
 		margin-top: 1.5rem;
 	}
@@ -89,7 +89,6 @@ function getGridArea(index: number) {
 				"a a a a a a b b b b b" 368px
 				"c c c c c d d d d d d" 368px /
 				1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-			gap: 0;
 		}
 
 		.item1 {

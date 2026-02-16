@@ -9,7 +9,7 @@
 		description: string;
 		isLabelReversed?: boolean;
 		label: string;
-		path: Pathname | undefined;
+		path?: Pathname;
 		src?: string;
 		style?: string;
 		variant: "primary" | "secondary";
