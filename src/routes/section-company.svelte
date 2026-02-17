@@ -1,10 +1,10 @@
 <!-- TODO: Delete members.svelte, members-card.svelte -->
 
 <script lang="ts">
-	import { floatUp } from '$lib/actions';
-	import Directors from "$lib/components/ui/directors.svelte";
-	import HorizontalDivider from "$lib/components/ui/horizontal-divider.svelte";
-	import Staffs from "$lib/components/ui/staffs.svelte";
+import { floatUp } from '$lib/actions'
+import Directors from '$lib/components/ui/directors.svelte'
+import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
+import Staffs from '$lib/components/ui/staffs.svelte'
 </script>
 
 <section id="company" class="container">
@@ -22,17 +22,17 @@
 </section>
 
 <style>
+#company {
+	margin-top: 10rem;
+}
+
+.staffs {
+	margin: 95px auto 0; /* CLAUDE.md原則: 下の要素にmargin-topを適用 */
+}
+
+@media screen and (width >= 768px) {
 	#company {
-		margin-top: 10rem;
+		margin-top: 300px;
 	}
-
-	.staffs {
-		margin: 95px auto 0; /* CLAUDE.md原則: 下の要素にmargin-topを適用 */
-	}
-
-	@media screen and (width >= 768px) {
-		#company {
-			margin-top: 300px;
-		}
-	}
+}
 </style>

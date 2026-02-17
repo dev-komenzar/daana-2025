@@ -1,43 +1,42 @@
 <script lang="ts">
-	import NewsCarousel from "$lib/components/ui/news-carousel.svelte";
-	import NewsLink from '$lib/components/ui/news-link.svelte';
-	import { getNewsRemote } from "$lib/news.remote";
+import NewsCarousel from '$lib/components/ui/news-carousel.svelte'
+import NewsLink from '$lib/components/ui/news-link.svelte'
+import { getNewsRemote } from '$lib/news.remote'
 
-	const query = getNewsRemote({
-		fields: ["id", "title", "publishedAt", "thumbnail", "content"],
-		limit: 3,
-		offset: 0,
-	});
+const query = getNewsRemote({
+	fields: ['id', 'title', 'publishedAt', 'thumbnail', 'content'],
+	limit: 3,
+	offset: 0,
+})
 
-	let currentIndex = $state(0);
-	let previousIndex = $state(-1);
-	let lastKnownIndex = -1;
+let currentIndex = $state(0)
+let previousIndex = $state(-1)
+let lastKnownIndex = -1
 
-	$effect(() => {
-		// currentIndex が変わった時、前の値を previousIndex に保存
-		if (lastKnownIndex !== -1 && lastKnownIndex !== currentIndex) {
-			previousIndex = lastKnownIndex;
-		}
-		lastKnownIndex = currentIndex;
-	});
-
-	function formatDate(isoDate: string): string {
-		const date = new Date(isoDate);
-		const year = date.getFullYear();
-		const month = String(date.getMonth() + 1).padStart(2, "0");
-		const day = String(date.getDate()).padStart(2, "0");
-		return `${year}.${month}.${day}`;
+$effect(() => {
+	// currentIndex が変わった時、前の値を previousIndex に保存
+	if (lastKnownIndex !== -1 && lastKnownIndex !== currentIndex) {
+		previousIndex = lastKnownIndex
 	}
+	lastKnownIndex = currentIndex
+})
 
-	function stripHtml(html: string): string {
-		return html.replaceAll(/<[^>]*>/g, "");
-	}
+function formatDate(isoDate: string): string {
+	const date = new Date(isoDate)
+	const year = date.getFullYear()
+	const month = String(date.getMonth() + 1).padStart(2, '0')
+	const day = String(date.getDate()).padStart(2, '0')
+	return `${year}.${month}.${day}`
+}
 
-	function truncate(text: string, maxLength: number): string {
-		if (text.length <= maxLength) return text;
-		return text.slice(0, maxLength) + "...";
-	}
+function stripHtml(html: string): string {
+	return html.replaceAll(/<[^>]*>/g, '')
+}
 
+function truncate(text: string, maxLength: number): string {
+	if (text.length <= maxLength) return text
+	return text.slice(0, maxLength) + '...'
+}
 </script>
 
 <section id="news" class="container">
@@ -55,22 +54,17 @@
 			{:else}
 				<div class="article-info-container">
 					{#each query.current as item, index (item.id)}
-						<div
-							class="article-info"
-							class:active={currentIndex === index}
-							class:exiting={previousIndex === index}
-						>
-							<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ""}</p>
-							<h3 class="article-title">{item.title ?? ""}</h3>
+						<div class="article-info" class:active={currentIndex === index} class:exiting={previousIndex === index}>
+							<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
+							<h3 class="article-title">{item.title ?? ''}</h3>
 							<p class="article-description">
-								{item.content ? truncate(stripHtml(item.content), 100) : ""}
+								{item.content ? truncate(stripHtml(item.content), 100) : ''}
 							</p>
 						</div>
 					{/each}
 				</div>
-				<NewsLink href={`/news/${query.current[currentIndex].id}`} textContent='VIEW NOTE' />
+				<NewsLink href={`/news/${query.current[currentIndex].id}`} textContent="VIEW NOTE" />
 			{/if}
-			
 		</div>
 		<div class="carousel">
 			{#if query.error}
@@ -87,115 +81,115 @@
 </section>
 
 <style>
-	#news {
-		margin-top: 10rem;
-	}
+#news {
+	margin-top: 10rem;
+}
 
-	.news {
-		display: flex;
-		flex-direction: column;
-		gap: 40px;
-	}
+.news {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
 
-	.news-header {
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-	}
+.news-header {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
 
-	.sub-heading {
-		/* Check it UP! */
-		font-family: "Noto Sans JP Regular", sans-serif;
-		font-size: 20px;
-		line-height: 29px;
-		color: #3C87C0;
-	}
+.sub-heading {
+	/* Check it UP! */
+	font-family: 'Noto Sans JP Regular', sans-serif;
+	font-size: 20px;
+	line-height: 29px;
+	color: #3c87c0;
+}
 
-	.article-info-container {
-		position: relative;
-		height: 200px;
-		margin-top: 31px;
-	}
+.article-info-container {
+	position: relative;
+	height: 200px;
+	margin-top: 31px;
+}
 
-	.article-info {
-		position: absolute;
-		top: 0;
-		left: 0;
-		opacity: 0;
-		transition: opacity 0.4s ease;
-	}
+.article-info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
 
-	.article-info.active {
-		opacity: 1;
-	}
+.article-info.active {
+	opacity: 1;
+}
 
-	.article-info.exiting {
-		opacity: 0;
-	}
+.article-info.exiting {
+	opacity: 0;
+}
 
-	.date {
-		/* 2025.01.01 */
+.date {
+	/* 2025.01.01 */
 	font-family: var(--font-heading-bold);
 	font-size: 11px;
 	line-height: 16px;
-	color: #3C87C0;
+	color: #3c87c0;
 	letter-spacing: 0.02em;
+}
+
+.article-title {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	font-family: var(--font-body-bold);
+	font-size: 19px;
+	line-height: 28px;
+	letter-spacing: 0.08em;
+	-webkit-box-orient: vertical;
+}
+
+.article-description {
+	display: -webkit-box;
+	width: 360px;
+	overflow: hidden;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+	font-family: var(--font-body);
+	font-size: 12px;
+	line-height: 19px;
+	letter-spacing: 0.08em;
+	-webkit-box-orient: vertical;
+}
+
+.carousel {
+	width: 100%;
+}
+
+@media screen and (width >= 768px) {
+	#news {
+		margin-top: 300px;
+	}
+}
+
+@media (width >= 1070px) {
+	.wide-content {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 	}
 
-	.article-title {
-		display: -webkit-box;
-		overflow: hidden;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		font-family: var(--font-body-bold);
-		font-size: 19px;
-		line-height: 28px;
-		letter-spacing: 0.08em;
-		-webkit-box-orient: vertical;
-	}
-
-	.article-description {
-		display: -webkit-box;
-		width: 360px;
-		overflow: hidden;
-		-webkit-line-clamp: 4;
-		line-clamp: 4;
-		font-family: var(--font-body);
-		font-size: 12px;
-		line-height: 19px;
-		letter-spacing: 0.08em;
-		-webkit-box-orient: vertical;
+	.news-header {
+		flex: 1;
+		min-width: 0;
 	}
 
 	.carousel {
-		width: 100%;
+		flex-shrink: 0;
+		width: 500px;
 	}
 
-	@media screen and (width >= 768px) {
-		#news {
-			margin-top: 300px;
-		}
+	.article-description {
+		width: 384px;
 	}
-
-	@media (width >= 1070px) {
-		.wide-content {
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-		}
-
-		.news-header {
-			flex: 1;
-			min-width: 0;
-		}
-
-		.carousel {
-			flex-shrink: 0;
-			width: 500px;
-		}
-
-		.article-description {
-			width: 384px;
-		}
-	}
+}
 </style>

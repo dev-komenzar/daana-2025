@@ -6,6 +6,7 @@
 
 - Svelte, SvelteKit
 - TypeScript
+- Prettier
 - ESLint
 - StyleLint
 - スタイル：CSS
@@ -36,11 +37,13 @@ Googleフォントからダウンロードしたフォントを`static/fonts/`�
 ```css
 /* app.css */
 @font-face {
- font-family: 'Noto Sans JP Light';
- font-style: normal;
- font-weight: 300;
- src: local('Noto Sans JP Light'), url('/fonts/NotoSansJP-Light.ttf') format("truetype");
- font-display: swap;
+	font-family: 'Noto Sans JP Light';
+	font-style: normal;
+	font-weight: 300;
+	src:
+		local('Noto Sans JP Light'),
+		url('/fonts/NotoSansJP-Light.ttf') format('truetype');
+	font-display: swap;
 }
 ```
 
@@ -54,23 +57,22 @@ Googleフォントからダウンロードしたフォントを`static/fonts/`�
 
 ```svelte
 <script>
-  import { floatUp } from '$lib/actions';
+	import { floatUp } from '$lib/actions'
 </script>
 
-<h2 use:floatUp>タイトル</h2>
-<p use:floatUp>コンテンツ</p>
+<h2 use:floatUp>タイトル</h2><p use:floatUp>コンテンツ</p>
 ```
 
 #### オプション
 
-| オプション | 型 | デフォルト | 説明 |
-|-----------|-----|-----------|------|
-| `translateY` | number | 6 | Y軸移動量（px）。正の値 = 下から開始 |
-| `scaleFrom` | number | 0.98 | 初期スケール値 |
-| `durationEnter` | number | 0.5 | 侵入アニメーション時間（秒） |
-| `durationExit` | number | 0.35 | 退出アニメーション時間（秒） |
-| `threshold` | number | 0.3 | トリガーに必要なビューポート内表示率（0-1） |
-| `bounce` | number | 0.3 | スケールのspring bounce値 |
+| オプション      | 型     | デフォルト | 説明                                        |
+| --------------- | ------ | ---------- | ------------------------------------------- |
+| `translateY`    | number | 6          | Y軸移動量（px）。正の値 = 下から開始        |
+| `scaleFrom`     | number | 0.98       | 初期スケール値                              |
+| `durationEnter` | number | 0.5        | 侵入アニメーション時間（秒）                |
+| `durationExit`  | number | 0.35       | 退出アニメーション時間（秒）                |
+| `threshold`     | number | 0.3        | トリガーに必要なビューポート内表示率（0-1） |
+| `bounce`        | number | 0.3        | スケールのspring bounce値                   |
 
 #### カスタマイズ例
 

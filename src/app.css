@@ -1,4 +1,4 @@
-@import url("./uaplus.css");
+@import url('./uaplus.css');
 
 /* Custom CSS Reset */
 button {
@@ -44,80 +44,80 @@ ol {
 
 /* Loading font */
 @font-face {
-	font-family: "Noto Sans JP Light";
+	font-family: 'Noto Sans JP Light';
 	font-style: normal;
 	font-weight: 300;
 	src:
-		local("Noto Sans JP Light"),
-		url("/fonts/NotoSansJP-Light.ttf") format("truetype");
+		local('Noto Sans JP Light'),
+		url('/fonts/NotoSansJP-Light.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Noto Sans JP Regular";
+	font-family: 'Noto Sans JP Regular';
 	font-style: normal;
 	font-weight: 400;
 	src:
-		local("Noto Sans JP Regular"),
-		url("/fonts/NotoSansJP-Regular.ttf") format("truetype");
+		local('Noto Sans JP Regular'),
+		url('/fonts/NotoSansJP-Regular.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Noto Sans JP Bold";
+	font-family: 'Noto Sans JP Bold';
 	font-style: normal;
 	font-weight: 700;
 	src:
-		local("Noto Sans JP Bold"),
-		url("/fonts/NotoSansJP-Bold.ttf") format("truetype");
+		local('Noto Sans JP Bold'),
+		url('/fonts/NotoSansJP-Bold.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Jost SemiBold";
+	font-family: 'Jost SemiBold';
 	font-style: normal;
 	font-weight: 600;
 	src:
-		local("Jost SemiBold"),
-		url("/fonts/Jost-SemiBold.ttf") format("truetype");
+		local('Jost SemiBold'),
+		url('/fonts/Jost-SemiBold.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Zen Kaku Gothic Antique Light";
+	font-family: 'Zen Kaku Gothic Antique Light';
 	src:
-		local("Zen Kaku Gothic Antique Light"),
-		url("/fonts/ZenKakuGothicAntique-Light.ttf") format("truetype");
+		local('Zen Kaku Gothic Antique Light'),
+		url('/fonts/ZenKakuGothicAntique-Light.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Zen Kaku Gothic Antique Regular";
+	font-family: 'Zen Kaku Gothic Antique Regular';
 	src:
-		local("Zen Kaku Gothic Antique"),
-		url("/fonts/ZenKakuGothicAntique-Regular.ttf") format("truetype");
+		local('Zen Kaku Gothic Antique'),
+		url('/fonts/ZenKakuGothicAntique-Regular.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Zen Kaku Gothic Antique Medium";
+	font-family: 'Zen Kaku Gothic Antique Medium';
 	src:
-		local("Zen Kaku Gothic Antique"),
-		url("/fonts/ZenKakuGothicAntique-Medium.ttf") format("truetype");
+		local('Zen Kaku Gothic Antique'),
+		url('/fonts/ZenKakuGothicAntique-Medium.ttf') format('truetype');
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Zen Kaku Gothic Antique Bold";
+	font-family: 'Zen Kaku Gothic Antique Bold';
 	src:
-		local("Zen Kaku Gothic Antique"),
-		url("/fonts/ZenKakuGothicAntique-Bold.ttf") format("truetype");
+		local('Zen Kaku Gothic Antique'),
+		url('/fonts/ZenKakuGothicAntique-Bold.ttf') format('truetype');
 	font-display: swap;
 }
 
 :root {
 	/* Colors */
-	--color-primary: #08192D;
+	--color-primary: #08192d;
 	--color-secondary: #a8bfdc;
 	--color-accent: #dc6f41;
 	--color-accent-soft: #fcb89b;
@@ -131,38 +131,17 @@ ol {
 
 	/* Heading Font */
 	--font-heading-light:
-		/* English sans */
-		"FuturaLTPro-Light", "Futura",
-		/* Japanese gothic */
-		"Zen Kaku Gothic Antique Light", "ヒラギノ角ゴ Pro W3", "Meiryo",
-		sans-serif;
-	--font-sans:
-		"FuturaLTPro-Book", "Futura",
-		"Zen Kaku Gothic Antique Regular", "ヒラギノ角ゴ Pro W4", "Meiryo",
-		sans-serif;
-	--font-heading-medium:
-		"FuturaLTPro-Medium", "Futura",
-		"Zen Kaku Gothic Antique Medium", "ヒラギノ角ゴ Pro W5", "Meiryo",
-		sans-serif;
-	--font-heading-bold:
-		"Jost SemiBold",
-		"Zen Kaku Gothic Antique Bold", "ヒラギノ角ゴ Pro W6", "Meiryo",
-		sans-serif;
+		/* English sans */ 'FuturaLTPro-Light', 'Futura', /* Japanese gothic */ 'Zen Kaku Gothic Antique Light', 'ヒラギノ角ゴ Pro W3', 'Meiryo', sans-serif;
+	--font-sans: 'FuturaLTPro-Book', 'Futura', 'Zen Kaku Gothic Antique Regular', 'ヒラギノ角ゴ Pro W4', 'Meiryo', sans-serif;
+	--font-heading-medium: 'FuturaLTPro-Medium', 'Futura', 'Zen Kaku Gothic Antique Medium', 'ヒラギノ角ゴ Pro W5', 'Meiryo', sans-serif;
+	--font-heading-bold: 'Jost SemiBold', 'Zen Kaku Gothic Antique Bold', 'ヒラギノ角ゴ Pro W6', 'Meiryo', sans-serif;
 
 	/* body Font */
-	--font-mincho: "FOT-筑紫Aオールド明朝 Pr6 R", "Hiragino Mincho Pro", serif;
-	--font-body-light:
-		"Zen Kaku Gothic Antique Light", "ヒラギノ角ゴ Pro W3", "Meiryo",
-		sans-serif;
-	--font-body:
-		"Zen Kaku Gothic Antique Regular", "ヒラギノ角ゴ Pro W4", "Meiryo",
-		sans-serif;
-	--font-body-medium:
-		"Zen Kaku Gothic Antique Medium", "ヒラギノ角ゴ Pro W5", "Meiryo",
-		sans-serif;
-	--font-body-bold:
-		"Zen Kaku Gothic Antique Bold", "ヒラギノ角ゴ Pro W6", "Meiryo",
-		sans-serif;
+	--font-mincho: 'FOT-筑紫Aオールド明朝 Pr6 R', 'Hiragino Mincho Pro', serif;
+	--font-body-light: 'Zen Kaku Gothic Antique Light', 'ヒラギノ角ゴ Pro W3', 'Meiryo', sans-serif;
+	--font-body: 'Zen Kaku Gothic Antique Regular', 'ヒラギノ角ゴ Pro W4', 'Meiryo', sans-serif;
+	--font-body-medium: 'Zen Kaku Gothic Antique Medium', 'ヒラギノ角ゴ Pro W5', 'Meiryo', sans-serif;
+	--font-body-bold: 'Zen Kaku Gothic Antique Bold', 'ヒラギノ角ゴ Pro W6', 'Meiryo', sans-serif;
 }
 
 @media (width >=768px) {
@@ -215,9 +194,8 @@ Container
 	width: 100%;
 	padding: 0 calc((100% - var(--max-width)) / 2) 200px;
 	margin: 0;
-	color: #FFF;
-	background: #08192D;
-
+	color: #fff;
+	background: #08192d;
 }
 
 .text-large {

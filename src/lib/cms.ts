@@ -1,9 +1,9 @@
-import type { Options } from 'ky';
+import type { Options } from 'ky'
 
-import consola from 'consola';
-import * as v from 'valibot';
+import consola from 'consola'
+import * as v from 'valibot'
 
-import { api, isApiConfigured } from './client';
+import { api, isApiConfigured } from './client'
 
 export const NewsItemSchema = v.object({
 	content: v.optional(v.string()),
@@ -16,7 +16,8 @@ export const NewsItemSchema = v.object({
 			height: v.number(),
 			url: v.string(),
 			width: v.number(),
-	})),
+		}),
+	),
 	title: v.optional(v.string()),
 	updatedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
 })
@@ -34,76 +35,72 @@ const ReturnNewApi = v.object({
 
 export type ReturnNewApi = v.InferOutput<typeof ReturnNewApi>
 
-export async function getNewsAsync(
-	offset: number,
-	limit: number,
-	fields: NewsItemKey[],
-): Promise<NewsItem[]> {
+export async function getNewsAsync(offset: number, limit: number, fields: NewsItemKey[]): Promise<NewsItem[]> {
 	if (!isApiConfigured) {
-		consola.warn('MICROCMS_API_KEY is not configured. Returning empty news list.');
-		return [];
+		consola.warn('MICROCMS_API_KEY is not configured. Returning empty news list.')
+		return []
 	}
 
-	const link = generateLink(offset, limit, fields);
+	const link = generateLink(offset, limit, fields)
 
 	// Fetch and validate data from microCMS
-	let data: ReturnNewApi;
+	let data: ReturnNewApi
 	try {
-		data = await fetchCms<ReturnNewApi>(link);
+		data = await fetchCms<ReturnNewApi>(link)
 	} catch (error) {
-		consola.error('Error fetching news from microCMS:', error);
-		return [];
+		consola.error('Error fetching news from microCMS:', error)
+		return []
 	}
 
 	// Log how many news loaded
 	consola.info(`Loaded ${data.contents.length} news`)
 
 	// Return only the contents array
-	return data.contents;
+	return data.contents
 }
 
 export async function getNewsPost(id: string): Promise<NewsItem | undefined> {
 	if (!isApiConfigured) {
-		consola.warn('MICROCMS_API_KEY is not configured. Cannot fetch news post.');
-		return undefined;
+		consola.warn('MICROCMS_API_KEY is not configured. Cannot fetch news post.')
+		return undefined
 	}
 
-	const link = `news/${id}`;
+	const link = `news/${id}`
 
 	// Fetch single news post
-	let data: NewsItem;
+	let data: NewsItem
 	try {
-		data = await fetchCmsSingle<NewsItem>(link);
+		data = await fetchCmsSingle<NewsItem>(link)
 	} catch (error) {
-		consola.error(`Error fetching news post ${id} from microCMS:`, error);
-		return undefined;
+		consola.error(`Error fetching news post ${id} from microCMS:`, error)
+		return undefined
 	}
 
 	consola.info(`Loaded news post: ${id}`)
 
-	return data;
+	return data
 }
 
 export async function getNewsTotalCount(): Promise<number> {
 	if (!isApiConfigured) {
-		consola.warn('MICROCMS_API_KEY is not configured. Returning zero count.');
-		return 0;
+		consola.warn('MICROCMS_API_KEY is not configured. Returning zero count.')
+		return 0
 	}
 
-	const link = 'news?limit=1&fields=id';
+	const link = 'news?limit=1&fields=id'
 
 	// Fetch with minimal data to get totalCount
-	let data: ReturnNewApi;
+	let data: ReturnNewApi
 	try {
-		data = await fetchCms<ReturnNewApi>(link);
+		data = await fetchCms<ReturnNewApi>(link)
 	} catch (error) {
-		consola.error('Error fetching news total count from microCMS:', error);
-		return 0;
+		consola.error('Error fetching news total count from microCMS:', error)
+		return 0
 	}
 
 	consola.info(`Total news count: ${data.totalCount}`)
 
-	return data.totalCount;
+	return data.totalCount
 }
 
 /**
@@ -111,13 +108,13 @@ export async function getNewsTotalCount(): Promise<number> {
  * @param {Options} options - `ky` options: https://github.com/sindresorhus/ky?tab=readme-ov-file#searchparams
  */
 async function fetchCms<T>(link: string, options?: Options): Promise<T> {
-	consola.start(`fetching microCMS: ${link}`);
-	const json = await api.get(link, options).json<T>();
+	consola.start(`fetching microCMS: ${link}`)
+	const json = await api.get(link, options).json<T>()
 	// バリデーションを追加
-	v.parse(ReturnNewApi, json);
-	consola.success(`fetching success: ${link}`);
+	v.parse(ReturnNewApi, json)
+	consola.success(`fetching success: ${link}`)
 
-	return json;
+	return json
 }
 
 /**
@@ -126,17 +123,17 @@ async function fetchCms<T>(link: string, options?: Options): Promise<T> {
  * @param {Options} options - `ky` options: https://github.com/sindresorhus/ky?tab=readme-ov-file#searchparams
  */
 async function fetchCmsSingle<T>(link: string, options?: Options): Promise<T> {
-	consola.start(`fetching microCMS: ${link}`);
-	const json = await api.get(link, options).json<T>();
+	consola.start(`fetching microCMS: ${link}`)
+	const json = await api.get(link, options).json<T>()
 	// バリデーションを追加
-	v.parse(NewsItemSchema, json);
-	consola.success(`fetching success: ${link}`);
+	v.parse(NewsItemSchema, json)
+	consola.success(`fetching success: ${link}`)
 
-	return json;
+	return json
 }
 
 function generateLink(offset: number, limit: number, fields: NewsItemKey[]): string {
-	const flatFields = fields.join(',');
-	const link = `news?offset=${offset}&limit=${limit}&fields=${flatFields}`;
+	const flatFields = fields.join(',')
+	const link = `news?offset=${offset}&limit=${limit}&fields=${flatFields}`
 	return link
 }

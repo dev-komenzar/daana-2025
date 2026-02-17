@@ -1,5 +1,5 @@
-import { loadEnv } from "vite";
-import { defineConfig } from 'vitest/config';
+import { loadEnv } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig(({ mode }) => {
 	// modeに応じた.envファイルを読み込み
@@ -11,5 +11,5 @@ export default defineConfig(({ mode }) => {
 			environment: 'node',
 			globals: true,
 		},
-	};
-});
+	}
+})

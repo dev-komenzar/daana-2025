@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { floatUp } from '$lib/actions';
+import { floatUp } from '$lib/actions'
 </script>
 
 <div class="wide-content wrapper">
@@ -19,40 +19,39 @@
 
 	<h3 use:floatUp>５．安易な迎合をしない</h3>
 	<p use:floatUp>私たちは、仏教を「安易に現代風にアレンジして面白く見せる」という試みには加担しません。 むしろ、アジアの伝統的な修行者たちとも対等に、あるいはそれ以上に真摯な姿勢で「仏陀の智慧」に向き合いたい。 日本の仏教が、世界の仏教者から再び「敬意」を持って見られる存在になるために。 表面的な演出で誤魔化し社会に媚びるのではなく、出家者のあり方という「構造」そのものを世界標準へと正すこと。 それこそが、私たちが背負うべき責任だと考えています。</p>
-
 </div>
 
 <style>
-	.wrapper {
-		margin-top: 167px;
-	}
+.wrapper {
+	margin-top: 167px;
+}
 
-	h2 {
-		font-family: var(--font-heading-bold);
-		font-size: 25px;
-		line-height: 30px;
-		letter-spacing: 0.12em;
-	}
+h2 {
+	font-family: var(--font-heading-bold);
+	font-size: 25px;
+	line-height: 30px;
+	letter-spacing: 0.12em;
+}
 
-	h3 {
-		font-family: var(--font-heading-bold);
-		font-size: 16px;
-		line-height: 30px;
-		letter-spacing: 0.06em;
-	}
+h3 {
+	font-family: var(--font-heading-bold);
+	font-size: 16px;
+	line-height: 30px;
+	letter-spacing: 0.06em;
+}
 
-	h2 + h3 {
-		margin-top: 38px;
-	}
+h2 + h3 {
+	margin-top: 38px;
+}
 
-	p {
-		font-family: var(--font-body);
-		font-size: 16px;
-		line-height: 30px;
-		letter-spacing: 0.06em;
-	}
+p {
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 30px;
+	letter-spacing: 0.06em;
+}
 
-	p + h3 {
-		margin-top: 3em;
-	}
+p + h3 {
+	margin-top: 3em;
+}
 </style>

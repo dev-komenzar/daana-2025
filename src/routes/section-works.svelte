@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { floatUp } from '$lib/actions';
-	import Link from '$lib/components/ui/link.svelte';
+import { floatUp } from '$lib/actions'
+import Link from '$lib/components/ui/link.svelte'
 
-	import WorksCreation from './works-creation.svelte';
-	import WorksOutreach from './works-outreach.svelte';
+import WorksCreation from './works-creation.svelte'
+import WorksOutreach from './works-outreach.svelte'
 
-	const FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4mQvkGNrdDcYXxBxw893GTe9WRjS4tQ/viewform?usp=publish-editor"
+const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4mQvkGNrdDcYXxBxw893GTe9WRjS4tQ/viewform?usp=publish-editor'
 </script>
 
 <section id="works">
@@ -40,7 +40,7 @@
 			<!-- 例外スペーサー -->
 			<div class="space"></div>
 			<div use:floatUp>
-				<Link href={FORM_LINK} textContent='CONTACT US'/>
+				<Link href={FORM_LINK} textContent="CONTACT US" />
 			</div>
 		</div>
 
@@ -51,56 +51,56 @@
 </section>
 
 <style>
+.container {
+	margin-top: 10rem;
+}
+
+.heading {
+	font-family: var(--font-heading-bold);
+	text-align: left;
+}
+
+h3 {
+	padding-top: 57px;
+	font-family: var(--font-body-bold);
+	font-size: 30px;
+	line-height: normal;
+	letter-spacing: 0.06em;
+}
+
+.summary {
+	font-family: var(--font-body-bold);
+	font-size: 15px;
+	line-height: normal;
+	letter-spacing: 0.06em;
+}
+
+.works-body {
+	font-family: var(--font-body);
+	font-size: 12px;
+	line-height: 24px;
+	letter-spacing: 0.06em;
+}
+
+.works-body > strong {
+	font-family: var(--font-body-bold);
+}
+
+.summary + .works-body {
+	padding-top: 32px;
+}
+
+ol {
+	padding-inline-start: 1.4em;
+}
+
+div.space {
+	height: 37px;
+}
+
+@media screen and (width >= 768px) {
 	.container {
-		margin-top: 10rem;
+		margin-top: 300px;
 	}
-
-	.heading {
-		font-family: var(--font-heading-bold);
-		text-align: left;
-	}
-
-	h3{
-		padding-top: 57px;
-		font-family: var(--font-body-bold);
-		font-size: 30px;
-		line-height: normal;
-		letter-spacing: 0.06em;
-	}
-
-	.summary{
-		font-family: var(--font-body-bold);
-		font-size: 15px;
-		line-height: normal;
-		letter-spacing: 0.06em;
-	}
-
-	.works-body{
-		font-family: var(--font-body);
-		font-size: 12px;
-		line-height: 24px;
-		letter-spacing: 0.06em;
-	}
-
-	.works-body > strong{
-		font-family: var(--font-body-bold);
-	}
-
-	.summary + .works-body{
-		padding-top: 32px;
-	}
-
-	ol{
-		padding-inline-start: 1.4em;
-	}
-
-	div.space{
-		height: 37px;
-	}
-
-	@media screen and (width >= 768px) {
-		.container {
-			margin-top: 300px;
-		}
-	}
+}
 </style>

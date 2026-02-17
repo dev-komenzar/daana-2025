@@ -137,33 +137,33 @@
 	height: 1px;
 	overflow: hidden;
 	white-space: nowrap;
-	content: "test";
+	content: 'test';
 	clip: rect(1px, 1px, 1px, 1px);
-	clip-path: inset(100%)
+	clip-path: inset(100%);
 }
 
 :where(s)::before {
-	content: "stricken text start ";
+	content: 'stricken text start ';
 }
 
 :where(s)::after {
-	content: " stricken text end";
+	content: ' stricken text end';
 }
 
 :where(del)::before {
-	content: "deletion start ";
+	content: 'deletion start ';
 }
 
 :where(del)::after {
-	content: " deletion end";
+	content: ' deletion end';
 }
 
 :where(ins)::before {
-	content: "insertion start ";
+	content: 'insertion start ';
 }
 
 :where(ins)::after {
-	content: " insertion end";
+	content: ' insertion end';
 }
 
 /**
@@ -226,13 +226,13 @@
  * Remove the rounded corners of search inputs on macOS and IOS 
  * and normalize the background color
  */
-:where([type="search"]) {
+:where([type='search']) {
 	appearance: textfield;
 }
 
 /* iOS only */
 @supports (-webkit-touch-callout: none) {
-	:where([type="search"]) {
+	:where([type='search']) {
 		background-color: canvas;
 		border: 1px solid -apple-system-secondary-label;
 	}
@@ -247,7 +247,7 @@
  *
  * See https://rtlstyling.com/posts/rtl-styling#form-inputs
  */
-:where([type="tel"], [type="url"], [type="email"], [type="number"]):not( :placeholder-shown) {
+:where([type='tel'], [type='url'], [type='email'], [type='number']):not(:placeholder-shown) {
 	direction: ltr;
 }
 
@@ -280,7 +280,9 @@
 :where(dialog),
 :where(dialog)::backdrop {
 	opacity: 0;
-	transition: opacity 300ms ease-out, display 300ms allow-discrete,
+	transition:
+		opacity 300ms ease-out,
+		display 300ms allow-discrete,
 		overlay 300ms allow-discrete;
 }
 
@@ -303,6 +305,6 @@
  * [hidden] attribute while still maintaining the until-found 
  * functionality.
  */
-[hidden]:not([hidden="until-found"]) {
+[hidden]:not([hidden='until-found']) {
 	display: none !important;
 }

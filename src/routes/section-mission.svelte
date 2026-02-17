@@ -1,35 +1,35 @@
 <script lang="ts">
-	import { scroll } from "motion";
-	import { onMount } from "svelte";
+import { scroll } from 'motion'
+import { onMount } from 'svelte'
 
-	let missionSection: HTMLElement;
+let missionSection: HTMLElement
 
-	// easeOutQuart: 序盤早く、最後はゆっくり
-	const easeOutQuart = (t: number): number => 1 - Math.pow(1 - t, 4);
+// easeOutQuart: 序盤早く、最後はゆっくり
+const easeOutQuart = (t: number): number => 1 - Math.pow(1 - t, 4)
 
-	onMount(() => {
-		// 初期スケールを0.6に設定
-		missionSection.style.scale = "0.6";
+onMount(() => {
+	// 初期スケールを0.6に設定
+	missionSection.style.scale = '0.6'
 
-		// スクロール連動アニメーション
-		const stopScroll = scroll(
-			(progress: number) => {
-				// progress: 0（下端に見え始め）→ 1（中央到達）
-				// easeOutQuartを適用してscale: 0.6 → 1 に変換
-				const easedProgress = easeOutQuart(progress);
-				const scale = 0.6 + easedProgress * 0.4;
-				missionSection.style.scale = String(scale);
-			},
-			{
-				offset: ["start end", "center center"],
-				target: missionSection,
-			},
-		);
+	// スクロール連動アニメーション
+	const stopScroll = scroll(
+		(progress: number) => {
+			// progress: 0（下端に見え始め）→ 1（中央到達）
+			// easeOutQuartを適用してscale: 0.6 → 1 に変換
+			const easedProgress = easeOutQuart(progress)
+			const scale = 0.6 + easedProgress * 0.4
+			missionSection.style.scale = String(scale)
+		},
+		{
+			offset: ['start end', 'center center'],
+			target: missionSection,
+		},
+	)
 
-		return () => {
-			stopScroll();
-		};
-	});
+	return () => {
+		stopScroll()
+	}
+})
 </script>
 
 <section id="mission" class="mission-section" bind:this={missionSection}>
@@ -48,57 +48,56 @@
 </section>
 
 <style>
+.mission-section {
+	position: relative;
+	height: auto;
+	color: white;
+	background-color: var(--color-primary);
+	will-change: transform;
+}
+
+.message {
+	padding: 240px 16px 200px;
+}
+
+.text {
+	padding-top: 72px;
+}
+
+.text p + p {
+	margin-top: 2em;
+}
+
+@media (width >= 768px) {
+	.text p + p {
+		margin-top: 0;
+	}
+}
+
+@media (width >= 768px) {
+	.message {
+		padding: 240px 24px 200px;
+	}
+}
+
+@media (width >= 1024px) {
 	.mission-section {
-		position: relative;
-		height: auto;
-		color: white;
-		background-color: var(--color-primary);
-		will-change: transform;
+		height: 820px;
 	}
 
 	.message {
-		padding: 240px 16px 200px;
+		position: absolute;
+		top: 330px;
+		left: 95px;
+		width: min(100%, 733px);
+		padding: 0;
 	}
+}
 
-	.text {
-		padding-top: 72px;
-	}
-
-	.text p + p {
-		margin-top: 2em;
-	}
-
-	@media (width >= 768px) {
-		.text p + p {
-			margin-top: 0;
-		}
-	}
-
-	@media (width >= 768px) {
-			.message {
-				padding: 240px 24px 200px;
-			}
-	}
-
-	@media (width >= 1024px) {
-		.mission-section {
-			height: 820px;
-
-		}
-
-		.message {
-			position: absolute;
-			top: 330px;
-			left: 95px;
-			width: min(100%, 733px);
-			padding: 0;
-		}
-	}
-
-	.heading {
-		font-family: var(--font-body-bold);
-		font-size: 25px;
-		line-height: normal;
-		letter-spacing: 0.06em;
-	}
+.heading {
+	font-family: var(--font-body-bold);
+	font-size: 25px;
+	line-height: normal;
+	letter-spacing: 0.06em;
+}
 </style>

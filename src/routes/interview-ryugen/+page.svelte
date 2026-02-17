@@ -1,34 +1,30 @@
 <script lang="ts">
-	import { floatUp } from '$lib/actions';
-	import Photo from '$lib/assets/interview-ryugen/ryugen-c.jpg';
-	import PhotoSecond from '$lib/assets/interview-ryugen/zenga_in-c.jpg';
-	import PhotoThird from '$lib/assets/interview-ryugen/zenga_in_2-c.jpg';
-	import PhotoFourth from '$lib/assets/interview-ryugen/zenga_in_exterior-c.jpg';
-	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
+import { floatUp } from '$lib/actions'
+import Photo from '$lib/assets/interview-ryugen/ryugen-c.jpg'
+import PhotoSecond from '$lib/assets/interview-ryugen/zenga_in-c.jpg'
+import PhotoThird from '$lib/assets/interview-ryugen/zenga_in_2-c.jpg'
+import PhotoFourth from '$lib/assets/interview-ryugen/zenga_in_exterior-c.jpg'
+import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 
-	const p = {
-		bio: `
+const p = {
+	bio: `
 大阪外国語大学（現：大阪大学）外国語学部卒、同大大学院東南アジア・オセアニア地域言語社会研究科博士前期課程修了、修士(学術)。ミャンマー仏教の文化人類学的研究を行う中で、研究より実践に惹かれ仏教者として生きることを志す。当初日本仏教界に縁がなく、武術の指導者として世に向かおうとするも2010年に縁を得て出家・修行（真言律宗総本山西大寺）。伝統や学術を大切にしつつも、囚われない「今に活きる仏教思想」の社会実装を提唱し、実験寺院の概念と方法論を創案。日本仏教徒協会設立の礎となる。
 多くの起業家、経営者、医師や学生などの精神的指導者として信頼を寄せられている。
 `,
-		imageUrl: Photo,
-		name: "松波龍源",
-		nameRomaji: "Ryugen Matsunami",
-		positions: [
-			"日本仏教徒協会 最高顧問 / Principal Advisor, Japan Buddhist Association",
-			"実験寺院グループ 総監    / Master of the Order , Experimental Buddhism Order",
-			"実験寺院 寳幢寺 僧院長 / Temple Master , Hōdō-ji Temple",
-		],
-	};
+	imageUrl: Photo,
+	name: '松波龍源',
+	nameRomaji: 'Ryugen Matsunami',
+	positions: ['日本仏教徒協会 最高顧問 / Principal Advisor, Japan Buddhist Association', '実験寺院グループ 総監    / Master of the Order , Experimental Buddhism Order', '実験寺院 寳幢寺 僧院長 / Temple Master , Hōdō-ji Temple'],
+}
 </script>
 
 <section class="container">
 	<div class="wide-content">
-		<h2 class="pre-heading" use:floatUp>実験寺院の取り組みについて、<br/>実験寺院グループ総監にインタビューしてみました。</h2>
+		<h2 class="pre-heading" use:floatUp>実験寺院の取り組みについて、<br />実験寺院グループ総監にインタビューしてみました。</h2>
 	</div>
 	<div class="full-content put-image-right">
 		<div class="description content">
-			<h1 class='name' use:floatUp>{p.name}</h1>
+			<h1 class="name" use:floatUp>{p.name}</h1>
 			<p class="name-romaji" use:floatUp>{p.nameRomaji}</p>
 			{#each p.positions as position (position)}
 				<p class="position" use:floatUp>{position}</p>
@@ -37,12 +33,12 @@
 		</div>
 
 		<div class="image-wrapper-first content" use:floatUp>
-			<EnhancedImage src={p.imageUrl} alt={p.name}/>
+			<EnhancedImage src={p.imageUrl} alt={p.name} />
 		</div>
 	</div>
 
 	<div class="wide-content">
-		<h3 class='interview-subheading' use:floatUp>2500年の「智の体系」を、現代へ</h3>
+		<h3 class="interview-subheading" use:floatUp>2500年の「智の体系」を、現代へ</h3>
 		<p class="interview-body" use:floatUp>問い：なぜ今、仏教なのでしょうか。</p>
 		<p class="interview-body" use:floatUp>答え： 人間は常に何らかの「動機」をもって行動し、その根底には必ず思想や哲学があります。人間性とは、まさにそこに宿るものではないでしょうか。しかし現代社会では、自らの思想や哲学に自覚的な人は多くありません。この欠落こそが、社会の息苦しさや漠然とした不安の源ではないかと感じています。仏教は、「人はいかに考え、いかに生きるか」という問いに対し、釈迦牟尼を始祖として2500年にわたり蓄積されてきた、極めて精緻な智の体系です。私見では、これに匹敵する人間思想は他に見当たりません。実際、西洋哲学も20世紀以降、仏教思想に接近する潮流を見せています。 千年以上の仏教的蓄積をもつ日本において、この叡智を活用しない理由はないと考えています。</p>
 
@@ -59,7 +55,7 @@
 
 	<div class="full-content put-image-left">
 		<div class="image-wrapper-second content" use:floatUp>
-			<EnhancedImage src={PhotoSecond} alt='禅河院' />
+			<EnhancedImage src={PhotoSecond} alt="禅河院" />
 		</div>
 
 		<div class="description content">
@@ -78,7 +74,7 @@
 	</div>
 
 	<div class="wide-content">
-		<h3 class='interview-subheading' use:floatUp>試練と覚悟：理想への道のりで得た教訓</h3>
+		<h3 class="interview-subheading" use:floatUp>試練と覚悟：理想への道のりで得た教訓</h3>
 		<p class="interview-body" use:floatUp>問い：ここに到るまで、実際にどのような挑戦をしてきたのですか？</p>
 		<p class="interview-body" use:floatUp>答え：始めにやってみたのが「ミャンマー式寺院運営の直輸入」でした。上手くいっている仕組みをそのまま使えば良いのでは？という単純な仮説です。これは全くうまく行きませんでした。日本とミャンマーは地理・気象条件も基層文化も全く違うからです。今考えれば単純で愚かでしたが、これはこれで貴重な実験データではありました。</p>
 		<p class="interview-body" use:floatUp>次に、日本で行われている伝統仏教のあり方を導入する、ということも試しました。ご祈祷や瞑想指導、月毎の行事、朝粥会や文化セミナーなど、出来そうなことは一通りやってみました。しかし、これらは結局「消費者」と「提供者」という関係を再生産しただけとなり、「仏教思想の社会実装」「構造の改変」には繋がりませんでした。</p>
@@ -104,14 +100,12 @@
 		</div>
 
 		<div class="image-wrapper-third content" use:floatUp>
-			<EnhancedImage src={PhotoThird} alt='禅河院で思索する' />
+			<EnhancedImage src={PhotoThird} alt="禅河院で思索する" />
 		</div>
 	</div>
 
 	<div class="wide-content">
-		<h3 class="interview-subheading" use:floatUp>
-				協会から寄付のお願い：実験へのご参加を！
-		</h3>
+		<h3 class="interview-subheading" use:floatUp>協会から寄付のお願い：実験へのご参加を！</h3>
 		<p class="interview-body space-top" use:floatUp>ありがたいことに、私たちの理念は多くの起業家、経営者などの皆様にご賛同いただき、法人の経営も安定軌道に乗り始めています。</p>
 		<p class="interview-body" use:floatUp>しかし、構造の改変という目標を達成するためには、まだ大きな壁が立ちはだかっています。最大の課題は「理想的出家者」の数を増やせていないことです。</p>
 		<p class="interview-body" use:floatUp>現在、実験寺院グループの出家者はひとりだけであり、法人にはまだ「次の出家者」を支えるだけの金銭的・人的リソースが不足しています。</p>
@@ -120,7 +114,7 @@
 
 	<div class="full-content put-image-left">
 		<div class="image-wrapper-fourth content" use:floatUp>
-			<EnhancedImage src={PhotoFourth} alt='禅河院外観' />
+			<EnhancedImage src={PhotoFourth} alt="禅河院外観" />
 		</div>
 
 		<div class="description content">
@@ -130,7 +124,7 @@
 			<p class="interview-body" use:floatUp>この「構造改変」の実験は、私たちだけの力では決して成し遂げられません。</p>
 			<p class="interview-body" use:floatUp>「思想・哲学が弱体化した社会に、2500年の叡智を再び実装する」という壮大なミッションを共有し、共に未来を創造してくださる皆様のご支援が必要です。</p>
 			<p class="interview-body" use:floatUp>ぜひ、この歴史的な一歩にご協力ください。</p>
-	</div>
+		</div>
 	</div>
 
 	<div class="wide-content">
@@ -140,205 +134,203 @@
 		<p class="interview-body" use:floatUp>プロジェクトベースの寄付：様々なプロジェクトに対してのご寄付を承ります。</p>
 		<p class="interview-body" use:floatUp>使途指定月額サポート：若者支援など寄付金の使途を指定して、月額でサポート頂けます。</p>
 		<p class="interview-body" use:floatUp>その他</p>
-
 	</div>
 </section>
 
 <style>
+.container {
+	margin-top: 10rem;
+}
+
+.pre-heading {
+	/* 実験寺院の取り組みについて、 実験寺院グループ総監にインタビューしてみました。 */
+
+	font-family: var(--font-heading-bold);
+	font-size: 16px;
+	line-height: 30px;
+	color: #000;
+	letter-spacing: 0.12em;
+}
+
+h1 {
+	margin-bottom: 24px;
+	font-family: 'Noto Sans JP Medium', sans-serif;
+	font-size: 24px;
+}
+
+.wide-content + .put-image-right {
+	margin-top: 90px;
+}
+
+.description {
+	font-family: var(--font-body-bold);
+	text-align: left;
+}
+
+.description + .image-wrapper-first {
+	margin-top: 44px;
+}
+
+.name {
+	/* 松波龍源 */
+	margin: 13px auto 0;
+	font-family: var(--font-body-bold);
+	font-size: 25px;
+	line-height: 36px;
+	color: #000;
+	letter-spacing: 0.12em;
+}
+
+.name-romaji {
+	/* Matsunami Ryugen */
+	font-family: var(--font-body-bold);
+	font-size: 13px;
+	line-height: 16px;
+	color: #000;
+	letter-spacing: 0.06em;
+}
+
+.position {
+	font-family: var(--font-body-bold);
+	font-size: 10px;
+	line-height: 18px;
+	letter-spacing: 0.05em;
+}
+
+.name-romaji + .position {
+	margin-top: 18px;
+}
+
+.bio {
+	/* 1979年生まれ... */
+	width: 100%;
+	margin: 14px auto 0 0;
+	font-family: var(--font-body-bold);
+	font-size: 11px;
+	line-height: 24px;
+	color: #000;
+	letter-spacing: 0.06em;
+}
+
+.position + .bio {
+	margin-top: 44px;
+}
+
+.interview-subheading {
+	padding-top: 150px;
+	font-family: var(--font-heading-bold);
+	font-size: 20px;
+	line-height: 30px;
+	letter-spacing: 0.06em;
+}
+
+.interview-body {
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 30px;
+	letter-spacing: 0.06em;
+}
+
+.interview-body.space-top {
+	padding-top: 2em;
+}
+
+li {
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 30px;
+	letter-spacing: 0.06em;
+}
+
+@media screen and (width >= 768px) {
 	.container {
-		margin-top: 10rem;
+		margin-top: 300px;
 	}
+}
 
-	.pre-heading {
-		/* 実験寺院の取り組みについて、 実験寺院グループ総監にインタビューしてみました。 */
-
-		font-family: var(--font-heading-bold);
-		font-size: 16px;
-		line-height: 30px;
-		color: #000;
-		letter-spacing: 0.12em;
-	}
-
-	h1 {
-		margin-bottom: 24px;
-		font-family: 'Noto Sans JP Medium', sans-serif;
-		font-size: 24px;
-	}
-
-	.wide-content + .put-image-right {
+@media screen and (width >= 1024px) {
+	.put-image-right {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		padding-left: 95px;
 		margin-top: 90px;
 	}
 
+	.put-image-right .interview-subheading {
+		padding-top: 0;
+	}
+
+	.image-wrapper-first {
+		flex-shrink: 0;
+		width: 574px;
+		height: 395px;
+	}
+
+	.image-wrapper-first > :global(img) {
+		width: 100%;
+		height: auto;
+	}
+
 	.description {
-		font-family: var(--font-body-bold);
-		text-align: left;
-	}
-
-	.description + .image-wrapper-first {
-		margin-top: 44px;
-	}
-
-	.name {
-		/* 松波龍源 */
-		margin: 13px auto 0;
-		font-family: var(--font-body-bold);
-		font-size: 25px;
-		line-height: 36px;
-		color: #000;
-		letter-spacing: 0.12em;
-	}
-
-	.name-romaji {
-		/* Matsunami Ryugen */
-		font-family: var(--font-body-bold);
-		font-size: 13px;
-		line-height: 16px;
-		color: #000;
-		letter-spacing: 0.06em;
-	}
-
-	.position {
-		font-family: var(--font-body-bold);
-		font-size: 10px;
-		line-height: 18px;
-		letter-spacing: 0.05em;
+		width: 424px;
 	}
 
 	.name-romaji + .position {
-		margin-top: 18px;
+		margin-top: 19px;
 	}
 
 	.bio {
-		/* 1979年生まれ... */
+		width: 372px;
+	}
+
+	.put-image-left {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		padding-top: 150px;
+		padding-right: 95px;
+	}
+
+	.put-image-left .interview-subheading {
+		padding-top: 0;
+	}
+
+	.image-wrapper-second {
+		width: 460px;
+		height: 684px;
+		margin-left: 0;
+	}
+
+	.image-wrapper-second > :global(img) {
 		width: 100%;
-		margin: 14px auto 0 0;
-		font-family: var(--font-body-bold);
-		font-size: 11px;
-		line-height: 24px;
-		color: #000;
-		letter-spacing: 0.06em;
+		height: auto;
 	}
 
-	.position + .bio {
-		margin-top: 44px;
+	.image-wrapper-third {
+		width: 464px;
+		height: 696px;
+		margin-right: 0;
 	}
 
-		.interview-subheading{
-			padding-top: 150px;
-			font-family: var(--font-heading-bold);
-			font-size: 20px;
-			line-height: 30px;
-			letter-spacing: 0.06em;
-		}
-
-	.interview-body{
-		font-family: var(--font-body);
-		font-size: 16px;
-		line-height: 30px;
-		letter-spacing: 0.06em;
+	.image-wrapper-third > :global(img) {
+		width: 100%;
+		height: auto;
 	}
 
-	.interview-body.space-top{
-		padding-top: 2em;
+	.image-wrapper-fourth {
+		width: 540px;
+		height: 435px;
+		margin-left: 0;
 	}
 
-	li{
-		font-family: var(--font-body);
-		font-size: 16px;
-		line-height: 30px;
-		letter-spacing: 0.06em;
+	.image-wrapper-fourth > :global(img) {
+		width: 100%;
+		height: auto;
 	}
 
-	@media screen and (width >= 768px) {
-		.container {
-			margin-top: 300px;
-		}
+	.image-wrapper-fourth + .description {
+		padding-left: 20px;
 	}
-
-	@media screen and (width >= 1024px) {
-		.put-image-right {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			padding-left: 95px;
-			margin-top: 90px;
-		}
-
-		.put-image-right .interview-subheading{
-			padding-top: 0;
-		}
-
-		.image-wrapper-first{
-			flex-shrink: 0;
-			width: 574px;
-			height: 395px;
-
-		}
-
-		.image-wrapper-first > :global(img){
-			width: 100%;
-			height: auto;
-		}
-
-		.description {
-			width: 424px;
-		}
-
-		.name-romaji + .position {
-			margin-top: 19px;
-		}
-
-		.bio {
-			width: 372px;
-		}
-
-		.put-image-left{
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			padding-top: 150px;
-			padding-right: 95px;
-		}
-
-		.put-image-left .interview-subheading {
-			padding-top: 0;
-		}
-
-		.image-wrapper-second{
-			width: 460px;
-			height: 684px;
-			margin-left: 0;
-		}
-
-		.image-wrapper-second > :global(img){
-			width: 100%;
-			height: auto;
-		}
-
-		.image-wrapper-third{
-			width: 464px;
-			height: 696px;
-			margin-right: 0;
-		}
-
-		.image-wrapper-third > :global(img){
-			width: 100%;
-			height: auto;
-		}
-
-		.image-wrapper-fourth{
-			width: 540px;
-			height: 435px;
-			margin-left: 0;
-		}
-
-		.image-wrapper-fourth > :global(img){
-			width: 100%;
-			height: auto;
-		}
-
-		.image-wrapper-fourth + .description{
-			padding-left: 20px;
-		}
-	}
+}
 </style>

@@ -13,6 +13,7 @@ Use **pnpm** for all package management tasks.
 ## Common Commands
 
 ### Development
+
 ```bash
 pnpm install          # Install dependencies
 pnpm dev              # Start dev server
@@ -22,18 +23,27 @@ pnpm preview          # Preview production build
 ```
 
 ### Type Checking
+
 ```bash
 pnpm check            # Run svelte-check
 pnpm check:watch      # Run svelte-check in watch mode
 ```
 
+### Formatting
+
+```bash
+pnpm format           # Format all files with Prettier
+```
+
 ### Linting
+
 ```bash
 pnpm lint             # Lint and fix JS/TS/Svelte files with ESLint
 pnpm lint:style       # Lint and fix CSS/Svelte styles with Stylelint
 ```
 
 ### Testing
+
 ```bash
 npx vitest            # Run tests (vitest is available but no test scripts configured)
 ```
@@ -41,6 +51,7 @@ npx vitest            # Run tests (vitest is available but no test scripts confi
 ## Architecture
 
 ### Tech Stack
+
 - **Framework**: SvelteKit with Svelte 5
 - **Language**: TypeScript with strict mode
 - **Styling**: Pure CSS (no CSS frameworks), **Mobile First** approach
@@ -50,10 +61,12 @@ npx vitest            # Run tests (vitest is available but no test scripts confi
 - **Deployment**: Vercel (deployed from GitHub)
 
 ### Key SvelteKit Features in Use
+
 - **Async Compiler** (`experimental.async: true` in svelte.config.js)
 - **Remote Functions** (`experimental.remoteFunctions: true`) - Used for server-side data fetching via `query()` from `$app/server`
 
 ### Project Structure
+
 ```
 src/
 ├── lib/
@@ -91,6 +104,7 @@ The project uses **SvelteKit Remote Functions** for type-safe server-client data
 ### Environment Variables
 
 Required environment variable:
+
 - `MICROCMS_API_KEY`: API key for microCMS (set in `.env`)
 
 ### Font Configuration
@@ -101,9 +115,10 @@ Required environment variable:
 
 ### Code Quality Tools
 
+- **Prettier**: Code formatter (tabs, no semicolons, single quotes)
 - **ESLint**: Extended with perfectionist, svelte, and unicorn plugins
 - **Stylelint**: Uses standard config with recess-order and HTML support
-- **Husky + lint-staged**: Pre-commit hooks run linting automatically
+- **Husky + lint-staged**: Pre-commit hooks run Prettier and linting automatically
 - **svelte-check**: Type-checking for Svelte components
 
 ### Image Handling
@@ -135,15 +150,15 @@ This project uses a **Mobile First** approach for responsive design:
 ```css
 /* Mobile First Example */
 .element {
-  padding: 24px;        /* Mobile default */
-  font-size: 14px;
+	padding: 24px; /* Mobile default */
+	font-size: 14px;
 }
 
 @media screen and (width >= 768px) {
-  .element {
-    padding: 48px;      /* Tablet and above */
-    font-size: 16px;
-  }
+	.element {
+		padding: 48px; /* Tablet and above */
+		font-size: 16px;
+	}
 }
 ```
 
@@ -159,9 +174,10 @@ General principles for managing spacing between elements:
   - **Horizontal spacing**: Apply margin/padding to the **right element** (use `margin-left` on the element to the right)
 
 ```html
-<div class='my-class'></div>
-<div class='your-class'></div>
+<div class="my-class"></div>
+<div class="your-class"></div>
 ```
+
 - Spacing such structure, use `my-class + your-calss` selector to indicate that this selector relates to two factors.
 
 ### Scroll Animations
@@ -171,17 +187,17 @@ Use the `floatUp` Svelte action for scroll-triggered "floating up" animations. T
 **Location**: `src/lib/actions/float-up.ts`
 
 **Usage**:
+
 ```svelte
 <script>
-  import { floatUp } from '$lib/actions';
+	import { floatUp } from '$lib/actions'
 </script>
 
-<h2 use:floatUp>タイトル</h2>
-<p use:floatUp>コンテンツ</p>
-<div use:floatUp={{ translateY: 10, bounce: 0.5 }}>カスタム設定</div>
+<h2 use:floatUp>タイトル</h2><p use:floatUp>コンテンツ</p><div use:floatUp={{ translateY: 10, bounce: 0.5 }}>カスタム設定</div>
 ```
 
 **Animation Effect**:
+
 - Fade in (opacity: 0 → 1)
 - Translate up (Y: 6px → 0)
 - Scale up with spring (scale: 0.98 → 1)

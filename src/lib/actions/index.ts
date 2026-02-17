@@ -1,1 +1,1 @@
-export { floatUp, type FloatUpOptions } from "./float-up";
+export { floatUp, type FloatUpOptions } from './float-up'

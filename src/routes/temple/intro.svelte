@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { floatUp } from '$lib/actions';
+import { floatUp } from '$lib/actions'
 </script>
 
 <div class="wide-content space-top">
@@ -16,25 +16,25 @@
 </div>
 
 <style>
-	.space-top {
-		margin-top: 126px;
-	}
+.space-top {
+	margin-top: 126px;
+}
 
-	.title {
-		font-family: var(--font-heading-bold);
-		font-size: 25px;
-		line-height: 48px;
-		letter-spacing: 0.12em;
-	}
+.title {
+	font-family: var(--font-heading-bold);
+	font-size: 25px;
+	line-height: 48px;
+	letter-spacing: 0.12em;
+}
 
-	.body {
-		font-family: var(--font-body);
-		font-size: 16px;
-		line-height: 30px;
-		letter-spacing: 0.06em;
-	}
+.body {
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 30px;
+	letter-spacing: 0.06em;
+}
 
-	.title + .body {
-		padding-top: 30px;
-	}
+.title + .body {
+	padding-top: 30px;
+}
 </style>
