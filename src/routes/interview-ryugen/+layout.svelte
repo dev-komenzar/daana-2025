@@ -6,9 +6,9 @@
 </script>
 
 <MetaTags
-	title='インタビュー'
+	title='松波龍源僧院長インタビュー'
 	titleTemplate='%s | 日本仏教徒協会'
-	canonical={`${SITE_FULL_URL}/interview`}
+	canonical={`${SITE_FULL_URL}/interview-ryugen`}
 />
 
 {@render children?.()}

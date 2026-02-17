@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { floatUp } from '$lib/actions';
-	import Photo from '$lib/assets/interview/ryugen-c.jpg';
-	import PhotoSecond from '$lib/assets/interview/zenga_in-c.jpg';
-	import PhotoThird from '$lib/assets/interview/zenga_in_2-c.jpg';
-	import PhotoFourth from '$lib/assets/interview/zenga_in_exterior-c.jpg';
+	import Photo from '$lib/assets/interview-ryugen/ryugen-c.jpg';
+	import PhotoSecond from '$lib/assets/interview-ryugen/zenga_in-c.jpg';
+	import PhotoThird from '$lib/assets/interview-ryugen/zenga_in_2-c.jpg';
+	import PhotoFourth from '$lib/assets/interview-ryugen/zenga_in_exterior-c.jpg';
 	import EnhancedImage from '$lib/components/ui/enhanced-image.svelte';
 
 	const p = {
@@ -165,9 +165,17 @@
 		font-size: 24px;
 	}
 
+	.wide-content + .put-image-right {
+		margin-top: 90px;
+	}
+
 	.description {
 		font-family: var(--font-body-bold);
 		text-align: left;
+	}
+
+	.description + .image-wrapper-first {
+		margin-top: 44px;
 	}
 
 	.name {
@@ -209,6 +217,10 @@
 		line-height: 24px;
 		color: #000;
 		letter-spacing: 0.06em;
+	}
+
+	.position + .bio {
+		margin-top: 44px;
 	}
 
 		.interview-subheading{
@@ -278,7 +290,6 @@
 
 		.bio {
 			width: 372px;
-			margin-top: 44px;
 		}
 
 		.put-image-left{
