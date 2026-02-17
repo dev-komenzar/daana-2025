@@ -158,6 +158,12 @@ General principles for managing spacing between elements:
   - **Vertical spacing**: Apply margin/padding to the **bottom element** (use `margin-top` on the element below)
   - **Horizontal spacing**: Apply margin/padding to the **right element** (use `margin-left` on the element to the right)
 
+```html
+<div class='my-class'></div>
+<div class='your-class'></div>
+```
+- Spacing such structure, use `my-class + your-calss` selector to indicate that this selector relates to two factors.
+
 ### Scroll Animations
 
 Use the `floatUp` Svelte action for scroll-triggered "floating up" animations. This action uses the Motion library (`motion.dev`) which is already installed in the project.
@@ -191,4 +197,4 @@ Use the `floatUp` Svelte action for scroll-triggered "floating up" animations. T
 | `durationExit` | 0.35 | Exit animation duration (seconds) |
 | `threshold` | 0.3 | Viewport visibility ratio to trigger (0-1) |
 
-**Important**: When adding scroll animations to new pages, follow the pattern used in `src/routes/interview/+page.svelte`.
+**Important**: When adding scroll animations to new pages, follow the pattern used in `src/routes/interview-ryugen/+page.svelte`.
