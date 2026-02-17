@@ -60,10 +60,6 @@
 		text-align: left;
 	}
 
-	.two {
-		padding-top: 200px;
-	}
-
 	h3{
 		padding-top: 57px;
 		font-family: var(--font-body-bold);
