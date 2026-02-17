@@ -41,7 +41,7 @@
 				{/each}
 				<p class="bio" use:floatUp>{p.bio}</p>
 				<div class="link" use:floatUp>
-					<Link href="/interview" textContent="VIEW MORE" />
+					<Link href="/interview-ryugen" textContent="VIEW MORE" />
 				</div>
 			</div>
 		</div>
