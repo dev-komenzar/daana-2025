@@ -94,7 +94,11 @@ async function loadMore() {
 
 			{#if hasMoreItems()}
 				<div class="load-more-container">
-					<button class="load-more-button" onclick={loadMore} disabled={isLoadingMore}>
+					<button
+						class="load-more-button"
+						onclick={loadMore}
+						disabled={isLoadingMore}
+					>
 						{isLoadingMore ? '読み込み中...' : 'さらに読み込む'}
 					</button>
 				</div>

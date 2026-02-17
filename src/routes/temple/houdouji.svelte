@@ -9,26 +9,55 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 <div class="full-content wrapper">
 	<div class="description">
 		<h2 use:floatUp>施設紹介</h2>
-		<span class="facility-label" use:floatUp>About Facility</span>
+		<span
+			class="facility-label"
+			use:floatUp>About Facility</span
+		>
 		<h3 use:floatUp>寳幢寺</h3>
-		<span class="houdouji-label" use:floatUp>Houdou-ji</span>
+		<span
+			class="houdouji-label"
+			use:floatUp>Houdou-ji</span
+		>
 		<p use:floatUp>所在：京都府京都市</p>
 		<p use:floatUp>西陣織の会社・工場跡地をお借りして運営</p>
 		<p use:floatUp>本尊：仏舎利如意宝珠・不動明王座像</p>
-		<p class="space-top" use:floatUp>実験寺院の第一号で旗艦寺院です。</p>
+		<p
+			class="space-top"
+			use:floatUp
+		>
+			実験寺院の第一号で旗艦寺院です。
+		</p>
 		<p use:floatUp>数多くの企業経営者、起業家、学生などが訪れ、日々仏教思想の社会実装が行われています。</p>
 	</div>
 
 	<div>
 		<div class="houdouji-grid">
-			<div class="houdouji-grid-meeting" use:floatUp>
-				<EnhancedImage src={PhotoMeeting} alt="ミーティング" />
+			<div
+				class="houdouji-grid-meeting"
+				use:floatUp
+			>
+				<EnhancedImage
+					src={PhotoMeeting}
+					alt="ミーティング"
+				/>
 			</div>
-			<div class="houdouji-grid-group" use:floatUp>
-				<EnhancedImage src={PhotoGroup} alt="集合写真" />
+			<div
+				class="houdouji-grid-group"
+				use:floatUp
+			>
+				<EnhancedImage
+					src={PhotoGroup}
+					alt="集合写真"
+				/>
 			</div>
-			<div class="houdouji-grid-meals" use:floatUp>
-				<EnhancedImage src={Photo1000} alt="1000人ミールス" />
+			<div
+				class="houdouji-grid-meals"
+				use:floatUp
+			>
+				<EnhancedImage
+					src={Photo1000}
+					alt="1000人ミールス"
+				/>
 			</div>
 		</div>
 	</div>

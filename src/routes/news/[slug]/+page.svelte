@@ -19,16 +19,25 @@ function formatDate(dateString: string | undefined): string {
 </script>
 
 {#await data.newsPost}
-	<MetaTags title="ニュース" titleTemplate="%s | 日本仏教徒協会" />
+	<MetaTags
+		title="ニュース"
+		titleTemplate="%s | 日本仏教徒協会"
+	/>
 	<NewsDetailSkeleton />
 {:then newsPost}
-	<MetaTags title={newsPost.title || 'ニュース'} titleTemplate="%s | 日本仏教徒協会" />
+	<MetaTags
+		title={newsPost.title || 'ニュース'}
+		titleTemplate="%s | 日本仏教徒協会"
+	/>
 
 	<article class="container">
 		<div class="content">
 			<header class="article-header">
 				{#if newsPost.publishedAt}
-					<time datetime={newsPost.publishedAt} class="publish-date">
+					<time
+						datetime={newsPost.publishedAt}
+						class="publish-date"
+					>
 						{formatDate(newsPost.publishedAt)}
 					</time>
 				{/if}
@@ -39,7 +48,12 @@ function formatDate(dateString: string | undefined): string {
 
 			{#if newsPost.thumbnail}
 				<div class="thumbnail">
-					<img src={newsPost.thumbnail.url} alt={newsPost.title || 'ニュース画像'} width={newsPost.thumbnail.width} height={newsPost.thumbnail.height} />
+					<img
+						src={newsPost.thumbnail.url}
+						alt={newsPost.title || 'ニュース画像'}
+						width={newsPost.thumbnail.width}
+						height={newsPost.thumbnail.height}
+					/>
 				</div>
 			{/if}
 
@@ -56,7 +70,10 @@ function formatDate(dateString: string | undefined): string {
 		</div>
 	</article>
 {:catch}
-	<MetaTags title="エラー" titleTemplate="%s | 日本仏教徒協会" />
+	<MetaTags
+		title="エラー"
+		titleTemplate="%s | 日本仏教徒協会"
+	/>
 	<article class="container">
 		<div class="content">
 			<div class="error-message">

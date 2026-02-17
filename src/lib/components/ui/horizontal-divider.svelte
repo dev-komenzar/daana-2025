@@ -8,7 +8,12 @@ type Properties = {
 let { color = 'var(--color-secondary)', marginBottom = 0, marginTop = 0 }: Properties = $props()
 </script>
 
-<hr class="divider" style:--margin-top="{marginTop}px" style:--margin-bottom="{marginBottom}px" style:--divider-color={color} />
+<hr
+	class="divider"
+	style:--margin-top="{marginTop}px"
+	style:--margin-bottom="{marginBottom}px"
+	style:--divider-color={color}
+/>
 
 <style>
 .divider {

@@ -1,7 +1,10 @@
 <script lang="ts">
 </script>
 
-<section id="eyecatch" class="eyecatch-section">
+<section
+	id="eyecatch"
+	class="eyecatch-section"
+>
 	<div class="hero-container eyecatch-container">
 		<div class="eyecatch-content">
 			<p class="eyecatch-meta">OUR MISSION</p>

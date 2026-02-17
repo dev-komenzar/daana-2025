@@ -37,13 +37,35 @@ onDestroy(() => {
 	<div class="content">
 		<p class="message">
 			ホームページを更新したので、お探しのページはございません。<br />
-			新ページのトップに<span class="count" aria-live="polite">{count}</span>秒で移動します。
+			新ページのトップに<span
+				class="count"
+				aria-live="polite">{count}</span
+			>秒で移動します。
 		</p>
-		<button type="button" class="redirect-button" onclick={redirectNow}>
+		<button
+			type="button"
+			class="redirect-button"
+			onclick={redirectNow}
+		>
 			<span class="button-text">今すぐ移動</span>
-			<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<path d="M0.710938 1H13.7544V14.1837" stroke="currentColor" stroke-width="2" />
-				<path d="M0.710938 14.1837L13.7544 1" stroke="currentColor" stroke-width="2" />
+			<svg
+				width="15"
+				height="15"
+				viewBox="0 0 15 15"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+			>
+				<path
+					d="M0.710938 1H13.7544V14.1837"
+					stroke="currentColor"
+					stroke-width="2"
+				/>
+				<path
+					d="M0.710938 14.1837L13.7544 1"
+					stroke="currentColor"
+					stroke-width="2"
+				/>
 			</svg>
 		</button>
 	</div>

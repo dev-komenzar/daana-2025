@@ -2,6 +2,7 @@
 	"useTabs": true,
 	"tabWidth": 2,
 	"printWidth": 99999,
+	"singleAttributePerLine": true,
 	"singleQuote": true,
 	"jsxSingleQuote": true,
 	"semi": false,

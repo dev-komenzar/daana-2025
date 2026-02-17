@@ -9,12 +9,21 @@ let { affiliation, bio, imageUrl, name, nameRomaji, position, reversed = false }
 
 <div class={['member-card', reversed && 'reversed']}>
 	{#if imageUrl}
-		<div class="image" use:floatUp>
-			<EnhancedImage src={imageUrl} alt={name} />
+		<div
+			class="image"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={imageUrl}
+				alt={name}
+			/>
 		</div>
 	{/if}
 
-	<div class="description" use:floatUp>
+	<div
+		class="description"
+		use:floatUp
+	>
 		<p class="position">{position}</p>
 		<h3 class="name">{name}</h3>
 		<p class="name-romaji">{nameRomaji}</p>

@@ -29,12 +29,28 @@ function handleMouseLeave() {
 }
 </script>
 
-<svelte:element this={path ? 'a' : 'div'} href={path} class={['works-card', variant]} {style} role={path ? undefined : 'group'} use:floatUp onmouseenter={handleMouseEnter} onmouseleave={handleMouseLeave}>
+<svelte:element
+	this={path ? 'a' : 'div'}
+	href={path}
+	class={['works-card', variant]}
+	{style}
+	role={path ? undefined : 'group'}
+	use:floatUp
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+>
 	{#if src}
-		<img {src} alt={label} class="image" />
+		<img
+			{src}
+			alt={label}
+			class="image"
+		/>
 	{/if}
 
-	<div bind:this={labelBoxElement} class={['label-box', isLabelReversed && 'reversed']}>
+	<div
+		bind:this={labelBoxElement}
+		class={['label-box', isLabelReversed && 'reversed']}
+	>
 		<h3 class="label">{label}</h3>
 	</div>
 </svelte:element>

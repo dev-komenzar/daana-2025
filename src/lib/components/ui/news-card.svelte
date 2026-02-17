@@ -16,10 +16,19 @@ const formattedDate = $derived(() => {
 })
 </script>
 
-<a href={resolve(`/news/${item.id}`)} class="news-card" data-sveltekit-preload-data="tap">
+<a
+	href={resolve(`/news/${item.id}`)}
+	class="news-card"
+	data-sveltekit-preload-data="tap"
+>
 	{#if item.thumbnail?.url}
 		<div class="card-thumbnail">
-			<img src={item.thumbnail.url} alt={item.title || 'ニュースのサムネイル'} width={item.thumbnail.width} height={item.thumbnail.height} />
+			<img
+				src={item.thumbnail.url}
+				alt={item.title || 'ニュースのサムネイル'}
+				width={item.thumbnail.width}
+				height={item.thumbnail.height}
+			/>
 		</div>
 	{:else}
 		<div class="card-thumbnail placeholder">
@@ -27,7 +36,10 @@ const formattedDate = $derived(() => {
 		</div>
 	{/if}
 	<div class="card-content">
-		<time class="card-date" datetime={item.publishedAt}>{formattedDate()}</time>
+		<time
+			class="card-date"
+			datetime={item.publishedAt}>{formattedDate()}</time
+		>
 		<h3 class="card-title">{item.title || '無題'}</h3>
 	</div>
 </a>

@@ -39,11 +39,19 @@ onMount(() => {
 </script>
 
 {#if overlayVisible}
-	<div class="opening-layer" out:fade>
+	<div
+		class="opening-layer"
+		out:fade
+	>
 		{#if contentVisible}
 			<!-- Add your opening layer content here -->
 			<div in:welcome={{ duration: 800 }}>
-				<EnhancedImage src={Logo} alt="Opening Logo" class="logo" loading="eager" />
+				<EnhancedImage
+					src={Logo}
+					alt="Opening Logo"
+					class="logo"
+					loading="eager"
+				/>
 			</div>
 		{/if}
 	</div>

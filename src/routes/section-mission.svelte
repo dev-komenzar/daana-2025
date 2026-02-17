@@ -32,7 +32,11 @@ onMount(() => {
 })
 </script>
 
-<section id="mission" class="mission-section" bind:this={missionSection}>
+<section
+	id="mission"
+	class="mission-section"
+	bind:this={missionSection}
+>
 	<div class="message">
 		<h2 class="heading font-gothic-bold">全く新しい「仏教に可能性を見出す人々」を繋ぐ団体</h2>
 		<div class="text">

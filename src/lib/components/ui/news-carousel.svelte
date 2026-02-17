@@ -49,13 +49,25 @@ function goToSlide(index: number) {
 <div class="carousel">
 	<div class="carousel-indicators">
 		{#each items as item, index (item.id)}
-			<button class="indicator" class:active={currentIndex === index} onclick={() => goToSlide(index)} aria-label={`スライド${index + 1}へ移動`}></button>
+			<button
+				class="indicator"
+				class:active={currentIndex === index}
+				onclick={() => goToSlide(index)}
+				aria-label={`スライド${index + 1}へ移動`}
+			></button>
 		{/each}
 	</div>
 
 	<div class="carousel-content">
 		{#each items as item, index (item.id)}
-			<a href={resolve(`/news/${item.id}`)} class="carousel-slide" class:active={currentIndex === index} class:exiting={previousIndex === index} style:background-image={item.thumbnail?.url ? `url(${item.thumbnail.url})` : 'none'} data-sveltekit-preload-data="tap">
+			<a
+				href={resolve(`/news/${item.id}`)}
+				class="carousel-slide"
+				class:active={currentIndex === index}
+				class:exiting={previousIndex === index}
+				style:background-image={item.thumbnail?.url ? `url(${item.thumbnail.url})` : 'none'}
+				data-sveltekit-preload-data="tap"
+			>
 				<div class="slide-overlay">
 					<h3 class="slide-title">{item.title}</h3>
 				</div>

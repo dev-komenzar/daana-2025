@@ -5,7 +5,16 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 </script>
 
 <section class="hero">
-	<EnhancedImage src={heroImage} alt="寳幢寺の僧侶たちの集合写真" class="hero-image" loading="eager" fetchpriority="high" sizes="100vw" objectFit="cover" objectPosition="var(--hero-object-position)" />
+	<EnhancedImage
+		src={heroImage}
+		alt="寳幢寺の僧侶たちの集合写真"
+		class="hero-image"
+		loading="eager"
+		fetchpriority="high"
+		sizes="100vw"
+		objectFit="cover"
+		objectPosition="var(--hero-object-position)"
+	/>
 
 	<div class="overlay">
 		<h1 use:floatUp>実験寺院プロジェクト</h1>

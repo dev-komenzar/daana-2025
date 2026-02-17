@@ -61,7 +61,13 @@ function getGridArea(index: number) {
 
 <div class="works-grid">
 	{#each works as work, index (work.name)}
-		<Card label={work.name} src={work.imageUrl} style={`grid-area: ${getGridArea(index)}`} variant={work.variant} isLabelReversed={work.isLabelReversed} />
+		<Card
+			label={work.name}
+			src={work.imageUrl}
+			style={`grid-area: ${getGridArea(index)}`}
+			variant={work.variant}
+			isLabelReversed={work.isLabelReversed}
+		/>
 	{/each}
 </div>
 

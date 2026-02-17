@@ -9,16 +9,30 @@ import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 
 <footer class="footer">
 	<!-- SectionDonation -->
-	<section id="donation" class="donation-section">
+	<section
+		id="donation"
+		class="donation-section"
+	>
 		<div class="donation-content">
-			<p class="donation-text" use:floatUp>
+			<p
+				class="donation-text"
+				use:floatUp
+			>
 				「寄付」というアクションを
 				<br />
 				あなたの力が我々の動力です
 			</p>
 		</div>
-		<a href={resolve('/donation')} class="donation-link" use:floatUp>
-			<EnhancedImage src={Button} alt="寄付ボタン" class="donation-button" />
+		<a
+			href={resolve('/donation')}
+			class="donation-link"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={Button}
+				alt="寄付ボタン"
+				class="donation-button"
+			/>
 		</a>
 	</section>
 
@@ -27,14 +41,29 @@ import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 	<div class="footer-info">
 		<div class="footer-main">
 			<div class="organization">
-				<div class="logo-row" use:floatUp>
-					<EnhancedImage src={JbaLogo} alt="日本仏教徒協会" class="jba-logo" />
+				<div
+					class="logo-row"
+					use:floatUp
+				>
+					<EnhancedImage
+						src={JbaLogo}
+						alt="日本仏教徒協会"
+						class="jba-logo"
+					/>
 				</div>
 
 				<div class="address-list">
 					<div class="address-item">
-						<p class="org-label" use:floatUp>一般社団法人 日本仏教徒協会</p>
-						<p class="address" use:floatUp>
+						<p
+							class="org-label"
+							use:floatUp
+						>
+							一般社団法人 日本仏教徒協会
+						</p>
+						<p
+							class="address"
+							use:floatUp
+						>
 							〒602-0052<br />
 							京都市上京区上小川町120-3
 						</p>
@@ -42,20 +71,67 @@ import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 				</div>
 			</div>
 
-			<div class="contact-row" use:floatUp>
-				<a href="mailto:info@houdouji.inc" class="contact-link">
-					<svg class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" />
-						<path d="M2 7L12 13L22 7" stroke="currentColor" stroke-width="1.5" />
+			<div
+				class="contact-row"
+				use:floatUp
+			>
+				<a
+					href="mailto:info@houdouji.inc"
+					class="contact-link"
+				>
+					<svg
+						class="mail-icon"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<rect
+							x="2"
+							y="4"
+							width="20"
+							height="16"
+							rx="2"
+							stroke="currentColor"
+							stroke-width="1.5"
+						/>
+						<path
+							d="M2 7L12 13L22 7"
+							stroke="currentColor"
+							stroke-width="1.5"
+						/>
 					</svg>
 					<span class="contact-label">Contact us</span>
 					<span class="contact-email">@Houdouji.inc</span>
-					<svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-						<path d="M10 8L14 12L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					<svg
+						class="arrow-icon"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<circle
+							cx="12"
+							cy="12"
+							r="10"
+							stroke="currentColor"
+							stroke-width="1.5"
+						/>
+						<path
+							d="M10 8L14 12L10 16"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
 					</svg>
 				</a>
-				<a href={resolve('/llm.txt')} class="llm-link">llm.txt</a>
+				<a
+					href="/llm.txt"
+					class="llm-link">llm.txt</a
+				>
 			</div>
 		</div>
 	</div>

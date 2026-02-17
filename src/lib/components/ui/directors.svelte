@@ -29,8 +29,21 @@ const directors: Director[] = [
 ]
 </script>
 
-<h3 class="text-medium section-header-japanese" use:floatUp>日本仏教徒協会_理事</h3>
+<h3
+	class="text-medium section-header-japanese"
+	use:floatUp
+>
+	日本仏教徒協会_理事
+</h3>
 
 {#each directors as member (member.name)}
-	<DirectorCard affiliation={member.affiliation} bio={member.bio} name={member.name} nameRomaji={member.nameRomaji} position={member.position} imageUrl={member.imageUrl} reversed={member.reversed} />
+	<DirectorCard
+		affiliation={member.affiliation}
+		bio={member.bio}
+		name={member.name}
+		nameRomaji={member.nameRomaji}
+		position={member.position}
+		imageUrl={member.imageUrl}
+		reversed={member.reversed}
+	/>
 {/each}

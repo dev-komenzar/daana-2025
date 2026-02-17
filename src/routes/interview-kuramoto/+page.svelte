@@ -27,7 +27,10 @@ const p = {
 			<p class="bio">{p.bio}</p>
 		</div>
 		<div class="image-wrapper-portrait content">
-			<EnhancedImage src={p.imageUrl} alt={p.name} />
+			<EnhancedImage
+				src={p.imageUrl}
+				alt={p.name}
+			/>
 		</div>
 	</div>
 
@@ -43,7 +46,10 @@ const p = {
 
 	<div class="full-content put-image-left">
 		<div class="image-wrapper-second">
-			<EnhancedImage src={PhotoTalking} alt="倉本教授近影" />
+			<EnhancedImage
+				src={PhotoTalking}
+				alt="倉本教授近影"
+			/>
 		</div>
 		<div class="description-second">
 			<p class="body">問い：なぜ「伝統仏教」の枠組みの中で改革を行わなかったのですか。</p>

@@ -40,7 +40,7 @@ const MenuItems: HeaderMenuItem[] = [
 		label: 'news',
 	},
 	{
-		href: '/donate',
+		href: '/donation',
 		isExternal: false,
 		key: 'donate',
 		label: 'donate',
@@ -71,15 +71,32 @@ function handleKeydown(event: KeyboardEvent) {
 <header class="header-container">
 	<div class="header-wrapper">
 		<a href={resolve('/')}>
-			<EnhancedImage src={Logo} alt="日本仏教徒協会" class="logo" loading="eager" fetchpriority="high" />
+			<EnhancedImage
+				src={Logo}
+				alt="日本仏教徒協会"
+				class="logo"
+				loading="eager"
+				fetchpriority="high"
+			/>
 		</a>
 
 		<!-- Mobile: Contact button and hamburger menu -->
 		<div class="mobile-controls">
-			<button class="contact-button" aria-label="お問い合わせ">
-				<img src={HeaderIcon} alt="お問合せフォーム" />
+			<button
+				class="contact-button"
+				aria-label="お問い合わせ"
+			>
+				<img
+					src={HeaderIcon}
+					alt="お問合せフォーム"
+				/>
 			</button>
-			<button class="hamburger-button" onclick={openMenu} aria-label="メニューを開く" aria-expanded={isMenuOpen}>
+			<button
+				class="hamburger-button"
+				onclick={openMenu}
+				aria-label="メニューを開く"
+				aria-expanded={isMenuOpen}
+			>
 				<span></span>
 				<span></span>
 				<span></span>
@@ -90,33 +107,88 @@ function handleKeydown(event: KeyboardEvent) {
 		<nav class="list desktop-nav">
 			{#each MenuItems as item (item.key)}
 				<div class="link-wrapper">
-					<a href={resolve(item.href)} class="item-link">
+					<a
+						href={item.href}
+						class="item-link"
+					>
 						{item.label}
 					</a>
 				</div>
 			{/each}
-			<img src={HeaderIcon} alt="お問合せフォーム" />
+			<img
+				src={HeaderIcon}
+				alt="お問合せフォーム"
+			/>
 		</nav>
 	</div>
 </header>
 
 <!-- Mobile menu overlay -->
-<div class="menu-overlay" class:open={isMenuOpen}>
+<div
+	class="menu-overlay"
+	class:open={isMenuOpen}
+>
 	<div class="menu-header">
 		<a href={resolve('/')}>
-			<EnhancedImage src={Logo} alt="日本仏教徒協会" class="menu-logo" loading="eager" />
+			<EnhancedImage
+				src={Logo}
+				alt="日本仏教徒協会"
+				class="menu-logo"
+				loading="eager"
+			/>
 		</a>
 		<div class="menu-header-controls">
-			<button class="contact-button" aria-label="お問い合わせ">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
-					<path d="M6 8L12 13L18 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-					<path d="M6 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+			<button
+				class="contact-button"
+				aria-label="お問い合わせ"
+			>
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<circle
+						cx="12"
+						cy="12"
+						r="11"
+						stroke="currentColor"
+						stroke-width="2"
+					/>
+					<path
+						d="M6 8L12 13L18 8"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<path
+						d="M6 16H18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+					/>
 				</svg>
 			</button>
-			<button class="close-button" onclick={closeMenu} aria-label="メニューを閉じる">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+			<button
+				class="close-button"
+				onclick={closeMenu}
+				aria-label="メニューを閉じる"
+			>
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M18 6L6 18M6 6L18 18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+					/>
 				</svg>
 			</button>
 		</div>
@@ -125,7 +197,7 @@ function handleKeydown(event: KeyboardEvent) {
 	<nav class="menu-nav">
 		{#each MenuItems.filter(item => ['donate', 'mission', 'news', 'works'].includes(item.key)) as item, index (item.key)}
 			<a
-				href={resolve(item.href)}
+				href={item.href}
 				class="menu-item"
 				style="
 

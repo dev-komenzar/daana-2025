@@ -1,3 +1,8 @@
 {
-	"npm.scriptRunner": "pnpm"
+	"npm.scriptRunner": "pnpm",
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	}
 }

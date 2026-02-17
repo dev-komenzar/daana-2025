@@ -8,7 +8,10 @@ import ZengaIn from './zenga-in.svelte'
 
 <Hero />
 
-<section id="temple" class="container">
+<section
+	id="temple"
+	class="container"
+>
 	<Intro />
 	<Houdouji />
 	<ZengaIn />

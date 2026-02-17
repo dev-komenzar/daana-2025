@@ -7,9 +7,17 @@ import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 import Staffs from '$lib/components/ui/staffs.svelte'
 </script>
 
-<section id="company" class="container">
+<section
+	id="company"
+	class="container"
+>
 	<div class="wide-content">
-		<h2 class="text-large section-header" use:floatUp>COMPANY</h2>
+		<h2
+			class="text-large section-header"
+			use:floatUp
+		>
+			COMPANY
+		</h2>
 	</div>
 	<div class="wide-content">
 		<Directors />

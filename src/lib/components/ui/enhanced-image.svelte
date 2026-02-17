@@ -29,7 +29,17 @@ interface Properties {
 let { alt, class: className = '', decoding = 'async', fetchpriority = 'auto', loading = 'lazy', objectFit = 'cover', objectPosition = 'center', sizes, src }: Properties = $props()
 </script>
 
-<enhanced:img {src} {alt} class={className} {loading} {sizes} style:object-fit={objectFit} style:object-position={objectPosition} {fetchpriority} {decoding} />
+<enhanced:img
+	{src}
+	{alt}
+	class={className}
+	{loading}
+	{sizes}
+	style:object-fit={objectFit}
+	style:object-position={objectPosition}
+	{fetchpriority}
+	{decoding}
+/>
 
 <style>
 /* stylelint-disable-next-line selector-type-no-unknown */

@@ -22,7 +22,12 @@ const staffs: Staff[] = [
 ]
 </script>
 
-<h3 class="text-medium section-header-japanese" use:floatUp>日本仏教徒協会_運営メンバー</h3>
+<h3
+	class="text-medium section-header-japanese"
+	use:floatUp
+>
+	日本仏教徒協会_運営メンバー
+</h3>
 
 <table>
 	<tbody>

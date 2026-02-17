@@ -16,26 +16,71 @@ const p = {
 }
 </script>
 
-<section id="houdouji" class="container">
+<section
+	id="houdouji"
+	class="container"
+>
 	<div class="wide-content">
-		<h2 class="text-large section-header" use:floatUp>Experimental Buddhism Order</h2>
-		<h3 class="text-medium section-header-japanese houdouji" use:floatUp>実験寺院グループ_執行部</h3>
+		<h2
+			class="text-large section-header"
+			use:floatUp
+		>
+			Experimental Buddhism Order
+		</h2>
+		<h3
+			class="text-medium section-header-japanese houdouji"
+			use:floatUp
+		>
+			実験寺院グループ_執行部
+		</h3>
 	</div>
 	<div class="wide-content body">
 		<div class="card">
-			<div class="image-wrapper" use:floatUp>
-				<EnhancedImage src={p.imageUrl} alt={p.name} />
+			<div
+				class="image-wrapper"
+				use:floatUp
+			>
+				<EnhancedImage
+					src={p.imageUrl}
+					alt={p.name}
+				/>
 			</div>
 
 			<div class="description">
-				<h3 class="name" use:floatUp>{p.name}</h3>
-				<p class="name-romaji" use:floatUp>{p.nameRomaji}</p>
+				<h3
+					class="name"
+					use:floatUp
+				>
+					{p.name}
+				</h3>
+				<p
+					class="name-romaji"
+					use:floatUp
+				>
+					{p.nameRomaji}
+				</p>
 				{#each p.positions as position (position)}
-					<p class="position" use:floatUp>{position}</p>
+					<p
+						class="position"
+						use:floatUp
+					>
+						{position}
+					</p>
 				{/each}
-				<p class="bio" use:floatUp>{p.bio}</p>
-				<div class="link" use:floatUp>
-					<Link href="/interview-ryugen" textContent="VIEW MORE" />
+				<p
+					class="bio"
+					use:floatUp
+				>
+					{p.bio}
+				</p>
+				<div
+					class="link"
+					use:floatUp
+				>
+					<Link
+						href="/interview-ryugen"
+						textContent="VIEW MORE"
+					/>
 				</div>
 			</div>
 		</div>

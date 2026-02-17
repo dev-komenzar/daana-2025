@@ -39,7 +39,10 @@ function truncate(text: string, maxLength: number): string {
 }
 </script>
 
-<section id="news" class="container">
+<section
+	id="news"
+	class="container"
+>
 	<div class="wide-content news">
 		<div class="news-header">
 			<h2 class="text-large font-gothic-bold">NEWS</h2>
@@ -54,7 +57,11 @@ function truncate(text: string, maxLength: number): string {
 			{:else}
 				<div class="article-info-container">
 					{#each query.current as item, index (item.id)}
-						<div class="article-info" class:active={currentIndex === index} class:exiting={previousIndex === index}>
+						<div
+							class="article-info"
+							class:active={currentIndex === index}
+							class:exiting={previousIndex === index}
+						>
 							<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
 							<h3 class="article-title">{item.title ?? ''}</h3>
 							<p class="article-description">
@@ -63,7 +70,10 @@ function truncate(text: string, maxLength: number): string {
 						</div>
 					{/each}
 				</div>
-				<NewsLink href={`/news/${query.current[currentIndex].id}`} textContent="VIEW NOTE" />
+				<NewsLink
+					href={`/news/${query.current[currentIndex].id}`}
+					textContent="VIEW NOTE"
+				/>
 			{/if}
 		</div>
 		<div class="carousel">
@@ -74,7 +84,10 @@ function truncate(text: string, maxLength: number): string {
 			{:else if !query.current || query.current.length === 0}
 				<p class="no-news-message">ニュースが取得できません</p>
 			{:else}
-				<NewsCarousel items={query.current} bind:currentIndex />
+				<NewsCarousel
+					items={query.current}
+					bind:currentIndex
+				/>
 			{/if}
 		</div>
 	</div>

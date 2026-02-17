@@ -10,29 +10,67 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 
 <div class="full-content wrapper">
 	<div class="zenga-grid">
-		<div class="zenga-grid-group" use:floatUp>
-			<EnhancedImage src={PhotoGroup} alt="禅河院 集合写真" />
+		<div
+			class="zenga-grid-group"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={PhotoGroup}
+				alt="禅河院 集合写真"
+			/>
 		</div>
-		<div class="zenga-grid-engawa" use:floatUp>
-			<EnhancedImage src={PhotoEngawa} alt="縁側で" />
+		<div
+			class="zenga-grid-engawa"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={PhotoEngawa}
+				alt="縁側で"
+			/>
 		</div>
-		<div class="zenga-grid-kaki" use:floatUp>
-			<EnhancedImage src={PhotoKaki} alt="庭になる柿" />
+		<div
+			class="zenga-grid-kaki"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={PhotoKaki}
+				alt="庭になる柿"
+			/>
 		</div>
-		<div class="zenga-grid-irori" use:floatUp>
-			<EnhancedImage src={PhotoIrori} alt="囲炉裏で団欒" />
+		<div
+			class="zenga-grid-irori"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={PhotoIrori}
+				alt="囲炉裏で団欒"
+			/>
 		</div>
-		<div class="zenga-grid-lecture" use:floatUp>
-			<EnhancedImage src={PhotoLecture} alt="講義の様子" />
+		<div
+			class="zenga-grid-lecture"
+			use:floatUp
+		>
+			<EnhancedImage
+				src={PhotoLecture}
+				alt="講義の様子"
+			/>
 		</div>
 	</div>
 	<div class="description">
 		<h3 use:floatUp>禅河院</h3>
-		<span class="zengain-label" use:floatUp>Zenga-in</span>
+		<span
+			class="zengain-label"
+			use:floatUp>Zenga-in</span
+		>
 		<p use:floatUp>所在：兵庫県西脇市</p>
 		<p use:floatUp>築150年以上の古民家</p>
 		<p use:floatUp>本尊：釈迦如来絵像・普賢菩薩絵像</p>
-		<p class="space-top" use:floatUp>実験寺院第二号で団体での研修や長期のリトリートなど、滞在型の企画に使用されています。</p>
+		<p
+			class="space-top"
+			use:floatUp
+		>
+			実験寺院第二号で団体での研修や長期のリトリートなど、滞在型の企画に使用されています。
+		</p>
 		<p use:floatUp>田畑に囲まれた静かな集落に位置し、瞑想などに最高の環境です。</p>
 	</div>
 </div>

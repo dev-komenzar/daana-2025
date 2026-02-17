@@ -6,10 +6,10 @@ let { children } = $props()
 </script>
 
 <MetaTags
-	title="ページ移動中"
+	title="寄付"
 	titleTemplate="%s | 日本仏教徒協会"
-	canonical={`${SITE_FULL_URL}/passion`}
-	robots="noindex, nofollow"
+	description="日本仏教徒協会への寄付ページ"
+	canonical={`${SITE_FULL_URL}/donation`}
 />
 
 {@render children?.()}

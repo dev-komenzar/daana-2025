@@ -29,7 +29,12 @@ const preventEsc = (event: KeyboardEvent) => {
 >
 	<div class="modal-content">
 		{@render children()}
-		<button onclick={() => (open = false)} class="modal-close-button"> Close </button>
+		<button
+			onclick={() => (open = false)}
+			class="modal-close-button"
+		>
+			Close
+		</button>
 	</div>
 </dialog>
 
