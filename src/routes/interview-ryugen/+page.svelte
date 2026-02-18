@@ -459,7 +459,7 @@ const p = {
 }
 
 .image-wrapper {
-	max-width: 400px;
+	max-width: 450px;
 }
 
 .description + .image-wrapper.portrait {
