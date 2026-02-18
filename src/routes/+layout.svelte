@@ -3,12 +3,15 @@ import Ogp from '$lib/assets/ogp.png'
 import Favicon from '$lib/components/layout/favicon.svelte'
 import Footer from '$lib/components/layout/footer.svelte'
 import Header from '$lib/components/layout/header.svelte'
+import DonationButtonFloating from '$lib/components/ui/donation-button-floating.svelte'
 import { SITE_FULL_URL } from '$lib/constants'
 import { MetaTags } from 'svelte-meta-tags'
 
 import '../app.css'
 
 let { children } = $props()
+
+let isMenuOpen = $state(false)
 </script>
 
 <svelte:head>
@@ -39,11 +42,13 @@ let { children } = $props()
 
 <div class="layout">
 	<main class="main-content">
-		<Header />
+		<Header bind:isMenuOpen />
 		{@render children?.()}
 	</main>
 	<Footer />
 </div>
+
+<DonationButtonFloating menuOpen={isMenuOpen} />
 
 <style>
 .layout {

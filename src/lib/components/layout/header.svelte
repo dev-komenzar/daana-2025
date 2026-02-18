@@ -2,6 +2,7 @@
 import { resolve } from '$app/paths'
 import HeaderIcon from '$lib/assets/header-icon.svg'
 import Logo from '$lib/assets/jba-black.png'
+import DonationButton from '$lib/components/ui/donation-button.svelte'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import * as v from 'valibot'
 
@@ -47,7 +48,7 @@ const MenuItems: HeaderMenuItem[] = [
 	},
 ] as const
 
-let isMenuOpen = $state(false)
+let { isMenuOpen = $bindable(false) }: { isMenuOpen?: boolean } = $props()
 
 function openMenu() {
 	isMenuOpen = true
@@ -115,10 +116,7 @@ function handleKeydown(event: KeyboardEvent) {
 					</a>
 				</div>
 			{/each}
-			<img
-				src={HeaderIcon}
-				alt="お問合せフォーム"
-			/>
+			<DonationButton />
 		</nav>
 	</div>
 </header>
@@ -429,6 +427,11 @@ function handleKeydown(event: KeyboardEvent) {
 
 /* Desktop styles */
 @media (width >= 1024px) {
+	.header-container {
+		position: sticky;
+		top: 0;
+	}
+
 	.mobile-controls {
 		display: none;
 	}
@@ -471,6 +474,10 @@ function handleKeydown(event: KeyboardEvent) {
 
 		/* identical to box height, or 314% */
 		letter-spacing: 0.015em;
+	}
+
+	:global(.desktop-nav .cta-group) {
+		flex: none;
 	}
 }
 </style>
