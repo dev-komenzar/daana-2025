@@ -1,6 +1,7 @@
 <script lang="ts">
 import Portrait from '$lib/assets/interview-kuramoto/portrait-c.jpg'
 import PhotoTalking from '$lib/assets/interview-kuramoto/talking-c.jpg'
+import PhotoZengain from '$lib/assets/interview-kuramoto/zenga_in-c.jpg'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 
 const p = {
@@ -14,7 +15,7 @@ const p = {
 
 <section class="container">
 	<div class="full-content put-image-right">
-		<div class="description content">
+		<div class="description space-description">
 			<p class="pre-heading">
 				実験寺院の取り組みについて、<br />
 				代表理事にインタビューしてみました。
@@ -26,7 +27,7 @@ const p = {
 			{/each}
 			<p class="bio">{p.bio}</p>
 		</div>
-		<div class="image-wrapper-portrait content">
+		<div class="image-wrapper portrait">
 			<EnhancedImage
 				src={p.imageUrl}
 				alt={p.name}
@@ -45,13 +46,13 @@ const p = {
 	</div>
 
 	<div class="full-content put-image-left">
-		<div class="image-wrapper-second">
+		<div class="image-wrapper second">
 			<EnhancedImage
 				src={PhotoTalking}
 				alt="倉本教授近影"
 			/>
 		</div>
-		<div class="description-second">
+		<div class="description-second space-description">
 			<p class="body">問い：なぜ「伝統仏教」の枠組みの中で改革を行わなかったのですか。</p>
 			<p class="body">答え：「守るべきものがある場所」と「新しい実験をする場所」を分ける必要があると考えたからです。まず強調したいのは、伝統仏教には、数百年、千年という時間軸で地域社会や家を守り、人々の心の拠り所となってきた、かけがえのない役割があるということです。既存の教団の中にも、高い志と優れた見識を持つ僧侶は数多くいらっしゃいます。しかし、彼らの多くは歴史ある伽藍や檀家制度、あるいは地域コミュニティを守るという重責を担っています。そうした「守り」の構造の中で、前例のない、失敗するかもしれない社会実験を行うことは、現実的に非常に困難です。既存の寺院が安定を志向するのは、その社会的責任の重さゆえでもあります。だからこそ、私たちは別の選択肢をとりました。「新しい酒は新しい革袋に」という言葉があるように、現代社会に向けた新しい仏教の実装実験を行うには、しがらみのない、身軽な「容れ物」が不可欠です。私たちは宗教法人ではなく、「一般社団法人」として出発し、現在は「公益社団法人」を目指しているのですが、それは伝統を否定するためではありません。伝統寺院が担う「保存・継承」の役割と、私たちが担う「活用・実装」の役割。この二つが車の両輪のように機能することで、日本仏教全体の可能性が広がると考えています。</p>
 		</div>
@@ -68,11 +69,45 @@ const p = {
 		<p class="body space-top">問い：このプロジェクトのゴールはどこにありますか。</p>
 		<p class="body">答え：この仕組み自体を「オープンソース化」することです。私たち一法人が成功し、拡大すること自体はゴールではありません。目指しているのは、日本仏教をアップデートするための「代替モデル（プロトタイプ）」を完成させることです。「家業」ではない寺院運営は可能なのか。市場原理によらない経済的自立は成し得るのか。私たちがリスクを取って実証したこのノウハウが、将来、志ある僧侶や次世代の寺院運営者にとっての「型」となり、日本各地で多様な仏教実践が花開くこと。それが、研究者であり代表理事である私の描く未来図です。</p>
 	</div>
+
+	<div class="full-content put-image-right">
+		<div class="description-third space-description">
+			<h3 class="subheading">参加と支援のお願い</h3>
+			<p class="body">問い：どのような方々に、この「実験」へ参加してほしいと考えていますか。</p>
+			<p class="body">答え：受動的な「救い」ではなく、知的な「問い」を共有できる方々です。 誤解を恐れずに言えば、私たちは「救い」を求めてただ依存するだけのあり方を推奨していません。求めているのは、既存の価値観に安住せず、自らの知性で真理を探究しようとする「問い」を持つ方々です。実際、寳幢寺に足繁く通われているのは、経営者や起業家、あるいは第一線で活躍するクリエイターの方々です。彼らは決して安易な「癒やし」を求めているのではありません。不確実で正解のない現代社会において、重大な決断を下すためのブレない「軸」──すなわち、強靭な哲学（OS）を求めているのです。ここは、ただ座って救済を待つ場所ではなく、自らの足で登るための「道場」です。社会の常識を疑い、共に新しい時代の精神を紡ぎ出そうとする、知的な体力のある方々との出会いを期待しています。</p>
+		</div>
+		<div class="image-wrapper third">
+			<EnhancedImage
+				src={PhotoZengain}
+				alt="禅河院での様子"
+			/>
+		</div>
+	</div>
 </section>
 
 <style>
 .container {
 	margin-top: 10rem;
+}
+
+.space-description {
+	width: 92%;
+	max-width: 650px;
+	margin: 0 auto;
+}
+
+.put-image-right {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.image-wrapper {
+	max-width: 400px;
+}
+
+.description + .image-wrapper.portrait {
+	margin-top: 100px;
 }
 
 .pre-heading {
@@ -134,11 +169,14 @@ h1 {
 }
 
 .subheading {
-	padding-top: 150px;
 	font-family: var(--font-heading-bold);
 	font-size: 20px;
 	line-height: 30px;
 	letter-spacing: 0.06em;
+}
+
+.wide-content > .subheading {
+	padding-top: 150px;
 }
 
 .body {
@@ -152,27 +190,63 @@ h1 {
 	padding-top: 2em;
 }
 
+.wide-content + .put-image-left {
+	margin-top: 76px;
+}
+
+.put-image-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.image-wrapper.second + .description-second {
+	margin-top: 70px;
+}
+
+.description-third + .image-wrapper.third {
+	margin-top: 100px;
+}
+
+@media screen and (width >= 768px) {
+	.space-description {
+		width: calc(100% - 2 * var(--wide-content-space));
+		max-width: 1200px;
+		margin: 0 var(--wide-content-space);
+	}
+}
+
 @media (width >= 1024px) {
 	.container {
 		margin-top: 165px;
+	}
+
+	.space-description {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+	}
+
+	.image-wrapper {
+		max-width: none;
 	}
 
 	.put-image-right {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding-left: 95px;
+		padding-left: var(--wide-content-space);
+	}
+
+	.description + .image-wrapper.portrait {
+		margin-left: 100px;
 	}
 
 	.description {
 		width: 372px;
 	}
 
-	.content {
-		margin-right: 0;
-	}
-
-	.image-wrapper-portrait {
+	.image-wrapper.portrait {
 		flex-shrink: 0;
 		width: 562px;
 		height: 578px;
@@ -183,22 +257,42 @@ h1 {
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		padding-right: var(--wide-content-space);
 	}
 
-	.wide-content + .put-image-left {
-		margin-top: 76px;
-	}
-
-	.image-wrapper-second {
+	.image-wrapper.second {
 		width: 489px;
 		height: 470px;
 		margin-left: 0;
 	}
 
+	.image-wrapper.second + .description-second {
+		margin-left: 70px;
+	}
+
 	.description-second {
 		width: 500px;
-		margin-right: 95px;
-		margin-left: 70px;
+	}
+
+	.wide-content + .put-image-right {
+		margin-top: 194px;
+	}
+
+	.description-third {
+		width: 376px;
+	}
+
+	.description-third > .subheading {
+		padding-top: 0;
+	}
+
+	.description-third + .image-wrapper.third {
+		margin-left: 100px;
+	}
+
+	.image-wrapper.third {
+		width: 556px;
+		height: 562px;
 	}
 }
 </style>

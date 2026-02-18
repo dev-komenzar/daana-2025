@@ -125,6 +125,7 @@ ol {
 	/* Layout */
 	--max-width: 1200px;
 	--container-padding: 1rem;
+	--wide-content-space: 4%; /* モバイル: 92% = 100% - 2*4% */
 
 	/* Root level setting */
 	box-sizing: border-box;
@@ -147,6 +148,7 @@ ol {
 @media (width >=768px) {
 	:root {
 		--container-padding: 2rem;
+		--wide-content-space: 95px;
 	}
 }
 
@@ -236,9 +238,9 @@ Container
 }
 
 .wide-content {
-	width: 92%;
+	width: calc(100% - 2 * var(--wide-content-space));
 	max-width: 650px;
-	margin: 0 auto;
+	margin: 0 var(--wide-content-space);
 }
 
 .full-content {
@@ -270,9 +272,9 @@ Container
 	}
 
 	.wide-content {
-		width: calc(100% - 2 * 95px);
 		max-width: 1200px;
-		margin: 0 95px;
+
+		/* width と margin は変数でレスポンシブ対応済み */
 	}
 
 	.full-content {

@@ -567,7 +567,7 @@ li {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding-left: 95px;
+		padding-left: var(--wide-content-space);
 		margin-top: 90px;
 	}
 
@@ -603,7 +603,7 @@ li {
 		flex-direction: row;
 		justify-content: space-between;
 		padding-top: 150px;
-		padding-right: 95px;
+		padding-right: var(--wide-content-space);
 	}
 
 	.put-image-left .interview-subheading {
