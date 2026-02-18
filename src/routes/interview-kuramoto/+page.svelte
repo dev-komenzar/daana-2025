@@ -96,7 +96,8 @@ const p = {
 	margin: 0 auto;
 }
 
-.put-image-right {
+.put-image-right,
+.put-image-left {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -194,12 +195,6 @@ h1 {
 	margin-top: 76px;
 }
 
-.put-image-left {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 .image-wrapper.second + .description-second {
 	margin-top: 70px;
 }
@@ -216,7 +211,7 @@ h1 {
 	}
 }
 
-@media (width >= 1024px) {
+@media screen and (width >= 1024px) {
 	.container {
 		margin-top: 165px;
 	}
