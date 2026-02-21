@@ -40,12 +40,6 @@ const MenuItems: HeaderMenuItem[] = [
 		key: 'news',
 		label: 'news',
 	},
-	{
-		href: '/donation',
-		isExternal: false,
-		key: 'donate',
-		label: 'donate',
-	},
 ] as const
 
 let { isMenuOpen = $bindable(false) }: { isMenuOpen?: boolean } = $props()
