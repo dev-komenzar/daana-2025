@@ -48,6 +48,9 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"esbuild"
+		],
+		"ignoredBuiltDependencies": [
+			"sharp"
 		]
 	},
 	"lint-staged": {
