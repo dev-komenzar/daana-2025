@@ -1,13 +1,9 @@
 <script lang="ts">
 import NewsCarousel from '$lib/components/ui/news-carousel.svelte'
 import NewsLink from '$lib/components/ui/news-link.svelte'
-import { getNewsRemote } from '$lib/news.remote'
+import { getNewsSectionPrerender } from '$lib/news.remote'
 
-const query = getNewsRemote({
-	fields: ['id', 'title', 'publishedAt', 'thumbnail', 'content'],
-	limit: 3,
-	offset: 0,
-})
+const newsPromise = getNewsSectionPrerender()
 
 let currentIndex = $state(0)
 let previousIndex = $state(-1)
@@ -48,47 +44,51 @@ function truncate(text: string, maxLength: number): string {
 			<h2 class="text-large font-gothic-bold">PICK UP</h2>
 			<p class="sub-heading">Check it UP!</p>
 
-			{#if query.error}
-				<p class="no-news-message">ニュースが取得できません</p>
-			{:else if query.loading}
+			{#await newsPromise}
 				<p>Loading...</p>
-			{:else if !query.current || query.current.length === 0}
+			{:then newsItems}
+				{#if !newsItems || newsItems.length === 0}
+					<p class="no-news-message">ニュースが取得できません</p>
+				{:else}
+					<div class="article-info-container">
+						{#each newsItems as item, index (item.id)}
+							<div
+								class="article-info"
+								class:active={currentIndex === index}
+								class:exiting={previousIndex === index}
+							>
+								<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
+								<h3 class="article-title">{item.title ?? ''}</h3>
+								<p class="article-description">
+									{item.content ? truncate(stripHtml(item.content), 100) : ''}
+								</p>
+							</div>
+						{/each}
+					</div>
+					<NewsLink
+						href={`/news/${newsItems[currentIndex].id}`}
+						textContent="VIEW NOTE"
+					/>
+				{/if}
+			{:catch}
 				<p class="no-news-message">ニュースが取得できません</p>
-			{:else}
-				<div class="article-info-container">
-					{#each query.current as item, index (item.id)}
-						<div
-							class="article-info"
-							class:active={currentIndex === index}
-							class:exiting={previousIndex === index}
-						>
-							<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
-							<h3 class="article-title">{item.title ?? ''}</h3>
-							<p class="article-description">
-								{item.content ? truncate(stripHtml(item.content), 100) : ''}
-							</p>
-						</div>
-					{/each}
-				</div>
-				<NewsLink
-					href={`/news/${query.current[currentIndex].id}`}
-					textContent="VIEW NOTE"
-				/>
-			{/if}
+			{/await}
 		</div>
 		<div class="carousel">
-			{#if query.error}
-				<p class="no-news-message">ニュースが取得できません</p>
-			{:else if query.loading}
+			{#await newsPromise}
 				<p>Loading...</p>
-			{:else if !query.current || query.current.length === 0}
+			{:then newsItems}
+				{#if !newsItems || newsItems.length === 0}
+					<p class="no-news-message">ニュースが取得できません</p>
+				{:else}
+					<NewsCarousel
+						items={newsItems}
+						bind:currentIndex
+					/>
+				{/if}
+			{:catch}
 				<p class="no-news-message">ニュースが取得できません</p>
-			{:else}
-				<NewsCarousel
-					items={query.current}
-					bind:currentIndex
-				/>
-			{/if}
+			{/await}
 		</div>
 	</div>
 </section>

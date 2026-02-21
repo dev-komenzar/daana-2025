@@ -3,31 +3,36 @@ import type { NewsItem } from '$lib/cms'
 
 import NewsCardSkeleton from '$lib/components/ui/news-card-skeleton.svelte'
 import NewsCard from '$lib/components/ui/news-card.svelte'
-import { getNewsRemote, getNewsTotalCountRemote } from '$lib/news.remote'
+import { getNewsListPrerender, getNewsRemote, getNewsTotalCountPrerender } from '$lib/news.remote'
 
 const ITEMS_PER_PAGE = 10
 
-// Initial load - same pattern as section-news.svelte
-const query = getNewsRemote({
-	fields: ['id', 'title', 'publishedAt', 'thumbnail'],
-	limit: ITEMS_PER_PAGE,
-	offset: 0,
-})
+// Initial load - prerender版を使用
+const initialNewsPromise = getNewsListPrerender()
+const totalCountPromise = getNewsTotalCountPrerender()
 
-// Get total count
-const totalCountQuery = getNewsTotalCountRemote()
-
+let initialNewsItems = $state<NewsItem[]>([])
+let totalCount = $state<number>(0)
 let allNewsItems = $state<NewsItem[]>([])
 let isLoadingMore = $state(false)
+let isInitialized = $state(false)
+
+// 初期データの読み込み完了を待って状態を設定
+$effect(() => {
+	if (!isInitialized) {
+		Promise.all([initialNewsPromise, totalCountPromise]).then(([news, count]) => {
+			initialNewsItems = news
+			totalCount = count
+			isInitialized = true
+		})
+	}
+})
 
 // Track if there are more items to load based on totalCount
 const hasMoreItems = $derived(() => {
-	if (query.loading || query.error) return false
-	if (!query.current) return false
-	if (totalCountQuery.loading || totalCountQuery.error || !totalCountQuery.current) return false
-
-	const currentItemCount = allNewsItems.length > 0 ? allNewsItems.length : query.current.length
-	return currentItemCount < totalCountQuery.current
+	if (!isInitialized) return false
+	const currentItemCount = allNewsItems.length > 0 ? allNewsItems.length : initialNewsItems.length
+	return currentItemCount < totalCount
 })
 
 // Merge initial query results with loaded items
@@ -35,7 +40,7 @@ const displayedItems = $derived(() => {
 	if (allNewsItems.length > 0) {
 		return allNewsItems
 	}
-	return query.current || []
+	return initialNewsItems
 })
 
 async function loadMore() {
@@ -54,7 +59,7 @@ async function loadMore() {
 
 		if (moreNews && moreNews.length > 0) {
 			// Merge initial items with new items
-			allNewsItems = allNewsItems.length === 0 && query.current ? [...query.current, ...moreNews] : [...allNewsItems, ...moreNews]
+			allNewsItems = allNewsItems.length === 0 ? [...initialNewsItems, ...moreNews] : [...allNewsItems, ...moreNews]
 		}
 	} catch (error) {
 		console.error('Failed to load more news:', error)
@@ -71,39 +76,41 @@ async function loadMore() {
 			<p class="page-subtitle">お知らせ一覧</p>
 		</header>
 
-		{#if query.error}
-			<div class="error-message">
-				<p>ニュースの読み込みに失敗しました。</p>
-			</div>
-		{:else if query.loading}
+		{#await Promise.all([initialNewsPromise, totalCountPromise])}
 			<div class="news-grid">
 				{#each [0, 1, 2] as index (index)}
 					<NewsCardSkeleton />
 				{/each}
 			</div>
-		{:else if displayedItems().length === 0}
-			<div class="empty-message">
-				<p>まだニュースがありません。</p>
-			</div>
-		{:else}
-			<div class="news-grid">
-				{#each displayedItems() as item (item.id)}
-					<NewsCard {item} />
-				{/each}
-			</div>
-
-			{#if hasMoreItems()}
-				<div class="load-more-container">
-					<button
-						class="load-more-button"
-						onclick={loadMore}
-						disabled={isLoadingMore}
-					>
-						{isLoadingMore ? '読み込み中...' : 'さらに読み込む'}
-					</button>
+		{:then}
+			{#if displayedItems().length === 0}
+				<div class="empty-message">
+					<p>まだニュースがありません。</p>
 				</div>
+			{:else}
+				<div class="news-grid">
+					{#each displayedItems() as item (item.id)}
+						<NewsCard {item} />
+					{/each}
+				</div>
+
+				{#if hasMoreItems()}
+					<div class="load-more-container">
+						<button
+							class="load-more-button"
+							onclick={loadMore}
+							disabled={isLoadingMore}
+						>
+							{isLoadingMore ? '読み込み中...' : 'さらに読み込む'}
+						</button>
+					</div>
+				{/if}
 			{/if}
-		{/if}
+		{:catch}
+			<div class="error-message">
+				<p>ニュースの読み込みに失敗しました。</p>
+			</div>
+		{/await}
 	</div>
 </div>
 
