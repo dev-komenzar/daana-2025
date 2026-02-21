@@ -1,7 +1,7 @@
 <script lang="ts">
 import { resolve } from '$app/paths'
 
-const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4mQvkGNrdDcYXxBxw893GTe9WRjS4tQ/viewform?usp=publish-editor'
+const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLrcqyE6cODMMKL1clXQarhLaV0Yel9w/viewform?usp=dialog'
 </script>
 
 <div class="cta-group">
