@@ -15,7 +15,7 @@ const isExternal = typeof href === 'string' && (href.startsWith('http://') || hr
 </script>
 
 <a
-	href={resolve(href as Pathname)}
+	href={isExternal ? href : resolve(href as Pathname)}
 	target={isExternal ? '_blank' : undefined}
 	rel={isExternal ? 'noopener noreferrer' : undefined}
 	class={className}
