@@ -16,6 +16,9 @@
           buildInputs = with pkgs; [
             nodejs_22
             nodePackages.pnpm
+            # sharp dependencies
+            vips
+            pkg-config
           ];
 
           shellHook = ''
@@ -23,6 +26,11 @@
             echo "Node.js: $(node --version)"
             echo "pnpm: $(pnpm --version)"
           '';
+
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+            pkgs.stdenv.cc.cc.lib
+            pkgs.vips
+          ];
         };
       }
     );
