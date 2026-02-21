@@ -45,7 +45,7 @@ function truncate(text: string, maxLength: number): string {
 >
 	<div class="wide-content news">
 		<div class="news-header">
-			<h2 class="text-large font-gothic-bold">NEWS</h2>
+			<h2 class="text-large font-gothic-bold">PICK UP</h2>
 			<p class="sub-heading">Check it UP!</p>
 
 			{#if query.error}
