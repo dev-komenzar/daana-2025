@@ -5,6 +5,8 @@ import Button from '$lib/assets/footer/donation-button.png'
 import JbaLogo from '$lib/assets/jba-black.png'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
+
+const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLrcqyE6cODMMKL1clXQarhLaV0Yel9w/viewform?usp=dialog'
 </script>
 
 <footer class="footer">
@@ -76,8 +78,10 @@ import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 				use:floatUp
 			>
 				<a
-					href="mailto:info@houdouji.inc"
+					href={FORM_LINK}
 					class="contact-link"
+					target="_blank"
+					rel="noopener noreferrer"
 				>
 					<svg
 						class="mail-icon"
