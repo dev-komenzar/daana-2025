@@ -1,7 +1,10 @@
+import type { Pathname } from '$app/types'
+
 export type Director = {
 	/** 所属・肩書き（例: "東京大学東洋文化研究所・教授"） */
 	affiliation: string
 	bio: string
+	href?: Pathname
 	imageUrl?: string
 	name: string
 	/** 氏名（ローマ字） */

@@ -1,10 +1,12 @@
 <script lang="ts">
 import type { Director } from '$lib/typing.d.ts'
 
+import { resolve } from '$app/paths'
 import { floatUp } from '$lib/actions'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
+import Link from '$lib/components/ui/link.svelte'
 
-let { affiliation, bio, imageUrl, name, nameRomaji, position, reversed = false }: Director = $props()
+let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = false }: Director = $props()
 </script>
 
 <div class={['member-card', reversed && 'reversed']}>
@@ -29,6 +31,18 @@ let { affiliation, bio, imageUrl, name, nameRomaji, position, reversed = false }
 		<p class="name-romaji">{nameRomaji}</p>
 		<p class="affiliation">{affiliation}</p>
 		<p class="bio">{bio}</p>
+
+		{#if href}
+			<div
+				class="link"
+				use:floatUp
+			>
+				<Link
+					href={resolve(href)}
+					textContent="VIEW MORE"
+				/>
+			</div>
+		{/if}
 	</div>
 </div>
 
@@ -107,6 +121,10 @@ let { affiliation, bio, imageUrl, name, nameRomaji, position, reversed = false }
 	line-height: 24px;
 	color: #000;
 	letter-spacing: 0.06em;
+}
+
+.link {
+	margin-top: 44px;
 }
 
 @media (width >= 1024px) {
