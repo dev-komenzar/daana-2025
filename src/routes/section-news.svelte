@@ -93,10 +93,10 @@ function truncate(text: string, maxLength: number): string {
 			{/await}
 		</div>
 	</div>
-	<div class="wide-content">
+	<div class="wide-content link-button">
 		<NewsLink
 			href="/news"
-			textContent="VIEW NOTE"
+			textContent="VIEW ALL"
 		/>
 	</div>
 </section>
@@ -128,7 +128,7 @@ function truncate(text: string, maxLength: number): string {
 
 .article-info-container {
 	position: relative;
-	height: 200px;
+	height: 150px;
 	margin-top: 31px;
 	/* 子要素(.article-info)がposition: absoluteのため、
 	   width: 100%を継承させるには親に明示的な幅が必要 */
@@ -172,6 +172,7 @@ function truncate(text: string, maxLength: number): string {
 	line-height: 28px;
 	letter-spacing: 0.08em;
 	-webkit-box-orient: vertical;
+	width: 400px;
 	max-width: calc(100vw - var(--wide-content-space) * 2);
 }
 
@@ -201,6 +202,10 @@ function truncate(text: string, maxLength: number): string {
 
 .carousel {
 	width: 100%;
+}
+
+.link-button {
+	margin-top: 44px;
 }
 
 @media screen and (width >= 768px) {
