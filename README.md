@@ -47,6 +47,45 @@ Googleフォントからダウンロードしたフォントを`static/fonts/`�
 }
 ```
 
+## News モジュール（DDD構造）
+
+ニュース機能はドメイン駆動設計（DDD）の原則に基づいて`src/lib/news/`に構成されています。
+
+### ディレクトリ構造
+
+```
+src/lib/news/
+├── domain/           # ビジネスロジックの中核
+│   ├── schema.ts     # NewsItemSchema, 型定義
+│   ├── repository.ts # INewsRepositoryインターフェース
+│   └── index.ts
+├── infra/            # 外部サービスとの通信
+│   ├── client.ts     # microCMS用HTTPクライアント
+│   ├── repository.ts # INewsRepository実装
+│   └── index.ts
+├── app/              # ユースケース。外部から利用するときはここからインポートする
+│   ├── get-news.ts
+│   ├── get-news-post.ts
+│   ├── get-news-total-count.ts
+│   ├── get-pinned-news.ts
+│   └── index.ts
+├── news.remote.ts    # SvelteKitリモート関数
+└── index.ts          # 公開API
+```
+
+### 使用方法
+
+```typescript
+// 型定義（クライアント/サーバー両方で使用可能）
+import type { NewsItem } from '$lib/news'
+
+// リモート関数（コンポーネントから）
+import { getNewsSectionPrerender, getPinnedNewsPrerender } from '$lib/news/news.remote'
+
+// サーバーサイドのみ（+page.server.tsなど）
+import { getNewsPost } from '$lib/news/app'
+```
+
 ## アニメーション
 
 ### floatUp アクション

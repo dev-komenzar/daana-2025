@@ -74,9 +74,11 @@ src/
 │   │   ├── layout/      # Layout components (header, opening-layer)
 │   │   └── ui/          # Reusable UI components (modal, cards)
 │   ├── assets/          # Static assets
-│   ├── cms.ts           # microCMS client and schema definitions
-│   ├── client.ts        # ky HTTP client configuration with microCMS headers
-│   └── news.remote.ts   # Remote function for news fetching
+│   └── news/            # News module (DDD structure)
+│       ├── domain/      # Business logic core
+│       ├── infra/       # External service communication
+│       ├── app/         # Use cases
+│       └── news.remote.ts # SvelteKit remote functions
 └── routes/
     ├── +page.svelte     # Homepage
     ├── +layout.svelte   # Root layout
@@ -85,21 +87,51 @@ src/
 
 ### Data Fetching Architecture
 
-The project uses **SvelteKit Remote Functions** for type-safe server-client data fetching:
+The project uses **SvelteKit Remote Functions** for type-safe server-client data fetching, organized in a **Domain-Driven Design (DDD)** structure:
 
-1. **HTTP Client** (`src/lib/client.ts`): Configured ky instance with microCMS API credentials from environment variables (`MICROCMS_API_KEY`)
+#### News Module (`src/lib/news/`)
 
-2. **Schema & API Layer** (`src/lib/cms.ts`):
-   - Defines `NewsItemSchema` using valibot
-   - Exports `getNewsAsync()` function for fetching news from microCMS
-   - Handles validation and error logging with consola
+```
+src/lib/news/
+├── domain/           # Business logic core
+│   ├── schema.ts     # NewsItemSchema, type definitions
+│   ├── repository.ts # INewsRepository interface
+│   └── index.ts
+├── infra/            # External service communication
+│   ├── client.ts     # ky HTTP client for microCMS
+│   ├── repository.ts # INewsRepository implementation
+│   └── index.ts
+├── app/              # Use cases
+│   ├── get-news.ts
+│   ├── get-news-post.ts
+│   ├── get-news-total-count.ts
+│   ├── get-pinned-news.ts
+│   └── index.ts
+├── news.remote.ts    # SvelteKit remote functions
+└── index.ts          # Public API
+```
 
-3. **Remote Function** (`src/lib/news.remote.ts`):
-   - Uses `query()` from `$app/server` to create type-safe remote functions
-   - Validates input parameters with valibot
-   - Wraps `getNewsAsync()` for client-side consumption
+#### Layer Responsibilities
 
-4. **Component Usage**: Call `getNewsRemote()` from client components to fetch data
+1. **Domain Layer** (`domain/`): Schema definitions with valibot, repository interface, pure TypeScript types
+2. **Infrastructure Layer** (`infra/`): microCMS HTTP client, repository implementation with API calls
+3. **Application Layer** (`app/`): Use case functions that orchestrate domain and infra
+4. **Remote Functions** (`news.remote.ts`): SvelteKit `prerender()` and `query()` for client-server communication
+
+#### Usage Patterns
+
+```typescript
+// Type definitions (client/server)
+import type { NewsItem } from '$lib/news'
+
+// Remote functions (from components)
+import { getNewsSectionPrerender, getPinnedNewsPrerender } from '$lib/news/news.remote'
+
+// Server-side only (+page.server.ts)
+import { getNewsPost } from '$lib/news/app'
+```
+
+**Important**: Remote function files must have `.remote` in the filename to work in subdirectories
 
 ### Environment Variables
 

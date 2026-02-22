@@ -2,7 +2,10 @@
 import { resolve } from '$app/paths'
 import NewsCarousel from '$lib/components/ui/news-carousel.svelte'
 import NewsLink from '$lib/components/ui/news-link.svelte'
-import { getNewsSectionPrerender } from '$lib/news.remote'
+import { getNewsSectionPrerender } from '$lib/news/news.remote'
+import { stripHtml, truncate } from '$lib/utils/description'
+
+import PinnedNews from './pinned-news.svelte'
 
 const newsPromise = getNewsSectionPrerender()
 
@@ -24,15 +27,6 @@ function formatDate(isoDate: string): string {
 	const month = String(date.getMonth() + 1).padStart(2, '0')
 	const day = String(date.getDate()).padStart(2, '0')
 	return `${year}.${month}.${day}`
-}
-
-function stripHtml(html: string): string {
-	return html.replaceAll(/<[^>]*>/g, '')
-}
-
-function truncate(text: string, maxLength: number): string {
-	if (text.length <= maxLength) return text
-	return text.slice(0, maxLength) + '...'
 }
 </script>
 
@@ -99,6 +93,8 @@ function truncate(text: string, maxLength: number): string {
 			textContent="VIEW ALL"
 		/>
 	</div>
+
+	<PinnedNews />
 </section>
 
 <style>

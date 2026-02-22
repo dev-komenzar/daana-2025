@@ -1,4 +1,4 @@
-import { getNewsPost } from '$lib/cms'
+import { getNewsPost } from '$lib/news/app'
 import { error } from '@sveltejs/kit'
 
 import type { PageServerLoad } from './$types'

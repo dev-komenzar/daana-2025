@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { NewsItem } from '$lib/cms'
+import type { NewsItem } from '$lib/news'
 
 import NewsCardSkeleton from '$lib/components/ui/news-card-skeleton.svelte'
 import NewsCard from '$lib/components/ui/news-card.svelte'
-import { getNewsListPrerender, getNewsRemote, getNewsTotalCountPrerender } from '$lib/news.remote'
+import { getNewsListPrerender, getNewsRemote, getNewsTotalCountPrerender } from '$lib/news/news.remote'
 
 const ITEMS_PER_PAGE = 10
 

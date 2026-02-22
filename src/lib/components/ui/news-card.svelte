@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { NewsItem } from '$lib/cms'
+import type { NewsItem } from '$lib/news'
 
 import { resolve } from '$app/paths'
 
