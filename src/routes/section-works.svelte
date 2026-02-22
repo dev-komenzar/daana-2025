@@ -70,7 +70,7 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4m
 		</div>
 	</div>
 
-	<div class="">
+	<div class="container">
 		<div class="wide-content">
 			<h3 use:floatUp>「実装」領域</h3>
 			<p
@@ -106,7 +106,8 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4m
 				/>
 			</div>
 		</div>
-
+	</div>
+	<div class="container-bg-colored">
 		<div class="full-content">
 			<WorksOutreach />
 		</div>
