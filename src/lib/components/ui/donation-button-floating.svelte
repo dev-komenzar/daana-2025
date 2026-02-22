@@ -38,6 +38,7 @@ let { menuOpen = false }: { menuOpen?: boolean } = $props()
 	color: #fff;
 	text-decoration: none;
 	background-color: var(--color-primary);
+	border: 1px solid rgb(192 235 245 / 50%);
 	border-radius: 30px;
 	box-shadow:
 		0 4px 12px rgb(0 0 0 / 15%),
