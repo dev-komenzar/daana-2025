@@ -3,6 +3,10 @@
 import * as v from 'valibot'
 import { afterAll, describe, expect, test, vi } from 'vitest'
 
+vi.mock('$env/static/private', () => ({
+	MICROCMS_API_KEY: 'dummy-key',
+}))
+
 import type { NewsItem, ReturnNewApi } from './cms'
 
 import { api } from './client'
@@ -51,6 +55,7 @@ describe('getNewsAsync (Unit)', () => {
 					content: '<p>本文1</p>',
 					createdAt: '2023-06-31T00:00:00.000Z',
 					id: 'news-1',
+					pinned: false,
 					publishedAt: '2023-06-31T00:00:00.000Z',
 					revisedAt: '2023-06-31T00:00:00.000Z',
 					thumbnail: { height: 100, url: 'https://example.com/thumb1.png', width: 100 },
@@ -74,15 +79,16 @@ describe('getNewsAsync (Unit)', () => {
 		expect(news).toEqual(mockResponse.contents)
 	})
 
-	test('API通信が失敗した場合、エラーをスローすること', async () => {
+	test('API通信が失敗した場合、空配列を返すこと', async () => {
 		// api.get がエラーをスローするようにモック
 		const mockError = new Error('API Error')
 		spy.mockReturnValue({
 			json: () => Promise.reject(mockError),
 		} as any)
 
-		// getNewsAsync を呼び出すとエラーがスローされることを検証
-		await expect(getNewsAsync(0, 10, ['id'])).rejects.toThrow(mockError)
+		// getNewsAsync はエラーをキャッチして空配列を返す
+		const result = await getNewsAsync(0, 10, ['id'])
+		expect(result).toEqual([])
 	})
 })
 

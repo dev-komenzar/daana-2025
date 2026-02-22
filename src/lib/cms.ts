@@ -9,6 +9,7 @@ export const NewsItemSchema = v.object({
 	content: v.optional(v.string()),
 	createdAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
 	id: v.string(),
+	pinned: v.optional(v.boolean()),
 	publishedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
 	revisedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
 	thumbnail: v.optional(
