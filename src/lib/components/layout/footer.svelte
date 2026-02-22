@@ -20,7 +20,7 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLr
 				class="donation-text"
 				use:floatUp
 			>
-				「寄付」というアクションを
+				「寄付」というご参与を
 				<br />
 				あなたの力が我々の動力です
 			</p>
