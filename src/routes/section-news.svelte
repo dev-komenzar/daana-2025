@@ -1,4 +1,5 @@
 <script lang="ts">
+import { resolve } from '$app/paths'
 import NewsCarousel from '$lib/components/ui/news-carousel.svelte'
 import NewsLink from '$lib/components/ui/news-link.svelte'
 import { getNewsSectionPrerender } from '$lib/news.remote'
@@ -58,17 +59,18 @@ function truncate(text: string, maxLength: number): string {
 								class:exiting={previousIndex === index}
 							>
 								<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
-								<h3 class="article-title">{item.title ?? ''}</h3>
-								<p class="article-description">
-									{item.content ? truncate(stripHtml(item.content), 100) : ''}
-								</p>
+								<a
+									href={resolve(`/news/${item.id}`)}
+									class="article-link"
+								>
+									<h3 class="article-title">{item.title ?? ''}</h3>
+									<p class="article-description">
+										{item.content ? truncate(stripHtml(item.content), 100) : ''}
+									</p>
+								</a>
 							</div>
 						{/each}
 					</div>
-					<NewsLink
-						href={`/news/${newsItems[currentIndex].id}`}
-						textContent="VIEW NOTE"
-					/>
 				{/if}
 			{:catch}
 				<p class="no-news-message">ニュースが取得できません</p>
@@ -90,6 +92,12 @@ function truncate(text: string, maxLength: number): string {
 				<p class="no-news-message">ニュースが取得できません</p>
 			{/await}
 		</div>
+	</div>
+	<div class="wide-content">
+		<NewsLink
+			href="/news"
+			textContent="VIEW NOTE"
+		/>
 	</div>
 </section>
 
@@ -179,6 +187,16 @@ function truncate(text: string, maxLength: number): string {
 	line-height: 19px;
 	letter-spacing: 0.08em;
 	-webkit-box-orient: vertical;
+}
+
+.article-link {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.article-link:hover {
+	opacity: 0.7;
 }
 
 .carousel {
