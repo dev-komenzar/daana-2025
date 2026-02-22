@@ -122,6 +122,9 @@ function truncate(text: string, maxLength: number): string {
 	position: relative;
 	height: 200px;
 	margin-top: 31px;
+	/* 子要素(.article-info)がposition: absoluteのため、
+	   width: 100%を継承させるには親に明示的な幅が必要 */
+	width: 100%;
 }
 
 .article-info {
@@ -130,6 +133,7 @@ function truncate(text: string, maxLength: number): string {
 	left: 0;
 	opacity: 0;
 	transition: opacity 0.4s ease;
+	width: 100%;
 }
 
 .article-info.active {
@@ -147,6 +151,7 @@ function truncate(text: string, maxLength: number): string {
 	line-height: 16px;
 	color: #3c87c0;
 	letter-spacing: 0.02em;
+	max-width: calc(100vw - var(--wide-content-space) * 2);
 }
 
 .article-title {
@@ -159,11 +164,13 @@ function truncate(text: string, maxLength: number): string {
 	line-height: 28px;
 	letter-spacing: 0.08em;
 	-webkit-box-orient: vertical;
+	max-width: calc(100vw - var(--wide-content-space) * 2);
 }
 
 .article-description {
 	display: -webkit-box;
 	width: 360px;
+	max-width: calc(100vw - var(--wide-content-space) * 2);
 	overflow: hidden;
 	-webkit-line-clamp: 4;
 	line-clamp: 4;
