@@ -5,6 +5,8 @@ import Footer from '$lib/components/layout/footer.svelte'
 import Header from '$lib/components/layout/header.svelte'
 import DonationButtonFloating from '$lib/components/ui/donation-button-floating.svelte'
 import { SITE_FULL_URL } from '$lib/constants'
+import { loadFontPlusScript } from '$lib/utils/font-loader'
+import { onMount } from 'svelte'
 import { MetaTags } from 'svelte-meta-tags'
 
 import '../app.css'
@@ -12,11 +14,16 @@ import '../app.css'
 let { children } = $props()
 
 let isMenuOpen = $state(false)
-</script>
 
-<svelte:head>
-	<script src="https://webfont.fontplus.jp/accessor/script/fontplus.js?hQIULW9VvKs%3D&box=opQCTPJIssU%3D&aa=1&ab=2"></script>
-</svelte:head>
+const FONTPLUS_URL = 'https://webfont.fontplus.jp/accessor/script/fontplus.js?hQIULW9VvKs%3D&box=opQCTPJIssU%3D&aa=1&ab=2'
+
+onMount(() => {
+	loadFontPlusScript({
+		src: FONTPLUS_URL,
+		timeout: 10_000,
+	})
+})
+</script>
 
 <Favicon />
 
