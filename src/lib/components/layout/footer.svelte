@@ -1,7 +1,7 @@
 <script lang="ts">
 import { resolve } from '$app/paths'
 import { floatUp } from '$lib/actions'
-import Button from '$lib/assets/footer/donation-button.png'
+import Button from '$lib/assets/footer/donation_button_2.png'
 import JbaLogo from '$lib/assets/jba-black.png'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
