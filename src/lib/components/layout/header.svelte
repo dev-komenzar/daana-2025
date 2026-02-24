@@ -75,17 +75,8 @@ function handleKeydown(event: KeyboardEvent) {
 			/>
 		</a>
 
-		<!-- Mobile: Contact button and hamburger menu -->
+		<!-- Mobile: hamburger menu -->
 		<div class="mobile-controls">
-			<button
-				class="contact-button"
-				aria-label="お問い合わせ"
-			>
-				<img
-					src={HeaderIcon}
-					alt="お問合せフォーム"
-				/>
-			</button>
 			<button
 				class="hamburger-button"
 				onclick={openMenu}
@@ -134,34 +125,10 @@ function handleKeydown(event: KeyboardEvent) {
 				class="contact-button"
 				aria-label="お問い合わせ"
 			>
-				<svg
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<circle
-						cx="12"
-						cy="12"
-						r="11"
-						stroke="currentColor"
-						stroke-width="2"
-					/>
-					<path
-						d="M6 8L12 13L18 8"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-					<path
-						d="M6 16H18"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-					/>
-				</svg>
+				<img
+					src={HeaderIcon}
+					alt="お問合せフォーム"
+				/>
 			</button>
 			<button
 				class="close-button"
@@ -249,11 +216,6 @@ function handleKeydown(event: KeyboardEvent) {
 	transition: opacity 0.2s;
 }
 
-.contact-button svg {
-	width: 28px;
-	height: 28px;
-}
-
 .contact-button:hover {
 	opacity: 0.7;
 }
@@ -320,7 +282,7 @@ function handleKeydown(event: KeyboardEvent) {
 	width: 100%;
 	height: 100vh;
 	overflow-y: auto;
-	background: #566f8f;
+	background: var(--color-primary);
 	opacity: 0;
 	transition:
 		opacity 0.3s ease,
@@ -376,13 +338,9 @@ function handleKeydown(event: KeyboardEvent) {
 	opacity: 0.7;
 }
 
-.menu-overlay .contact-button {
-	color: #fff;
-}
-
-.menu-overlay .contact-button svg {
-	width: 28px;
-	height: 28px;
+.menu-overlay .contact-button img {
+	border: 1px solid #fff;
+	border-radius: 50%;
 }
 
 .menu-nav {
