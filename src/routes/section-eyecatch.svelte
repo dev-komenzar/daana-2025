@@ -7,8 +7,7 @@
 >
 	<div class="hero-container eyecatch-container">
 		<div class="eyecatch-content">
-			<p class="eyecatch-meta">OUR MISSION</p>
-			<h1 class="eyecatch-title">「仏教かもしれない」</h1>
+			<h1 class="eyecatch-title">Implement a Buddha’s Praxis</h1>
 
 			<p class="eyecatch-description">
 				宗教や伝統文化としてではない、純粋な「思想・哲学」としての仏教は、<br />
@@ -40,14 +39,6 @@
 
 .eyecatch-content {
 	max-width: 800px;
-}
-
-.eyecatch-meta {
-	margin-bottom: 32px;
-	font-family: var(--font-heading-bold);
-	font-size: 36px;
-	line-height: 44px;
-	letter-spacing: -0.01em;
 }
 
 .eyecatch-title {

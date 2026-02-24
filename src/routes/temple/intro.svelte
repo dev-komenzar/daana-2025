@@ -55,7 +55,7 @@ import { floatUp } from '$lib/actions'
 		class="body"
 		use:floatUp
 	>
-		過剰な権威や厳めしい伝統、組織の論理など纏わない軽やかな「仏教思想の拠点」
+		過剰な権威や厳めしい伝統、組織の論理など纏わない軽やかな「ひとづくりの拠点」
 	</p>
 	<p
 		class="body"
