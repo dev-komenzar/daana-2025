@@ -1,5 +1,6 @@
 <script lang="ts">
 import { floatUp } from '$lib/actions'
+import ScrollIndicator from '$lib/components/ui/scroll-indicator.svelte'
 </script>
 
 <section
@@ -34,14 +35,16 @@ import { floatUp } from '$lib/actions'
 			</p>
 		</div>
 	</div>
+	<ScrollIndicator targetSectionId="mission" />
 </section>
 
 <style>
 .eyecatch-section {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100lvh;
+	min-height: calc(100lvh - 180px); /* 矢印(60px) + bottom offset(120px) をカバー */
 	padding: var(--space-16) 0;
 }
 
@@ -83,6 +86,10 @@ import { floatUp } from '$lib/actions'
 }
 
 @media screen and (width >= 768px) {
+	.eyecatch-section {
+		min-height: calc(100lvh - 120px); /* 矢印(60px) + bottom offset(60px) をカバー */
+	}
+
 	.eyecatch-description br {
 		display: inline;
 	}
