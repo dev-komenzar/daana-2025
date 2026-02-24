@@ -1,4 +1,5 @@
 <script lang="ts">
+import { floatUp } from '$lib/actions'
 </script>
 
 <section
@@ -7,14 +8,25 @@
 >
 	<div class="hero-container eyecatch-container">
 		<div class="eyecatch-content">
-			<h1 class="eyecatch-title">Implement a Buddha’s Praxis</h1>
+			<h1
+				class="eyecatch-title"
+				use:floatUp
+			>
+				Implement a Buddha’s Praxis
+			</h1>
 
-			<p class="eyecatch-description">
+			<p
+				class="eyecatch-description"
+				use:floatUp
+			>
 				宗教や伝統文化としてではない、純粋な「思想・哲学」としての仏教は、<br />
 				最もフラットで論理破綻のない、人類のOSとしての最高到達地点ではないか？<br />
 				次の時代の人類哲学は「仏教かもしれない」
 			</p>
-			<p class="eyecatch-description">
+			<p
+				class="eyecatch-description"
+				use:floatUp
+			>
 				長い歴史と、文化的な経緯によって「宗教」の衣を纏い<br />
 				「使いにくくなってしまった」仏教思想を、もう一度「普遍的な人類の哲学」に戻す。<br />
 				原題の人類社会に、使いやすいものへと橋を渡す。<br />
@@ -35,6 +47,7 @@
 
 .eyecatch-container {
 	z-index: 1;
+	padding: 0 var(--wide-content-space);
 }
 
 .eyecatch-content {
@@ -57,9 +70,21 @@
 	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0.06em;
+	text-align: left;
 }
 
 .eyecatch-description + .eyecatch-description {
 	margin: 30px 0 0;
+}
+
+/* モバイルでは改行を非表示 */
+.eyecatch-description br {
+	display: none;
+}
+
+@media screen and (width >= 768px) {
+	.eyecatch-description br {
+		display: inline;
+	}
 }
 </style>
