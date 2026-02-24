@@ -59,6 +59,8 @@ onMount(() => {
 	height: auto;
 	color: white;
 	background-color: var(--color-primary);
+	background-image: url('$lib/assets/mission-bg.jpg');
+	background-size: cover;
 	will-change: transform;
 }
 
