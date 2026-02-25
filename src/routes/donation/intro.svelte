@@ -19,10 +19,11 @@
 
 <style>
 .container {
-	height: calc(90lvh - 76px);
+	min-height: calc(90lvh - 76px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding-bottom: 80px;
 }
 
 h1 {
@@ -37,5 +38,11 @@ p {
 	font-size: 13px;
 	line-height: 22px;
 	letter-spacing: 0.06em;
+}
+
+@media screen and (width >= 1024px) {
+	.container {
+		padding-bottom: 0;
+	}
 }
 </style>

@@ -43,6 +43,7 @@ import Tabs from './tabs.svelte'
 <style>
 .container {
 	background-color: hsl(214 16% 91% / 58%);
+	padding-bottom: 200px;
 }
 
 h2 {
