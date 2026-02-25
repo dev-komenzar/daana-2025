@@ -71,6 +71,11 @@ h3 {
 .inquiry {
 	display: block;
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
+	transition: transform 0.2s ease-in;
+}
+
+.inquiry:hover {
+	transform: translateY(-4px);
 }
 
 p + .inquiry {

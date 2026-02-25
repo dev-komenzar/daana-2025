@@ -63,6 +63,14 @@ p {
 	justify-content: center;
 }
 
+.button-wrapper a {
+	transition: transform 0.2s ease-in;
+}
+
+.button-wrapper a:hover {
+	transform: translateY(-4px);
+}
+
 p + .button-wrapper {
 	margin-top: 40px;
 }

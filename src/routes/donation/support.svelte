@@ -3,6 +3,7 @@ import Bequest from './bequest.svelte'
 import CreditCard from './credit-card.svelte'
 import Projects from './projects.svelte'
 import Tabs from './tabs.svelte'
+import Wishlist from './wishlist.svelte'
 </script>
 
 {#snippet labelBasic()}基本の<wbr />ご寄付{/snippet}
@@ -21,6 +22,10 @@ import Tabs from './tabs.svelte'
 			]}
 			{contents}
 		/>
+	</div>
+
+	<div class="wide-content wishlist">
+		<Wishlist />
 	</div>
 </section>
 
@@ -64,6 +69,10 @@ h2 {
 	padding-bottom: 60px;
 	padding-left: 4%;
 	padding-right: 4%;
+}
+
+.wishlist {
+	margin-top: 200px;
 }
 
 @media screen and (width >= 768px) {
