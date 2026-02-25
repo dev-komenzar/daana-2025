@@ -31,6 +31,13 @@ onMount(() => {
 	title="日本仏教徒協会"
 	description="仏教の社会実装のために新しい挑戦をするお寺・寳幢（ほうどう）寺のウェブサイトです。"
 	canonical={SITE_FULL_URL}
+	robots="index, follow"
+	additionalRobotsProps={{
+		maxImagePreview: 'large',
+		maxSnippet: -1,
+		maxVideoPreview: -1,
+		noarchive: true,
+	}}
 	openGraph={{
 		description: '仏教の社会実装のために新しい挑戦をするお寺・寳幢（ほうどう）寺のウェブサイトです。',
 		images: [
