@@ -20,7 +20,7 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 		>
 		<p use:floatUp>所在：京都府京都市</p>
 		<p use:floatUp>西陣織の会社・工場跡地をお借りして運営</p>
-		<p use:floatUp>本尊：仏舎利如意宝珠・不動明王座像</p>
+		<p use:floatUp>本尊：釈迦如来座像・不動明王座像</p>
 		<p
 			class="space-top"
 			use:floatUp
