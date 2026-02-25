@@ -1,19 +1,21 @@
 <script lang="ts">
 import Tabs from './tabs.svelte'
-
-const tabs = [
-	{ color: 'orange' as const, id: 'basic', label: '基本のご寄付' },
-	{ color: 'blue' as const, id: 'project', label: 'プロジェクトへのご寄付' },
-	{ color: 'mint' as const, id: 'legacy', label: '遺贈寄付など' },
-]
 </script>
+
+{#snippet labelBasic()}基本の<wbr />ご寄付{/snippet}
+{#snippet labelProject()}プロジェクト<br />へのご寄付{/snippet}
+{#snippet labelLegacy()}遺贈寄付<wbr />など{/snippet}
 
 <section class="container">
 	<div class="wide-content">
 		<h2>お気持ちにあった支援方法をお選びください</h2>
 
 		<Tabs
-			{tabs}
+			tabs={[
+				{ color: 'orange' as const, id: 'basic', label: labelBasic },
+				{ color: 'blue' as const, id: 'project', label: labelProject },
+				{ color: 'mint' as const, id: 'legacy', label: labelLegacy },
+			]}
 			{contents}
 		/>
 	</div>

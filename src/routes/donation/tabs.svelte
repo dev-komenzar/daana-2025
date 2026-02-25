@@ -4,7 +4,7 @@ import type { Snippet } from 'svelte'
 interface Tab {
 	color: 'blue' | 'mint' | 'orange'
 	id: string
-	label: string
+	label: Snippet
 }
 
 interface Properties {
@@ -118,7 +118,7 @@ function handleKeydown(event: KeyboardEvent, index: number) {
 							</svg>
 						{/if}
 					</span>
-					<span class="tab-label">{tab.label}</span>
+					<span class="tab-label">{@render tab.label()}</span>
 				</span>
 			</button>
 		{/each}
@@ -245,8 +245,8 @@ function handleKeydown(event: KeyboardEvent, index: number) {
 	font-size: 14px;
 	line-height: 1.4;
 	text-align: center;
-	white-space: nowrap;
 	color: #000;
+	word-break: keep-all;
 }
 
 @media screen and (width >= 768px) {
