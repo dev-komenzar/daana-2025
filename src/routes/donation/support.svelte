@@ -1,5 +1,7 @@
 <script lang="ts">
+import Bequest from './bequest.svelte'
 import CreditCard from './credit-card.svelte'
+import Projects from './projects.svelte'
 import Tabs from './tabs.svelte'
 </script>
 
@@ -29,13 +31,11 @@ import Tabs from './tabs.svelte'
 		</div>
 	{:else if tabId === 'project'}
 		<div class="tab-content-inner">
-			<h3>プロジェクトへのご寄付</h3>
-			<p>特定のプロジェクトへのご支援をお考えの方はこちらをご覧ください。</p>
+			<Projects />
 		</div>
 	{:else if tabId === 'legacy'}
 		<div class="tab-content-inner">
-			<h3>遺贈寄付など</h3>
-			<p>遺贈寄付やその他の支援方法についてはこちらをご覧ください。</p>
+			<Bequest />
 		</div>
 	{/if}
 {/snippet}
@@ -59,11 +59,18 @@ h2 {
 .tab-content-inner {
 	text-align: center;
 	background-color: white;
-	padding-top: 160px;
+	padding-top: 60px;
 	padding-bottom: 60px;
+	padding-left: 4%;
+	padding-right: 4%;
 }
 
 @media screen and (width >= 768px) {
+	.tab-content-inner {
+		padding-top: 160px;
+		padding-left: 45px;
+		padding-right: 45px;
+	}
 	.tab-content-inner h3 {
 		font-size: 28px;
 	}
