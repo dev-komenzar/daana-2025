@@ -1,4 +1,5 @@
 <script lang="ts">
+import CreditCard from './credit-card.svelte'
 import Tabs from './tabs.svelte'
 </script>
 
@@ -24,9 +25,7 @@ import Tabs from './tabs.svelte'
 {#snippet contents(tabId: string)}
 	{#if tabId === 'basic'}
 		<div class="tab-content-inner">
-			<h3>クレジットカード、口座振替</h3>
-			<p>日本仏教徒協会の活動にご参与頂ける方は、まずはこちらの「基本のご寄付」からご参加下さい。</p>
-			<p>リンク先から「毎月の定額寄付」と「1回毎の寄付」がお選び頂けます。</p>
+			<CreditCard />
 		</div>
 	{:else if tabId === 'project'}
 		<div class="tab-content-inner">
@@ -62,23 +61,6 @@ h2 {
 	background-color: white;
 	padding-top: 160px;
 	padding-bottom: 60px;
-}
-
-.tab-content-inner h3 {
-	font-family: var(--font-body-bold);
-	font-size: 24px;
-	line-height: 1.6;
-	margin-bottom: 24px;
-}
-
-.tab-content-inner p {
-	font-size: 14px;
-	line-height: 1.8;
-	color: #333;
-}
-
-.tab-content-inner p + p {
-	margin-top: 12px;
 }
 
 @media screen and (width >= 768px) {
