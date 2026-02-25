@@ -246,3 +246,30 @@ Use the `floatUp` Svelte action for scroll-triggered "floating up" animations. T
 | `threshold` | 0.3 | Viewport visibility ratio to trigger (0-1) |
 
 **Important**: When adding scroll animations to new pages, follow the pattern used in `src/routes/interview-ryugen/+page.svelte`.
+
+### Svelte Each Block Keys
+
+Always provide a key expression for `{#each}` blocks to help Svelte efficiently track and update list items:
+
+```svelte
+<!-- Good: with key -->
+{#each items as item (item.id)}
+	<div>{item.name}</div>
+{/each}
+
+<!-- Good: with key and index -->
+{#each items as item, index (item.id)}
+	<div>{index}: {item.name}</div>
+{/each}
+
+<!-- Bad: no key (causes linter warning) -->
+{#each items as item}
+	<div>{item.name}</div>
+{/each}
+```
+
+**Key selection**:
+
+- Use a unique identifier like `id` when available
+- The key must be unique within the list
+- Avoid using array index as the key if items can be reordered or filtered
