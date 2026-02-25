@@ -47,7 +47,6 @@ h3 {
 	justify-content: center;
 	column-gap: 45px;
 	width: 100%;
-	padding: 40px 4%;
 }
 
 .image-wrapper {
@@ -86,7 +85,7 @@ p + .inquiry {
 		justify-content: center;
 		column-gap: 45px;
 		width: 100%;
-		padding: 40px 45px;
+		padding-top: 40px;
 	}
 
 	.image-wrapper {

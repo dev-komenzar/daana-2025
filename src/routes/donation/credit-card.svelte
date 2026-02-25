@@ -77,23 +77,43 @@ p + .button-wrapper {
 
 .footer {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	column-gap: 38px;
+	row-gap: 38px;
 }
+
 .congrant-wrapper {
-	width: 150px;
-	height: 32px;
+	width: 70%;
+	height: auto;
 }
 
 .congrant-description {
-	width: 50%;
+	width: 100%;
 	font-size: 12px;
 	font-family: var(--font-body);
 }
 
 .congrant-description a {
 	color: #0088ff;
+}
+
+@media screen and (width >= 1024px) {
+	.footer {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		column-gap: 38px;
+	}
+
+	.congrant-wrapper {
+		width: 150px;
+		height: 32px;
+	}
+
+	.congrant-description {
+		width: 50%;
+	}
 }
 </style>
