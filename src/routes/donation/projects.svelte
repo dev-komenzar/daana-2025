@@ -1,16 +1,14 @@
 <script lang="ts">
 import type { ProjectItem } from '$lib/projects'
 
-import { getProjectsPrerender } from '$lib/projects/projects.remote'
+let { projects }: { projects: ProjectItem[] } = $props()
 
-const projectsPromise = getProjectsPrerender()
-
-function groupProjectsByType(projects: ProjectItem[]) {
+function groupProjectsByType(projectsList: ProjectItem[]) {
 	const hitoProjects: ProjectItem[] = []
 	const monoProjects: ProjectItem[] = []
 	const otherProjects: ProjectItem[] = []
 
-	for (const project of projects) {
+	for (const project of projectsList) {
 		if (project.type?.includes('hito')) {
 			hitoProjects.push(project)
 		} else if (project.type?.includes('mono')) {
@@ -22,75 +20,69 @@ function groupProjectsByType(projects: ProjectItem[]) {
 
 	return { hitoProjects, monoProjects, otherProjects }
 }
+
+const grouped = $derived(groupProjectsByType(projects))
 </script>
 
 <h3>プロジェクトへのご寄付</h3>
 <p>特定のプロジェクトへのご支援をお考えの方はこちらをご覧ください。</p>
 
-{#await projectsPromise}
-	<p class="loading">読み込み中...</p>
-{:then projects}
-	{@const { hitoProjects, monoProjects, otherProjects } = groupProjectsByType(projects)}
+{#if grouped.hitoProjects.length > 0}
+	<div class="project-group">
+		<h4>ひと（人）へのご寄付</h4>
+		<ul class="project-list">
+			{#each grouped.hitoProjects as project (project.id)}
+				<li>
+					<a
+						href={project.projectLink}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{project.title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
 
-	{#if hitoProjects.length > 0}
-		<div class="project-group">
-			<h4>ひと（人）へのご寄付</h4>
-			<ul class="project-list">
-				{#each hitoProjects as project (project.id)}
-					<li>
-						<a
-							href={project.projectLink}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{project.title}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	{/if}
+{#if grouped.monoProjects.length > 0}
+	<div class="project-group">
+		<h4>もの（物）へのご寄付</h4>
+		<ul class="project-list">
+			{#each grouped.monoProjects as project (project.id)}
+				<li>
+					<a
+						href={project.projectLink}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{project.title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
 
-	{#if monoProjects.length > 0}
-		<div class="project-group">
-			<h4>もの（物）へのご寄付</h4>
-			<ul class="project-list">
-				{#each monoProjects as project (project.id)}
-					<li>
-						<a
-							href={project.projectLink}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{project.title}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	{/if}
-
-	{#if otherProjects.length > 0}
-		<div class="project-group">
-			<h4>その他のご寄付</h4>
-			<ul class="project-list">
-				{#each otherProjects as project (project.id)}
-					<li>
-						<a
-							href={project.projectLink}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{project.title}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	{/if}
-{:catch}
-	<p class="error">プロジェクトの読み込みに失敗しました。</p>
-{/await}
+{#if grouped.otherProjects.length > 0}
+	<div class="project-group">
+		<h4>その他のご寄付</h4>
+		<ul class="project-list">
+			{#each grouped.otherProjects as project (project.id)}
+				<li>
+					<a
+						href={project.projectLink}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{project.title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
 
 <style>
 h3 {
@@ -106,15 +98,6 @@ p {
 	line-height: 30px;
 	letter-spacing: 0.08em;
 	color: #333;
-}
-
-.loading,
-.error {
-	padding: 40px 0;
-}
-
-.error {
-	color: #c00;
 }
 
 p + .project-group {

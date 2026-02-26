@@ -1,9 +1,13 @@
 <script lang="ts">
+import type { ProjectItem } from '$lib/projects'
+
 import Bequest from './bequest.svelte'
 import CreditCard from './credit-card.svelte'
 import Projects from './projects.svelte'
 import Tabs from './tabs.svelte'
 import Wishlist from './wishlist.svelte'
+
+let { projects }: { projects: ProjectItem[] } = $props()
 </script>
 
 {#snippet labelBasic()}基本の<wbr />ご寄付{/snippet}
@@ -36,7 +40,7 @@ import Wishlist from './wishlist.svelte'
 		</div>
 	{:else if tabId === 'project'}
 		<div class="tab-content-inner">
-			<Projects />
+			<Projects {projects} />
 		</div>
 	{:else if tabId === 'legacy'}
 		<div class="tab-content-inner">

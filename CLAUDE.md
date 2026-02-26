@@ -62,8 +62,8 @@ npx vitest            # Run tests (vitest is available but no test scripts confi
 
 ### Key SvelteKit Features in Use
 
-- **Async Compiler** (`experimental.async: true` in svelte.config.js)
-- **Remote Functions** (`experimental.remoteFunctions: true`) - Used for server-side data fetching via `query()` from `$app/server`
+- **Server-Side Rendering (SSR)**: All pages are server-rendered by default
+- **Load Functions**: Data fetching via `+page.server.ts` load functions
 
 ### Project Structure
 
@@ -74,20 +74,25 @@ src/
 │   │   ├── layout/      # Layout components (header, opening-layer)
 │   │   └── ui/          # Reusable UI components (modal, cards)
 │   ├── assets/          # Static assets
-│   └── news/            # News module (DDD structure)
+│   ├── news/            # News module (DDD structure)
+│   │   ├── domain/      # Business logic core
+│   │   ├── infra/       # External service communication
+│   │   └── app/         # Use cases
+│   └── projects/        # Projects module (DDD structure)
 │       ├── domain/      # Business logic core
 │       ├── infra/       # External service communication
-│       ├── app/         # Use cases
-│       └── news.remote.ts # SvelteKit remote functions
+│       └── app/         # Use cases
 └── routes/
     ├── +page.svelte     # Homepage
+    ├── +page.server.ts  # Homepage data loading
     ├── +layout.svelte   # Root layout
+    ├── api/news/        # News API endpoint
     └── section-*.svelte # Page sections (mission, works, news, etc.)
 ```
 
 ### Data Fetching Architecture
 
-The project uses **SvelteKit Remote Functions** for type-safe server-client data fetching, organized in a **Domain-Driven Design (DDD)** structure:
+The project uses **SvelteKit Load Functions** for server-side data fetching, organized in a **Domain-Driven Design (DDD)** structure:
 
 #### News Module (`src/lib/news/`)
 
@@ -107,7 +112,6 @@ src/lib/news/
 │   ├── get-news-total-count.ts
 │   ├── get-pinned-news.ts
 │   └── index.ts
-├── news.remote.ts    # SvelteKit remote functions
 └── index.ts          # Public API
 ```
 
@@ -116,7 +120,6 @@ src/lib/news/
 1. **Domain Layer** (`domain/`): Schema definitions with valibot, repository interface, pure TypeScript types
 2. **Infrastructure Layer** (`infra/`): microCMS HTTP client, repository implementation with API calls
 3. **Application Layer** (`app/`): Use case functions that orchestrate domain and infra
-4. **Remote Functions** (`news.remote.ts`): SvelteKit `prerender()` and `query()` for client-server communication
 
 #### Usage Patterns
 
@@ -124,14 +127,21 @@ src/lib/news/
 // Type definitions (client/server)
 import type { NewsItem } from '$lib/news'
 
-// Remote functions (from components)
-import { getNewsSectionPrerender, getPinnedNewsPrerender } from '$lib/news/news.remote'
-
 // Server-side only (+page.server.ts)
-import { getNewsPost } from '$lib/news/app'
+import { getNewsAsync, getPinnedNews } from '$lib/news/app'
+
+// In +page.server.ts
+export const load: PageServerLoad = async () => {
+	const newsItems = await getNewsAsync(0, 10, ['id', 'title', 'publishedAt'])
+	return { newsItems }
+}
 ```
 
-**Important**: Remote function files must have `.remote` in the filename to work in subdirectories
+#### API Endpoints
+
+For client-side dynamic data fetching (e.g., pagination), use API routes:
+
+- `/api/news` - News list with pagination support (offset, limit parameters)
 
 ### Environment Variables
 
@@ -167,7 +177,7 @@ Required environment variable:
 - All routes are organized as section components imported into the main page
 - The project uses Svelte 5's latest features
 - microCMS is used as the headless CMS for content management
-- Remote functions require server-side execution; they cannot run in pure client context
+- Data fetching is done via `+page.server.ts` load functions (SSR)
 
 ### CSS Architecture - Mobile First
 

@@ -1,13 +1,14 @@
 <script lang="ts">
+import type { NewsItem } from '$lib/news'
+
 import { resolve } from '$app/paths'
 import NewsCarousel from '$lib/components/ui/news-carousel.svelte'
 import NewsLink from '$lib/components/ui/news-link.svelte'
-import { getNewsSectionPrerender } from '$lib/news/news.remote'
 import { stripHtml, truncate } from '$lib/utils/description'
 
 import PinnedNews from './pinned-news.svelte'
 
-const newsPromise = getNewsSectionPrerender()
+let { newsItems, pinnedNewsItems }: { newsItems: NewsItem[]; pinnedNewsItems: NewsItem[] } = $props()
 
 let currentIndex = $state(0)
 let previousIndex = $state(-1)
@@ -39,52 +40,40 @@ function formatDate(isoDate: string): string {
 			<h2 class="text-large font-gothic-bold">PICK UP</h2>
 			<p class="sub-heading">Check it UP!</p>
 
-			{#await newsPromise}
-				<p>Loading...</p>
-			{:then newsItems}
-				{#if !newsItems || newsItems.length === 0}
-					<p class="no-news-message">ニュースが取得できません</p>
-				{:else}
-					<div class="article-info-container">
-						{#each newsItems as item, index (item.id)}
-							<div
-								class="article-info"
-								class:active={currentIndex === index}
-								class:exiting={previousIndex === index}
-							>
-								<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
-								<a
-									href={resolve(`/news/${item.id}`)}
-									class="article-link"
-								>
-									<h3 class="article-title">{item.title ?? ''}</h3>
-									<p class="article-description">
-										{item.content ? truncate(stripHtml(item.content), 100) : ''}
-									</p>
-								</a>
-							</div>
-						{/each}
-					</div>
-				{/if}
-			{:catch}
+			{#if !newsItems || newsItems.length === 0}
 				<p class="no-news-message">ニュースが取得できません</p>
-			{/await}
+			{:else}
+				<div class="article-info-container">
+					{#each newsItems as item, index (item.id)}
+						<div
+							class="article-info"
+							class:active={currentIndex === index}
+							class:exiting={previousIndex === index}
+						>
+							<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
+							<a
+								href={resolve(`/news/${item.id}`)}
+								class="article-link"
+							>
+								<h3 class="article-title">{item.title ?? ''}</h3>
+								<p class="article-description">
+									{item.content ? truncate(stripHtml(item.content), 100) : ''}
+								</p>
+							</a>
+						</div>
+					{/each}
+				</div>
+			{/if}
 		</div>
 		<div class="carousel">
-			{#await newsPromise}
-				<p>Loading...</p>
-			{:then newsItems}
-				{#if !newsItems || newsItems.length === 0}
-					<p class="no-news-message">ニュースが取得できません</p>
-				{:else}
-					<NewsCarousel
-						items={newsItems}
-						bind:currentIndex
-					/>
-				{/if}
-			{:catch}
+			{#if !newsItems || newsItems.length === 0}
 				<p class="no-news-message">ニュースが取得できません</p>
-			{/await}
+			{:else}
+				<NewsCarousel
+					items={newsItems}
+					bind:currentIndex
+				/>
+			{/if}
 		</div>
 	</div>
 	<div class="wide-content link-button">
@@ -94,7 +83,7 @@ function formatDate(isoDate: string): string {
 		/>
 	</div>
 
-	<PinnedNews />
+	<PinnedNews {pinnedNewsItems} />
 </section>
 
 <style>

@@ -1,63 +1,58 @@
 <script lang="ts">
-import { getPinnedNewsPrerender } from '$lib/news/news.remote'
+import type { NewsItem } from '$lib/news'
+
 import { stripHtml, truncate } from '$lib/utils/description'
 
-const newsPromise = getPinnedNewsPrerender()
+let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 </script>
 
 <div class="full-content">
-	{#await newsPromise}
-		<p>Loading...</p>
-	{:then newsItems}
-		{#each newsItems as item (item.id)}
-			{#if item.content}
-				{@const description = truncate(stripHtml(item.content), 35)}
-				<div class="row">
-					<div class="article-info">
-						<div class="date">{item.publishedAt}</div>
-						<div class="article-title">{item.title}</div>
-						<div class="article-description">{description}</div>
-					</div>
-
-					{#if item.thumbnail && item.thumbnail.url}
-						<div class="image-wrapper">
-							<svg
-								class="icon"
-								width="34"
-								height="34"
-								viewBox="0 0 34 34"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<circle
-									cx="17"
-									cy="17"
-									r="16.25"
-									fill="white"
-									stroke="black"
-									stroke-width="1.5"
-								/>
-								<path
-									d="M16.7356 10.2585C17.0871 9.91383 17.6579 9.91383 18.0094 10.2585L23.7364 15.876C24.0879 16.2206 24.0879 16.7794 23.7364 17.124L18.0094 22.7415C17.6579 23.0862 17.0871 23.0862 16.7356 22.7415C16.3841 22.3968 16.3841 21.837 16.7356 21.4923L20.9274 17.3826H9.9C9.40295 17.3826 9 16.9875 9 16.5C9 16.0125 9.40295 15.6174 9.9 15.6174H20.9274L16.7356 11.5077C16.3841 11.163 16.3841 10.6032 16.7356 10.2585Z"
-									fill="black"
-								/>
-							</svg>
-
-							<img
-								src={item.thumbnail.url}
-								alt={description}
-								class="thumbnail"
-							/>
-						</div>
-					{/if}
+	{#each pinnedNewsItems as item (item.id)}
+		{#if item.content}
+			{@const description = truncate(stripHtml(item.content), 35)}
+			<div class="row">
+				<div class="article-info">
+					<div class="date">{item.publishedAt}</div>
+					<div class="article-title">{item.title}</div>
+					<div class="article-description">{description}</div>
 				</div>
-			{:else}
-				<p>本文がありません。</p>
-			{/if}
-		{/each}
-	{:catch}
-		<p>ニュースが取得できません</p>
-	{/await}
+
+				{#if item.thumbnail && item.thumbnail.url}
+					<div class="image-wrapper">
+						<svg
+							class="icon"
+							width="34"
+							height="34"
+							viewBox="0 0 34 34"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<circle
+								cx="17"
+								cy="17"
+								r="16.25"
+								fill="white"
+								stroke="black"
+								stroke-width="1.5"
+							/>
+							<path
+								d="M16.7356 10.2585C17.0871 9.91383 17.6579 9.91383 18.0094 10.2585L23.7364 15.876C24.0879 16.2206 24.0879 16.7794 23.7364 17.124L18.0094 22.7415C17.6579 23.0862 17.0871 23.0862 16.7356 22.7415C16.3841 22.3968 16.3841 21.837 16.7356 21.4923L20.9274 17.3826H9.9C9.40295 17.3826 9 16.9875 9 16.5C9 16.0125 9.40295 15.6174 9.9 15.6174H20.9274L16.7356 11.5077C16.3841 11.163 16.3841 10.6032 16.7356 10.2585Z"
+								fill="black"
+							/>
+						</svg>
+
+						<img
+							src={item.thumbnail.url}
+							alt={description}
+							class="thumbnail"
+						/>
+					</div>
+				{/if}
+			</div>
+		{:else}
+			<p>本文がありません。</p>
+		{/if}
+	{/each}
 </div>
 
 <style>
