@@ -1,5 +1,3 @@
-import { animate } from 'motion/mini'
-
 /**
  * scrollIndicator アクションのオプション
  */
@@ -14,6 +12,8 @@ export interface ScrollIndicatorOptions {
  * スクロール誘導インジケーター用Svelteアクション。
  * バウンスアニメーションと、ターゲットセクションとの重なりに応じた色分割を実装。
  *
+ * CSSアニメーションを使用してページ遷移時のエラーを回避。
+ *
  * @example
  * <div use:scrollIndicator={{ targetSectionId: 'mission', whiteLayer }}>
  */
@@ -22,32 +22,30 @@ export function scrollIndicator(node: HTMLElement, options: ScrollIndicatorOptio
 
 	node.style.willChange = 'transform'
 
-	// バウンスアニメーション（落下→バウンド→停止→持ち上げループ）
-	// より細かくリアルな物理的バウンスを再現（移動距離: 20px）
-	const bounceAnimation = animate(
-		node,
-		{
-			transform: [
-				'translateY(0px)', // 開始位置
-				'translateY(20px)', // 落下（加速）
-				'translateY(3px)', // 1回目バウンス（大きく跳ね返る）
-				'translateY(20px)', // 再落下
-				'translateY(9px)', // 2回目バウンス（中程度）
-				'translateY(20px)', // 再落下
-				'translateY(14px)', // 3回目バウンス（小さく）
-				'translateY(20px)', // 最終落下
-				'translateY(17px)', // 微小バウンス
-				'translateY(20px)', // 着地・静止
-				'translateY(20px)', // 静止維持
-				'translateY(0px)', // 持ち上げ（ループ準備）
-			],
-		},
-		{
-			duration: 3.5,
-			ease: [0.4, 0, 0.2, 1], // カスタムイージング（落下は速く、バウンスは緩やかに）
-			repeat: Infinity,
-		},
-	)
+	// CSSアニメーションでバウンス効果を実現
+	// キーフレームを動的に作成
+	const keyframeName = `bounce-${Math.random().toString(36).slice(2, 9)}`
+	const styleSheet = document.createElement('style')
+	styleSheet.textContent = `
+		@keyframes ${keyframeName} {
+			0% { transform: translateY(0px); }
+			5.7% { transform: translateY(20px); }
+			11.4% { transform: translateY(3px); }
+			17.1% { transform: translateY(20px); }
+			22.8% { transform: translateY(9px); }
+			28.5% { transform: translateY(20px); }
+			34.2% { transform: translateY(14px); }
+			40% { transform: translateY(20px); }
+			45.7% { transform: translateY(17px); }
+			51.4% { transform: translateY(20px); }
+			80% { transform: translateY(20px); }
+			100% { transform: translateY(0px); }
+		}
+	`
+	document.head.append(styleSheet)
+
+	// アニメーションを適用
+	node.style.animation = `${keyframeName} 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite`
 
 	// requestAnimationFrameで常に白い矢印のclip-pathを更新
 	// バウンスアニメーション中も位置が変わるため、毎フレーム更新が必要
@@ -80,7 +78,9 @@ export function scrollIndicator(node: HTMLElement, options: ScrollIndicatorOptio
 		destroy() {
 			isRunning = false
 			cancelAnimationFrame(animationFrameId)
-			bounceAnimation.stop()
+			// CSSアニメーションを停止（スタイルシートを削除）
+			styleSheet.remove()
+			node.style.animation = ''
 			node.style.willChange = ''
 		},
 	}

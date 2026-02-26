@@ -1,6 +1,5 @@
 <script lang="ts">
 import { floatUp } from '$lib/actions'
-import { scroll } from 'motion'
 import { onMount } from 'svelte'
 
 let missionSection: HTMLElement
@@ -12,23 +11,49 @@ onMount(() => {
 	// 初期スケールを0.6に設定
 	missionSection.style.scale = '0.6'
 
-	// スクロール連動アニメーション
-	const stopScroll = scroll(
-		(progress: number) => {
-			// progress: 0（下端に見え始め）→ 1（中央到達）
-			// easeOutQuartを適用してscale: 0.6 → 1 に変換
-			const easedProgress = easeOutQuart(progress)
-			const scale = 0.6 + easedProgress * 0.4
-			missionSection.style.scale = String(scale)
-		},
-		{
-			offset: ['start end', 'center center'],
-			target: missionSection,
-		},
-	)
+	let isDestroyed = false
+	let rafId: number
+
+	// スクロール連動アニメーション（ネイティブ実装）
+	const updateScale = () => {
+		if (isDestroyed || !missionSection.isConnected) return
+
+		const rect = missionSection.getBoundingClientRect()
+		const windowHeight = window.innerHeight
+
+		// progress: 0（下端に見え始め）→ 1（中央到達）
+		// "start end" = 要素の上端がビューポートの下端にあるとき progress = 0
+		// "center center" = 要素の中央がビューポートの中央にあるとき progress = 1
+		const elementTop = rect.top
+		const viewportCenter = windowHeight / 2
+
+		// 計算: 要素上端がビューポート下端にある時 -> progress = 0
+		//       要素中央がビューポート中央にある時 -> progress = 1
+		const startPosition = windowHeight // 要素上端がビューポート下端
+		const endPosition = viewportCenter - rect.height / 2 // 要素中央がビューポート中央
+
+		let progress = 0
+		if (elementTop < startPosition && elementTop > endPosition) {
+			progress = (startPosition - elementTop) / (startPosition - endPosition)
+		} else if (elementTop <= endPosition) {
+			progress = 1
+		}
+
+		progress = Math.max(0, Math.min(1, progress))
+
+		// easeOutQuartを適用してscale: 0.6 → 1 に変換
+		const easedProgress = easeOutQuart(progress)
+		const scale = 0.6 + easedProgress * 0.4
+		missionSection.style.scale = String(scale)
+
+		rafId = requestAnimationFrame(updateScale)
+	}
+
+	updateScale()
 
 	return () => {
-		stopScroll()
+		isDestroyed = true
+		cancelAnimationFrame(rafId)
 	}
 })
 </script>

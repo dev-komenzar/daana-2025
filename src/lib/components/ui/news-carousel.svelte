@@ -34,6 +34,9 @@ function stopAutoSlide() {
 }
 
 function goToNext() {
+	// コンポーネント破棄時やナビゲーション中に items が undefined になる可能性があるためガード
+	if (!items || items.length === 0) return
+
 	previousIndex = currentIndex
 	currentIndex = (currentIndex + 1) % items.length
 }

@@ -2,8 +2,6 @@
 import type { Pathname } from '$app/types'
 
 import { floatUp } from '$lib/actions'
-import { spring } from 'motion'
-import { animate } from 'motion/mini'
 
 type Properties = {
 	isLabelReversed?: boolean
@@ -20,12 +18,15 @@ let labelBoxElement: HTMLDivElement
 
 function handleMouseEnter() {
 	if (!labelBoxElement) return
-	animate(labelBoxElement, { scale: 1.02 }, { bounce: 0.4, duration: 0.6, type: spring })
+	// CSSトランジションでスケール効果を実現
+	labelBoxElement.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'
+	labelBoxElement.style.transform = 'scale(1.02)'
 }
 
 function handleMouseLeave() {
 	if (!labelBoxElement) return
-	animate(labelBoxElement, { scale: 1 }, { bounce: 0.3, duration: 0.5, type: spring })
+	labelBoxElement.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1)'
+	labelBoxElement.style.transform = 'scale(1)'
 }
 </script>
 
