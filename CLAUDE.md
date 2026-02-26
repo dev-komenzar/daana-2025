@@ -22,6 +22,15 @@ pnpm build            # Build for production
 pnpm preview          # Preview production build
 ```
 
+**Important**: Before starting a preview server, check for existing processes and kill them first to avoid port conflicts:
+
+```bash
+# Check for existing preview/dev processes
+lsof -i :4173 -i :5173
+
+# Kill existing processes if needed before starting new ones
+```
+
 ### Type Checking
 
 ```bash
