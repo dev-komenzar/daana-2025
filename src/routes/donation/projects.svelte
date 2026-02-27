@@ -1,88 +1,67 @@
 <script lang="ts">
-import type { ProjectItem } from '$lib/projects'
+import { resolve } from '$app/paths'
+import ProjectHito from '$lib/assets/donation/project_hito-c.jpg'
+import ProjectMono from '$lib/assets/donation/project_mono-c.jpg'
+import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 
-let { projects }: { projects: ProjectItem[] } = $props()
+import DonationButton from './button.svelte'
 
-function groupProjectsByType(projectsList: ProjectItem[]) {
-	const hitoProjects: ProjectItem[] = []
-	const monoProjects: ProjectItem[] = []
-	const otherProjects: ProjectItem[] = []
-
-	for (const project of projectsList) {
-		if (project.type?.includes('hito')) {
-			hitoProjects.push(project)
-		} else if (project.type?.includes('mono')) {
-			monoProjects.push(project)
-		} else {
-			otherProjects.push(project)
-		}
-	}
-
-	return { hitoProjects, monoProjects, otherProjects }
-}
-
-const grouped = $derived(groupProjectsByType(projects))
+const newsHito = resolve('/news/xphu-2h7lj')
+const newsMono = resolve('/news/xgalyh9t8t')
 </script>
 
 <h3>プロジェクトへのご寄付</h3>
-<p>特定のプロジェクトへのご支援をお考えの方はこちらをご覧ください。</p>
+<p>当協会は様々な取り組みを企画しております。</p>
+<p>ご興味に合わせた「プロジェクトベース」のご寄付をお選び頂けます。</p>
 
-{#if grouped.hitoProjects.length > 0}
-	<div class="project-group">
-		<h4>ひと（人）へのご寄付</h4>
-		<ul class="project-list">
-			{#each grouped.hitoProjects as project (project.id)}
-				<li>
-					<a
-						href={project.projectLink}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{project.title}
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</div>
-{/if}
+<div class="subheading">
+	<h4>「ひと」に関わる<wbr />プロジェクト</h4>
+</div>
 
-{#if grouped.monoProjects.length > 0}
-	<div class="project-group">
-		<h4>もの（物）へのご寄付</h4>
-		<ul class="project-list">
-			{#each grouped.monoProjects as project (project.id)}
-				<li>
-					<a
-						href={project.projectLink}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{project.title}
-					</a>
-				</li>
-			{/each}
-		</ul>
+<div class="wrapper">
+	<div class="image-wrapper">
+		<EnhancedImage
+			src={ProjectHito}
+			alt="「ひと」に関わるプロジェクト"
+		/>
 	</div>
-{/if}
+	<div class="description">
+		<p>日本仏教徒協会は「未来を担うひとづくり」を行います。学校などではカバーできない「生き方・あり方」を地道に、確実に届けるための仕組み作りに取り組んでいます。</p>
+		<p>「人間社会はそこに生きる人により、人のあり方はその人の考え方による」釈迦牟尼や弘法大師の説かれた真理です。まずは「ひとづくり」、その核心は「思想・哲学」にある。是非、我々のプロジェクトにご参画くださいませ。</p>
+	</div>
+</div>
 
-{#if grouped.otherProjects.length > 0}
-	<div class="project-group">
-		<h4>その他のご寄付</h4>
-		<ul class="project-list">
-			{#each grouped.otherProjects as project (project.id)}
-				<li>
-					<a
-						href={project.projectLink}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{project.title}
-					</a>
-				</li>
-			{/each}
-		</ul>
+<div class="button-wrapper">
+	<DonationButton
+		href={newsHito}
+		label="ご寄付はこちらから"
+	/>
+</div>
+
+<div class="subheading">
+	<h4>「場所・もの」に関わる<wbr />プロジェクト</h4>
+</div>
+
+<div class="wrapper">
+	<div class="image-wrapper">
+		<EnhancedImage
+			src={ProjectMono}
+			alt="「もの」に関わるプロジェクト"
+		/>
 	</div>
-{/if}
+	<div class="description">
+		<p>ひとが学び、育つために「場の力」は不可欠です。「学びの場」を欠いて「よきひとづくり」はできません。</p>
+		<p>古来「寺院や神殿」のような、日常から区切られた「聖なる場」は「思想・哲学の学び舎」でした。そして精神性を形にした彫刻や美術は、「ただ、そこにある」ことで、人々の心を育てました。</p>
+		<p>我々は「寺院」を、観光や歴史遺産としてではなく「いまに即した実用の場」として創っていきます。「博物館のガラスケースの向こう側」ではなく「未来に向けたひとづくりの現場」として、現代の精神を形にする事業にご参画頂けませんか？</p>
+	</div>
+</div>
+
+<div class="button-wrapper">
+	<DonationButton
+		href={newsMono}
+		label="ご寄付はこちらから"
+	/>
+</div>
 
 <style>
 h3 {
@@ -100,54 +79,59 @@ p {
 	letter-spacing: 0.08em;
 }
 
-p + .project-group {
-	margin-top: 40px;
+p + .subheading {
+	margin-top: 100px;
 }
 
-.project-group + .project-group {
-	margin-top: 32px;
+.subheading {
+	background-color: #16212f;
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 }
 
 h4 {
-	margin-bottom: 16px;
 	font-family: var(--font-body-bold);
 	font-size: 18px;
-	line-height: 1.6;
-	color: #333;
+	line-height: 30px;
+	letter-spacing: 0.08em;
+	color: white;
+	word-break: keep-all;
 }
 
-.project-list {
-	padding: 0;
-	margin: 0;
-	list-style: none;
+.subheading + .wrapper {
+	margin-top: 37px;
 }
 
-.project-list li + li {
-	margin-top: 12px;
+.description {
+	text-align: left;
 }
 
-.project-list a {
-	display: inline-block;
-	font-family: var(--font-body);
-	font-size: 16px;
-	line-height: 1.6;
-	color: #08f;
-	text-decoration: none;
-	transition: opacity 0.2s;
+.image-wrapper + .description {
+	margin-top: 40px;
 }
 
-.project-list a:hover {
-	text-decoration: underline;
-	opacity: 0.7;
+.button-wrapper {
+	margin-top: 54px;
 }
 
-@media screen and (width >= 768px) {
-	h4 {
-		font-size: 20px;
+.button-wrapper + .subheading {
+	margin-top: 200px;
+}
+
+@media screen and (width >= 1024px) {
+	.wrapper {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
 	}
 
-	.project-list a {
-		font-size: 18px;
+	.image-wrapper + .description {
+		margin-top: 0px;
 	}
 }
 </style>
