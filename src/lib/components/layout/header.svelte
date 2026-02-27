@@ -40,6 +40,12 @@ const MenuItems: HeaderMenuItem[] = [
 		key: 'pick-up',
 		label: 'pick up',
 	},
+	{
+		href: '/news/7bfa480blq',
+		isExternal: false,
+		key: 'faq',
+		label: 'FAQ',
+	},
 ] as const
 
 let { isMenuOpen = $bindable(false) }: { isMenuOpen?: boolean } = $props()
@@ -154,7 +160,7 @@ function handleKeydown(event: KeyboardEvent) {
 	</div>
 
 	<nav class="menu-nav">
-		{#each MenuItems.filter(item => ['donate', 'mission', 'news', 'works'].includes(item.key)) as item, index (item.key)}
+		{#each MenuItems as item, index (item.key)}
 			<a
 				href={item.href}
 				class="menu-item"
