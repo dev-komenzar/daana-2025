@@ -1,26 +1,21 @@
 <script lang="ts">
-import Button from '$lib/assets/donation/button.png'
 import Congrant from '$lib/assets/donation/congrant_logo_primary.png'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 
+import DonationButton from './button.svelte'
+
 const BASIC_DONATION = 'https://congrant.com/project/jba/16919'
+const WISHLIST = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_share'
 </script>
 
 <h3>クレジットカード、口座振替</h3>
 <p>日本仏教徒協会の活動にご参与頂ける方は、まずはこちらの「基本のご寄付」からご参加下さい。</p>
 <p>リンク先から「毎月の定額寄付」と「1回毎の寄付」がお選び頂けます。</p>
 <div class="button-wrapper">
-	<a
+	<DonationButton
 		href={BASIC_DONATION}
-		target="_blank"
-		rel="noopener noreferrer"
-	>
-		<EnhancedImage
-			src={Button}
-			alt="寄付ボタン"
-			class="donation-button"
-		/>
-	</a>
+		label="ご寄付はこちらから"
+	/>
 </div>
 <div class="footer">
 	<div class="congrant-wrapper">
@@ -40,21 +35,33 @@ const BASIC_DONATION = 'https://congrant.com/project/jba/16919'
 		</a>
 	</p>
 </div>
+<div class="devider">
+	<span class="devider-bar"></span>
+</div>
+<h3>物品のご寄付</h3>
+<p>法会や修行などで使われる供物や、必要な備品などを掲載しております。</p>
+<p>Amazonのウィッシュリストから直接ご寄付頂くことが出来ます。</p>
+<div class="button-wrapper">
+	<DonationButton
+		href={WISHLIST}
+		label="WISHLISTを見る"
+	/>
+</div>
 
 <style>
 h3 {
+	margin-bottom: 24px;
 	font-family: var(--font-body-bold);
 	font-size: 24px;
 	line-height: 1.6;
-	margin-bottom: 24px;
 }
 
 p {
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 30px;
-	letter-spacing: 0.08em;
 	color: #333;
+	letter-spacing: 0.08em;
 }
 
 .button-wrapper {
@@ -63,20 +70,12 @@ p {
 	justify-content: center;
 }
 
-.button-wrapper a {
-	transition: transform 0.2s ease-in;
-}
-
-.button-wrapper a:hover {
-	transform: translateY(-4px);
-}
-
 p + .button-wrapper {
 	margin-top: 40px;
 }
 
 :global(.donation-button) {
-	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
+	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 40%));
 }
 
 .button-wrapper + .footer {
@@ -86,9 +85,9 @@ p + .button-wrapper {
 .footer {
 	display: flex;
 	flex-direction: column;
+	row-gap: 38px;
 	align-items: center;
 	justify-content: center;
-	row-gap: 38px;
 }
 
 .congrant-wrapper {
@@ -98,21 +97,39 @@ p + .button-wrapper {
 
 .congrant-description {
 	width: 100%;
-	font-size: 12px;
 	font-family: var(--font-body);
+	font-size: 12px;
 }
 
 .congrant-description a {
-	color: #0088ff;
+	color: #08f;
+}
+
+.devider {
+	margin-top: 100px;
+	margin-bottom: 100px;
+
+	width: 100%;
+	height: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.devider-bar {
+	display: block;
+	width: 88px;
+	height: 2px;
+	background-color: #1e1e1e;
 }
 
 @media screen and (width >= 1024px) {
 	.footer {
 		display: flex;
 		flex-direction: row;
+		column-gap: 38px;
 		align-items: center;
 		justify-content: center;
-		column-gap: 38px;
 	}
 
 	.congrant-wrapper {
