@@ -5,6 +5,7 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import DonationButton from './button.svelte'
 
 const BASIC_DONATION = 'https://congrant.com/project/jba/16919'
+const UPDATE_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScm_SF-Qd-5PgeBt7fN1hsSbscRfWSZn9d30a2PgeaDkTNtHg/viewform'
 const WISHLIST = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_share'
 </script>
 
@@ -16,6 +17,12 @@ const WISHLIST = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_
 		href={BASIC_DONATION}
 		label="ご寄付はこちらから"
 	/>
+	<a
+		class="update-form"
+		href={UPDATE_FORM}
+		target="_blank"
+		rel="noopner noreferrer">カード情報・プランの更新はこちら</a
+	>
 </div>
 <div class="footer">
 	<div class="congrant-wrapper">
@@ -66,8 +73,17 @@ p {
 
 .button-wrapper {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.update-form {
+	margin-top: 20px;
+	font-family: var(--font-body-light);
+	font-size: 13px;
+	letter-spacing: 0.08em;
+	color: #333;
 }
 
 p + .button-wrapper {
