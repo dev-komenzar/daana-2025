@@ -1,5 +1,6 @@
 <script lang="ts">
 import Ogp from '$lib/assets/ogp.png'
+import Analytics from '$lib/components/layout/analytics.svelte'
 import Favicon from '$lib/components/layout/favicon.svelte'
 import Footer from '$lib/components/layout/footer.svelte'
 import Header from '$lib/components/layout/header.svelte'
@@ -25,6 +26,7 @@ onMount(() => {
 })
 </script>
 
+<Analytics />
 <Favicon />
 
 <MetaTags
