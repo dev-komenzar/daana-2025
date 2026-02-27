@@ -9,7 +9,7 @@ const UPDATE_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScm_SF-Qd-5PgeBt7f
 const WISHLIST = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_share'
 </script>
 
-<h3>クレジットカード、口座振替</h3>
+<h3>オンライン決済、銀行振込</h3>
 <p>日本仏教徒協会の活動にご参与頂ける方は、まずはこちらの「基本のご寄付」からご参加下さい。</p>
 <p>リンク先から「毎月の定額寄付」と「1回毎の寄付」がお選び頂けます。</p>
 <div class="button-wrapper">
@@ -32,7 +32,7 @@ const WISHLIST = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_
 		/>
 	</div>
 	<p class="congrant-description">
-		Congrant (決済システム)より、クレジットカード、Google Pay、Apple Pay、PayPay、Amazon Pay、銀行振込、郵便振替に対応しています。
+		Congrant (決済システム)より、クレジットカード、Google Pay、銀行振込に対応しています。
 		<a
 			href="https://congrant.com/jp/about.html"
 			target="_blank"
@@ -41,6 +41,12 @@ const WISHLIST = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_
 			＊Congrantとは
 		</a>
 	</p>
+	<p>銀行口座へのお振込み先</p>
+	<div>
+		<p class="bank-info">三菱UFJ銀行 西陣支店</p>
+		<p class="bank-info">普通口座:0179549</p>
+		<p class="bank-info">一般社団法人 日本仏教徒協会</p>
+	</div>
 </div>
 <div class="devider">
 	<span class="devider-bar"></span>
@@ -102,8 +108,8 @@ p + .button-wrapper {
 	display: flex;
 	flex-direction: column;
 	row-gap: 38px;
-	align-items: center;
-	justify-content: center;
+	column-gap: 22px;
+	text-align: left;
 }
 
 .congrant-wrapper {
@@ -119,6 +125,25 @@ p + .button-wrapper {
 
 .congrant-description a {
 	color: #08f;
+}
+
+.footer-congrant + .footer-bank {
+	margin-top: 22px;
+}
+
+.footer-bank {
+	display: flex;
+	flex-direction: column;
+	row-gap: 38px;
+	align-items: center;
+	justify-content: center;
+}
+
+.bank-info {
+	text-align: left;
+	font-family: var(--font-body-light);
+	font-size: 14px;
+	letter-spacing: 0.15em;
 }
 
 .devider {
@@ -141,11 +166,20 @@ p + .button-wrapper {
 
 @media screen and (width >= 1024px) {
 	.footer {
-		display: flex;
-		flex-direction: row;
-		column-gap: 38px;
-		align-items: center;
-		justify-content: center;
+		display: grid;
+		grid-template-columns: 4fr 5fr;
+		row-gap: 38px;
+		column-gap: 22px;
+	}
+
+	/* .footerの子要素 1, 3番目は justify-self: end; */
+	/* 2, 4番目は justify-self: start; */
+	.footer > *:nth-child(odd) {
+		justify-self: end;
+	}
+
+	.footer > *:nth-child(even) {
+		justify-self: start;
 	}
 
 	.congrant-wrapper {
@@ -153,8 +187,16 @@ p + .button-wrapper {
 		height: 32px;
 	}
 
+	.footer-bank {
+		display: flex;
+		flex-direction: row;
+		column-gap: 38px;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.congrant-description {
-		width: 50%;
+		width: 70%;
 	}
 }
 </style>
