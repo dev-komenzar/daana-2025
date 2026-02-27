@@ -73,12 +73,12 @@ const LINK = 'https://www.amazon.co.jp/hz/wishlist/ls/1I838ZANZ4SLQ?ref_=wl_shar
 }
 
 .header-wrapper {
-	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	height: 100%;
 }
 
 .icon {
@@ -92,21 +92,18 @@ h3 {
 	font-family: var(--font-heading-bold);
 	font-size: 20px;
 	line-height: 24px;
-	letter-spacing: 0.06em;
 	color: black;
+	letter-spacing: 0.06em;
 }
 
 .body {
-	width: 100%;
-	background-color: #fff;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding-top: 100px;
-	padding-bottom: 90px;
-	padding-left: 4%;
-	padding-right: 4%;
+	width: 100%;
+	padding: 100px 4% 90px;
+	background-color: #fff;
 }
 
 #wishlist + .body {

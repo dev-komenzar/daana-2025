@@ -69,8 +69,8 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLr
 	font-size: 13px;
 	font-weight: 500;
 	color: #fff;
-	text-decoration: none;
 	white-space: nowrap;
+	text-decoration: none;
 	background-color: var(--color-primary);
 	border-radius: 24px 0 0 24px;
 	transition:

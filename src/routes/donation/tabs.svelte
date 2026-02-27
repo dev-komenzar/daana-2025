@@ -148,15 +148,15 @@ function handleKeydown(event: KeyboardEvent, index: number) {
 }
 
 .tab {
-	flex: 1;
+	position: relative;
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	align-items: center;
 	padding: 0;
+	cursor: pointer;
 	background: #fff;
 	border: none;
-	cursor: pointer;
-	position: relative;
 	transition:
 		background 0.2s ease,
 		color 0.2s ease;
@@ -217,15 +217,15 @@ function handleKeydown(event: KeyboardEvent, index: number) {
 	background: #e8e8e8;
 }
 
-.tab:not(.active):not(:hover) {
+.tab:not(.active, :hover) {
 	color: #999;
 }
 
 .tab-content {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	gap: 8px;
+	align-items: center;
 	padding: 16px 8px;
 }
 
@@ -244,8 +244,8 @@ function handleKeydown(event: KeyboardEvent, index: number) {
 	font-family: var(--font-body-medium);
 	font-size: 14px;
 	line-height: 1.4;
-	text-align: center;
 	color: #000;
+	text-align: center;
 	word-break: keep-all;
 }
 

@@ -5,7 +5,6 @@ import Bequest from './bequest.svelte'
 import CreditCard from './credit-card.svelte'
 import Projects from './projects.svelte'
 import Tabs from './tabs.svelte'
-import Wishlist from './wishlist.svelte'
 
 let { projects }: { projects: ProjectItem[] } = $props()
 </script>
@@ -27,10 +26,6 @@ let { projects }: { projects: ProjectItem[] } = $props()
 			{contents}
 		/>
 	</div>
-
-	<div class="wide-content wishlist">
-		<Wishlist />
-	</div>
 </section>
 
 {#snippet contents(tabId: string)}
@@ -51,8 +46,8 @@ let { projects }: { projects: ProjectItem[] } = $props()
 
 <style>
 .container {
-	background-color: hsl(214 16% 91% / 58%);
 	padding-bottom: 200px;
+	background-color: hsl(214deg 16% 91% / 58%);
 }
 
 h2 {
@@ -67,23 +62,16 @@ h2 {
 }
 
 .tab-content-inner {
+	padding: 60px 4%;
 	text-align: center;
 	background-color: white;
-	padding-top: 60px;
-	padding-bottom: 60px;
-	padding-left: 4%;
-	padding-right: 4%;
-}
-
-.wishlist {
-	margin-top: 200px;
 }
 
 @media screen and (width >= 768px) {
 	.tab-content-inner {
 		padding-top: 160px;
-		padding-left: 45px;
 		padding-right: 45px;
+		padding-left: 45px;
 	}
 }
 </style>

@@ -86,18 +86,18 @@ const grouped = $derived(groupProjectsByType(projects))
 
 <style>
 h3 {
+	margin-bottom: 24px;
 	font-family: var(--font-body-bold);
 	font-size: 24px;
 	line-height: 1.6;
-	margin-bottom: 24px;
 }
 
 p {
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 30px;
-	letter-spacing: 0.08em;
 	color: #333;
+	letter-spacing: 0.08em;
 }
 
 p + .project-group {
@@ -109,17 +109,17 @@ p + .project-group {
 }
 
 h4 {
+	margin-bottom: 16px;
 	font-family: var(--font-body-bold);
 	font-size: 18px;
 	line-height: 1.6;
-	margin-bottom: 16px;
 	color: #333;
 }
 
 .project-list {
-	list-style: none;
 	padding: 0;
 	margin: 0;
+	list-style: none;
 }
 
 .project-list li + li {
@@ -131,14 +131,14 @@ h4 {
 	font-family: var(--font-body);
 	font-size: 16px;
 	line-height: 1.6;
-	color: #0088ff;
+	color: #08f;
 	text-decoration: none;
 	transition: opacity 0.2s;
 }
 
 .project-list a:hover {
-	opacity: 0.7;
 	text-decoration: underline;
+	opacity: 0.7;
 }
 
 @media screen and (width >= 768px) {

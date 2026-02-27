@@ -113,20 +113,21 @@ function formatDate(isoDate: string): string {
 
 .article-info-container {
 	position: relative;
-	height: 150px;
-	margin-top: 31px;
+
 	/* 子要素(.article-info)がposition: absoluteのため、
 	   width: 100%を継承させるには親に明示的な幅が必要 */
 	width: 100%;
+	height: 150px;
+	margin-top: 31px;
 }
 
 .article-info {
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
 	opacity: 0;
 	transition: opacity 0.4s ease;
-	width: 100%;
 }
 
 .article-info.active {
@@ -138,17 +139,20 @@ function formatDate(isoDate: string): string {
 }
 
 .date {
+	max-width: calc(100vw - var(--wide-content-space) * 2);
+
 	/* 2025.01.01 */
 	font-family: var(--font-heading-bold);
 	font-size: 11px;
 	line-height: 16px;
 	color: #3c87c0;
 	letter-spacing: 0.02em;
-	max-width: calc(100vw - var(--wide-content-space) * 2);
 }
 
 .article-title {
 	display: -webkit-box;
+	width: 400px;
+	max-width: calc(100vw - var(--wide-content-space) * 2);
 	overflow: hidden;
 	-webkit-line-clamp: 2;
 	line-clamp: 2;
@@ -157,8 +161,6 @@ function formatDate(isoDate: string): string {
 	line-height: 28px;
 	letter-spacing: 0.08em;
 	-webkit-box-orient: vertical;
-	width: 400px;
-	max-width: calc(100vw - var(--wide-content-space) * 2);
 }
 
 .article-description {

@@ -64,15 +64,14 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 .full-content {
 	margin-top: 95px;
 }
+
 .row {
-	width: 100%;
 	display: grid;
 	grid-template-rows: 1fr 1fr;
-
-	border-top: 1px dashed;
-
+	width: 100%;
 	color: black;
 	text-decoration: none;
+	border-top: 1px dashed;
 }
 
 .row:last-child {
@@ -80,8 +79,8 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 }
 
 .article-info {
-	padding-left: var(--wide-content-space);
 	padding-right: var(--wide-content-space);
+	padding-left: var(--wide-content-space);
 	margin-top: 16px;
 }
 
@@ -121,8 +120,8 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 .image-wrapper {
 	position: relative;
 	width: 100%;
-	height: 94px;
 	max-width: 425px;
+	height: 94px;
 	margin: 0 auto;
 }
 
@@ -141,10 +140,10 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 
 @media screen and (width >= 1024px) {
 	.row {
-		width: 100%;
 		display: grid;
 		grid-template-rows: none;
 		grid-template-columns: 1fr 1fr;
+		width: 100%;
 	}
 
 	.article-info {

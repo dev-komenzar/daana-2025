@@ -40,12 +40,13 @@ h3 {
 	line-height: 30px;
 	letter-spacing: 0.08em;
 }
+
 .wrapper {
 	display: flex;
 	flex-direction: column;
+	column-gap: 45px;
 	align-items: center;
 	justify-content: center;
-	column-gap: 45px;
 	width: 100%;
 }
 
@@ -56,11 +57,10 @@ h3 {
 
 .description {
 	width: 100%;
-	text-align: left;
-
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 30px;
+	text-align: left;
 	letter-spacing: 0.08em;
 }
 
@@ -70,7 +70,7 @@ h3 {
 
 .inquiry {
 	display: block;
-	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
+	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 40%));
 	transition: transform 0.2s ease-in;
 }
 
@@ -86,9 +86,9 @@ p + .inquiry {
 	.wrapper {
 		display: flex;
 		flex-direction: row;
+		column-gap: 45px;
 		align-items: center;
 		justify-content: center;
-		column-gap: 45px;
 		width: 100%;
 		padding-top: 40px;
 	}

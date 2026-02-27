@@ -19,18 +19,18 @@
 
 <style>
 .container {
-	min-height: calc(90lvh - 76px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	min-height: calc(90lvh - 76px);
 	padding-bottom: 80px;
 }
 
 h1 {
 	font-family: var(--font-heading-medium);
 	font-size: 26px;
-	color: var(--color-primary);
 	line-height: 42px;
+	color: var(--color-primary);
 	letter-spacing: 0.06em;
 }
 

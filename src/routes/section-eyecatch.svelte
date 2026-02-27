@@ -72,8 +72,8 @@ import ScrollIndicator from '$lib/components/ui/scroll-indicator.svelte'
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 24px;
-	letter-spacing: 0.06em;
 	text-align: left;
+	letter-spacing: 0.06em;
 }
 
 .eyecatch-description + .eyecatch-description {
