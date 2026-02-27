@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { NewsItem } from '$lib/news'
 
+import { resolve } from '$app/paths'
 import { stripHtml, truncate } from '$lib/utils/description'
 
 let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
@@ -10,7 +11,11 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 	{#each pinnedNewsItems as item (item.id)}
 		{#if item.content}
 			{@const description = truncate(stripHtml(item.content), 35)}
-			<div class="row">
+			{@const resolvedLink = resolve('/news/[slug]', { slug: item.id })}
+			<a
+				href={resolvedLink}
+				class="row"
+			>
 				<div class="article-info">
 					<div class="date">{item.publishedAt}</div>
 					<div class="article-title">{item.title}</div>
@@ -48,7 +53,7 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 						/>
 					</div>
 				{/if}
-			</div>
+			</a>
 		{:else}
 			<p>本文がありません。</p>
 		{/if}
@@ -65,6 +70,9 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 	grid-template-rows: 1fr 1fr;
 
 	border-top: 1px dashed;
+
+	color: black;
+	text-decoration: none;
 }
 
 .row:last-child {
