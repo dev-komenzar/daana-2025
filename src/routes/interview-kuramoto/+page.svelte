@@ -9,7 +9,7 @@ const p = {
 	bio: `1979年生まれ。福岡県出身。東京大学教養学部卒業、同大大学院総合文化研究科博士課程単位取得退学。博士(学術)・専門は文化人類学。2006年からミャンマーで出家を含む現地調査を行う。2015年から実験寺院・寳幢寺の設立準備・運営に関わる。著書に「世俗を生きる出家者たち」(法蔵館)、Living with the Vinaya(University of Hawaii Press)など。新著『仏教を「経営」する』(NHK出版)では、ミャンマーの２つの寺院及び寳幢寺を事例として、現代社会における仏教の可能性について検討している。`,
 	imageUrl: Portrait,
 	name: '藏本 龍介',
-	nameRomaji: 'Kuramoto Ryusuke',
+	nameRomaji: 'Kuramoto Ryosuke',
 	positions: ['日本仏教徒協会 代表理事', '東京大学東洋文化研究所教授'],
 }
 </script>
