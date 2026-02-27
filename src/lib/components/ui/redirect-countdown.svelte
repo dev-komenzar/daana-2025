@@ -11,6 +11,7 @@ interface Properties {
 }
 
 let { countdownSeconds = 5, redirectTo = '/' }: Properties = $props()
+// svelte-ignore state_referenced_locally
 let count = $state(countdownSeconds)
 let intervalId: ReturnType<typeof setInterval> | undefined
 

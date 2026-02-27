@@ -6,12 +6,11 @@ import { resolve } from '$app/paths'
 type Properties = {
 	class?: string
 	href: Pathname | (string & {})
+	isExternal?: boolean
 	textContent: string
 }
 
-let { class: className, href, textContent }: Properties = $props()
-
-const isExternal = typeof href === 'string' && (href.startsWith('http://') || href.startsWith('https://'))
+let { class: className, href, isExternal = false, textContent }: Properties = $props()
 </script>
 
 <a

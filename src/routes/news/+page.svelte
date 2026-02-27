@@ -125,16 +125,9 @@ async function loadMore() {
 	margin-bottom: 40px;
 }
 
-.error-message,
 .empty-message {
 	padding: 40px 20px;
 	text-align: center;
-}
-
-.error-message p {
-	font-family: 'Noto Sans JP Light', sans-serif;
-	font-size: 16px;
-	color: #d32f2f;
 }
 
 .empty-message p {

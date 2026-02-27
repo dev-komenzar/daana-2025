@@ -85,12 +85,5 @@ h2 {
 		padding-left: 45px;
 		padding-right: 45px;
 	}
-	.tab-content-inner h3 {
-		font-size: 28px;
-	}
-
-	.tab-content-inner p {
-		font-size: 16px;
-	}
 }
 </style>
