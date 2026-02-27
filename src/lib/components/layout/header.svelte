@@ -37,8 +37,8 @@ const MenuItems: HeaderMenuItem[] = [
 	{
 		href: '/#news',
 		isExternal: false,
-		key: 'news',
-		label: 'news',
+		key: 'pick-up',
+		label: 'pick up',
 	},
 ] as const
 
