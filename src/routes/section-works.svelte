@@ -103,6 +103,7 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4m
 				<Link
 					href={FORM_LINK}
 					textContent="CONTACT US"
+					isExternal
 				/>
 			</div>
 		</div>
