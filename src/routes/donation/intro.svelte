@@ -35,7 +35,8 @@ h1 {
 }
 
 p {
-	font-size: 13px;
+	font-family: var(--font-body);
+	font-size: 14px;
 	line-height: 22px;
 	letter-spacing: 0.06em;
 }
