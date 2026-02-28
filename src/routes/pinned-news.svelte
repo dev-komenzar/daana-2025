@@ -10,7 +10,7 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 <div class="full-content">
 	{#each pinnedNewsItems as item (item.id)}
 		{#if item.content}
-			{@const description = truncate(stripHtml(item.content), 35)}
+			{@const description = truncate(stripHtml(item.content), 30)}
 			{@const resolvedLink = resolve('/news/[slug]', { slug: item.id })}
 			<a
 				href={resolvedLink}
@@ -81,6 +81,7 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 	padding-right: var(--wide-content-space);
 	padding-left: var(--wide-content-space);
 	margin-top: 16px;
+	color: var(--color-text);
 }
 
 .date {
