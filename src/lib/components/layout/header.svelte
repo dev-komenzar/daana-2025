@@ -6,6 +6,8 @@ import DonationButton from '$lib/components/ui/donation-button.svelte'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import * as v from 'valibot'
 
+const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLrcqyE6cODMMKL1clXQarhLaV0Yel9w/viewform?usp=dialog'
+
 const HeaderMenuItem = v.object({
 	href: v.pipe(v.string(), v.url()),
 	isExternal: v.optional(v.boolean(), false),
@@ -127,15 +129,18 @@ function handleKeydown(event: KeyboardEvent) {
 			/>
 		</a>
 		<div class="menu-header-controls">
-			<button
+			<a
 				class="contact-button"
 				aria-label="お問い合わせ"
+				href={FORM_LINK}
+				target="_blank"
+				rel="noopener noreferrer"
 			>
 				<img
 					src={HeaderIcon}
 					alt="お問合せフォーム"
 				/>
-			</button>
+			</a>
 			<button
 				class="close-button"
 				onclick={closeMenu}
