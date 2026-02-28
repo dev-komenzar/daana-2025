@@ -56,6 +56,14 @@ onMount(() => {
 	}}
 />
 
+<!-- フォントプリローダー: フォントプラスがスキャン時にOptima Novaを検出するための隠し要素 -->
+<div
+	class="fontplus-preloader"
+	aria-hidden="true"
+>
+	.
+</div>
+
 <div class="layout">
 	<main class="main-content">
 		<Header bind:isMenuOpen />
@@ -67,6 +75,16 @@ onMount(() => {
 <DonationButtonFloating menuOpen={isMenuOpen} />
 
 <style>
+/* フォントプラスがOptima Novaを検出するための隠し要素 */
+.fontplus-preloader {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+	font-family: 'OptimaNovaLTPro-Regular', serif;
+	font-size: 1px;
+	visibility: hidden;
+}
+
 .layout {
 	display: flex;
 	flex-direction: column;
