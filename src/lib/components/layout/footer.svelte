@@ -7,6 +7,8 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 
 const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLrcqyE6cODMMKL1clXQarhLaV0Yel9w/viewform?usp=dialog'
+
+const ACCESS = resolve('/access')
 </script>
 
 <footer class="footer">
@@ -69,6 +71,7 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLr
 							〒602-0052<br />
 							京都市上京区上小川町120-3
 						</p>
+						<a href={ACCESS}>アクセス</a>
 					</div>
 				</div>
 			</div>
@@ -213,6 +216,15 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLr
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+}
+
+.address-item > a {
+	color: #fff;
+	transition: color 0.2s ease;
+}
+
+.address-item > a:hover {
+	color: var(--color-accent-soft);
 }
 
 .org-label {
