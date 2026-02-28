@@ -30,6 +30,16 @@ export function loadFontPlusScript(options: FontLoaderOptions): void {
 		loaded = true
 		cleanup()
 		consola.info('[fontplus] Script loaded successfully')
+
+		// SvelteKitのハイドレーション完了後にフォントプラスを再スキャンさせる
+		// 初期スキャン時にはDOMが完全に構築されていない可能性があるため
+		setTimeout(() => {
+			const fontplus = (globalThis as unknown as { FONTPLUS?: { reload: () => void } }).FONTPLUS
+			if (fontplus?.reload) {
+				fontplus.reload()
+				consola.info('[fontplus] Triggered reload for hydrated DOM')
+			}
+		}, 100)
 	})
 
 	script.addEventListener('error', () => {

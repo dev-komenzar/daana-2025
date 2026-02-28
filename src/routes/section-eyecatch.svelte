@@ -140,7 +140,7 @@ function handleLogoLoad() {
 	padding: 0 var(--space-4);
 	margin: 0 0 33px;
 	font-family: var(--font-top);
-	font-size: 25px;
+	font-size: 28px;
 	line-height: 1.4;
 	color: black;
 	text-align: left;
