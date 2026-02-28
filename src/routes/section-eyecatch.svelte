@@ -129,11 +129,11 @@ function handleLogoLoad() {
 .eyecatch-title {
 	padding: 0 var(--space-4);
 	margin: 0 0 33px;
-	font-family: var(--font-body-bold);
+	font-family: var(--font-top);
 	font-size: 25px;
 	line-height: 1.4;
 	color: var(--color-white);
-	text-align: center;
+	text-align: left;
 	letter-spacing: 0.06em;
 }
 

@@ -143,6 +143,9 @@ ol {
 	--font-heading-medium: 'FuturaLTPro-Medium', 'Futura', 'Zen Kaku Gothic Antique Medium', 'ヒラギノ角ゴ Pro W5', 'Meiryo', sans-serif;
 	--font-heading-bold: 'Jost SemiBold', 'Zen Kaku Gothic Antique Bold', 'ヒラギノ角ゴ Pro W6', 'Meiryo', sans-serif;
 
+	/* Top page title */
+	--font-top: 'OptimaNovaLTPro-Regular', serif;
+
 	/* body Font */
 	--font-mincho: 'FOT-筑紫Aオールド明朝 Pr6 R', 'Hiragino Mincho Pro', serif;
 	--font-body-light: 'Zen Kaku Gothic Antique Light', 'ヒラギノ角ゴ Pro W3', 'Meiryo', sans-serif;
