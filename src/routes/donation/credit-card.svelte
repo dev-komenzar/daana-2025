@@ -86,8 +86,8 @@ p {
 
 .update-form {
 	margin-top: 20px;
-	font-family: var(--font-body-light);
-	font-size: 13px;
+	font-family: var(--font-body);
+	font-size: 14px;
 	color: #333;
 	letter-spacing: 0.08em;
 }
@@ -126,20 +126,8 @@ p + .button-wrapper {
 	color: #08f;
 }
 
-.footer-bank {
-	display: flex;
-	flex-direction: column;
-	row-gap: 38px;
-	align-items: center;
-	justify-content: center;
-}
-
-.footer-congrant + .footer-bank {
-	margin-top: 22px;
-}
-
 .bank-info {
-	font-family: var(--font-body-light);
+	font-family: var(--font-body);
 	font-size: 14px;
 	text-align: left;
 	letter-spacing: 0.15em;
@@ -183,14 +171,6 @@ p + .button-wrapper {
 	.congrant-wrapper {
 		width: 150px;
 		height: 32px;
-	}
-
-	.footer-bank {
-		display: flex;
-		flex-direction: row;
-		column-gap: 38px;
-		align-items: center;
-		justify-content: center;
 	}
 
 	.congrant-description {
