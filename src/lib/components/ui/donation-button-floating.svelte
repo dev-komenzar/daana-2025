@@ -1,7 +1,7 @@
 <script lang="ts">
 import { resolve } from '$app/paths'
 
-let { menuOpen = false }: { menuOpen?: boolean } = $props()
+let { menuOpen = false, onclick }: { menuOpen?: boolean; onclick?: () => void } = $props()
 </script>
 
 <a
@@ -9,6 +9,7 @@ let { menuOpen = false }: { menuOpen?: boolean } = $props()
 	class="donation-button-floating"
 	class:menu-open={menuOpen}
 	aria-label="寄付ページへ移動"
+	{onclick}
 >
 	<svg
 		width="20"

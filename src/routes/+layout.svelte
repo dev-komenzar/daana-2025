@@ -72,7 +72,10 @@ onMount(() => {
 	<Footer />
 </div>
 
-<DonationButtonFloating menuOpen={isMenuOpen} />
+<DonationButtonFloating
+	menuOpen={isMenuOpen}
+	onclick={() => (isMenuOpen = false)}
+/>
 
 <style>
 /* フォントプラスがOptima Novaを検出するための隠し要素 */

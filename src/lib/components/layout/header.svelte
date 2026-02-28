@@ -67,6 +67,11 @@ function handleKeydown(event: KeyboardEvent) {
 		closeMenu()
 	}
 }
+
+// 外部から isMenuOpen が変更された場合も overflow を同期
+$effect(() => {
+	document.body.style.overflow = isMenuOpen ? 'hidden' : ''
+})
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
