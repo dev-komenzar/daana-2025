@@ -56,7 +56,7 @@ async function loadMore() {
 <div class="news-page">
 	<div class="container">
 		<header class="page-header">
-			<h1 class="page-title text-large font-gothic-bold">NEWS</h1>
+			<h1 class="page-title text-large font-gothic-bold">Pick Up</h1>
 			<p class="page-subtitle">お知らせ一覧</p>
 		</header>
 
