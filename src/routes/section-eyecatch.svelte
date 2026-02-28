@@ -81,10 +81,10 @@ function handleLogoLoad() {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: calc(100lvh - 180px); /* 矢印(60px) + bottom offset(120px) をカバー */
-	padding: var(--space-16) 0;
 	width: 100%;
 	height: 100%;
+	min-height: calc(100lvh - 180px); /* 矢印(60px) + bottom offset(120px) をカバー */
+	padding: var(--space-16) 0;
 }
 
 /* ロゴオーバーレイ（コンテンツの上に被せる） */
@@ -100,8 +100,8 @@ function handleLogoLoad() {
 }
 
 .logo-overlay.hidden {
-	opacity: 0;
 	pointer-events: none;
+	opacity: 0;
 }
 
 /* ロゴ表示エリア */
@@ -110,10 +110,10 @@ function handleLogoLoad() {
 	place-items: center;
 	padding: var(--space-8);
 	opacity: 0;
+	transform: scale(0.98);
 	transition:
 		opacity 0.8s ease-out,
 		transform 0.8s ease-out;
-	transform: scale(0.98);
 }
 
 .logo-area.visible {

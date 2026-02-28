@@ -80,9 +80,9 @@ onMount(() => {
 	position: absolute;
 	top: -9999px;
 	left: -9999px;
-	font-family: 'OptimaNovaLTPro-Regular', serif;
-	font-size: 1px;
 	visibility: hidden;
+	font-family: OptimaNovaLTPro-Regular, serif;
+	font-size: 1px;
 }
 
 .layout {

@@ -131,13 +131,13 @@ function formatDate(isoDate: string): string {
 }
 
 .article-info.active {
-	opacity: 1;
 	z-index: 100;
+	opacity: 1;
 }
 
 .article-info.exiting {
-	opacity: 0;
 	z-index: 1;
+	opacity: 0;
 }
 
 .date {
