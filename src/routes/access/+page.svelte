@@ -19,7 +19,7 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 			class="map-description"
 			use:floatUp
 		>
-			「実験寺院」で検索
+			「日本仏教徒協会」で検索
 		</p>
 		<iframe
 			class="map"
@@ -42,7 +42,7 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 			<p class="link">→今出川駅からの道順</p>
 		</a>
 		<h3>京都駅から</h3>
-		<p>京都駅からタクシーで約20分。タクシーGOをご利用の際は「実験寺院」でご検索ください。</p>
+		<p>京都駅からタクシーで約20分。タクシーGOをご利用の際は「日本仏教徒協会」でご検索ください。</p>
 	</section>
 
 	<section
