@@ -54,8 +54,9 @@ let { class: className, href, isExternal = false, textContent }: Properties = $p
 	height: 52px;
 	color: #ff8957;
 	background: #fff;
-	border: 2.5px solid #ff8957;
+	border: 2px solid #ff8957;
 	border-radius: 11px;
+	isolation: isolate;
 	transition:
 		background 0.3s,
 		color 0.3s,
@@ -64,11 +65,13 @@ let { class: className, href, isExternal = false, textContent }: Properties = $p
 
 .inner {
 	position: absolute;
+	top: 0;
+	left: 0;
 	width: 170px;
-	height: 47px;
+	height: 48px;
 	border-color: #ff8957;
 	border-style: none dashed none none;
-	border-width: 2.5px;
+	border-width: 2px;
 	transition: border-color 0.3s;
 }
 
@@ -91,7 +94,7 @@ let { class: className, href, isExternal = false, textContent }: Properties = $p
 	top: 0;
 	right: 0;
 	width: 77px;
-	height: 47px;
+	height: 48px;
 	border: none;
 }
 
