@@ -17,14 +17,14 @@ let { isLabelReversed = false, label, path, src, style, variant = 'primary' }: P
 let labelBoxElement: HTMLDivElement
 
 function handleMouseEnter() {
-	if (!labelBoxElement) return
+	if (!path || !labelBoxElement) return
 	// CSSトランジションでスケール効果を実現
 	labelBoxElement.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'
 	labelBoxElement.style.transform = 'scale(1.02)'
 }
 
 function handleMouseLeave() {
-	if (!labelBoxElement) return
+	if (!path || !labelBoxElement) return
 	labelBoxElement.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1)'
 	labelBoxElement.style.transform = 'scale(1)'
 }
@@ -66,14 +66,14 @@ function handleMouseLeave() {
 	transition: box-shadow 0.3s ease-in-out;
 }
 
-.works-card:hover {
-	box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
-}
-
 a.works-card {
 	display: block;
 	color: inherit;
 	text-decoration: none;
+}
+
+a.works-card:hover {
+	box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
 }
 
 .primary {
@@ -93,7 +93,7 @@ a.works-card {
 		filter 0.3s ease-in-out;
 }
 
-.works-card:hover .image {
+a.works-card:hover .image {
 	filter: brightness(0.6);
 	transform: scale(1.02);
 }
