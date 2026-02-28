@@ -142,7 +142,6 @@ function handleLogoLoad() {
 	font-family: var(--font-top);
 	font-size: 28px;
 	line-height: 1.4;
-	color: black;
 	text-align: left;
 	letter-spacing: 0.06em;
 }

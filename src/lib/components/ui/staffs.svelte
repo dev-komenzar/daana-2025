@@ -46,7 +46,6 @@ table {
 	font-family: var(--font-body-bold);
 	font-size: 14px;
 	line-height: 19px;
-	color: #000;
 	letter-spacing: 0.06em;
 	border: none;
 }

@@ -244,7 +244,6 @@ function handleKeydown(event: KeyboardEvent, index: number) {
 	font-family: var(--font-body-medium);
 	font-size: 14px;
 	line-height: 1.4;
-	color: #000;
 	text-align: center;
 	word-break: keep-all;
 }

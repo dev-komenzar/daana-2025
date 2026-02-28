@@ -234,7 +234,6 @@ const p = {
 	font-family: var(--font-heading-bold);
 	font-size: 16px;
 	line-height: 30px;
-	color: #000;
 	letter-spacing: 0.12em;
 }
 
@@ -244,7 +243,6 @@ h1 {
 	font-family: var(--font-body-bold);
 	font-size: 25px;
 	line-height: 36px;
-	color: #000;
 	letter-spacing: 0.12em;
 }
 
@@ -257,7 +255,6 @@ h1 {
 	font-family: var(--font-body-bold);
 	font-size: 14px;
 	line-height: 16px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 
@@ -279,7 +276,6 @@ h1 {
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 24px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 

@@ -126,7 +126,6 @@ const p = {
 	font-family: var(--font-body-bold);
 	font-size: 25px;
 	line-height: 36px;
-	color: #000;
 	letter-spacing: 0.12em;
 }
 
@@ -135,7 +134,6 @@ const p = {
 	font-family: var(--font-body-bold);
 	font-size: 14px;
 	line-height: 16px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 
@@ -157,7 +155,6 @@ const p = {
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 24px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 

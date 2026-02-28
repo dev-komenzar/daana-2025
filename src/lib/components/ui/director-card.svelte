@@ -80,7 +80,6 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	font-family: var(--font-body-bold);
 	font-size: 14px;
 	line-height: 19px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 
@@ -90,7 +89,6 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	font-family: var(--font-body-bold);
 	font-size: 25px;
 	line-height: 36px;
-	color: #000;
 	letter-spacing: 0.12em;
 }
 
@@ -99,7 +97,6 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	font-family: var(--font-body-bold);
 	font-size: 14px;
 	line-height: 16px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 
@@ -109,7 +106,6 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	font-family: var(--font-body-bold);
 	font-size: 14px;
 	line-height: 24px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 
@@ -119,7 +115,6 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 24px;
-	color: #000;
 	letter-spacing: 0.06em;
 }
 

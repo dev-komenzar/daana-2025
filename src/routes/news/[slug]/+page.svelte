@@ -114,7 +114,6 @@ function formatDate(dateString: string | undefined): string {
 	font-size: 28px;
 	font-weight: bold;
 	line-height: 1.5;
-	color: #000;
 }
 
 .thumbnail {
@@ -143,7 +142,6 @@ function formatDate(dateString: string | undefined): string {
 	font-size: 24px;
 	font-weight: bold;
 	line-height: 1.5;
-	color: #000;
 }
 
 .article-content :global(h3) {
@@ -152,7 +150,6 @@ function formatDate(dateString: string | undefined): string {
 	font-size: 20px;
 	font-weight: 600;
 	line-height: 1.5;
-	color: #000;
 }
 
 .article-content :global(p) {

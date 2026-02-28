@@ -215,7 +215,6 @@ function handleKeydown(event: KeyboardEvent) {
 	width: 36px;
 	height: 36px;
 	padding: 0;
-	color: #000;
 	cursor: pointer;
 	background: transparent;
 	border: none;
@@ -267,7 +266,6 @@ function handleKeydown(event: KeyboardEvent) {
 	font-style: normal;
 	font-weight: 500;
 	line-height: 16px;
-	color: #000;
 	text-align: center;
 	letter-spacing: 0.14em;
 	white-space: nowrap;
@@ -427,7 +425,6 @@ function handleKeydown(event: KeyboardEvent) {
 		font-family: var(--font-heading-bold);
 		font-size: 14px;
 		line-height: 44px;
-		color: #000;
 		text-transform: uppercase;
 
 		/* identical to box height, or 314% */

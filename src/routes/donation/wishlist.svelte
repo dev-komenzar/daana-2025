@@ -92,7 +92,6 @@ h3 {
 	font-family: var(--font-heading-bold);
 	font-size: 20px;
 	line-height: 24px;
-	color: black;
 	letter-spacing: 0.06em;
 }
 

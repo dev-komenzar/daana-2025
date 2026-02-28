@@ -69,7 +69,6 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 	display: grid;
 	grid-template-rows: 1fr 1fr;
 	width: 100%;
-	color: black;
 	text-decoration: none;
 	border-top: 1px dashed;
 }
