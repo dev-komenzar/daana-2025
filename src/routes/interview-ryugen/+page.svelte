@@ -489,7 +489,7 @@ h1 {
 
 .name-romaji {
 	font-family: var(--font-body-bold);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 16px;
 	color: #000;
 	letter-spacing: 0.06em;
@@ -497,7 +497,7 @@ h1 {
 
 .position {
 	font-family: var(--font-body-bold);
-	font-size: 10px;
+	font-size: 14px;
 	line-height: 18px;
 	letter-spacing: 0.05em;
 }
@@ -509,8 +509,8 @@ h1 {
 .bio {
 	width: 100%;
 	margin: 14px auto 0 0;
-	font-family: var(--font-body-bold);
-	font-size: 11px;
+	font-family: var(--font-body);
+	font-size: 14px;
 	line-height: 24px;
 	color: #000;
 	letter-spacing: 0.06em;

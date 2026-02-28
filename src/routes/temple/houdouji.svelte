@@ -89,7 +89,7 @@ h3 {
 
 .facility-label {
 	font-family: var(--font-heading-bold);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0.06em;
 }
@@ -100,14 +100,14 @@ h3 {
 
 .houdouji-label {
 	font-family: var(--font-heading-bold);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0.06em;
 }
 
 p {
-	font-family: var(--font-body-bold);
-	font-size: 12px;
+	font-family: var(--font-body);
+	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0.06em;
 }

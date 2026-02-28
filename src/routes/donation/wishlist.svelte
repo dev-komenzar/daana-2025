@@ -119,7 +119,7 @@ h4 {
 
 .note-amazon {
 	font-family: var(--font-body);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 30px;
 	letter-spacing: 0.08em;
 }

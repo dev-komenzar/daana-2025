@@ -63,7 +63,7 @@ import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 .overlay p {
 	margin: 0;
 	font-family: var(--font-body);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0.06em;
 	word-break: keep-all;

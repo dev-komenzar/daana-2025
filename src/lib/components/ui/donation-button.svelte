@@ -66,7 +66,7 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSf0uGXb31O_6tEKFbGLr
 	width: fit-content;
 	padding: 8px 16px 8px 8px;
 	font-family: 'Noto Sans JP', sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 500;
 	color: #fff;
 	white-space: nowrap;

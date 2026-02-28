@@ -119,7 +119,7 @@ p + .button-wrapper {
 .congrant-description {
 	width: 100%;
 	font-family: var(--font-body);
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .congrant-description a {

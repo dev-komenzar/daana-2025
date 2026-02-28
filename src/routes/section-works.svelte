@@ -142,7 +142,7 @@ h3 {
 
 .works-body {
 	font-family: var(--font-body);
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0.06em;
 }

@@ -78,7 +78,7 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	/* 代表理事 */
 	margin: 0;
 	font-family: var(--font-body-bold);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 19px;
 	color: #000;
 	letter-spacing: 0.06em;
@@ -97,7 +97,7 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 .name-romaji {
 	/* Kuramoto Ryosuke */
 	font-family: var(--font-body-bold);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 16px;
 	color: #000;
 	letter-spacing: 0.06em;
@@ -107,7 +107,7 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 	/* 東京大学東洋文化研究所・教授 */
 	margin: 13px auto 0;
 	font-family: var(--font-body-bold);
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 24px;
 	color: #000;
 	letter-spacing: 0.06em;
@@ -116,8 +116,8 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 .bio {
 	/* 1979年生まれ... */
 	margin: 14px auto 0;
-	font-family: var(--font-body-bold);
-	font-size: 11px;
+	font-family: var(--font-body);
+	font-size: 14px;
 	line-height: 24px;
 	color: #000;
 	letter-spacing: 0.06em;

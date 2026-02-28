@@ -87,7 +87,7 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 .date {
 	/* 2025.01.01 */
 	font-family: var(--font-heading-bold);
-	font-size: 11px;
+	font-size: 14px;
 	line-height: 16px;
 	color: #3c87c0;
 	letter-spacing: 0.02em;
@@ -111,7 +111,7 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 	-webkit-line-clamp: 4;
 	line-clamp: 4;
 	font-family: var(--font-body);
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 19px;
 	letter-spacing: 0.08em;
 	-webkit-box-orient: vertical;

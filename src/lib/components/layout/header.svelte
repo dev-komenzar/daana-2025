@@ -263,7 +263,7 @@ function handleKeydown(event: KeyboardEvent) {
 
 .item-link {
 	font-family: 'Noto Sans JP', sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 16px;

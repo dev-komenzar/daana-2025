@@ -251,7 +251,7 @@ const ACCESS = resolve('/access')
 	gap: 12px;
 	align-items: center;
 	font-family: var(--font-heading);
-	font-size: 12px;
+	font-size: 14px;
 	color: #fff;
 	text-decoration: none;
 }
@@ -276,7 +276,7 @@ const ACCESS = resolve('/access')
 
 .llm-link {
 	font-family: var(--font-heading);
-	font-size: 12px;
+	font-size: 14px;
 	color: rgb(255 255 255 / 50%);
 	text-decoration: none;
 }

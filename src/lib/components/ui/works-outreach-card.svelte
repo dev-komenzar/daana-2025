@@ -132,7 +132,7 @@ a.works-card:hover .image {
 
 .description {
 	font-family: var(--font-heading);
-	font-size: 8px;
+	font-size: 14px;
 	line-height: 10px;
 	color: #fff;
 	letter-spacing: 0.06em;
