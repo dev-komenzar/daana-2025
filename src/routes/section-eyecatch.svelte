@@ -4,17 +4,16 @@ import Logo from '$lib/assets/opening_logo.png'
 import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import ScrollIndicator from '$lib/components/ui/scroll-indicator.svelte'
 
-let showLogo = $state(false)
-let showContent = $state(false)
+let showOverlay = $state(true)
+let logoVisible = $state(false)
 
 /**
  * ロゴ画像読み込み完了時にアニメーションを開始する。
  */
 function handleLogoLoad() {
-	showLogo = true
+	logoVisible = true
 	setTimeout(() => {
-		showLogo = false
-		showContent = true
+		showOverlay = false
 	}, 1200)
 }
 </script>
@@ -23,26 +22,8 @@ function handleLogoLoad() {
 	id="eyecatch"
 	class="eyecatch-section"
 >
-	<!-- ロゴ表示エリア -->
-	<div
-		class="logo-area"
-		class:visible={showLogo}
-	>
-		<EnhancedImage
-			src={Logo}
-			alt="Opening Logo"
-			class="logo"
-			loading="eager"
-			fetchpriority="high"
-			onload={handleLogoLoad}
-		/>
-	</div>
-
-	<!-- Eyecatch コンテンツ -->
-	<div
-		class="hero-container eyecatch-container"
-		class:visible={showContent}
-	>
+	<!-- Eyecatch コンテンツ（常に表示状態 - フォントプラスがフォントを検出可能） -->
+	<div class="hero-container eyecatch-container">
 		<div class="eyecatch-content">
 			<h1
 				class="eyecatch-title"
@@ -71,6 +52,26 @@ function handleLogoLoad() {
 		</div>
 	</div>
 
+	<!-- ロゴオーバーレイ（コンテンツの上に被せる） -->
+	<div
+		class="logo-overlay"
+		class:hidden={!showOverlay}
+	>
+		<div
+			class="logo-area"
+			class:visible={logoVisible}
+		>
+			<EnhancedImage
+				src={Logo}
+				alt="Opening Logo"
+				class="logo"
+				loading="eager"
+				fetchpriority="high"
+				onload={handleLogoLoad}
+			/>
+		</div>
+	</div>
+
 	<ScrollIndicator targetSectionId="mission" />
 </section>
 
@@ -86,10 +87,25 @@ function handleLogoLoad() {
 	height: 100%;
 }
 
-/* ロゴ表示エリア */
-.logo-area {
+/* ロゴオーバーレイ（コンテンツの上に被せる） */
+.logo-overlay {
 	position: absolute;
 	inset: 0;
+	z-index: 10;
+	display: grid;
+	place-items: center;
+	background-color: var(--color-white);
+	opacity: 1;
+	transition: opacity 0.5s ease-out;
+}
+
+.logo-overlay.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* ロゴ表示エリア */
+.logo-area {
 	display: grid;
 	place-items: center;
 	padding: var(--space-8);
@@ -110,16 +126,10 @@ function handleLogoLoad() {
 	max-width: 440px;
 }
 
-/* Eyecatch コンテンツ */
+/* Eyecatch コンテンツ（常に表示状態） */
 .eyecatch-container {
 	z-index: 1;
 	padding: 0 var(--wide-content-space);
-	opacity: 0;
-	transition: opacity 0.5s ease-out;
-}
-
-.eyecatch-container.visible {
-	opacity: 1;
 }
 
 .eyecatch-content {
@@ -132,7 +142,7 @@ function handleLogoLoad() {
 	font-family: var(--font-top);
 	font-size: 25px;
 	line-height: 1.4;
-	color: var(--color-white);
+	color: black;
 	text-align: left;
 	letter-spacing: 0.06em;
 }

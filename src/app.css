@@ -127,6 +127,7 @@ ol {
 	--color-accent-soft: #fcb89b;
 	--color-accent-mint: #5fd8b8;
 	--color-accent-blue: #3c87c0;
+	--color-white: #fff;
 
 	/* Layout */
 	--max-width: 1200px;
