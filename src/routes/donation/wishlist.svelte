@@ -124,15 +124,15 @@ h4 {
 	letter-spacing: 0.08em;
 }
 
-.note-amazon + p {
-	margin-top: 34px;
-}
-
 p {
 	font-family: var(--font-body);
 	font-size: 14px;
 	line-height: 30px;
 	letter-spacing: 0.08em;
+}
+
+.note-amazon + p {
+	margin-top: 34px;
 }
 
 .button {
@@ -142,11 +142,11 @@ p {
 	transition: transform 0.2s ease-in;
 }
 
-.button:hover {
-	transform: translateY(-4px);
-}
-
 p + .button {
 	margin-top: 74px;
+}
+
+.button:hover {
+	transform: translateY(-4px);
 }
 </style>

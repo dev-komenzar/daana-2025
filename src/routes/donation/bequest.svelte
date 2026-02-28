@@ -74,12 +74,12 @@ h3 {
 	transition: transform 0.2s ease-in;
 }
 
-.inquiry:hover {
-	transform: translateY(-4px);
-}
-
 p + .inquiry {
 	margin-top: 44px;
+}
+
+.inquiry:hover {
+	transform: translateY(-4px);
 }
 
 @media screen and (width >= 1024px) {

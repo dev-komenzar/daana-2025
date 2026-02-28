@@ -88,8 +88,8 @@ p {
 	margin-top: 20px;
 	font-family: var(--font-body-light);
 	font-size: 13px;
-	letter-spacing: 0.08em;
 	color: #333;
+	letter-spacing: 0.08em;
 }
 
 p + .button-wrapper {
@@ -100,16 +100,15 @@ p + .button-wrapper {
 	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 40%));
 }
 
-.button-wrapper + .footer {
-	margin-top: 130px;
-}
-
 .footer {
 	display: flex;
 	flex-direction: column;
-	row-gap: 38px;
-	column-gap: 22px;
+	gap: 38px 22px;
 	text-align: left;
+}
+
+.button-wrapper + .footer {
+	margin-top: 130px;
 }
 
 .congrant-wrapper {
@@ -127,10 +126,6 @@ p + .button-wrapper {
 	color: #08f;
 }
 
-.footer-congrant + .footer-bank {
-	margin-top: 22px;
-}
-
 .footer-bank {
 	display: flex;
 	flex-direction: column;
@@ -139,22 +134,25 @@ p + .button-wrapper {
 	justify-content: center;
 }
 
+.footer-congrant + .footer-bank {
+	margin-top: 22px;
+}
+
 .bank-info {
-	text-align: left;
 	font-family: var(--font-body-light);
 	font-size: 14px;
+	text-align: left;
 	letter-spacing: 0.15em;
 }
 
 .devider {
-	margin-top: 100px;
-	margin-bottom: 100px;
-
-	width: 100%;
-	height: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	height: 10px;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
 
 .devider-bar {
@@ -168,11 +166,11 @@ p + .button-wrapper {
 	.footer {
 		display: grid;
 		grid-template-columns: 4fr 5fr;
-		row-gap: 38px;
-		column-gap: 22px;
+		gap: 38px 22px;
 	}
 
 	/* .footerの子要素 1, 3番目は justify-self: end; */
+
 	/* 2, 4番目は justify-self: start; */
 	.footer > *:nth-child(odd) {
 		justify-self: end;

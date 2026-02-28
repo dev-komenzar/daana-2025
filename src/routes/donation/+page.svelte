@@ -5,6 +5,3 @@ import Support from './support.svelte'
 
 <Intro />
 <Support />
-
-<style>
-</style>

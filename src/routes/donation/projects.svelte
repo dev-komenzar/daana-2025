@@ -79,27 +79,27 @@ p {
 	letter-spacing: 0.08em;
 }
 
-p + .subheading {
-	margin-top: 100px;
-}
-
 .subheading {
-	background-color: #16212f;
-	width: 100%;
-	height: auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	height: auto;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
+	background-color: #16212f;
+}
+
+p + .subheading {
+	margin-top: 100px;
 }
 
 h4 {
 	font-family: var(--font-body-bold);
 	font-size: 18px;
 	line-height: 30px;
-	letter-spacing: 0.08em;
 	color: white;
+	letter-spacing: 0.08em;
 	word-break: keep-all;
 }
 
@@ -131,7 +131,7 @@ h4 {
 	}
 
 	.image-wrapper + .description {
-		margin-top: 0px;
+		margin-top: 0;
 	}
 }
 </style>

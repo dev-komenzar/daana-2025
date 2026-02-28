@@ -29,7 +29,7 @@ export const GET: RequestHandler = async () => {
 	})
 }
 
-function generateSitemapXml(staticRoutes: Array<{ changefreq: string; path: string; priority: string; }>, newsItems: Array<{ id: string; publishedAt?: string }>): string {
+function generateSitemapXml(staticRoutes: Array<{ changefreq: string; path: string; priority: string }>, newsItems: Array<{ id: string; publishedAt?: string }>): string {
 	const staticUrls = staticRoutes
 		.map(
 			route => `  <url>
