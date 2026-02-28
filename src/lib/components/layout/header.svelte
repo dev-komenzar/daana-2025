@@ -182,7 +182,8 @@ function handleKeydown(event: KeyboardEvent) {
 
 <style>
 .header-container {
-	position: relative;
+	position: sticky;
+	top: 0;
 	z-index: 100;
 	width: 100%;
 	background: #fff;
