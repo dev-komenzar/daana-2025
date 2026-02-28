@@ -1,5 +1,5 @@
 {
-  description = "ほうどう寺 WEBサイト 2025 - SvelteKit project";
+  description = "日本仏教徒協会 WEBサイト 2025 - SvelteKit project";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

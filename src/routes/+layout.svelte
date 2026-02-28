@@ -31,7 +31,7 @@ onMount(() => {
 
 <MetaTags
 	title="日本仏教徒協会"
-	description="仏教の社会実装のために新しい挑戦をするお寺・寳幢（ほうどう）寺のウェブサイトです。"
+	description="日本へ「仏教」の再導入を目指し、世界へ「日本発の仏教」を届ける理想を掲げて。実験寺院プロジェクトに取り組む日本仏教徒協会の公式ウェブサイトです。"
 	canonical={SITE_FULL_URL}
 	robots="index, follow"
 	additionalRobotsProps={{
@@ -41,7 +41,7 @@ onMount(() => {
 		noarchive: true,
 	}}
 	openGraph={{
-		description: '仏教の社会実装のために新しい挑戦をするお寺・寳幢（ほうどう）寺のウェブサイトです。',
+		description: '日本へ「仏教」の再導入を目指し、世界へ「日本発の仏教」を届ける理想を掲げて。実験寺院プロジェクトに取り組む日本仏教徒協会の公式ウェブサイトです。',
 		images: [
 			{
 				alt: '日本仏教徒協会',
