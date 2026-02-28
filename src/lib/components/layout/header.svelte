@@ -266,6 +266,7 @@ function handleKeydown(event: KeyboardEvent) {
 	font-style: normal;
 	font-weight: 500;
 	line-height: 16px;
+	color: var(--color-text);
 	text-align: center;
 	letter-spacing: 0.14em;
 	white-space: nowrap;

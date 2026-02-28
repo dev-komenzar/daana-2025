@@ -45,9 +45,9 @@ let { href, textContent }: Properties = $props()
 	box-sizing: border-box;
 	width: 247px;
 	height: 52px;
-	color: #16212f;
+	color: var(--color-text);
 	background: #fff;
-	border: 2.5px solid #16212f;
+	border: 2.5px solid var(--color-text);
 	border-radius: 11px;
 	transition:
 		background 0.3s,
@@ -59,7 +59,7 @@ let { href, textContent }: Properties = $props()
 	position: absolute;
 	width: 170px;
 	height: 47px;
-	border-color: #16212f;
+	border-color: var(--color-text);
 	border-style: none dashed none none;
 	border-width: 2.5px;
 	transition: border-color 0.3s;
@@ -97,7 +97,7 @@ let { href, textContent }: Properties = $props()
 
 .outer:hover {
 	color: #fff;
-	background: #16212f;
+	background: var(--color-text);
 }
 
 .outer:hover .inner {

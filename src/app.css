@@ -128,6 +128,7 @@ ol {
 	--color-accent-mint: #5fd8b8;
 	--color-accent-blue: #3c87c0;
 	--color-white: #fff;
+	--color-text: #16212f;
 
 	/* Layout */
 	--max-width: 1200px;
@@ -174,7 +175,7 @@ body {
 
 	/* Light Gothic Font */
 	font-family: var(--font-body-light);
-	color: #16212f;
+	color: var(--color-text);
 }
 
 /*
