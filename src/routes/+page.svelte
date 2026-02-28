@@ -1,5 +1,4 @@
 <script lang="ts">
-import OpeningLayer from '$lib/components/layout/opening-layer.svelte'
 import HorizontalDivider from '$lib/components/ui/horizontal-divider.svelte'
 
 import type { PageData } from './$types'
@@ -13,8 +12,6 @@ import SectionWorks from './section-works.svelte'
 
 let { data }: { data: PageData } = $props()
 </script>
-
-<OpeningLayer />
 
 <SectionEyecatch />
 

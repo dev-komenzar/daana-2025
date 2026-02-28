@@ -20,13 +20,15 @@ interface Properties {
 	objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
 	/** object-position CSS プロパティ */
 	objectPosition?: string
+	/** 画像読み込み完了時のコールバック */
+	onload?: () => void
 	/** レスポンシブ画像のsizes属性 (例: "(min-width: 768px) 50vw, 100vw") */
 	sizes?: string
 	/** 画像ソース - ローカルimportのみ対応 */
 	src: string
 }
 
-let { alt, class: className = '', decoding = 'async', fetchpriority = 'auto', loading = 'lazy', objectFit = 'cover', objectPosition = 'center', sizes, src }: Properties = $props()
+let { alt, class: className = '', decoding = 'async', fetchpriority = 'auto', loading = 'lazy', objectFit = 'cover', objectPosition = 'center', onload, sizes, src }: Properties = $props()
 </script>
 
 <enhanced:img
@@ -39,6 +41,7 @@ let { alt, class: className = '', decoding = 'async', fetchpriority = 'auto', lo
 	style:object-position={objectPosition}
 	{fetchpriority}
 	{decoding}
+	{onload}
 />
 
 <style>

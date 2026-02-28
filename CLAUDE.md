@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Workflow Orchestration
+
+### Plan Mode Default
+
+- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
+- If something goes sideways, STOP and re-plan immediately – don't keep pushing
+- Use plan mode for verification steps, not just building
+- Write detailed specs upfront to reduce ambiguity
+
 ## Project Overview
 
 ほうどう寺のWEBサイト2025年版 - A website for Houdou Temple built with SvelteKit.
@@ -73,7 +82,7 @@ npx vitest            # Run tests (vitest is available but no test scripts confi
 src/
 ├── lib/
 │   ├── components/
-│   │   ├── layout/      # Layout components (header, opening-layer)
+│   │   ├── layout/      # Layout components (header)
 │   │   └── ui/          # Reusable UI components (modal, cards)
 │   ├── assets/          # Static assets
 │   ├── news/            # News module (DDD structure)
@@ -173,6 +182,30 @@ Required environment variable:
   - Prevents layout shift by auto-setting width/height
   - Images must be imported from `$lib/assets/`
 - **External URLs** (e.g., microCMS): Use standard `<img>` tags with explicit `width` and `height` attributes
+
+### Meta Tags
+
+Use **svelte-meta-tags** for SEO meta tags instead of `<svelte:head>`. Define meta tags in `+layout.svelte` files:
+
+```svelte
+<script lang="ts">
+	import { SITE_FULL_URL } from '$lib/constants'
+	import { MetaTags } from 'svelte-meta-tags'
+
+	let { children } = $props()
+</script>
+
+<MetaTags
+	title="ページタイトル"
+	titleTemplate="%s | 日本仏教徒協会"
+	description="ページの説明"
+	canonical={`${SITE_FULL_URL}/path`}
+/>
+
+{@render children?.()}
+```
+
+**Important**: Do NOT use `<svelte:head>` for meta tags. Always use `svelte-meta-tags` in `+layout.svelte`.
 
 ### Important Notes
 

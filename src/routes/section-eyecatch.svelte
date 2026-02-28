@@ -1,19 +1,54 @@
 <script lang="ts">
 import { floatUp } from '$lib/actions'
+import Logo from '$lib/assets/opening_logo.png'
+import EnhancedImage from '$lib/components/ui/enhanced-image.svelte'
 import ScrollIndicator from '$lib/components/ui/scroll-indicator.svelte'
+
+let showLogo = $state(false)
+let showContent = $state(false)
+
+/**
+ * ロゴ画像読み込み完了時にアニメーションを開始する。
+ */
+function handleLogoLoad() {
+	showLogo = true
+	setTimeout(() => {
+		showLogo = false
+		showContent = true
+	}, 1200)
+}
 </script>
 
 <section
 	id="eyecatch"
 	class="eyecatch-section"
 >
-	<div class="hero-container eyecatch-container">
+	<!-- ロゴ表示エリア -->
+	<div
+		class="logo-area"
+		class:visible={showLogo}
+	>
+		<EnhancedImage
+			src={Logo}
+			alt="Opening Logo"
+			class="logo"
+			loading="eager"
+			fetchpriority="high"
+			onload={handleLogoLoad}
+		/>
+	</div>
+
+	<!-- Eyecatch コンテンツ -->
+	<div
+		class="hero-container eyecatch-container"
+		class:visible={showContent}
+	>
 		<div class="eyecatch-content">
 			<h1
 				class="eyecatch-title"
 				use:floatUp
 			>
-				Implement a Buddha’s Praxis
+				Implement a Buddha's Praxis
 			</h1>
 
 			<p
@@ -35,6 +70,7 @@ import ScrollIndicator from '$lib/components/ui/scroll-indicator.svelte'
 			</p>
 		</div>
 	</div>
+
 	<ScrollIndicator targetSectionId="mission" />
 </section>
 
@@ -46,11 +82,44 @@ import ScrollIndicator from '$lib/components/ui/scroll-indicator.svelte'
 	justify-content: center;
 	min-height: calc(100lvh - 180px); /* 矢印(60px) + bottom offset(120px) をカバー */
 	padding: var(--space-16) 0;
+	width: 100%;
+	height: 100%;
 }
 
+/* ロゴ表示エリア */
+.logo-area {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	padding: var(--space-8);
+	opacity: 0;
+	transition:
+		opacity 0.8s ease-out,
+		transform 0.8s ease-out;
+	transform: scale(0.98);
+}
+
+.logo-area.visible {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.logo-area :global(.logo) {
+	width: 100%;
+	max-width: 440px;
+}
+
+/* Eyecatch コンテンツ */
 .eyecatch-container {
 	z-index: 1;
 	padding: 0 var(--wide-content-space);
+	opacity: 0;
+	transition: opacity 0.5s ease-out;
+}
+
+.eyecatch-container.visible {
+	opacity: 1;
 }
 
 .eyecatch-content {
