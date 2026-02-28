@@ -112,6 +112,10 @@ p + p {
 	margin-top: 0;
 }
 
+p {
+	word-break: keep-all;
+}
+
 p.space {
 	margin-top: 2em;
 }
@@ -137,7 +141,7 @@ p.space {
 		position: absolute;
 		top: 330px;
 		left: 95px;
-		width: min(100%, 733px);
+		width: min(100%, 800px);
 		padding: 0;
 	}
 }
