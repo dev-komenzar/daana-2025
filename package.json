@@ -12,7 +12,9 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "eslint --fix .",
-		"lint:style": "stylelint --fix --ignore-path .gitignore '**/*.{css,svelte}'"
+		"lint:ci": "eslint .",
+		"lint:style": "stylelint --fix --ignore-path .gitignore '**/*.{css,svelte}'",
+		"lint:style:ci": "stylelint --ignore-path .gitignore '**/*.{css,svelte}'"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.1",
