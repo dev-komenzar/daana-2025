@@ -5,6 +5,14 @@ import { resolve } from '$app/paths'
 import { stripHtml, truncate } from '$lib/utils/description'
 
 let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
+
+function formatDate(isoDate: string): string {
+	const date = new Date(isoDate)
+	const year = date.getFullYear()
+	const month = String(date.getMonth() + 1).padStart(2, '0')
+	const day = String(date.getDate()).padStart(2, '0')
+	return `${year}.${month}.${day}`
+}
 </script>
 
 <div class="full-content">
@@ -17,7 +25,7 @@ let { pinnedNewsItems }: { pinnedNewsItems: NewsItem[] } = $props()
 				class="row"
 			>
 				<div class="article-info">
-					<div class="date">{item.publishedAt}</div>
+					<div class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</div>
 					<div class="article-title">{item.title}</div>
 					<div class="article-description">{description}</div>
 				</div>
