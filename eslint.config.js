@@ -15,6 +15,9 @@ const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	{
+		ignores: ['pocketbase/pb_migrations/**', 'pocketbase/pb_hooks/**'],
+	},
 	js.configs.recommended,
 	...ts.configs.recommended,
 	perfectionist.configs['recommended-natural'],

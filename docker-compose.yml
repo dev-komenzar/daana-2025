@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     ports:
       - '8090:8090'
+    command: ['serve', '--http=0.0.0.0:8090', '--dev']
     volumes:
       - pb_data:/pb/pb_data
       - ./pocketbase/pb_migrations:/pb/pb_migrations
