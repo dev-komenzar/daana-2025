@@ -31,32 +31,40 @@ const FORM_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSeybsspD3fochhGeqD4m
 			>
 				<strong>当協会は、仏教哲学の探究と実践を通じ、現代社会に即した「仏教の価値」を創造しています。</strong>
 			</p>
-			<ol>
-				<li
-					class="works-body"
-					use:floatUp
-				>
-					<strong>「実験寺院」の運営</strong>：「社会的意義を果たす仏教の再導入」をテーマに、寺院の新たな在り方を検証する実験の場を運営しています。
-				</li>
-				<li
-					class="works-body"
-					use:floatUp
-				>
-					<strong>「Philosophy Collectives Network」の研究</strong>：仏教哲学に基づく組織論を構築し、現代の組織運営に活かすための実践的研究を展開しています。
-				</li>
-				<li
-					class="works-body"
-					use:floatUp
-				>
-					<strong>「即仏大学」の運営</strong>：実験寺院グループが提唱する「即の仏教（時代と状況に即した仏教）」を体系的に学ぶための教育プラットフォームです。
-				</li>
-				<li
-					class="works-body"
-					use:floatUp
-				>
-					<strong>「DaNAs for Good」の開催</strong>：「即の仏教」を概念で終わらせず、体感として落とし込むためのリトリート（合宿）企画を運営しています。
-				</li>
-			</ol>
+			<div class="works-table-wrapper">
+				<table class="works-table">
+					<tbody>
+						<tr
+							class="works-body"
+							use:floatUp
+						>
+							<td><strong>「実験寺院」の運営</strong>：</td>
+							<td>「社会的意義を果たす仏教の再導入」をテーマに、寺院の新たな在り方を検証する実験の場を運営しています。</td>
+						</tr>
+						<tr
+							class="works-body"
+							use:floatUp
+						>
+							<td><strong>「Philosophy Collectives Network」の研究</strong>：</td>
+							<td>仏教哲学に基づく組織論を構築し、現代の組織運営に活かすための実践的研究を展開しています。</td>
+						</tr>
+						<tr
+							class="works-body"
+							use:floatUp
+						>
+							<td><strong>「即仏大学」の運営</strong>：</td>
+							<td>実験寺院グループが提唱する「即の仏教（時代と状況に即した仏教）」を体系的に学ぶための教育プラットフォームです。</td>
+						</tr>
+						<tr
+							class="works-body"
+							use:floatUp
+						>
+							<td><strong>「DaNAs for Good」の開催</strong>：</td>
+							<td>「即の仏教」を概念で終わらせず、体感として落とし込むためのリトリート（合宿）企画を運営しています。</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<p
 				class="works-body"
 				use:floatUp
@@ -155,8 +163,36 @@ h3 {
 	padding-top: 32px;
 }
 
-ol {
-	padding-inline-start: 1.4em;
+.works-table-wrapper {
+	margin-block: 1rem;
+	overflow-x: auto;
+}
+
+.works-table {
+	border: none;
+	border-collapse: collapse;
+}
+
+.works-table tr,
+.works-table td {
+	padding: 0;
+	line-height: 1.5;
+	vertical-align: top;
+	border: none;
+}
+
+.works-table tr:not(:last-child) td {
+	padding-bottom: 0.5rem;
+}
+
+.works-table td:first-child {
+	width: 200px;
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
+.works-table td:last-child {
+	min-width: 200px;
 }
 
 div.space {
