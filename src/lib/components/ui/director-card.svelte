@@ -38,7 +38,7 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 				use:floatUp
 			>
 				<Link
-					href={resolve(href)}
+					href={resolve(href as '/')}
 					textContent="VIEW MORE"
 				/>
 			</div>

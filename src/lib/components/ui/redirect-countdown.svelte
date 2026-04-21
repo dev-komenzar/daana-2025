@@ -17,7 +17,7 @@ let intervalId: ReturnType<typeof setInterval> | undefined
 
 function redirectNow() {
 	if (intervalId) clearInterval(intervalId)
-	goto(resolve(redirectTo))
+	goto(resolve(redirectTo as '/'))
 }
 
 onMount(() => {

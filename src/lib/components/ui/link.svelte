@@ -14,7 +14,7 @@ let { class: className, href, isExternal = false, textContent }: Properties = $p
 </script>
 
 <a
-	href={isExternal ? href : resolve(href as Pathname)}
+	href={isExternal ? href : resolve(href as '/')}
 	target={isExternal ? '_blank' : undefined}
 	rel={isExternal ? 'noopener noreferrer' : undefined}
 	class={className}

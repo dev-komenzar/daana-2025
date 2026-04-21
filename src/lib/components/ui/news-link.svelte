@@ -11,7 +11,7 @@ type Properties = {
 let { href, textContent }: Properties = $props()
 </script>
 
-<a href={resolve(href)}>
+<a href={resolve(href as '/')}>
 	<div class="outer">
 		<div class="inner">
 			<span class="text">{textContent}</span>
