@@ -22,6 +22,76 @@ pnpm dev --open
 
 フレームワークについては[Svelte • Web development for the rest of us](https://svelte.jp/)を見てください。
 
+### 環境変数
+
+`.env.example` を `.env` にコピーし、必要な値を埋める。
+
+```shell
+cp .env.example .env
+```
+
+| 変数                | 用途                                                            |
+| ------------------- | --------------------------------------------------------------- |
+| `MICROCMS_API_KEY`  | microCMS API キー (Stage 6 で撤廃予定)                          |
+| `PB_URL`            | ローカル PocketBase の URL (デフォルト `http://localhost:8090`) |
+| `PB_ADMIN_EMAIL`    | ローカル PB superuser のメール                                  |
+| `PB_ADMIN_PASSWORD` | ローカル PB superuser のパスワード (ローカル限定で管理)         |
+
+### ローカル PocketBase セットアップ (Stage 1)
+
+CMS 移行期間中はローカルで PocketBase を起動し、`users` / `news` / `projects` / `media` コレクションの挙動を検証する。詳細は beads の epic `daana-pb3` を参照。
+
+#### 1. コンテナ起動
+
+```shell
+docker compose up -d
+docker compose logs -f pocketbase
+```
+
+- http://localhost:8090/\_/ → Admin UI
+- http://localhost:8090/api/health → ヘルスチェック
+- データは named volume `daana-pb-data` に永続化される (`pocketbase/pb_data/` はバインドしていない)
+
+migrations (`pocketbase/pb_migrations/`) と hooks (`pocketbase/pb_hooks/`) はコンテナ起動時に自動適用される。
+
+#### 2. 初回: superuser を作成
+
+PocketBase は初回起動時にセットアップウィザードへ誘導される。以下いずれかの方法で superuser を作成する。
+
+**a. CLI で作成 (推奨)**
+
+```shell
+docker compose exec pocketbase /pb/pocketbase admin create admin@example.com 'your-strong-password'
+```
+
+メールとパスワードは `.env` の `PB_ADMIN_EMAIL` / `PB_ADMIN_PASSWORD` に揃えると便利。
+
+**b. Admin UI で作成**
+
+ブラウザで http://localhost:8090/\_/ を開き、ウィザードに従って superuser を作成する。
+
+#### 3. editor ユーザーを1人作成
+
+`users` コレクションに `role: "editor"` を持つレコードを 1 件作成する。これが `/cms` ログイン (Stage 4) で使うアカウントになる。
+
+1. http://localhost:8090/\_/ に superuser でログイン
+2. 左メニュー Collections → `users` → `+ New record`
+3. 以下を入力して保存
+   - `email`: `editor@example.com`
+   - `password` / `passwordConfirm`: 任意
+   - `role`: `editor`
+4. 作成後、editor アカウントでもログイン可能 (`/api/collections/users/auth-with-password`)
+
+> `role` は `pb_hooks/users_guard.pb.js` で superuser 以外による改ざんを防いでいる。変更が必要な場合は superuser でログインする。
+
+#### 4. 停止 / クリーンアップ
+
+```shell
+docker compose down              # コンテナ停止 (volume は残る)
+docker compose down -v           # volume ごと削除 (DB リセット)
+docker volume rm daana-pb-data   # volume のみ削除
+```
+
 ## Depoy
 
 Githubにリポジトリを置き、Vercelにデプロイします。
