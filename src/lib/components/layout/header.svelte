@@ -1,5 +1,6 @@
 <script lang="ts">
 import { resolve } from '$app/paths'
+import { page } from '$app/state'
 import HeaderIcon from '$lib/assets/header-icon.svg'
 import Logo from '$lib/assets/jba-black.png'
 import DonationButton from '$lib/components/ui/donation-button.svelte'
@@ -68,6 +69,13 @@ function handleKeydown(event: KeyboardEvent) {
 	}
 }
 
+function handleMenuLogoClick(event: MouseEvent) {
+	closeMenu()
+	if (page.url.pathname === resolve('/')) {
+		event.preventDefault()
+	}
+}
+
 // 外部から isMenuOpen が変更された場合も overflow を同期
 $effect(() => {
 	document.body.style.overflow = isMenuOpen ? 'hidden' : ''
@@ -125,7 +133,10 @@ $effect(() => {
 	class:open={isMenuOpen}
 >
 	<div class="menu-header">
-		<a href={resolve('/')}>
+		<a
+			href={resolve('/')}
+			onclick={handleMenuLogoClick}
+		>
 			<EnhancedImage
 				src={Logo}
 				alt="日本仏教徒協会"
