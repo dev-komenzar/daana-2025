@@ -7,7 +7,9 @@ export type ProjectType = v.InferOutput<typeof ProjectTypeSchema>
 export const ProjectItemSchema = v.object({
 	body: v.optional(v.string()),
 	createdAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+	draft: v.optional(v.boolean()),
 	id: v.string(),
+	originalId: v.optional(v.string()),
 	projectLink: v.string(),
 	publishedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
 	revisedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),

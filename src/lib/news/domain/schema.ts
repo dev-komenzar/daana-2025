@@ -3,7 +3,9 @@ import * as v from 'valibot'
 export const NewsItemSchema = v.object({
 	content: v.optional(v.string()),
 	createdAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+	draft: v.optional(v.boolean()),
 	id: v.string(),
+	originalId: v.optional(v.string()),
 	pinned: v.optional(v.boolean()),
 	publishedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
 	revisedAt: v.optional(v.pipe(v.string(), v.isoTimestamp())),
