@@ -20,6 +20,7 @@
 		"test:unit:watch": "vitest",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
+		"check:tiptap-roundtrip": "tsx scripts/tiptap-roundtrip-check.ts",
 		"migrate": "tsx scripts/migrate-microcms.ts"
 	},
 	"devDependencies": {
@@ -41,6 +42,7 @@
 		"eslint-plugin-svelte": "^3.13.0",
 		"eslint-plugin-unicorn": "^61.0.2",
 		"globals": "^16.5.0",
+		"happy-dom": "^20.9.0",
 		"husky": "^9.1.7",
 		"jsdom": "^29.0.2",
 		"lint-staged": "^16.2.6",
@@ -83,6 +85,18 @@
 		"*.svelte": "svelte-check --tsconfig ./tsconfig.json"
 	},
 	"dependencies": {
+		"@tiptap/core": "^3.22.4",
+		"@tiptap/extension-bubble-menu": "^3.22.4",
+		"@tiptap/extension-color": "^3.22.4",
+		"@tiptap/extension-floating-menu": "^3.22.4",
+		"@tiptap/extension-image": "^3.22.4",
+		"@tiptap/extension-link": "^3.22.4",
+		"@tiptap/extension-table": "^3.22.4",
+		"@tiptap/extension-text-align": "^3.22.4",
+		"@tiptap/extension-text-style": "^3.22.4",
+		"@tiptap/extension-underline": "^3.22.4",
+		"@tiptap/html": "^3.22.4",
+		"@tiptap/starter-kit": "^3.22.4",
 		"consola": "^3.4.2",
 		"ky": "^1.14.0",
 		"motion": "^12.23.25",
