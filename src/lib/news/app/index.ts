@@ -1,4 +1,5 @@
 export { getNewsAsync } from './get-news'
+export { getNewsByOriginalId } from './get-news-by-original-id'
 export { getNewsForSitemap } from './get-news-for-sitemap'
 export { getNewsPost } from './get-news-post'
 export { getNewsTotalCount } from './get-news-total-count'

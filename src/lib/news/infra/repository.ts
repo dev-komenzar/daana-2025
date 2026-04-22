@@ -8,6 +8,7 @@ import type { NewsItem, NewsItemKey, ReturnNewApi } from '../domain/schema'
 
 import { NewsItemSchema, ReturnNewApiSchema } from '../domain/schema'
 import { api, isApiConfigured } from './client'
+import { pbNewsRepository } from './pb-repository'
 
 class MicroCmsNewsRepository implements INewsRepository {
 	async getNews(offset: number, limit: number, fields: NewsItemKey[]): Promise<NewsItem[]> {
@@ -44,6 +45,11 @@ class MicroCmsNewsRepository implements INewsRepository {
 			consola.error(`Error fetching news post ${id} from microCMS:`, error)
 			return undefined
 		}
+	}
+
+	async getNewsByOriginalId(originalId: string): Promise<NewsItem | undefined> {
+		// microCMS では id == originalId として扱う (同一レコード)
+		return this.getNewsById(originalId)
 	}
 
 	async getPinnedNews(limit: number, fields: NewsItemKey[]): Promise<NewsItem[]> {
@@ -105,4 +111,10 @@ class MicroCmsNewsRepository implements INewsRepository {
 	}
 }
 
-export const newsRepository: INewsRepository = new MicroCmsNewsRepository()
+export const microCmsNewsRepository: INewsRepository = new MicroCmsNewsRepository()
+
+function resolveCmsSource(): 'microcms' | 'pocketbase' {
+	return process.env.CMS_SOURCE === 'pocketbase' ? 'pocketbase' : 'microcms'
+}
+
+export const newsRepository: INewsRepository = resolveCmsSource() === 'pocketbase' ? pbNewsRepository : microCmsNewsRepository

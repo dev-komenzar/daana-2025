@@ -6,6 +6,7 @@ import type { ProjectItem, ProjectItemKey, ReturnProjectApi } from '../domain/sc
 
 import { api, isApiConfigured } from '../../news/infra/client'
 import { ReturnProjectApiSchema } from '../domain/schema'
+import { pbProjectRepository } from './pb-repository'
 
 class MicroCmsProjectRepository implements IProjectRepository {
 	async getProjects(fields: ProjectItemKey[]): Promise<ProjectItem[]> {
@@ -31,4 +32,10 @@ class MicroCmsProjectRepository implements IProjectRepository {
 	}
 }
 
-export const projectRepository: IProjectRepository = new MicroCmsProjectRepository()
+export const microCmsProjectRepository: IProjectRepository = new MicroCmsProjectRepository()
+
+function resolveCmsSource(): 'microcms' | 'pocketbase' {
+	return process.env.CMS_SOURCE === 'pocketbase' ? 'pocketbase' : 'microcms'
+}
+
+export const projectRepository: IProjectRepository = resolveCmsSource() === 'pocketbase' ? pbProjectRepository : microCmsProjectRepository

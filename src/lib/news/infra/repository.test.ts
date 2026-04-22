@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 
 vi.mock('$env/static/private', () => ({
 	MICROCMS_API_KEY: 'dummy-key',
+	PB_URL: 'http://localhost:8090',
 }))
 
 import type { MockInstance } from 'vitest'
@@ -89,6 +90,23 @@ describe('newsRepository (Unit)', () => {
 
 			const result = await newsRepository.getNews(0, 10, ['id'])
 			expect(result).toEqual([])
+		})
+	})
+
+	describe('getNewsByOriginalId', () => {
+		test('microCMS 実装では id と同一扱いで news/{id} を呼ぶ', async () => {
+			const mockResponse: NewsItem = v.parse(NewsItemSchema, {
+				id: 'abc123',
+				pinned: false,
+				title: 'ニュース',
+			})
+			spy.mockReturnValue({
+				json: () => Promise.resolve(mockResponse),
+			} as any)
+
+			const result = await newsRepository.getNewsByOriginalId('abc123')
+			expect(spy).toHaveBeenCalledWith('news/abc123', undefined)
+			expect(result?.id).toBe('abc123')
 		})
 	})
 
