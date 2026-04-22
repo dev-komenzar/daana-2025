@@ -19,12 +19,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 複雑な問題には、サブエージェントを使ってより多くの計算リソースを投入する
 - 集中して実行するために、サブエージェント1つにつき1タスクを割り当てる
 
-### 3. 自己改善ループ
+### 3. 自己改善ループ（auto memory 連携）
 
-- ユーザーから修正を受けたら必ず `tasks/lessons.md` にそのパターンを記録する
-- 同じミスを繰り返さないように、自分へのルールを書く
-- ミス率が下がるまで、ルールを徹底的に改善し続ける
-- セッション開始時に、そのプロジェクトに関連するlessonsをレビューする
+- ユーザーから修正・承認を受けたり、非自明な project decision に気付いたら auto memory に記録する
+- 記録先は Claude Code の memory system (`~/.claude/projects/<project>/memory/`)。`MEMORY.md` が index、各メモリは個別ファイル + frontmatter
+- 保存すべきは「将来セッションでも通用する持続的な知見」: feedback / project decision / reference / user profile
+- 保存すべきでないもの: 特定バグのデバッグ手順 (コード本体と commit message に残せば十分)、コードを読めば分かる構造情報
+- 同一セッション内の一時状態は TodoWrite または Plan で、永続すべきものだけ memory へ
 
 ### 4. 完了前に必ず検証する
 
@@ -56,7 +57,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 3. **進捗を記録する**：完了した項目を随時マークしていく
 4. **変更を説明する**：各ステップで高レベルのサマリーを提供する
 5. **結果をドキュメント化する**：`tasks/todo.md` にレビューセクションを追加する
-6. **学びを記録する**：修正を受けた後に `tasks/lessons.md` を更新する
+6. **学びを記録する**：修正・承認や非自明な決定は auto memory (§ワークフロー設計 3) に保存する
 
 ---
 
