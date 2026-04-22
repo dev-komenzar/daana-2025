@@ -142,6 +142,16 @@ function createMediaUploader(deps: MediaUploaderDeps): (url: string, alt?: strin
 }
 
 function toMessage(error: unknown): string {
-	if (error instanceof Error) return error.message
+	if (error instanceof Error) {
+		const detail = (error as { data?: unknown }).data
+		if (detail && typeof detail === 'object') {
+			try {
+				return `${error.message} :: ${JSON.stringify(detail)}`
+			} catch {
+				// ignore
+			}
+		}
+		return error.message
+	}
 	return typeof error === 'string' ? error : JSON.stringify(error)
 }

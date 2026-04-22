@@ -10,7 +10,7 @@ import { loadDotenv, readMigrateEnv } from './lib/env'
 import { createMicrocmsClient } from './lib/microcms'
 import { defaultImageFetcher, type MigrationReport, type MigrationTarget, runMigration } from './lib/migrate-runner'
 import { parseArgs } from './lib/parse-args'
-import { createPbMediaRepo } from './lib/pb-media-repo'
+import { createPbMediaRepo, ensureMediaOriginalUrlField } from './lib/pb-media-repo'
 import { createPbNewsRepo } from './lib/pb-news-repo'
 import { createPbProjectRepo } from './lib/pb-project-repo'
 
@@ -139,6 +139,7 @@ async function run(): Promise<void> {
 		const pb = new PocketBase(env.pbUrl)
 		await authenticateSuperuser(pb, env.pbAdminEmail, env.pbAdminPassword)
 		console.log(`[migrate] superuser auth ok (token valid=${pb.authStore.isValid})`)
+		await ensureMediaOriginalUrlField(pb)
 		mediaRepo = createPbMediaRepo(pb)
 		newsRepo = createPbNewsRepo(pb)
 		projectRepo = createPbProjectRepo(pb)
