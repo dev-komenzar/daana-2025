@@ -3,15 +3,18 @@
 
 /// <reference types="@testing-library/jest-dom" />
 
+import type { AuthModel } from 'pocketbase'
+import type PocketBase from 'pocketbase'
+
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			pb: PocketBase
+			user: AuthModel
+		}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
 	}
 }
-
-// eslint-disable-next-line unicorn/require-module-specifiers
-export {}
