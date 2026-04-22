@@ -29,6 +29,7 @@ vite.config.ts.timestamp-*
 # Claude
 .claude/settings.local.json
 .claude/settings.json
+.claude/scheduled_tasks.lock
 
 # Playwright MCP
 .playwright-mcp/
