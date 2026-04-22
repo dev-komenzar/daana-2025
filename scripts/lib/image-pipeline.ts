@@ -1,8 +1,4 @@
-/**
- * sharp による画像最適化パイプライン (mozjpeg, 2400px 上限, EXIF 除去)。
- *
- * Green 実装は daana-ov9.4 で行う。それまでは Red を維持する。
- */
+import sharp from 'sharp'
 
 export interface OptimizedImage {
 	buffer: Buffer
@@ -16,6 +12,37 @@ export interface PipelineOptions {
 	maxLongEdge?: number
 }
 
-export async function optimizeImage(_input: Buffer, _options: PipelineOptions = {}): Promise<OptimizedImage> {
-	throw new Error('Not implemented: daana-ov9.4')
+const DEFAULT_MAX_LONG_EDGE = 2400
+const DEFAULT_JPEG_QUALITY = 82
+
+export async function optimizeImage(input: Buffer, options: PipelineOptions = {}): Promise<OptimizedImage> {
+	const maxLongEdge = options.maxLongEdge ?? DEFAULT_MAX_LONG_EDGE
+	const jpegQuality = options.jpegQuality ?? DEFAULT_JPEG_QUALITY
+
+	const source = sharp(input, { failOn: 'error' })
+	const meta = await source.metadata()
+	const format = meta.format ?? 'jpeg'
+	const longEdge = Math.max(meta.width ?? 0, meta.height ?? 0)
+	const needsResize = longEdge > maxLongEdge
+
+	let pipeline = sharp(input, { failOn: 'error' }).rotate()
+	if (needsResize) {
+		pipeline = pipeline.resize({
+			fit: 'inside',
+			height: maxLongEdge,
+			width: maxLongEdge,
+			withoutEnlargement: true,
+		})
+	}
+
+	// sharp は .withMetadata() を呼ばない限り EXIF を剥がすので、ここでは明示的に呼ばない。
+	pipeline = format === 'png' ? pipeline.png({ compressionLevel: 9 }) : format === 'webp' ? pipeline.webp({ quality: jpegQuality }) : pipeline.jpeg({ mozjpeg: true, quality: jpegQuality })
+
+	const { data, info } = await pipeline.toBuffer({ resolveWithObject: true })
+	return {
+		buffer: data,
+		format: info.format,
+		height: info.height,
+		width: info.width,
+	}
 }
