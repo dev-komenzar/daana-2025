@@ -1,3 +1,4 @@
+import { CMS_SOURCE } from '$env/static/private'
 import consola from 'consola'
 import * as v from 'valibot'
 
@@ -34,8 +35,4 @@ class MicroCmsProjectRepository implements IProjectRepository {
 
 export const microCmsProjectRepository: IProjectRepository = new MicroCmsProjectRepository()
 
-function resolveCmsSource(): 'microcms' | 'pocketbase' {
-	return process.env.CMS_SOURCE === 'pocketbase' ? 'pocketbase' : 'microcms'
-}
-
-export const projectRepository: IProjectRepository = resolveCmsSource() === 'pocketbase' ? pbProjectRepository : microCmsProjectRepository
+export const projectRepository: IProjectRepository = CMS_SOURCE === 'pocketbase' ? pbProjectRepository : microCmsProjectRepository

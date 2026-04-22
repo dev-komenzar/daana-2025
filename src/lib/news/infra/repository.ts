@@ -1,5 +1,6 @@
 import type { Options } from 'ky'
 
+import { CMS_SOURCE } from '$env/static/private'
 import consola from 'consola'
 import * as v from 'valibot'
 
@@ -113,8 +114,4 @@ class MicroCmsNewsRepository implements INewsRepository {
 
 export const microCmsNewsRepository: INewsRepository = new MicroCmsNewsRepository()
 
-function resolveCmsSource(): 'microcms' | 'pocketbase' {
-	return process.env.CMS_SOURCE === 'pocketbase' ? 'pocketbase' : 'microcms'
-}
-
-export const newsRepository: INewsRepository = resolveCmsSource() === 'pocketbase' ? pbNewsRepository : microCmsNewsRepository
+export const newsRepository: INewsRepository = CMS_SOURCE === 'pocketbase' ? pbNewsRepository : microCmsNewsRepository
