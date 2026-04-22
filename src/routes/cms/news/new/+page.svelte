@@ -7,11 +7,10 @@ import type { ActionData, PageData } from './$types'
 let { data, form }: { data: PageData; form?: ActionData } = $props()
 </script>
 
-<MetaTags title="お知らせ編集" />
-<h1>お知らせ編集</h1>
+<MetaTags title="お知らせ新規作成" />
+<h1>お知らせ新規作成</h1>
 <NewsForm
 	mediaItems={data.mediaItems}
-	submitLabel="更新"
+	submitLabel="作成"
 	error={form?.error}
-	initial={data.record}
 />
