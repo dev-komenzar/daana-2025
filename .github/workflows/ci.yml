@@ -18,6 +18,9 @@ jobs:
     env:
       HUSKY: 0
       CI: true
+      # svelte-kit sync が $env/static/private の型を生成するために必要。
+      # pnpm check はネットワーク呼び出しをしないため実値は不要。
+      MICROCMS_API_KEY: ci-placeholder-for-type-check
     steps:
       - name: Checkout
         uses: actions/checkout@v4
