@@ -98,4 +98,22 @@ describe('cms/news/[id]/edit actions.default', () => {
 		const result = await actions.default!(event)
 		expect(result?.status).toBe(400)
 	})
+
+	test('content に <script> が含まれる場合、sanitize 後の HTML が PB に保存される', async () => {
+		const { pb, update } = createPb()
+		const request = makeEditRequest({
+			content: "<p>updated</p><script>alert('xss')</script>",
+			title: 'XSS test',
+		})
+		const event = {
+			locals: { pb },
+			params: { id: 'rec1' },
+			request,
+		} as unknown as Parameters<NonNullable<typeof actions>['default']>[0]
+
+		await expect(actions.default!(event)).rejects.toMatchObject({ status: 303 })
+		const callArgument = update.mock.calls[0][1] as { content: string }
+		expect(callArgument.content).not.toContain('<script>')
+		expect(callArgument.content).toContain('<p>updated</p>')
+	})
 })

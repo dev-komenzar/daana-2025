@@ -1,3 +1,4 @@
+import { sanitizeHtml } from '$lib/cms/sanitize'
 import { fail, redirect } from '@sveltejs/kit'
 
 import type { Actions, PageServerLoad } from './$types'
@@ -18,7 +19,8 @@ export const actions: Actions = {
 	default: async ({ locals, request }) => {
 		const data = await request.formData()
 		const title = data.get('title')
-		const content = data.get('content') ?? ''
+		const contentRaw = data.get('content')
+		const content = typeof contentRaw === 'string' ? sanitizeHtml(contentRaw) : ''
 		const thumbnail = data.get('thumbnail') ?? ''
 		const pinned = data.get('pinned') === 'on'
 		const draft = data.get('draft') === 'on'

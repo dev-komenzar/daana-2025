@@ -87,4 +87,18 @@ describe('cms/news/new actions.default', () => {
 		const callArgument = create.mock.calls[0][0] as { published_at: string }
 		expect(callArgument.published_at).toBe('')
 	})
+
+	test('content に <script> が含まれる場合、sanitize 後の HTML が PB に保存される', async () => {
+		const { create, pb } = createPb()
+		const request = makeNewRequest({
+			content: "<p>hello</p><script>alert('xss')</script>",
+			title: 'XSS test',
+		})
+		const event = { locals: { pb }, request } as unknown as Parameters<NonNullable<typeof actions>['default']>[0]
+
+		await expect(actions.default!(event)).rejects.toMatchObject({ status: 303 })
+		const callArgument = create.mock.calls[0][0] as { content: string }
+		expect(callArgument.content).not.toContain('<script>')
+		expect(callArgument.content).toContain('<p>hello</p>')
+	})
 })

@@ -98,6 +98,7 @@
 		"@tiptap/html": "^3.22.4",
 		"@tiptap/starter-kit": "^3.22.4",
 		"consola": "^3.4.2",
+		"isomorphic-dompurify": "^3.9.0",
 		"ky": "^1.14.0",
 		"motion": "^12.23.25",
 		"pocketbase": "^0.21.5",
