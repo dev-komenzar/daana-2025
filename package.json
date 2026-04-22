@@ -14,7 +14,10 @@
 		"lint": "eslint --fix .",
 		"lint:ci": "eslint .",
 		"lint:style": "stylelint --fix --ignore-path .gitignore '**/*.{css,svelte}'",
-		"lint:style:ci": "stylelint --ignore-path .gitignore '**/*.{css,svelte}'"
+		"lint:style:ci": "stylelint --ignore-path .gitignore '**/*.{css,svelte}'",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"migrate": "tsx scripts/migrate-microcms.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.1",
@@ -34,8 +37,10 @@
 		"globals": "^16.5.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.6",
+		"msw": "^2.13.4",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.4.1",
+		"sharp": "^0.34.5",
 		"stylelint": "^16.25.0",
 		"stylelint-config-html": "^1.1.0",
 		"stylelint-config-recess-order": "^7.4.0",
@@ -43,6 +48,7 @@
 		"svelte": "^5.53.5",
 		"svelte-check": "^4.3.3",
 		"svelte-meta-tags": "^4.5.0",
+		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.46.3",
 		"vite": "^7.2.2",
@@ -53,6 +59,7 @@
 			"esbuild"
 		],
 		"ignoredBuiltDependencies": [
+			"msw",
 			"sharp"
 		]
 	},
@@ -72,6 +79,7 @@
 		"consola": "^3.4.2",
 		"ky": "^1.14.0",
 		"motion": "^12.23.25",
+		"pocketbase": "^0.21.5",
 		"valibot": "^1.1.0"
 	}
 }

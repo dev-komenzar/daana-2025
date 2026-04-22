@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
 			// インテグレーションテストを実行するための環境変数を設定
 			env: loadEnv(mode, process.cwd(), ''),
 			environment: 'node',
+			exclude: ['**/node_modules/**', '**/.direnv/**', '**/.svelte-kit/**', '**/dist/**'],
 			globals: true,
 		},
 	}

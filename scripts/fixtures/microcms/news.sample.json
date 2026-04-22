@@ -1,0 +1,37 @@
+{
+	"contents": [
+		{
+			"id": "news-001",
+			"title": "テストニュース 1",
+			"content": "<p>本文1</p><img src=\"https://images.microcms-assets.io/assets/sample1.jpg\" alt=\"sample\" />",
+			"publishedAt": "2025-10-01T00:00:00.000Z",
+			"revisedAt": "2025-10-01T00:00:00.000Z",
+			"createdAt": "2025-10-01T00:00:00.000Z",
+			"updatedAt": "2025-10-01T00:00:00.000Z",
+			"pinned": true,
+			"thumbnail": {
+				"url": "https://images.microcms-assets.io/assets/thumb-001.jpg",
+				"width": 1200,
+				"height": 800
+			}
+		},
+		{
+			"id": "news-002",
+			"title": "テストニュース 2",
+			"content": "<p>本文2</p>",
+			"publishedAt": "2025-09-15T00:00:00.000Z",
+			"revisedAt": "2025-09-15T00:00:00.000Z",
+			"createdAt": "2025-09-15T00:00:00.000Z",
+			"updatedAt": "2025-09-15T00:00:00.000Z",
+			"pinned": false,
+			"thumbnail": {
+				"url": "https://images.microcms-assets.io/assets/thumb-002.jpg",
+				"width": 1200,
+				"height": 800
+			}
+		}
+	],
+	"totalCount": 2,
+	"offset": 0,
+	"limit": 10
+}

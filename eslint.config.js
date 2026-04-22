@@ -28,9 +28,21 @@ export default defineConfig(
 			globals: { ...globals.browser, ...globals.node },
 		},
 		rules: {
+			// アンダースコア始まりは「意図的な未使用」として許容する (TDD の stub 等)
+			'@typescript-eslint/no-unused-vars': ['error', { args: 'after-used', argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
 			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
 			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 			'no-undef': 'off',
+		},
+	},
+	{
+		// scripts/ は Node CLI エントリ。process.exit や CLI 慣用略語 (Args) を許容する。
+		files: ['scripts/**/*.ts'],
+		rules: {
+			'unicorn/import-style': 'off',
+			'unicorn/no-process-exit': 'off',
+			'unicorn/prefer-top-level-await': 'off',
+			'unicorn/prevent-abbreviations': 'off',
 		},
 	},
 	{
