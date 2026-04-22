@@ -1,4 +1,6 @@
-import type { PageServerLoad } from './$types'
+import { fail, redirect } from '@sveltejs/kit'
+
+import type { Actions, PageServerLoad } from './$types'
 
 type NewsListRecord = {
 	draft?: boolean
@@ -24,4 +26,16 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		perPage: result.perPage,
 		totalPages: result.totalPages,
 	}
+}
+
+export const actions: Actions = {
+	delete: async ({ locals, request }) => {
+		const data = await request.formData()
+		const id = data.get('id')
+		if (typeof id !== 'string' || !id) {
+			return fail(400, { error: 'id is required' })
+		}
+		await locals.pb.collection('news').delete(id)
+		redirect(303, '/cms/news')
+	},
 }

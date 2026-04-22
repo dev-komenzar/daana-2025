@@ -11,6 +11,10 @@ function formatDate(iso: string | undefined): string {
 	if (!iso) return '—'
 	return iso.slice(0, 10)
 }
+
+function confirmDelete(event: SubmitEvent) {
+	if (!confirm('削除しますか？')) event.preventDefault()
+}
 </script>
 
 <MetaTags title="お知らせ" />
@@ -35,7 +39,25 @@ function formatDate(iso: string | undefined): string {
 					{#if item.draft}<span class="badge badge--draft">下書き</span>{/if}
 				</td>
 				<td>{formatDate(item.published_at)}</td>
-				<td><a href={resolve(`/cms/news/${item.id}/edit`)}>編集</a></td>
+				<td>
+					<a href={resolve(`/cms/news/${item.id}/edit`)}>編集</a>
+					<form
+						method="POST"
+						action="?/delete"
+						class="delete-form"
+						onsubmit={confirmDelete}
+					>
+						<input
+							type="hidden"
+							name="id"
+							value={item.id}
+						/>
+						<button
+							type="submit"
+							data-testid="delete-button">削除</button
+						>
+					</form>
+				</td>
 			</tr>
 		{/each}
 	</tbody>
@@ -100,5 +122,9 @@ function formatDate(iso: string | undefined): string {
 	gap: 12px;
 	align-items: center;
 	margin-top: 16px;
+}
+
+.delete-form {
+	display: inline;
 }
 </style>
