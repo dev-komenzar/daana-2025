@@ -108,17 +108,17 @@ onMount(() => {
 	padding-top: 72px;
 }
 
-.text p {
-	word-break: keep-all;
-	overflow-wrap: break-word;
-}
-
 p + p {
 	margin-top: 0;
 }
 
 p.space {
 	margin-top: 2em;
+}
+
+.text p {
+	word-break: keep-all;
+	overflow-wrap: break-word;
 }
 
 @media (width >= 768px) {

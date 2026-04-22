@@ -169,8 +169,8 @@ h3 {
 }
 
 .works-table {
-	border: none;
 	border-collapse: collapse;
+	border: none;
 }
 
 .works-table tr,
@@ -181,10 +181,6 @@ h3 {
 	border: none;
 }
 
-.works-table tr:not(:last-child) td {
-	padding-bottom: 0.5rem;
-}
-
 .works-table td:first-child {
 	width: 200px;
 	padding-left: 1em;
@@ -193,6 +189,10 @@ h3 {
 
 .works-table td:last-child {
 	min-width: 200px;
+}
+
+.works-table tr:not(:last-child) td {
+	padding-bottom: 0.5rem;
 }
 
 div.space {

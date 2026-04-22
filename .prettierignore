@@ -3,3 +3,5 @@ node_modules
 build
 .svelte-kit
 pnpm-lock.yaml
+pocketbase/pb_migrations
+pocketbase/pb_hooks
