@@ -2,6 +2,7 @@ import { resolve } from 'node:path'
 import PocketBase from 'pocketbase'
 
 import { loadDotenv, readMigrateEnv } from './lib/env'
+import { createMicrocmsClient, fetchAllNews, fetchAllProjects } from './lib/microcms'
 import { parseArgs } from './lib/parse-args'
 
 const HELP_TEXT = `Usage: pnpm migrate [options]
@@ -34,15 +35,32 @@ async function run(): Promise<void> {
 	}
 
 	const env = readMigrateEnv()
-	console.log(`[migrate] PB_URL=${env.pbUrl}`)
-	console.log(`[migrate] authenticating superuser ${env.pbAdminEmail}`)
+	const target = args.only ?? 'all'
+	console.log(`[migrate] PB_URL=${env.pbUrl} target=${target} dry-run=${args.dryRun}`)
 
+	const microcms = createMicrocmsClient({ apiKey: env.microcmsApiKey })
+
+	if (args.dryRun) {
+		if (target === 'all' || target === 'news') {
+			const news = await fetchAllNews(microcms)
+			console.log(`[migrate] news: fetched ${news.length} items (dry-run)`)
+		}
+		if (target === 'all' || target === 'projects') {
+			const projects = await fetchAllProjects(microcms)
+			console.log(`[migrate] projects: fetched ${projects.length} items (dry-run)`)
+		}
+		if (target === 'media') {
+			console.log('[migrate] media: dry-run は news/projects 経由での画像参照のみ集計 (daana-ov9.11 で拡張予定)')
+		}
+		console.log('[migrate] dry-run complete')
+		return
+	}
+
+	console.log(`[migrate] authenticating superuser ${env.pbAdminEmail}`)
 	const pb = new PocketBase(env.pbUrl)
 	await authenticateSuperuser(pb, env.pbAdminEmail, env.pbAdminPassword)
-
 	console.log(`[migrate] superuser auth ok (token valid=${pb.authStore.isValid})`)
-	console.log(`[migrate] dry-run=${args.dryRun} only=${args.only ?? 'all'}`)
-	console.log('[migrate] TODO: news/projects/media migration (daana-ov9.2〜9)')
+	console.log('[migrate] TODO: news/projects/media upsert (daana-ov9.5〜9)')
 }
 
 run().catch((error: unknown) => {
