@@ -10,6 +10,35 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        # Playwright 同梱 chromium-headless-shell が dlopen するランタイム共有ライブラリ。
+        # NixOS では /usr/lib 系の共有ライブラリが存在しないため LD_LIBRARY_PATH で渡す。
+        playwrightLibs = with pkgs; [
+          glib
+          nss
+          nspr
+          dbus.lib
+          atk
+          at-spi2-atk
+          at-spi2-core
+          cups.lib
+          libdrm
+          expat
+          libxkbcommon
+          libgbm
+          mesa
+          cairo
+          pango
+          alsa-lib
+          fontconfig.lib
+          freetype
+          xorg.libX11
+          xorg.libXcomposite
+          xorg.libXdamage
+          xorg.libXext
+          xorg.libXfixes
+          xorg.libXrandr
+          xorg.libxcb
+        ];
       in
       {
         devShells.default = pkgs.mkShell {
@@ -27,10 +56,13 @@
             echo "pnpm: $(pnpm --version)"
           '';
 
-          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+          # Playwright 公式バイナリは NixOS 非対応のためホスト検証をスキップ。
+          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
+
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ([
             pkgs.stdenv.cc.cc.lib
             pkgs.vips
-          ];
+          ] ++ playwrightLibs);
         };
       }
     );
