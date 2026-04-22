@@ -1,0 +1,21 @@
+{
+	"contents": [
+		{
+			"id": "proj-001",
+			"title": "テストプロジェクト 1",
+			"description": "プロジェクトの説明1",
+			"publishedAt": "2025-10-01T00:00:00.000Z",
+			"revisedAt": "2025-10-01T00:00:00.000Z",
+			"createdAt": "2025-10-01T00:00:00.000Z",
+			"updatedAt": "2025-10-01T00:00:00.000Z",
+			"thumbnail": {
+				"url": "https://images.microcms-assets.io/assets/proj-thumb-001.jpg",
+				"width": 1600,
+				"height": 900
+			}
+		}
+	],
+	"totalCount": 1,
+	"offset": 0,
+	"limit": 10
+}
