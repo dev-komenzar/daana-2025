@@ -1,3 +1,4 @@
+import { CMS_SOURCE } from '$env/static/private'
 import consola from 'consola'
 import * as v from 'valibot'
 
@@ -6,6 +7,7 @@ import type { ProjectItem, ProjectItemKey, ReturnProjectApi } from '../domain/sc
 
 import { api, isApiConfigured } from '../../news/infra/client'
 import { ReturnProjectApiSchema } from '../domain/schema'
+import { pbProjectRepository } from './pb-repository'
 
 class MicroCmsProjectRepository implements IProjectRepository {
 	async getProjects(fields: ProjectItemKey[]): Promise<ProjectItem[]> {
@@ -31,4 +33,6 @@ class MicroCmsProjectRepository implements IProjectRepository {
 	}
 }
 
-export const projectRepository: IProjectRepository = new MicroCmsProjectRepository()
+export const microCmsProjectRepository: IProjectRepository = new MicroCmsProjectRepository()
+
+export const projectRepository: IProjectRepository = CMS_SOURCE === 'pocketbase' ? pbProjectRepository : microCmsProjectRepository

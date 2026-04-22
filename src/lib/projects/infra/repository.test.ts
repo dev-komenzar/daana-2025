@@ -4,7 +4,9 @@ import * as v from 'valibot'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 
 vi.mock('$env/static/private', () => ({
+	CMS_SOURCE: 'microcms',
 	MICROCMS_API_KEY: 'dummy-key',
+	PB_URL: 'http://localhost:8090',
 }))
 
 import type { MockInstance } from 'vitest'
