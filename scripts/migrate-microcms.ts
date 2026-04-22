@@ -22,8 +22,11 @@ Environment (load from .env in current working directory):
   PB_ADMIN_PASSWORD   PocketBase superuser password
 `
 
+// PocketBase サーバは v0.22 系 (Dockerfile で固定)。SDK は 0.23+ で `_superusers`
+// コレクションに移行したが、v0.22 互換の `pb.admins.authWithPassword` が SDK にまだ残っており、
+// そちらを利用する。
 export async function authenticateSuperuser(pb: PocketBase, email: string, password: string): Promise<void> {
-	await pb.collection('_superusers').authWithPassword(email, password)
+	await pb.admins.authWithPassword(email, password)
 }
 
 async function run(): Promise<void> {
