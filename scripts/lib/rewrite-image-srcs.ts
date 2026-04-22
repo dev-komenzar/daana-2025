@@ -1,4 +1,19 @@
 /**
+ * HTML 内の <img src="..."> から URL を重複排除して抽出する。
+ * 本文中の画像参照を媒体 repo に寄せるため、移行スクリプトで使用する。
+ */
+export function extractImageSrcs(html: string): string[] {
+	if (!html) return []
+	const pattern = /<img\b[^>]*?\ssrc\s*=\s*["']([^"']+)["']/gi
+	const seen = new Set<string>()
+	for (const match of html.matchAll(pattern)) {
+		const url = match[1]
+		if (url) seen.add(url)
+	}
+	return [...seen]
+}
+
+/**
  * HTML 本文内の <img src="..."> を urlMap に従って置換する純粋関数。
  * daana-275 Red → daana-ov9.6 Green 実装。
  *
