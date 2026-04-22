@@ -1,6 +1,8 @@
 <script lang="ts">
 import { Editor } from '@tiptap/core'
 import { Color } from '@tiptap/extension-color'
+import { Image } from '@tiptap/extension-image'
+import { Table, TableCell, TableHeader, TableRow } from '@tiptap/extension-table'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { StarterKit } from '@tiptap/starter-kit'
 import { onDestroy, onMount } from 'svelte'
@@ -20,7 +22,7 @@ onMount(() => {
 	editor = new Editor({
 		content,
 		element: editorElement,
-		extensions: [StarterKit, TextStyle, Color],
+		extensions: [StarterKit, TextStyle, Color, Image, Table.configure({ resizable: true }), TableCell, TableHeader, TableRow],
 		onUpdate: ({ editor: instance }) => onUpdate?.(instance.getHTML()),
 	})
 })
