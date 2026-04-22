@@ -36,6 +36,16 @@ export default defineConfig(
 		},
 	},
 	{
+		// scripts/ は Node CLI エントリ。process.exit や CLI 慣用略語 (Args) を許容する。
+		files: ['scripts/**/*.ts'],
+		rules: {
+			'unicorn/import-style': 'off',
+			'unicorn/no-process-exit': 'off',
+			'unicorn/prefer-top-level-await': 'off',
+			'unicorn/prevent-abbreviations': 'off',
+		},
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parserOptions: {

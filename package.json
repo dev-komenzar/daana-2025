@@ -16,7 +16,8 @@
 		"lint:style": "stylelint --fix --ignore-path .gitignore '**/*.{css,svelte}'",
 		"lint:style:ci": "stylelint --ignore-path .gitignore '**/*.{css,svelte}'",
 		"test": "vitest run",
-		"test:watch": "vitest"
+		"test:watch": "vitest",
+		"migrate": "tsx scripts/migrate-microcms.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.1",
@@ -47,6 +48,7 @@
 		"svelte": "^5.53.5",
 		"svelte-check": "^4.3.3",
 		"svelte-meta-tags": "^4.5.0",
+		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.46.3",
 		"vite": "^7.2.2",
@@ -77,6 +79,7 @@
 		"consola": "^3.4.2",
 		"ky": "^1.14.0",
 		"motion": "^12.23.25",
+		"pocketbase": "^0.26.8",
 		"valibot": "^1.1.0"
 	}
 }
