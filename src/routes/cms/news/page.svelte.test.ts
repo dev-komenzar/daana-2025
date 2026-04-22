@@ -49,6 +49,22 @@ describe('cms/news +page.svelte', () => {
 		expect(getAllByText('固定')).toHaveLength(1)
 	})
 
+	test('draft: false + 未来の published_at のレコードに「予約公開」バッジが表示される', () => {
+		const future = new Date(Date.now() + 86_400_000).toISOString()
+		const items = [makeItem({ draft: false, id: '1', published_at: future, title: '予約記事' })]
+		const { getAllByText, queryAllByText } = render(Page, { data: makeData(items, 1, 1) })
+
+		expect(getAllByText('予約公開')).toHaveLength(1)
+		expect(queryAllByText('下書き')).toHaveLength(0)
+	})
+
+	test('draft: false + 過去の published_at のレコードには「予約公開」バッジが表示されない', () => {
+		const items = [makeItem({ draft: false, id: '1', published_at: '2020-01-01T00:00:00.000Z', title: '公開済み記事' })]
+		const { queryAllByText } = render(Page, { data: makeData(items, 1, 1) })
+
+		expect(queryAllByText('予約公開')).toHaveLength(0)
+	})
+
 	test('各行に /cms/news/<id>/edit へのリンクが存在する', () => {
 		const items = [makeItem({ id: 'abc123', title: '記事' }), makeItem({ id: 'xyz789', title: '記事2' })]
 		const { getAllByRole } = render(Page, { data: makeData(items, 1, 1) })

@@ -4,6 +4,8 @@ import { MetaTags } from 'svelte-meta-tags'
 
 import type { PageData } from './$types'
 
+import { statusOf } from './status'
+
 type Properties = { data: PageData }
 let { data }: Properties = $props()
 
@@ -37,6 +39,7 @@ function confirmDelete(event: SubmitEvent) {
 				<td>
 					{#if item.pinned}<span class="badge badge--pinned">固定</span>{/if}
 					{#if item.draft}<span class="badge badge--draft">下書き</span>{/if}
+					{#if statusOf(item) === 'scheduled'}<span class="badge badge--scheduled">予約公開</span>{/if}
 				</td>
 				<td>{formatDate(item.published_at)}</td>
 				<td>
@@ -115,6 +118,11 @@ function confirmDelete(event: SubmitEvent) {
 .badge--draft {
 	color: #7a0000;
 	background: #fdd;
+}
+
+.badge--scheduled {
+	color: #fff;
+	background: #c88000;
 }
 
 .pagination {

@@ -4,6 +4,7 @@ import type { INewsRepository } from '../domain/repository'
 import type { NewsItem, NewsItemKey } from '../domain/schema'
 
 import { buildPbFileUrl, pbBaseUrl, pbClient } from '../../pb/client'
+import { isPubliclyVisible } from '../domain/visibility'
 
 type PbCollectionLike = {
 	getFirstListItem: (filter: string, options?: Record<string, unknown>) => Promise<PbRecord>
@@ -53,6 +54,7 @@ export class PocketBaseNewsRepository implements INewsRepository {
 			const page = Math.floor(offset / limit) + 1
 			const result = await this.pb.collection(NEWS_COLLECTION).getList(page, limit, {
 				expand: 'thumbnail',
+				filter: 'draft != true && (published_at = "" || published_at <= @now)',
 				sort: '-published_at',
 			})
 			consola.info(`Loaded ${result.items.length} news from PocketBase`)
@@ -66,7 +68,8 @@ export class PocketBaseNewsRepository implements INewsRepository {
 	async getNewsById(id: string): Promise<NewsItem | undefined> {
 		try {
 			const record = await this.pb.collection(NEWS_COLLECTION).getOne(id, { expand: 'thumbnail' })
-			return this.toNewsItem(record)
+			const item = this.toNewsItem(record)
+			return isPubliclyVisible(item) ? item : undefined
 		} catch (error) {
 			if (isNotFound(error)) return undefined
 			consola.error(`Error fetching news ${id} from PocketBase:`, error)
@@ -78,7 +81,8 @@ export class PocketBaseNewsRepository implements INewsRepository {
 		try {
 			const escaped = originalId.replaceAll('"', String.raw`\"`)
 			const record = await this.pb.collection(NEWS_COLLECTION).getFirstListItem(`original_id="${escaped}"`, { expand: 'thumbnail' })
-			return this.toNewsItem(record)
+			const item = this.toNewsItem(record)
+			return isPubliclyVisible(item) ? item : undefined
 		} catch (error) {
 			if (isNotFound(error)) return undefined
 			consola.error(`Error fetching news by originalId ${originalId} from PocketBase:`, error)
@@ -90,7 +94,7 @@ export class PocketBaseNewsRepository implements INewsRepository {
 		try {
 			const result = await this.pb.collection(NEWS_COLLECTION).getList(1, limit, {
 				expand: 'thumbnail',
-				filter: 'pinned=true',
+				filter: 'pinned=true && draft != true && (published_at = "" || published_at <= @now)',
 				sort: '-published_at',
 			})
 			consola.info(`Loaded ${result.items.length} pinned news from PocketBase`)
