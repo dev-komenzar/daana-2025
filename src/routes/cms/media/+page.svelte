@@ -7,6 +7,10 @@ import type { PageData } from './$types'
 type Properties = { data: PageData }
 let { data }: Properties = $props()
 
+function confirmDelete(event: SubmitEvent) {
+	if (!confirm('削除しますか？')) event.preventDefault()
+}
+
 function paginationHref(pageNumber: number) {
 	// eslint-disable-next-line svelte/prefer-svelte-reactivity -- 非リアクティブな純関数。URLSearchParams で十分
 	const parameters = new URLSearchParams()
@@ -60,6 +64,22 @@ function paginationHref(pageNumber: number) {
 				>
 					{item.fileName}
 				</p>
+				<form
+					method="POST"
+					action="?/delete"
+					class="delete-form"
+					onsubmit={confirmDelete}
+				>
+					<input
+						type="hidden"
+						name="id"
+						value={item.id}
+					/>
+					<button
+						type="submit"
+						data-testid="delete-button">削除</button
+					>
+				</form>
 			</li>
 		{/each}
 	</ul>

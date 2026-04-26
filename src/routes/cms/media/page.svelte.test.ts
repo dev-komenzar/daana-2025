@@ -1,7 +1,7 @@
 import type { AuthModel } from 'pocketbase'
 
 import { render } from '@testing-library/svelte'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 
 import Page from './+page.svelte'
 
@@ -106,5 +106,49 @@ describe('cms/media +page.svelte', () => {
 		const { getByTestId } = render(Page, { data: makeData([], 1, 0) })
 
 		expect(getByTestId('upload-link')).toHaveAttribute('href', '/cms/media/upload')
+	})
+
+	test('各カードに削除ボタンが存在する', () => {
+		const items = [makeItem({ id: 'abc' }), makeItem({ id: 'xyz' })]
+		const { getAllByTestId } = render(Page, { data: makeData(items, 1, 1) })
+
+		expect(getAllByTestId('delete-button')).toHaveLength(2)
+	})
+
+	test('削除フォームが ?/delete を action に持ち、id が hidden input に含まれる', () => {
+		const items = [makeItem({ id: 'abc123' })]
+		const { container } = render(Page, { data: makeData(items, 1, 1) })
+
+		const form = container.querySelector('form[action="?/delete"]') as HTMLFormElement
+		expect(form).toBeTruthy()
+		const hidden = form.querySelector('input[name="id"]') as HTMLInputElement
+		expect(hidden.value).toBe('abc123')
+	})
+
+	test('削除ボタンを押すと confirm が呼ばれ、キャンセル時は preventDefault される', () => {
+		const items = [makeItem({ id: 'abc123' })]
+		const confirmSpy = vi.spyOn(globalThis, 'confirm').mockReturnValue(false)
+		const { container } = render(Page, { data: makeData(items, 1, 1) })
+
+		const form = container.querySelector('form[action="?/delete"]') as HTMLFormElement
+		const submitEvent = new Event('submit', { bubbles: true, cancelable: true })
+		form.dispatchEvent(submitEvent)
+
+		expect(confirmSpy).toHaveBeenCalled()
+		expect(submitEvent.defaultPrevented).toBe(true)
+		confirmSpy.mockRestore()
+	})
+
+	test('削除ボタンを押して確定すると preventDefault されない', () => {
+		const items = [makeItem({ id: 'abc123' })]
+		const confirmSpy = vi.spyOn(globalThis, 'confirm').mockReturnValue(true)
+		const { container } = render(Page, { data: makeData(items, 1, 1) })
+
+		const form = container.querySelector('form[action="?/delete"]') as HTMLFormElement
+		const submitEvent = new Event('submit', { bubbles: true, cancelable: true })
+		form.dispatchEvent(submitEvent)
+
+		expect(submitEvent.defaultPrevented).toBe(false)
+		confirmSpy.mockRestore()
 	})
 })
