@@ -53,7 +53,6 @@ jobs:
           tags: ${{ env.IMAGE_NAME }}:latest
           build-args: |
             MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }}
-            PB_URL=https://pb.samgha.org
             CMS_SOURCE=pocketbase
           cache-from: type=gha
           cache-to: type=gha,mode=max

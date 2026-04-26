@@ -17,11 +17,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ARG MICROCMS_API_KEY=""
-ARG PB_URL="https://pb.samgha.org"
 ARG CMS_SOURCE="pocketbase"
 
 ENV MICROCMS_API_KEY=$MICROCMS_API_KEY \
-    PB_URL=$PB_URL \
     CMS_SOURCE=$CMS_SOURCE
 
 RUN pnpm build

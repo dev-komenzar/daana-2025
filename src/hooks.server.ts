@@ -1,11 +1,10 @@
 import type { Handle } from '@sveltejs/kit'
 
-import { PB_URL } from '$env/static/private'
 import consola from 'consola'
 import PocketBase from 'pocketbase'
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const pb = new PocketBase(PB_URL)
+	const pb = new PocketBase(process.env.PB_URL ?? 'http://localhost:8090')
 	pb.authStore.loadFromCookie(event.request.headers.get('cookie') ?? '')
 
 	try {
