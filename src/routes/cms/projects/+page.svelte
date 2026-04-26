@@ -48,7 +48,7 @@ function confirmDelete(event: SubmitEvent) {
 				<td>{formatType(item.type)}</td>
 				<td>
 					{#if item.draft}<span
-							class="badge badge--draft"
+							class="badge badge-draft"
 							data-testid="badge-draft-{item.id}">下書き</span
 						>{/if}
 				</td>
@@ -108,8 +108,8 @@ function confirmDelete(event: SubmitEvent) {
 <style>
 .projects-table {
 	width: 100%;
-	border-collapse: collapse;
 	margin-top: 16px;
+	border-collapse: collapse;
 }
 
 .projects-table th,
@@ -127,7 +127,7 @@ function confirmDelete(event: SubmitEvent) {
 	border-radius: 12px;
 }
 
-.badge--draft {
+.badge-draft {
 	color: #7a0000;
 	background: #fdd;
 }

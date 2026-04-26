@@ -42,9 +42,9 @@ function confirmDelete(event: SubmitEvent) {
 			<tr>
 				<td>{item.title ?? '(無題)'}</td>
 				<td>
-					{#if item.pinned}<span class="badge badge--pinned">固定</span>{/if}
-					{#if item.draft}<span class="badge badge--draft">下書き</span>{/if}
-					{#if statusOf(item) === 'scheduled'}<span class="badge badge--scheduled">予約公開</span>{/if}
+					{#if item.pinned}<span class="badge badge-pinned">固定</span>{/if}
+					{#if item.draft}<span class="badge badge-draft">下書き</span>{/if}
+					{#if statusOf(item) === 'scheduled'}<span class="badge badge-scheduled">予約公開</span>{/if}
 				</td>
 				<td>{formatDate(item.published_at)}</td>
 				<td>
@@ -115,17 +115,17 @@ function confirmDelete(event: SubmitEvent) {
 	border-radius: 12px;
 }
 
-.badge--pinned {
+.badge-pinned {
 	color: #fff;
 	background: #08192d;
 }
 
-.badge--draft {
+.badge-draft {
 	color: #7a0000;
 	background: #fdd;
 }
 
-.badge--scheduled {
+.badge-scheduled {
 	color: #fff;
 	background: #c88000;
 }

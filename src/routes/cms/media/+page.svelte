@@ -159,8 +159,8 @@ function paginationHref(pageNumber: number) {
 
 .filename {
 	overflow: hidden;
-	font-size: 12px;
 	text-overflow: ellipsis;
+	font-size: 12px;
 	white-space: nowrap;
 }
 

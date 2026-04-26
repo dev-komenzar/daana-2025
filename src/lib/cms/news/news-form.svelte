@@ -133,12 +133,12 @@ function toLocalDateTime(iso?: string): string {
 		<span>未保存の下書きがあります（{savedDraft.savedAt.slice(0, 16).replace('T', ' ')}）</span>
 		<button
 			type="button"
-			class="draft-btn draft-btn--restore"
+			class="draft-btn draft-btn-restore"
 			onclick={handleRestoreDraft}>復元</button
 		>
 		<button
 			type="button"
-			class="draft-btn draft-btn--discard"
+			class="draft-btn draft-btn-discard"
 			onclick={handleDiscardDraft}>破棄</button
 		>
 	</div>
@@ -295,12 +295,12 @@ button[type='submit'] {
 	border-radius: 3px;
 }
 
-.draft-btn--restore {
+.draft-btn-restore {
 	color: #444;
 	background: #fff;
 }
 
-.draft-btn--discard {
+.draft-btn-discard {
 	color: #999;
 	background: transparent;
 }

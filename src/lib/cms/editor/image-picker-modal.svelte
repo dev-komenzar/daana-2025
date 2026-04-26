@@ -64,9 +64,9 @@ function handleDialogClick(event: MouseEvent) {
 
 <style>
 dialog {
-	padding: 24px;
 	width: min(800px, 90vw);
 	max-height: 80vh;
+	padding: 24px;
 	overflow-y: auto;
 	border: none;
 	border-radius: 8px;
@@ -121,8 +121,8 @@ header {
 
 .alt {
 	overflow: hidden;
-	font-size: 11px;
 	text-overflow: ellipsis;
+	font-size: 11px;
 	white-space: nowrap;
 }
 </style>

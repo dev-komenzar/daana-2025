@@ -68,8 +68,8 @@ let showNav = $derived(shouldShowNav(page.url.pathname, data.user?.role))
 
 .cms-sidenav {
 	display: flex;
-	flex-direction: column;
 	flex-shrink: 0;
+	flex-direction: column;
 	justify-content: space-between;
 	width: 200px;
 	min-height: 60vh;
