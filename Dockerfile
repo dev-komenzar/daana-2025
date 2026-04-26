@@ -8,7 +8,7 @@ FROM node:22-alpine AS prod-deps
 WORKDIR /app
 RUN corepack enable pnpm
 COPY package.json pnpm-lock.yaml ./
-RUN HUSKY=0 pnpm install --frozen-lockfile --prod
+RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
 FROM node:22-alpine AS builder
 WORKDIR /app
