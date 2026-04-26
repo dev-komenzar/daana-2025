@@ -49,3 +49,6 @@ jobs:
 
       - name: Stylelint (pnpm lint:style:ci)
         run: pnpm lint:style:ci
+
+      - name: Unit test (pnpm test:unit)
+        run: pnpm test:unit

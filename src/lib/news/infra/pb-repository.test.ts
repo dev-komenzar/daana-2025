@@ -41,7 +41,7 @@ const PB_BASE = 'http://localhost:8090'
 
 describe('PocketBaseNewsRepository', () => {
 	describe('getNews', () => {
-		test('offset/limit から page/perPage を計算し、published_at 降順で getList を呼ぶ', async () => {
+		test('offset/limit から page/perPage を計算し、公開フィルタ + published_at 降順で getList を呼ぶ', async () => {
 			const pb = createPbStub({
 				getList: vi.fn().mockResolvedValue({ items: [], page: 2, perPage: 10, totalItems: 0, totalPages: 0 }),
 			})
@@ -56,6 +56,7 @@ describe('PocketBaseNewsRepository', () => {
 			expect(perPage).toBe(10)
 			expect(options).toMatchObject({
 				expand: 'thumbnail',
+				filter: 'draft != true && (published_at = "" || published_at <= @now)',
 				sort: '-published_at',
 			})
 		})
@@ -194,10 +195,50 @@ describe('PocketBaseNewsRepository', () => {
 			const item = await repo.getNewsById('missing')
 			expect(item).toBeUndefined()
 		})
+
+		test('draft: true のレコードは undefined を返す (可視性チェック)', async () => {
+			const pb = createPbStub({
+				getOne: vi.fn().mockResolvedValue({
+					created: '2026-04-22 05:50:12.897Z',
+					draft: true,
+					id: 'abc',
+					original_id: '',
+					pinned: false,
+					published_at: '2020-01-01 00:00:00.000Z',
+					revised_at: '',
+					thumbnail: '',
+					title: '下書き',
+					updated: '2026-04-22 05:50:12.897Z',
+				}),
+			})
+			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
+			const item = await repo.getNewsById('abc')
+			expect(item).toBeUndefined()
+		})
+
+		test('未来の published_at (予約公開) のレコードは undefined を返す', async () => {
+			const pb = createPbStub({
+				getOne: vi.fn().mockResolvedValue({
+					created: '2020-01-01 00:00:00.000Z',
+					draft: false,
+					id: 'abc',
+					original_id: '',
+					pinned: false,
+					published_at: '2099-01-01 00:00:00.000Z',
+					revised_at: '',
+					thumbnail: '',
+					title: '予約',
+					updated: '2020-01-01 00:00:00.000Z',
+				}),
+			})
+			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
+			const item = await repo.getNewsById('abc')
+			expect(item).toBeUndefined()
+		})
 	})
 
 	describe('getPinnedNews', () => {
-		test('pinned=true フィルタで getList を呼ぶ', async () => {
+		test('pinned=true + 公開フィルタで getList を呼ぶ', async () => {
 			const pb = createPbStub({
 				getList: vi.fn().mockResolvedValue({ items: [], page: 1, perPage: 5, totalItems: 0, totalPages: 0 }),
 			})
@@ -211,7 +252,7 @@ describe('PocketBaseNewsRepository', () => {
 			expect(perPage).toBe(5)
 			expect(options).toMatchObject({
 				expand: 'thumbnail',
-				filter: 'pinned=true',
+				filter: 'pinned=true && draft != true && (published_at = "" || published_at <= @now)',
 				sort: '-published_at',
 			})
 		})
@@ -268,6 +309,26 @@ describe('PocketBaseNewsRepository', () => {
 			})
 			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
 			const item = await repo.getNewsByOriginalId('missing')
+			expect(item).toBeUndefined()
+		})
+
+		test('draft: true のレコードは undefined を返す (可視性チェック)', async () => {
+			const pb = createPbStub({
+				getFirstListItem: vi.fn().mockResolvedValue({
+					created: '2020-01-01 00:00:00.000Z',
+					draft: true,
+					id: 'abc',
+					original_id: 'old-1',
+					pinned: false,
+					published_at: '2020-01-01 00:00:00.000Z',
+					revised_at: '',
+					thumbnail: '',
+					title: '下書き',
+					updated: '2020-01-01 00:00:00.000Z',
+				}),
+			})
+			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
+			const item = await repo.getNewsByOriginalId('old-1')
 			expect(item).toBeUndefined()
 		})
 
