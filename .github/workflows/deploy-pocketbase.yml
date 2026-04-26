@@ -60,4 +60,4 @@ jobs:
     steps:
       - name: Trigger Coolify webhook
         run: |
-          curl -fsSL -X GET "${{ secrets.COOLIFY_WEBHOOK_PB }}"
+          curl -fsSL -X POST "${{ secrets.COOLIFY_WEBHOOK_PB }}"
