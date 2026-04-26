@@ -25,6 +25,12 @@ function makeData(items: NewsItem[], page: number, totalPages: number) {
 }
 
 describe('cms/news +page.svelte', () => {
+	test('「新規作成」リンクが /cms/news/new を指す', () => {
+		const { getByTestId } = render(Page, { data: makeData([], 1, 1) })
+
+		expect(getByTestId('create-link')).toHaveAttribute('href', '/cms/news/new')
+	})
+
 	test('テーブルが items の行数分レンダリングされる', () => {
 		const items = [makeItem({ id: '1', title: 'ニュース1' }), makeItem({ id: '2', title: 'ニュース2' })]
 		const { getAllByRole } = render(Page, { data: makeData(items, 1, 1) })

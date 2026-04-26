@@ -23,6 +23,11 @@ function confirmDelete(event: SubmitEvent) {
 
 <h1>お知らせ</h1>
 
+<a
+	href={resolve('/cms/news/new')}
+	data-testid="create-link">新規作成</a
+>
+
 <table class="news-table">
 	<thead>
 		<tr>

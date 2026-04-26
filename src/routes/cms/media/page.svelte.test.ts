@@ -101,4 +101,10 @@ describe('cms/media +page.svelte', () => {
 
 		expect(queryAllByRole('img')).toHaveLength(0)
 	})
+
+	test('「+ アップロード」リンクが /cms/media/upload を指す', () => {
+		const { getByTestId } = render(Page, { data: makeData([], 1, 0) })
+
+		expect(getByTestId('upload-link')).toHaveAttribute('href', '/cms/media/upload')
+	})
 })

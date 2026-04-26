@@ -26,7 +26,10 @@ function confirmDelete(event: SubmitEvent) {
 
 <h1>プロジェクト</h1>
 
-<a href={resolve('/cms/projects/new')}>新規作成</a>
+<a
+	href={resolve('/cms/projects/new')}
+	data-testid="create-link">新規作成</a
+>
 
 <table class="projects-table">
 	<thead>
@@ -44,11 +47,17 @@ function confirmDelete(event: SubmitEvent) {
 				<td>{item.title ?? '(無題)'}</td>
 				<td>{formatType(item.type)}</td>
 				<td>
-					{#if item.draft}<span class="badge badge--draft">下書き</span>{/if}
+					{#if item.draft}<span
+							class="badge badge--draft"
+							data-testid="badge-draft-{item.id}">下書き</span
+						>{/if}
 				</td>
 				<td>{formatDate(item.published_at)}</td>
 				<td>
-					<a href={resolve(`/cms/projects/${item.id}/edit`)}>編集</a>
+					<a
+						href={resolve(`/cms/projects/${item.id}/edit`)}
+						data-testid="edit-link-{item.id}">編集</a
+					>
 					<form
 						method="POST"
 						action="?/delete"
@@ -80,7 +89,8 @@ function confirmDelete(event: SubmitEvent) {
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- ページ遷移先のパスは resolve() 済み、query 文字列のみ動的 -->
 			<a
 				href={`${resolve('/cms/projects')}?page=${data.page - 1}`}
-				rel="prev">前へ</a
+				rel="prev"
+				data-testid="page-prev">前へ</a
 			>
 		{/if}
 		<span>{data.page} / {data.totalPages}</span>
@@ -88,7 +98,8 @@ function confirmDelete(event: SubmitEvent) {
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- ページ遷移先のパスは resolve() 済み、query 文字列のみ動的 -->
 			<a
 				href={`${resolve('/cms/projects')}?page=${data.page + 1}`}
-				rel="next">次へ</a
+				rel="next"
+				data-testid="page-next">次へ</a
 			>
 		{/if}
 	</nav>

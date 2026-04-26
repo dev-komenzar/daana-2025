@@ -20,7 +20,10 @@ function paginationHref(pageNumber: number) {
 
 <h1>メディア</h1>
 
-<a href={resolve('/cms/media/upload')}>+ アップロード</a>
+<a
+	href={resolve('/cms/media/upload')}
+	data-testid="upload-link">+ アップロード</a
+>
 
 <form
 	method="GET"
