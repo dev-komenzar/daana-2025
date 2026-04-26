@@ -3,8 +3,12 @@ import type { Editor } from '@tiptap/core'
 
 import BubbleMenu from '$lib/cms/editor/bubble-menu.svelte'
 import ImagePickerModal, { type MediaItem } from '$lib/cms/editor/image-picker-modal.svelte'
+import SlashMenu from '$lib/cms/editor/slash-menu.svelte'
 import StaticToolbar from '$lib/cms/editor/static-toolbar.svelte'
 import TipTapEditor from '$lib/cms/editor/tiptap-editor.svelte'
+import { onDestroy, onMount } from 'svelte'
+
+type Draft = { content: string; savedAt: string; title: string }
 
 type Initial = {
 	content?: string
@@ -16,22 +20,76 @@ type Initial = {
 }
 
 type Properties = {
+	draftKey?: string
 	error?: string
 	initial?: Initial
 	mediaItems: MediaItem[]
 	submitLabel: string
 }
 
-let { error: errorMessage, initial = {}, mediaItems, submitLabel }: Properties = $props()
+let { draftKey, error: errorMessage, initial = {}, mediaItems, submitLabel }: Properties = $props()
 
 let editor = $state<Editor | undefined>()
 let formElement: HTMLFormElement | undefined = $state()
 let contentInput: HTMLInputElement | undefined = $state()
 let modalOpen = $state(false)
+let savedDraft = $state<Draft | undefined>()
+let debounceTimer: ReturnType<typeof setTimeout> | undefined
+
+onMount(() => {
+	if (!draftKey) return
+	const raw = localStorage.getItem(draftKey)
+	if (!raw) return
+	try {
+		const parsed = JSON.parse(raw) as Draft
+		if (parsed.savedAt) savedDraft = parsed
+	} catch {
+		// ignore corrupted data
+	}
+})
+
+onDestroy(() => {
+	clearTimeout(debounceTimer)
+})
+
+function saveDraft() {
+	if (!draftKey) return
+	const titleInput = formElement?.querySelector<HTMLInputElement>('input[name="title"]')
+	const draft: Draft = {
+		content: editor?.getHTML() ?? '',
+		savedAt: new Date().toISOString(),
+		title: titleInput?.value ?? '',
+	}
+	localStorage.setItem(draftKey, JSON.stringify(draft))
+}
+
+function clearDraft() {
+	if (draftKey) localStorage.removeItem(draftKey)
+}
+
+function handleEditorUpdate() {
+	if (!draftKey) return
+	clearTimeout(debounceTimer)
+	debounceTimer = setTimeout(saveDraft, 5000)
+}
+
+function handleRestoreDraft() {
+	if (!savedDraft || !editor) return
+	const titleInput = formElement?.querySelector<HTMLInputElement>('input[name="title"]')
+	if (titleInput && savedDraft.title) titleInput.value = savedDraft.title
+	editor.commands.setContent(savedDraft.content)
+	savedDraft = undefined
+}
+
+function handleDiscardDraft() {
+	clearDraft()
+	savedDraft = undefined
+}
 
 function handleSubmit() {
 	if (!editor || !contentInput) return
 	contentInput.value = editor.getHTML()
+	clearDraft()
 }
 
 function handleSave() {
@@ -65,6 +123,25 @@ function toLocalDateTime(iso?: string): string {
 	>
 		{errorMessage}
 	</p>
+{/if}
+
+{#if savedDraft}
+	<div
+		class="draft-banner"
+		role="status"
+	>
+		<span>未保存の下書きがあります（{savedDraft.savedAt.slice(0, 16).replace('T', ' ')}）</span>
+		<button
+			type="button"
+			class="draft-btn draft-btn--restore"
+			onclick={handleRestoreDraft}>復元</button
+		>
+		<button
+			type="button"
+			class="draft-btn draft-btn--discard"
+			onclick={handleDiscardDraft}>破棄</button
+		>
+	</div>
 {/if}
 
 <form
@@ -127,10 +204,12 @@ function toLocalDateTime(iso?: string): string {
 			onSave={handleSave}
 		/>
 		<BubbleMenu {editor} />
+		<SlashMenu {editor} />
 	{/if}
 	<TipTapEditor
 		bind:editor
 		content={initial.content ?? ''}
+		onUpdate={handleEditorUpdate}
 	/>
 
 	<input
@@ -189,5 +268,40 @@ button[type='submit'] {
 	color: #7a0000;
 	background: #fdd;
 	border-radius: 4px;
+}
+
+.draft-banner {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	max-width: 800px;
+	padding: 8px 12px;
+	color: #5a4000;
+	background: #fff8d6;
+	border: 1px solid #e8c840;
+	border-radius: 4px;
+}
+
+.draft-banner span {
+	flex: 1;
+	font-size: 13px;
+}
+
+.draft-btn {
+	padding: 4px 10px;
+	font-size: 12px;
+	cursor: pointer;
+	border: 1px solid currentcolor;
+	border-radius: 3px;
+}
+
+.draft-btn--restore {
+	color: #444;
+	background: #fff;
+}
+
+.draft-btn--discard {
+	color: #999;
+	background: transparent;
 }
 </style>

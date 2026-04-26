@@ -14,4 +14,5 @@ let { data, form }: { data: PageData; form?: ActionData } = $props()
 	submitLabel="更新"
 	error={form?.error}
 	initial={data.record}
+	draftKey={`news:${data.record.id}`}
 />

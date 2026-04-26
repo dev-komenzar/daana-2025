@@ -7,6 +7,9 @@ import { TextStyle } from '@tiptap/extension-text-style'
 import { StarterKit } from '@tiptap/starter-kit'
 import { onDestroy, onMount } from 'svelte'
 
+import { FigureExtension } from './figure-extension'
+import { HeadingWithId } from './heading-with-id'
+
 type Properties = {
 	content?: string
 	editor?: Editor
@@ -22,7 +25,7 @@ onMount(() => {
 	editor = new Editor({
 		content,
 		element: editorElement,
-		extensions: [StarterKit, TextStyle, Color, Image, Table.configure({ resizable: true }), TableCell, TableHeader, TableRow],
+		extensions: [StarterKit.configure({ heading: false }), HeadingWithId, TextStyle, Color, Image, Table.configure({ resizable: true }), TableCell, TableHeader, TableRow, FigureExtension],
 		onUpdate: ({ editor: instance }) => onUpdate?.(instance.getHTML()),
 	})
 })
