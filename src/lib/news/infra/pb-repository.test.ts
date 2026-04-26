@@ -18,6 +18,24 @@ type CollectionStub = {
 	getOne: ReturnType<typeof vi.fn>
 }
 
+/** コレクション名ごとに異なるスタブを返す多コレクション対応版 */
+function createMultiPbStub(collections: Record<string, Partial<CollectionStub>> = {}): { collection: (name: string) => CollectionStub } {
+	const stubs = new Map<string, CollectionStub>()
+	return {
+		collection(name: string) {
+			if (!stubs.has(name)) {
+				stubs.set(name, {
+					getFirstListItem: vi.fn(),
+					getList: vi.fn(),
+					getOne: vi.fn(),
+					...collections[name],
+				})
+			}
+			return stubs.get(name)!
+		},
+	}
+}
+
 function createPbStub(collection: Partial<CollectionStub> = {}): { collection: (name: string) => CollectionStub; lastCollectionName: string | undefined } {
 	let lastCollectionName: string | undefined
 	const stub: CollectionStub = {
@@ -234,6 +252,78 @@ describe('PocketBaseNewsRepository', () => {
 			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
 			const item = await repo.getNewsById('abc')
 			expect(item).toBeUndefined()
+		})
+
+		test('content 内の pb-media:// 参照を実 URL に解決する', async () => {
+			const pb = createMultiPbStub({
+				media: {
+					getOne: vi.fn().mockResolvedValue({ file: 'photo.jpg', id: 'media1' }),
+				},
+				news: {
+					getOne: vi.fn().mockResolvedValue({
+						content: '<p><img src="pb-media://media1" alt="写真"></p>',
+						created: '2026-04-22 05:50:12.897Z',
+						draft: false,
+						id: 'abc',
+						original_id: '',
+						pinned: false,
+						published_at: '2026-04-15 14:07:54.638Z',
+						revised_at: '',
+						thumbnail: '',
+						title: 'テスト',
+						updated: '2026-04-22 05:50:12.897Z',
+					}),
+				},
+			})
+			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
+			const item = await repo.getNewsById('abc')
+			expect(item?.content).toBe(`<p><img src="${PB_BASE}/api/files/media/media1/photo.jpg" alt="写真"></p>`)
+		})
+
+		test('pb-media:// が無い場合はコンテンツをそのまま返す', async () => {
+			const pb = createPbStub({
+				getOne: vi.fn().mockResolvedValue({
+					content: '<p>普通のテキスト</p>',
+					created: '2026-04-22 05:50:12.897Z',
+					draft: false,
+					id: 'abc',
+					original_id: '',
+					pinned: false,
+					published_at: '2026-04-15 14:07:54.638Z',
+					revised_at: '',
+					thumbnail: '',
+					title: 't',
+					updated: '2026-04-22 05:50:12.897Z',
+				}),
+			})
+			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
+			const item = await repo.getNewsById('abc')
+			expect(item?.content).toBe('<p>普通のテキスト</p>')
+		})
+
+		test('メディアレコードが見つからない pb-media:// はそのまま残す', async () => {
+			const notFound = Object.assign(new Error('not found'), { status: 404 })
+			const pb = createMultiPbStub({
+				media: { getOne: vi.fn().mockRejectedValue(notFound) },
+				news: {
+					getOne: vi.fn().mockResolvedValue({
+						content: '<img src="pb-media://missing">',
+						created: '2026-04-22 05:50:12.897Z',
+						draft: false,
+						id: 'abc',
+						original_id: '',
+						pinned: false,
+						published_at: '2026-04-15 14:07:54.638Z',
+						revised_at: '',
+						thumbnail: '',
+						title: 't',
+						updated: '2026-04-22 05:50:12.897Z',
+					}),
+				},
+			})
+			const repo = new PocketBaseNewsRepository(pb as any, PB_BASE)
+			const item = await repo.getNewsById('abc')
+			expect(item?.content).toBe('<img src="pb-media://missing">')
 		})
 	})
 
