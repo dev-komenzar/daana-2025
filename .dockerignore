@@ -1,0 +1,7 @@
+node_modules
+.git
+.svelte-kit
+build
+.env
+.env.*
+pocketbase/pb_data
