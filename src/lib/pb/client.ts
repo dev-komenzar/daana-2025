@@ -3,12 +3,12 @@ import PocketBase from 'pocketbase'
 // 実行時環境変数で読み込む（ビルド時に焼き込まない）
 // PB_URL: サーバー→PB の内部通信URL（Coolify ネットワークエイリアス等）
 // PB_PUBLIC_URL: ブラウザに返すファイルURL用の公開URL（未設定時は PB_URL を使用）
-const pbApiUrl = process.env.PB_URL?.trim() ?? 'http://localhost:8090'
+const pbApiUrl = process.env.PB_URL?.trim()
 const pbPublicUrl = process.env.PB_PUBLIC_URL?.trim() || pbApiUrl
 
 export const isPbConfigured = Boolean(pbApiUrl)
 
-export const pbBaseUrl = pbPublicUrl
+export const pbBaseUrl = pbPublicUrl ?? ''
 
 export const pbClient = new PocketBase(pbApiUrl)
 
