@@ -1,6 +1,6 @@
 FROM alpine:3.20 AS downloader
 
-ARG PB_VERSION=0.22.21
+ARG PB_VERSION=0.37.3
 ARG TARGETARCH=amd64
 
 RUN apk add --no-cache ca-certificates unzip wget \

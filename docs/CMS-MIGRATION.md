@@ -21,7 +21,7 @@
 | 公開ドメイン   | `https://samgha.org` (Web), `https://pb.samgha.org` (PocketBase API)                   |
 | PB Admin UI    | `https://pb.samgha.org/_/`                                                             |
 | ホスティング   | ConoHa VPS + Coolify (`160.251.179.252` / IPv6: `2400:8500:2002:3166:160:251:179:252`) |
-| PocketBase     | v0.22 系 ([pocketbase/Dockerfile](../pocketbase/Dockerfile) の `PB_VERSION`)           |
+| PocketBase     | v0.37 系 ([pocketbase/Dockerfile](../pocketbase/Dockerfile) の `PB_VERSION`)           |
 | データ永続     | Docker volume `daana-pb-data` → `/pb/pb_data`                                          |
 | ログイン (CMS) | `https://samgha.org/cms/login` (role=editor 必須)                                      |
 

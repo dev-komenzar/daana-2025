@@ -1,16 +1,17 @@
 /// <reference path="../pb_data/types.d.ts" />
-onRecordBeforeUpdateRequest((e) => {
-	const admin = e.httpContext.get('admin')
-	if (admin) {
+onRecordUpdateRequest((e) => {
+	if (e.hasSuperuserAuth()) {
+		e.next()
 		return
 	}
 
-	const originalRole = e.record.originalCopy().getString('role')
+	const original = e.record.original()
 	const newRole = e.record.getString('role')
+	const originalRole = original.getString('role')
 
 	if (newRole !== originalRole) {
-		throw new BadRequestError(
-			'role field cannot be modified by non-admin users',
-		)
+		throw new BadRequestError('role field cannot be modified by non-admin users')
 	}
+
+	e.next()
 }, 'users')

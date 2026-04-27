@@ -31,7 +31,10 @@ Environment (load from .env in current working directory):
   PB_ADMIN_PASSWORD   PocketBase superuser password
 `
 
-// PocketBase サーバは v0.22 系 (Dockerfile で固定)。SDK 0.26 の pb.admins で互換取る。
+// 本スクリプトは 2026-04-27 の microCMS → PocketBase 移行時の一回限り運用ツール。
+// PB v0.22 系を前提に書かれている (`pb.admins.authWithPassword` は v0.23+ では廃止され
+// `pb.collection('_superusers').authWithPassword` に置き換わる)。
+// 再実行が必要になった場合は SDK バンプ + auth API 差し替えが必要。
 export async function authenticateSuperuser(pb: PocketBase, email: string, password: string): Promise<void> {
 	await pb.admins.authWithPassword(email, password)
 }

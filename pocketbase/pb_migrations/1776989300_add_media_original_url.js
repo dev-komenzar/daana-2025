@@ -1,29 +1,29 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate(
-	(db) => {
-		const dao = new Dao(db)
-		const collection = dao.findCollectionByNameOrId('col_media')
-		collection.schema.addField(
-			new SchemaField({
+	(app) => {
+		const collection = app.findCollectionByNameOrId('col_media')
+
+		collection.fields.add(
+			new TextField({
 				id: 'md_originalUrl',
 				name: 'original_url',
-				type: 'text',
-				required: false,
-				unique: false,
-				system: false,
-				options: { min: null, max: 512, pattern: '' },
+				max: 512,
 			}),
 		)
-		collection.indexes.push(
-			"CREATE UNIQUE INDEX `idx_media_original_url` ON `media` (`original_url`) WHERE `original_url` != ''",
+
+		collection.addIndex(
+			'idx_media_original_url',
+			true,
+			'`original_url`',
+			"`original_url` != ''",
 		)
-		return dao.saveCollection(collection)
+
+		app.save(collection)
 	},
-	(db) => {
-		const dao = new Dao(db)
-		const collection = dao.findCollectionByNameOrId('col_media')
-		collection.schema.removeField('md_originalUrl')
-		collection.indexes = collection.indexes.filter((idx) => !idx.includes('idx_media_original_url'))
-		return dao.saveCollection(collection)
+	(app) => {
+		const collection = app.findCollectionByNameOrId('col_media')
+		collection.fields.removeById('md_originalUrl')
+		collection.removeIndex('idx_media_original_url')
+		app.save(collection)
 	},
 )

@@ -1,30 +1,23 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate(
-	(db) => {
-		const dao = new Dao(db)
-		const collection = dao.findCollectionByNameOrId('users')
+	(app) => {
+		const users = app.findCollectionByNameOrId('users')
 
-		collection.schema.addField(
-			new SchemaField({
+		users.fields.add(
+			new SelectField({
 				id: 'usr_role',
 				name: 'role',
-				type: 'select',
 				required: false,
-				unique: false,
-				system: false,
-				options: {
-					maxSelect: 1,
-					values: ['editor', 'viewer'],
-				},
+				maxSelect: 1,
+				values: ['editor', 'viewer'],
 			}),
 		)
 
-		return dao.saveCollection(collection)
+		app.save(users)
 	},
-	(db) => {
-		const dao = new Dao(db)
-		const collection = dao.findCollectionByNameOrId('users')
-		collection.schema.removeField('usr_role')
-		return dao.saveCollection(collection)
+	(app) => {
+		const users = app.findCollectionByNameOrId('users')
+		users.fields.removeById('usr_role')
+		app.save(users)
 	},
 )
