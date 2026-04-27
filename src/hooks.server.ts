@@ -1,14 +1,15 @@
 import type { Handle } from '@sveltejs/kit'
 
+import { env } from '$env/dynamic/private'
 import consola from 'consola'
 import PocketBase from 'pocketbase'
 
-if (!process.env.PB_URL) {
+if (!env.PB_URL) {
 	consola.warn('[hooks.server] PB_URL is not set')
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const pb = new PocketBase(process.env.PB_URL)
+	const pb = new PocketBase(env.PB_URL)
 	pb.authStore.loadFromCookie(event.request.headers.get('cookie') ?? '')
 
 	try {

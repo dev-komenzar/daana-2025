@@ -1,3 +1,4 @@
+import { env } from '$env/dynamic/private'
 import { json } from '@sveltejs/kit'
 
 import type { RequestHandler } from './$types'
@@ -7,7 +8,7 @@ const PB_HEALTH_TIMEOUT_MS = 2000
 type PbStatus = 'ok' | 'unconfigured' | 'unreachable'
 
 async function checkPb(): Promise<PbStatus> {
-	const pbUrl = process.env.PB_URL?.trim()
+	const pbUrl = env.PB_URL?.trim()
 	if (!pbUrl) return 'unconfigured'
 
 	const controller = new AbortController()
