@@ -1,4 +1,4 @@
-import type { AuthModel } from 'pocketbase'
+import type { AuthRecord } from 'pocketbase'
 
 import { describe, expect, test } from 'vitest'
 
@@ -6,10 +6,10 @@ import { load } from './+layout.server'
 
 type MinimalEvent = Parameters<typeof load>[0]
 
-// eslint-disable-next-line unicorn/no-null -- PocketBase authStore.model returns null for unauth
-const UNAUTH: AuthModel = null
+// eslint-disable-next-line unicorn/no-null -- PocketBase authStore.record returns null for unauth
+const UNAUTH: AuthRecord = null
 
-function createEvent(pathname: string, user: AuthModel): MinimalEvent {
+function createEvent(pathname: string, user: AuthRecord): MinimalEvent {
 	return {
 		locals: { user } as App.Locals,
 		url: new URL(`http://localhost${pathname}`),
@@ -23,12 +23,12 @@ describe('cms layout server load (auth guard)', () => {
 	})
 
 	test('Case B: non-editor role on /cms/news → redirects 303 to /cms/login', async () => {
-		const event = createEvent('/cms/news', { role: 'viewer' } as unknown as AuthModel)
+		const event = createEvent('/cms/news', { role: 'viewer' } as unknown as AuthRecord)
 		await expect(load(event)).rejects.toMatchObject({ location: '/cms/login', status: 303 })
 	})
 
 	test('Case C: authenticated editor on /cms/news → returns user without redirecting', async () => {
-		const user = { role: 'editor' } as unknown as AuthModel
+		const user = { role: 'editor' } as unknown as AuthRecord
 		const event = createEvent('/cms/news', user)
 		const result = await load(event)
 		expect(result).toEqual({ user })

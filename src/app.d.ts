@@ -3,7 +3,7 @@
 
 /// <reference types="@testing-library/jest-dom" />
 
-import type { AuthModel } from 'pocketbase'
+import type { AuthRecord } from 'pocketbase'
 import type PocketBase from 'pocketbase'
 
 declare global {
@@ -11,7 +11,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			pb: PocketBase
-			user: AuthModel
+			user: AuthRecord
 		}
 		// interface PageData {}
 		// interface PageState {}

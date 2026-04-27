@@ -1,4 +1,4 @@
-import type { AuthModel } from 'pocketbase'
+import type { AuthRecord } from 'pocketbase'
 
 import { render } from '@testing-library/svelte'
 import { describe, expect, test, vi } from 'vitest'
@@ -25,8 +25,8 @@ function makeItem(overrides: Partial<MediaItem> & { id: string }): MediaItem {
 	}
 }
 
-// eslint-disable-next-line unicorn/no-null -- PocketBase AuthModel can be null
-const nullUser: AuthModel = null
+// eslint-disable-next-line unicorn/no-null -- PocketBase AuthRecord can be null
+const nullUser: AuthRecord = null
 
 function makeData(items: MediaItem[], page: number, totalPages: number, q = '') {
 	return { items, page, perPage: 30, q, totalPages, user: nullUser }

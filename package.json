@@ -102,7 +102,7 @@
 		"isomorphic-dompurify": "^3.9.0",
 		"ky": "^1.14.0",
 		"motion": "^12.23.25",
-		"pocketbase": "^0.21.5",
+		"pocketbase": "^0.26.8",
 		"valibot": "^1.1.0"
 	}
 }
