@@ -17,9 +17,13 @@ export const pbClient = new PocketBase(pbApiUrl)
 // SDK の auto-cancellation で片側が AbortError になるのを防ぐ。
 pbClient.autoCancellation(false)
 
-/** PB file フィールドからフル URL を生成 */
-export function buildPbFileUrl(collectionIdOrName: string, recordId: string, filename: string): string {
-	return `${pbPublicUrl}/api/files/${collectionIdOrName}/${recordId}/${filename}`
+/** PB file フィールドからフル URL を生成 (thumb 等のクエリは options で付加) */
+export function buildPbFileUrl(collectionIdOrName: string, recordId: string, filename: string, options?: { thumb?: string }): string {
+	const baseUrl = `${pbPublicUrl}/api/files/${collectionIdOrName}/${recordId}/${filename}`
+	if (!options?.thumb) return baseUrl
+	const parameters = new URLSearchParams()
+	parameters.set('thumb', options.thumb)
+	return `${baseUrl}?${parameters.toString()}`
 }
 
 /** PB の日時表現 (`YYYY-MM-DD HH:mm:ss.SSSZ`) を ISO8601 (`T` 区切り) に正規化 */
