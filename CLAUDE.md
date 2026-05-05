@@ -68,9 +68,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 bd ready              # 着手可能な作業を表示
 bd show <id>          # 課題の詳細を確認
-bd update <id> --status in_progress  # 作業を開始
+bd update <id> --claim  # 作業を開始（assignee設定 + in_progress）
 bd close <id>         # 作業を完了
-bd sync               # gitと同期
 ```
 
 ---
@@ -84,7 +83,6 @@ bd sync               # gitと同期
 3. **issueステータス更新** - 完了した作業をclose、進行中のものを更新する
 4. **変更をcommit** - **必須**：
    ```bash
-   bd sync
    git add <files>
    git commit -m "..."
    git status  # すべての変更がcommit済みであることを確認
