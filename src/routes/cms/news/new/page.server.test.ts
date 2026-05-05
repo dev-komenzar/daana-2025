@@ -2,10 +2,15 @@ import type PocketBase from 'pocketbase'
 
 import { describe, expect, test, vi } from 'vitest'
 
+vi.mock('$lib/pb', () => ({
+	buildPbFileUrl: vi.fn((collection: string, id: string, file: string, options?: { thumb?: string }) => (options?.thumb ? `https://pub.example.com/api/files/${collection}/${id}/${file}?thumb=${options.thumb}` : `https://pub.example.com/api/files/${collection}/${id}/${file}`)),
+}))
+
+import { buildPbFileUrl } from '$lib/pb'
+
 import { actions, load } from './+page.server'
 
-function createPb(overrides: Partial<{ collection: unknown; files: unknown }> = {}) {
-	const filesGetUrl = vi.fn(() => 'https://example.com/img.jpg')
+function createPb(overrides: Partial<{ collection: unknown }> = {}) {
 	const getList = vi.fn().mockResolvedValue({
 		items: [{ alt: 'Alt', file: 'img.jpg', id: 'media1' }],
 		page: 1,
@@ -19,23 +24,23 @@ function createPb(overrides: Partial<{ collection: unknown; files: unknown }> = 
 		if (name === 'news') return { create }
 		return {}
 	})
-	const files = { getUrl: filesGetUrl }
-	const pb = { collection, files, ...overrides } as unknown as App.Locals['pb'] & PocketBase
-	return { collection, create, files, filesGetUrl, getList, pb }
+	const pb = { collection, ...overrides } as unknown as App.Locals['pb'] & PocketBase
+	return { collection, create, getList, pb }
 }
 
 describe('cms/news/new load', () => {
 	test('happy path: media items が返る、thumbUrl が含まれる', async () => {
-		const { filesGetUrl, getList, pb } = createPb()
+		vi.mocked(buildPbFileUrl).mockClear()
+		const { getList, pb } = createPb()
 		const event = { locals: { pb } } as unknown as Parameters<typeof load>[0]
 
 		const data = await load(event)
 
 		expect(getList).toHaveBeenCalledWith(1, 30, { sort: '-created' })
-		expect(filesGetUrl).toHaveBeenCalledWith(expect.objectContaining({ id: 'media1' }), 'img.jpg', { thumb: '200x200' })
+		expect(buildPbFileUrl).toHaveBeenCalledWith('media', 'media1', 'img.jpg', { thumb: '200x200' })
 		const d = data as { mediaItems: Array<{ alt: string; id: string; thumbUrl: string }> }
 		expect(d.mediaItems).toHaveLength(1)
-		expect(d.mediaItems[0]).toMatchObject({ alt: 'Alt', id: 'media1', thumbUrl: 'https://example.com/img.jpg' })
+		expect(d.mediaItems[0]).toMatchObject({ alt: 'Alt', id: 'media1', thumbUrl: 'https://pub.example.com/api/files/media/media1/img.jpg?thumb=200x200' })
 	})
 })
 

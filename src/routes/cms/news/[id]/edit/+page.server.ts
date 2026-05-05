@@ -1,4 +1,5 @@
 import { sanitizeHtml } from '$lib/cms/sanitize'
+import { buildPbFileUrl } from '$lib/pb'
 import { error, fail, redirect } from '@sveltejs/kit'
 
 import type { Actions, PageServerLoad } from './$types'
@@ -25,8 +26,8 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const mediaItems = mediaResult.items.map(r => ({
 		alt: r.alt,
 		id: r.id,
-		src: locals.pb.files.getUrl(r, r.file),
-		thumbUrl: locals.pb.files.getUrl(r, r.file, { thumb: '200x200' }),
+		src: buildPbFileUrl('media', r.id, r.file),
+		thumbUrl: buildPbFileUrl('media', r.id, r.file, { thumb: '200x200' }),
 	}))
 	return { mediaItems, record }
 }

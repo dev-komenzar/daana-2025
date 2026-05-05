@@ -2,6 +2,12 @@ import type PocketBase from 'pocketbase'
 
 import { describe, expect, test, vi } from 'vitest'
 
+vi.mock('$lib/pb', () => ({
+	buildPbFileUrl: vi.fn((collection: string, id: string, file: string, options?: { thumb?: string }) => (options?.thumb ? `https://pub.example.com/api/files/${collection}/${id}/${file}?thumb=${options.thumb}` : `https://pub.example.com/api/files/${collection}/${id}/${file}`)),
+}))
+
+import { buildPbFileUrl } from '$lib/pb'
+
 import { actions, load } from './+page.server'
 
 const mockRecord = {
@@ -15,7 +21,6 @@ const mockRecord = {
 }
 
 function createPb(overrides: { getOneError?: Error } = {}) {
-	const filesGetUrl = vi.fn(() => 'https://example.com/img.jpg')
 	const getList = vi.fn().mockResolvedValue({
 		items: [{ alt: 'Alt', file: 'img.jpg', id: 'media1' }],
 		page: 1,
@@ -30,13 +35,13 @@ function createPb(overrides: { getOneError?: Error } = {}) {
 		if (name === 'news') return { getOne, update }
 		return {}
 	})
-	const files = { getUrl: filesGetUrl }
-	const pb = { collection, files } as unknown as App.Locals['pb'] & PocketBase
-	return { collection, files, filesGetUrl, getList, getOne, pb, update }
+	const pb = { collection } as unknown as App.Locals['pb'] & PocketBase
+	return { collection, getList, getOne, pb, update }
 }
 
 describe('cms/news/[id]/edit load', () => {
 	test('happy path: news + media items が返る', async () => {
+		vi.mocked(buildPbFileUrl).mockClear()
 		const { getList, getOne, pb } = createPb()
 		const event = {
 			locals: { pb },
@@ -47,6 +52,7 @@ describe('cms/news/[id]/edit load', () => {
 
 		expect(getOne).toHaveBeenCalledWith('rec1')
 		expect(getList).toHaveBeenCalledWith(1, 30, { sort: '-created' })
+		expect(buildPbFileUrl).toHaveBeenCalledWith('media', 'media1', 'img.jpg', { thumb: '200x200' })
 		const d = data as { mediaItems: unknown[]; record: { id: string; title: string } }
 		expect(d.record).toMatchObject({ id: 'rec1', title: '既存タイトル' })
 		expect(d.mediaItems).toHaveLength(1)
