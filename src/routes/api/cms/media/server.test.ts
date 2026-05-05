@@ -2,6 +2,12 @@ import type PocketBase from 'pocketbase'
 
 import { describe, expect, test, vi } from 'vitest'
 
+vi.mock('$lib/pb', () => ({
+	buildPbFileUrl: vi.fn((collection: string, id: string, file: string, options?: { thumb?: string }) => (options?.thumb ? `https://pub.example.com/api/files/${collection}/${id}/${file}?thumb=${options.thumb}` : `https://pub.example.com/api/files/${collection}/${id}/${file}`)),
+}))
+
+import { buildPbFileUrl } from '$lib/pb'
+
 import { GET } from './+server'
 
 type Locals = App.Locals & { user?: { role: string } }
@@ -17,16 +23,14 @@ function createMocks(result: object) {
 	const getList = vi.fn().mockResolvedValue(result)
 	const collection = vi.fn(() => ({ getList }))
 	const filter = vi.fn((raw: string, parameters: Record<string, unknown>) => `interpolated:${raw}:${JSON.stringify(parameters)}`)
-	const filesGetURL = vi.fn((record: { file: string }, file: string, options?: object) => (options ? `https://example.com/thumb/${file}` : `https://example.com/full/${file}`))
-	const files = { getUrl: filesGetURL }
-	const pb = { collection, files, filter } as unknown as App.Locals['pb'] & PocketBase
-	return { collection, filesGetURL, filter, getList, pb }
+	const pb = { collection, filter } as unknown as App.Locals['pb'] & PocketBase
+	return { collection, filter, getList, pb }
 }
 
 const mockRecord = {
 	alt: 'Test image',
 	caption: 'A caption',
-	collectionId: 'col1',
+	collectionId: 'col_media',
 	collectionName: 'media',
 	file: 'test.jpg',
 	height: 300,
@@ -101,5 +105,19 @@ describe('GET /api/cms/media', () => {
 		const callArguments = getList.mock.calls[0]
 		expect(callArguments[2]).toMatchObject({ sort: '-created' })
 		expect(callArguments[2].filter).toBeDefined()
+	})
+
+	test('items.src と items.thumbUrl が buildPbFileUrl を経由して生成される', async () => {
+		vi.mocked(buildPbFileUrl).mockClear()
+		const { pb } = createMocks(mockResult)
+		const event = createEvent({ pb, user: { role: 'editor' } } as Partial<Locals>, '')
+
+		const response = await GET(event)
+		const body = await response.json()
+
+		expect(buildPbFileUrl).toHaveBeenCalledWith('col_media', 'rec1', 'test.jpg')
+		expect(buildPbFileUrl).toHaveBeenCalledWith('col_media', 'rec1', 'test.jpg', { thumb: '200x200' })
+		expect(body.items[0].src).toBe('https://pub.example.com/api/files/col_media/rec1/test.jpg')
+		expect(body.items[0].thumbUrl).toBe('https://pub.example.com/api/files/col_media/rec1/test.jpg?thumb=200x200')
 	})
 })

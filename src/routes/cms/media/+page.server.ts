@@ -1,3 +1,4 @@
+import { buildPbFileUrl } from '$lib/pb'
 import { fail, redirect } from '@sveltejs/kit'
 
 import type { Actions, PageServerLoad } from './$types'
@@ -5,6 +6,7 @@ import type { Actions, PageServerLoad } from './$types'
 type MediaRecord = {
 	alt: string
 	caption?: string
+	collectionId: string
 	file: string
 	height?: number
 	id: string
@@ -34,7 +36,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		fileName: record.file,
 		height: record.height,
 		id: record.id,
-		thumbUrl: locals.pb.files.getUrl(record, record.file, { thumb: '200x200' }),
+		thumbUrl: buildPbFileUrl(record.collectionId, record.id, record.file, { thumb: '200x200' }),
 		width: record.width,
 	}))
 

@@ -1,3 +1,4 @@
+import { buildPbFileUrl } from '$lib/pb'
 import { json } from '@sveltejs/kit'
 
 import type { RequestHandler } from './$types'
@@ -5,6 +6,7 @@ import type { RequestHandler } from './$types'
 type MediaRecord = {
 	alt: string
 	caption?: string
+	collectionId: string
 	file: string
 	height?: number
 	id: string
@@ -30,8 +32,8 @@ export const GET: RequestHandler = async ({ locals, url }) => {
 	const items = result.items.map(r => ({
 		alt: r.alt,
 		id: r.id,
-		src: locals.pb.files.getUrl(r, r.file),
-		thumbUrl: locals.pb.files.getUrl(r, r.file, { thumb: '200x200' }),
+		src: buildPbFileUrl(r.collectionId, r.id, r.file),
+		thumbUrl: buildPbFileUrl(r.collectionId, r.id, r.file, { thumb: '200x200' }),
 	}))
 
 	return json({ items, page: result.page, totalPages: result.totalPages })
