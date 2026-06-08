@@ -44,11 +44,11 @@ export const FigureExtension = Node.create({
 		]
 	},
 
-	renderHTML({ HTMLAttributes }) {
-		const { alt, caption, src } = HTMLAttributes as { alt?: string; caption?: string; src?: string }
-		const imgAttributes = mergeAttributes({ alt: alt ?? '', src: src ?? '' })
-		if (caption) {
-			return ['figure', {}, ['img', imgAttributes], ['figcaption', {}, caption]]
+	renderHTML({ node }) {
+		const attributes = node.attrs as { alt?: string; caption?: string; src?: string }
+		const imgAttributes = mergeAttributes({ alt: attributes.alt ?? '', src: attributes.src ?? '' })
+		if (attributes.caption) {
+			return ['figure', {}, ['img', imgAttributes], ['figcaption', {}, attributes.caption]]
 		}
 		return ['figure', {}, ['img', imgAttributes]]
 	},
