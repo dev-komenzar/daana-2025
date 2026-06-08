@@ -8,5 +8,6 @@ export function sanitizeHtml(raw: string): string {
 	return DOMPurify.sanitize(raw, {
 		ALLOWED_ATTR,
 		ALLOWED_TAGS,
+		ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|pb-media):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
 	})
 }

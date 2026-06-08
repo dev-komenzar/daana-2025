@@ -1,5 +1,6 @@
 import { sanitizeHtml } from '$lib/cms/sanitize'
-import { buildPbFileUrl } from '$lib/pb'
+import { buildPbFileUrl, pbPublicUrl } from '$lib/pb'
+import { convertAbsolutePbUrlsToReferences, resolvePbMediaReferences } from '$lib/pb'
 import { error, fail, redirect } from '@sveltejs/kit'
 
 import type { Actions, PageServerLoad } from './$types'
@@ -30,7 +31,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		src: buildPbFileUrl('media', r.id, r.file),
 		thumbUrl: buildPbFileUrl('media', r.id, r.file, { thumb: '200x200' }),
 	}))
-	return { mediaItems, record }
+
+	const body = await resolvePbMediaReferences(convertAbsolutePbUrlsToReferences(record.body), locals.pb, pbPublicUrl)
+	return { mediaItems, record: { ...record, body: body ?? '' } }
 }
 
 export const actions: Actions = {
@@ -38,7 +41,7 @@ export const actions: Actions = {
 		const data = await request.formData()
 		const title = data.get('title')
 		const bodyRaw = data.get('body')
-		const body = typeof bodyRaw === 'string' ? sanitizeHtml(bodyRaw) : ''
+		const body = typeof bodyRaw === 'string' ? sanitizeHtml(convertAbsolutePbUrlsToReferences(bodyRaw) ?? bodyRaw) : ''
 		const projectLink = data.get('projectLink') ?? ''
 		const type = data.getAll('type').filter((v): v is string => typeof v === 'string')
 		const draft = data.get('draft') === 'on'

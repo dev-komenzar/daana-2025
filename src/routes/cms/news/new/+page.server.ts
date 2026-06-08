@@ -1,5 +1,6 @@
 import { sanitizeHtml } from '$lib/cms/sanitize'
 import { buildPbFileUrl } from '$lib/pb'
+import { convertAbsolutePbUrlsToReferences } from '$lib/pb'
 import { fail, redirect } from '@sveltejs/kit'
 
 import type { Actions, PageServerLoad } from './$types'
@@ -21,7 +22,7 @@ export const actions: Actions = {
 		const data = await request.formData()
 		const title = data.get('title')
 		const contentRaw = data.get('content')
-		const content = typeof contentRaw === 'string' ? sanitizeHtml(contentRaw) : ''
+		const content = typeof contentRaw === 'string' ? sanitizeHtml(convertAbsolutePbUrlsToReferences(contentRaw) ?? contentRaw) : ''
 		const thumbnail = data.get('thumbnail') ?? ''
 		const pinned = data.get('pinned') === 'on'
 		const draft = data.get('draft') === 'on'

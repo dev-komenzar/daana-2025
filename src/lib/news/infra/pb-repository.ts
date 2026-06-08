@@ -3,7 +3,8 @@ import consola from 'consola'
 import type { INewsRepository } from '../domain/repository'
 import type { NewsItem, NewsItemKey } from '../domain/schema'
 
-import { buildPbFileUrl, pbBaseUrl, pbClient } from '../../pb/client'
+import { pbBaseUrl, pbClient } from '../../pb/client'
+import { buildPbFileUrlWithBase, resolvePbMediaReferences } from '../../pb/rewrite-content-urls'
 import { isPubliclyVisible } from '../domain/visibility'
 
 type PbCollectionLike = {
@@ -70,7 +71,7 @@ export class PocketBaseNewsRepository implements INewsRepository {
 			const record = await this.pb.collection(NEWS_COLLECTION).getOne(id, { expand: 'thumbnail' })
 			const item = this.toNewsItem(record)
 			if (!isPubliclyVisible(item)) return undefined
-			return { ...item, content: await this.resolvePbMediaRefs(item.content) }
+			return { ...item, content: await resolvePbMediaReferences(item.content, this.pb, this.baseUrl) }
 		} catch (error) {
 			if (isNotFound(error)) return undefined
 			consola.error(`Error fetching news ${id} from PocketBase:`, error)
@@ -84,10 +85,8 @@ export class PocketBaseNewsRepository implements INewsRepository {
 			const record = await this.pb.collection(NEWS_COLLECTION).getFirstListItem(`original_id="${escaped}"`, { expand: 'thumbnail' })
 			const item = this.toNewsItem(record)
 			if (!isPubliclyVisible(item)) return undefined
-			return { ...item, content: await this.resolvePbMediaRefs(item.content) }
-		} catch (error) {
-			if (isNotFound(error)) return undefined
-			consola.error(`Error fetching news by originalId ${originalId} from PocketBase:`, error)
+			return { ...item, content: await resolvePbMediaReferences(item.content, this.pb, this.baseUrl) }
+		} catch {
 			return undefined
 		}
 	}
@@ -115,32 +114,6 @@ export class PocketBaseNewsRepository implements INewsRepository {
 			consola.error('Error fetching news total count from PocketBase:', error)
 			return 0
 		}
-	}
-
-	private async resolvePbMediaRefs(html: string | undefined): Promise<string | undefined> {
-		if (!html) return html
-		const ids = [...new Set([...html.matchAll(/pb-media:\/\/([a-zA-Z0-9]+)/g)].map(m => m[1]))]
-		if (ids.length === 0) return html
-
-		const urlMap = new Map<string, string>()
-		await Promise.all(
-			ids.map(async id => {
-				try {
-					const record = (await this.pb.collection('media').getOne(id)) as unknown as { file?: string }
-					if (record.file) {
-						urlMap.set(id, buildPbFileUrlWithBase(this.baseUrl, 'media', id, record.file))
-					}
-				} catch {
-					// leave unresolved if media record missing
-				}
-			}),
-		)
-
-		let result = html
-		for (const [id, url] of urlMap) {
-			result = result.replaceAll(`pb-media://${id}`, url)
-		}
-		return result
 	}
 
 	private toNewsItem(record: PbRecord): NewsItem {
@@ -172,11 +145,6 @@ export class PocketBaseNewsRepository implements INewsRepository {
 			updatedAt: normalize(record.updated),
 		}
 	}
-}
-
-function buildPbFileUrlWithBase(baseUrl: string, collectionIdOrName: string, recordId: string, filename: string): string {
-	if (baseUrl === pbBaseUrl) return buildPbFileUrl(collectionIdOrName, recordId, filename)
-	return `${baseUrl}/api/files/${collectionIdOrName}/${recordId}/${filename}`
 }
 
 function isNotFound(error: unknown): boolean {

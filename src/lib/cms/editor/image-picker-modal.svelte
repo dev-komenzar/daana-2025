@@ -21,7 +21,11 @@ $effect(() => {
 })
 
 function selectItem(item: MediaItem) {
-	editor.chain().focus().setImage({ alt: item.alt, src: item.src }).run()
+	editor
+		.chain()
+		.focus()
+		.setImage({ alt: item.alt, src: `pb-media://${item.id}` })
+		.run()
 	onClose()
 }
 

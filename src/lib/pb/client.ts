@@ -5,7 +5,7 @@ import PocketBase from 'pocketbase'
 // PB_URL: サーバー→PB の内部通信URL（Coolify ネットワークエイリアス等）
 // PB_PUBLIC_URL: ブラウザに返すファイルURL用の公開URL（未設定時は PB_URL を使用）
 const pbApiUrl = env.PB_URL?.trim()
-const pbPublicUrl = env.PB_PUBLIC_URL?.trim() || pbApiUrl
+export const pbPublicUrl = env.PB_PUBLIC_URL?.trim() || pbApiUrl
 
 export const isPbConfigured = Boolean(pbApiUrl)
 

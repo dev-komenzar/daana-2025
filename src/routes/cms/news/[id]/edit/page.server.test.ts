@@ -4,6 +4,9 @@ import { describe, expect, test, vi } from 'vitest'
 
 vi.mock('$lib/pb', () => ({
 	buildPbFileUrl: vi.fn((collection: string, id: string, file: string, options?: { thumb?: string }) => (options?.thumb ? `https://pub.example.com/api/files/${collection}/${id}/${file}?thumb=${options.thumb}` : `https://pub.example.com/api/files/${collection}/${id}/${file}`)),
+	convertAbsolutePbUrlsToReferences: vi.fn((html?: string) => html),
+	pbPublicUrl: 'https://pub.example.com',
+	resolvePbMediaReferences: vi.fn(async (html?: string) => html),
 }))
 
 import { buildPbFileUrl } from '$lib/pb'
