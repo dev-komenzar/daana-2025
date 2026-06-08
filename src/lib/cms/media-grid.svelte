@@ -99,8 +99,8 @@ $effect(() => {
 }
 
 .media-grid button.selected {
-	border-color: var(--color-primary, #08192d);
 	background: color-mix(in srgb, var(--color-primary, #08192d) 10%, transparent);
+	border-color: var(--color-primary, #08192d);
 }
 
 .media-grid img {
@@ -123,8 +123,8 @@ $effect(() => {
 
 .loading {
 	padding: 12px 0;
-	text-align: center;
 	font-size: 13px;
 	color: #666;
+	text-align: center;
 }
 </style>

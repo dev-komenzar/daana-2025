@@ -124,9 +124,9 @@ function handleDialogClick(event: MouseEvent) {
 	position: relative;
 	width: 120px;
 	height: 120px;
+	overflow: hidden;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	overflow: hidden;
 }
 
 .preview-img {
@@ -142,13 +142,13 @@ function handleDialogClick(event: MouseEvent) {
 	width: 22px;
 	height: 22px;
 	padding: 0;
+	font-size: 13px;
 	line-height: 1;
 	color: #fff;
 	cursor: pointer;
 	background: rgb(0 0 0 / 50%);
 	border: none;
 	border-radius: 50%;
-	font-size: 13px;
 }
 
 .placeholder {
@@ -167,12 +167,12 @@ function handleDialogClick(event: MouseEvent) {
 
 .select-btn {
 	padding: 8px 16px;
+	font-size: 13px;
+	color: #fff;
 	cursor: pointer;
 	background: var(--color-primary, #222);
-	color: #fff;
 	border: none;
 	border-radius: 4px;
-	font-size: 13px;
 }
 
 dialog {
@@ -202,8 +202,8 @@ header h2 {
 }
 
 .upload-link {
+	margin-left: auto;
 	font-size: 13px;
 	color: var(--color-primary, #222);
-	margin-left: auto;
 }
 </style>
