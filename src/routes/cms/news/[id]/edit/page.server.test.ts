@@ -23,6 +23,13 @@ const mockRecord = {
 	title: '既存タイトル',
 }
 
+const mockRecordWithExpand = {
+	...mockRecord,
+	expand: {
+		thumbnail: { alt: 'Alt', collectionId: 'col_media', file: 'thumb.jpg', id: 'media-id' },
+	},
+}
+
 function createPb(overrides: { getOneError?: Error } = {}) {
 	const getList = vi.fn().mockResolvedValue({
 		items: [{ alt: 'Alt', file: 'img.jpg', id: 'media1' }],
@@ -31,7 +38,7 @@ function createPb(overrides: { getOneError?: Error } = {}) {
 		totalItems: 1,
 		totalPages: 1,
 	})
-	const getOne = overrides.getOneError ? vi.fn().mockRejectedValue(overrides.getOneError) : vi.fn().mockResolvedValue(mockRecord)
+	const getOne = overrides.getOneError ? vi.fn().mockRejectedValue(overrides.getOneError) : vi.fn().mockResolvedValue(mockRecordWithExpand)
 	const update = vi.fn().mockResolvedValue(mockRecord)
 	const collection = vi.fn((name: string) => {
 		if (name === 'media') return { getList }
@@ -53,7 +60,7 @@ describe('cms/news/[id]/edit load', () => {
 
 		const data = await load(event)
 
-		expect(getOne).toHaveBeenCalledWith('rec1')
+		expect(getOne).toHaveBeenCalledWith('rec1', { expand: 'thumbnail' })
 		expect(getList).toHaveBeenCalledWith(1, 30, { sort: '-created' })
 		expect(buildPbFileUrl).toHaveBeenCalledWith('media', 'media1', 'img.jpg', { thumb: '200x200' })
 		const d = data as { mediaItems: unknown[]; record: { id: string; title: string } }

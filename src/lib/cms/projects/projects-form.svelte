@@ -1,8 +1,9 @@
 <script lang="ts">
+import type { MediaItem } from '$lib/cms/media-grid.svelte'
 import type { Editor } from '@tiptap/core'
 
 import BubbleMenu from '$lib/cms/editor/bubble-menu.svelte'
-import ImagePickerModal, { type MediaItem } from '$lib/cms/editor/image-picker-modal.svelte'
+import ImagePickerModal from '$lib/cms/editor/image-picker-modal.svelte'
 import SlashMenu from '$lib/cms/editor/slash-menu.svelte'
 import StaticToolbar from '$lib/cms/editor/static-toolbar.svelte'
 import TipTapEditor from '$lib/cms/editor/tiptap-editor.svelte'

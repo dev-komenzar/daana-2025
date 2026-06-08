@@ -1,11 +1,13 @@
 <script lang="ts">
+import type { MediaItem } from '$lib/cms/media-grid.svelte'
 import type { Editor } from '@tiptap/core'
 
 import BubbleMenu from '$lib/cms/editor/bubble-menu.svelte'
-import ImagePickerModal, { type MediaItem } from '$lib/cms/editor/image-picker-modal.svelte'
+import ImagePickerModal from '$lib/cms/editor/image-picker-modal.svelte'
 import SlashMenu from '$lib/cms/editor/slash-menu.svelte'
 import StaticToolbar from '$lib/cms/editor/static-toolbar.svelte'
 import TipTapEditor from '$lib/cms/editor/tiptap-editor.svelte'
+import ThumbnailPicker from '$lib/cms/thumbnail-picker.svelte'
 import { onDestroy, onMount } from 'svelte'
 
 type Draft = { content: string; savedAt: string; title: string }
@@ -16,6 +18,7 @@ type Initial = {
 	pinned?: boolean
 	published_at?: string
 	thumbnail?: string
+	thumbnailUrl?: string
 	title?: string
 }
 
@@ -160,15 +163,12 @@ function toLocalDateTime(iso?: string): string {
 			aria-label="タイトル"
 		/>
 	</label>
-	<label>
-		サムネイル (media record ID)
-		<input
-			type="text"
-			name="thumbnail"
-			value={initial.thumbnail ?? ''}
-			aria-label="サムネイル (media record ID)"
-		/>
-	</label>
+	<ThumbnailPicker
+		initialId={initial.thumbnail}
+		initialThumbUrl={initial.thumbnailUrl}
+		{mediaItems}
+		name="thumbnail"
+	/>
 	<label>
 		公開日時
 		<input

@@ -1,16 +1,23 @@
 import { render, screen } from '@testing-library/svelte'
-import { describe, expect, test } from 'vitest'
+import { beforeAll, describe, expect, test, vi } from 'vitest'
 
 import NewsForm from './news-form.svelte'
+
+beforeAll(() => {
+	function MockIntersectionObserver() {
+		return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() }
+	}
+	vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
+})
 
 const mediaItems = [{ alt: 'Test image', id: 'm1', src: 'https://example.com/img.jpg', thumbUrl: 'https://example.com/thumb.jpg' }]
 
 describe('NewsForm', () => {
 	test('フォームが title / thumbnail / published_at / pinned / draft 入力を持つ', () => {
-		render(NewsForm, { mediaItems, submitLabel: '作成' })
+		const { container } = render(NewsForm, { mediaItems, submitLabel: '作成' })
 
 		expect(screen.getByRole('textbox', { name: /タイトル/ })).toBeInTheDocument()
-		expect(screen.getByRole('textbox', { name: /サムネイル/ })).toBeInTheDocument()
+		expect(container.querySelector('input[type="hidden"][name="thumbnail"]')).toBeInTheDocument()
 		expect(screen.getByLabelText(/公開日時/)).toBeInTheDocument()
 		expect(screen.getByRole('checkbox', { name: /固定/ })).toBeInTheDocument()
 		expect(screen.getByRole('checkbox', { name: /下書き/ })).toBeInTheDocument()
@@ -27,7 +34,7 @@ describe('NewsForm', () => {
 	})
 
 	test('initial prop の値が各フィールドに入る', () => {
-		render(NewsForm, {
+		const { container } = render(NewsForm, {
 			initial: {
 				draft: true,
 				pinned: true,
@@ -39,7 +46,8 @@ describe('NewsForm', () => {
 		})
 
 		expect(screen.getByRole('textbox', { name: /タイトル/ })).toHaveValue('既存タイトル')
-		expect(screen.getByRole('textbox', { name: /サムネイル/ })).toHaveValue('media-abc')
+		const thumbnailInput = container.querySelector('input[type="hidden"][name="thumbnail"]') as HTMLInputElement
+		expect(thumbnailInput.value).toBe('media-abc')
 		expect(screen.getByRole('checkbox', { name: /固定/ })).toBeChecked()
 		expect(screen.getByRole('checkbox', { name: /下書き/ })).toBeChecked()
 	})
