@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Editor } from '@tiptap/core'
 
-export type MediaItem = { alt: string; id: string; src: string; thumbUrl: string }
+export type MediaItem = { alt: string; id: string; thumbUrl: string }
 
 type Properties = {
 	editor: Editor

@@ -107,7 +107,7 @@ describe('GET /api/cms/media', () => {
 		expect(callArguments[2].filter).toBeDefined()
 	})
 
-	test('items.src と items.thumbUrl が buildPbFileUrl を経由して生成される', async () => {
+	test('items.thumbUrl が buildPbFileUrl を経由して生成され、items.src は pb-media:// になる', async () => {
 		vi.mocked(buildPbFileUrl).mockClear()
 		const { pb } = createMocks(mockResult)
 		const event = createEvent({ pb, user: { role: 'editor' } } as Partial<Locals>, '')
@@ -115,9 +115,8 @@ describe('GET /api/cms/media', () => {
 		const response = await GET(event)
 		const body = await response.json()
 
-		expect(buildPbFileUrl).toHaveBeenCalledWith('col_media', 'rec1', 'test.jpg')
 		expect(buildPbFileUrl).toHaveBeenCalledWith('col_media', 'rec1', 'test.jpg', { thumb: '200x200' })
-		expect(body.items[0].src).toBe('https://pub.example.com/api/files/col_media/rec1/test.jpg')
+		expect(body.items[0].src).toBe('pb-media://rec1')
 		expect(body.items[0].thumbUrl).toBe('https://pub.example.com/api/files/col_media/rec1/test.jpg?thumb=200x200')
 	})
 })

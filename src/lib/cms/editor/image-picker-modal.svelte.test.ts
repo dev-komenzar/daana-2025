@@ -32,8 +32,8 @@ function createEditor() {
 }
 
 const mediaItems: MediaItem[] = [
-	{ alt: 'First image', id: 'item1', src: 'https://example.com/img1.jpg', thumbUrl: 'https://example.com/thumb1.jpg' },
-	{ alt: 'Second image', id: 'item2', src: 'https://example.com/img2.jpg', thumbUrl: 'https://example.com/thumb2.jpg' },
+	{ alt: 'First image', id: 'item1', thumbUrl: 'https://example.com/thumb1.jpg' },
+	{ alt: 'Second image', id: 'item2', thumbUrl: 'https://example.com/thumb2.jpg' },
 ]
 
 describe('ImagePickerModal', () => {

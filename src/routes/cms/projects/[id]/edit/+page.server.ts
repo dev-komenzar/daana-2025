@@ -28,7 +28,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const mediaItems = mediaResult.items.map(r => ({
 		alt: r.alt,
 		id: r.id,
-		src: buildPbFileUrl('media', r.id, r.file),
 		thumbUrl: buildPbFileUrl('media', r.id, r.file, { thumb: '200x200' }),
 	}))
 

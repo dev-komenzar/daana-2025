@@ -32,7 +32,7 @@ export const GET: RequestHandler = async ({ locals, url }) => {
 	const items = result.items.map(r => ({
 		alt: r.alt,
 		id: r.id,
-		src: buildPbFileUrl(r.collectionId, r.id, r.file),
+		src: `pb-media://${r.id}`,
 		thumbUrl: buildPbFileUrl(r.collectionId, r.id, r.file, { thumb: '200x200' }),
 	}))
 
