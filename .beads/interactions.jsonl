@@ -11,3 +11,6 @@
 {"id":"int-fe22ba30","kind":"field_change","created_at":"2026-06-08T08:55:08.130392668Z","actor":"dev-komenzar","issue_id":"daana-l6o.5","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
 {"id":"int-12a8a939","kind":"field_change","created_at":"2026-06-08T08:55:08.787574114Z","actor":"dev-komenzar","issue_id":"daana-l6o.6","extra":{"field":"status","new_value":"closed","old_value":"open"}}
 {"id":"int-a0429df8","kind":"field_change","created_at":"2026-06-08T08:55:09.159388694Z","actor":"dev-komenzar","issue_id":"daana-l6o","extra":{"field":"status","new_value":"closed","old_value":"open"}}
+{"id":"int-584e049d","kind":"field_change","created_at":"2026-06-09T03:21:04.14874103Z","actor":"dev-komenzar","issue_id":"daana-16t","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Closed"}}
+{"id":"int-031cb3df","kind":"field_change","created_at":"2026-06-09T03:21:04.864628457Z","actor":"dev-komenzar","issue_id":"daana-46j","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Closed"}}
+{"id":"int-fe785b85","kind":"field_change","created_at":"2026-06-09T03:21:05.250825779Z","actor":"dev-komenzar","issue_id":"daana-a00","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}

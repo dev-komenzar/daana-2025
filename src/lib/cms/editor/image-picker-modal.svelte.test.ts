@@ -105,7 +105,7 @@ describe('ImagePickerModal', () => {
 
 		await vi.waitFor(() => {
 			expect(editor.getHTML()).toContain('<img')
-			expect(editor.getHTML()).toContain('src="pb-media://item1"')
+			expect(editor.getHTML()).toContain('src="https://example.com/thumb1.jpg"')
 			expect(editor.getHTML()).toContain('alt="First image"')
 		})
 	})
