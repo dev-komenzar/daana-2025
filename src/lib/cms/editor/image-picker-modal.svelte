@@ -39,11 +39,7 @@ async function loadMore() {
 }
 
 function selectItem(item: MediaItem) {
-	editor
-		.chain()
-		.focus()
-		.setImage({ alt: item.alt, src: `pb-media://${item.id}` })
-		.run()
+	editor.chain().focus().setImage({ alt: item.alt, src: item.thumbUrl }).run()
 	onClose()
 }
 
