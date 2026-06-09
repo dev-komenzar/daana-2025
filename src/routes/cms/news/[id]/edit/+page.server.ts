@@ -8,6 +8,7 @@ import type { Actions, PageServerLoad } from './$types'
 type NewsRecord = {
 	content: string
 	draft: boolean
+	expand?: { thumbnail?: { alt: string; collectionId: string; file: string; id: string } }
 	id: string
 	pinned: boolean
 	published_at: string
@@ -18,7 +19,7 @@ type NewsRecord = {
 export const load: PageServerLoad = async ({ locals, params }) => {
 	let record: NewsRecord
 	try {
-		record = await locals.pb.collection('news').getOne<NewsRecord>(params.id)
+		record = await locals.pb.collection('news').getOne<NewsRecord>(params.id, { expand: 'thumbnail' })
 	} catch {
 		error(404, 'お知らせが見つかりません')
 	}
@@ -30,8 +31,11 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		thumbUrl: buildPbFileUrl('media', r.id, r.file, { thumb: '200x200' }),
 	}))
 
+	const expandedThumbnail = record.expand?.thumbnail
+	const thumbnailUrl = expandedThumbnail ? buildPbFileUrl(expandedThumbnail.collectionId, expandedThumbnail.id, expandedThumbnail.file, { thumb: '200x200' }) : undefined
+
 	const content = await resolvePbMediaReferences(convertAbsolutePbUrlsToReferences(record.content), locals.pb, pbPublicUrl)
-	return { mediaItems, record: { ...record, content: content ?? '' } }
+	return { mediaItems, record: { ...record, content: content ?? '', thumbnailUrl } }
 }
 
 export const actions: Actions = {

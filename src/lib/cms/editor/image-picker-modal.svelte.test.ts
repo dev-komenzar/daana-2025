@@ -1,10 +1,10 @@
+import type { MediaItem } from '$lib/cms/media-grid.svelte'
+
 import { fireEvent, render } from '@testing-library/svelte'
 import { Editor } from '@tiptap/core'
 import { Image } from '@tiptap/extension-image'
 import { StarterKit } from '@tiptap/starter-kit'
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest'
-
-import type { MediaItem } from './image-picker-modal.svelte'
 
 import ImagePickerModal from './image-picker-modal.svelte'
 
@@ -21,6 +21,13 @@ beforeAll(() => {
 			return this.hasAttribute('open')
 		},
 	})
+
+	function MockIntersectionObserver() {
+		return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() }
+	}
+	vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
+
+	vi.stubGlobal('fetch', vi.fn())
 })
 
 function createEditor() {

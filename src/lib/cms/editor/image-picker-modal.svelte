@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { Editor } from '@tiptap/core'
 
-export type MediaItem = { alt: string; id: string; thumbUrl: string }
+import MediaGrid, { type MediaItem } from '$lib/cms/media-grid.svelte'
+import { untrack } from 'svelte'
 
 type Properties = {
 	editor: Editor
@@ -12,13 +13,30 @@ type Properties = {
 
 let { editor, mediaItems, onClose, open }: Properties = $props()
 
-let dialog: HTMLDialogElement | undefined = $state()
+let dialog = $state<HTMLDialogElement | undefined>()
+let allItems = $state(untrack(() => mediaItems))
+let currentPage = $state(1)
+let hasMore = $state(untrack(() => mediaItems.length >= 30))
 
 $effect(() => {
 	if (!dialog) return
 	if (open && !dialog.open) dialog.showModal()
 	if (!open && dialog.open) dialog.close()
 })
+
+async function loadMore() {
+	if (!hasMore) return
+	const nextPage = currentPage + 1
+	const response = await fetch(`/api/cms/media?page=${nextPage}`)
+	if (!response.ok) {
+		hasMore = false
+		return
+	}
+	const data = (await response.json()) as { items: MediaItem[]; page: number; totalPages: number }
+	allItems = [...allItems, ...data.items]
+	currentPage = data.page
+	hasMore = currentPage < data.totalPages
+}
 
 function selectItem(item: MediaItem) {
 	editor
@@ -48,22 +66,11 @@ function handleDialogClick(event: MouseEvent) {
 			onclick={onClose}>×</button
 		>
 	</header>
-	<ul class="media-grid">
-		{#each mediaItems as item (item.id)}
-			<li>
-				<button
-					type="button"
-					onclick={() => selectItem(item)}
-				>
-					<img
-						src={item.thumbUrl}
-						alt={item.alt}
-					/>
-					<span class="alt">{item.alt}</span>
-				</button>
-			</li>
-		{/each}
-	</ul>
+	<MediaGrid
+		items={allItems}
+		onselect={selectItem}
+		onloadmore={loadMore}
+	/>
 </dialog>
 
 <style>
@@ -86,47 +93,5 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 16px;
-}
-
-.media-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-	gap: 8px;
-	padding: 0;
-	list-style: none;
-}
-
-.media-grid li {
-	margin: 0;
-}
-
-.media-grid button {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	width: 100%;
-	padding: 4px;
-	cursor: pointer;
-	background: transparent;
-	border: 1px solid transparent;
-	border-radius: 4px;
-}
-
-.media-grid button:hover {
-	border-color: var(--color-primary, #08192d);
-}
-
-.media-grid img {
-	width: 100%;
-	height: auto;
-	aspect-ratio: 1;
-	object-fit: cover;
-}
-
-.alt {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	font-size: 11px;
-	white-space: nowrap;
 }
 </style>

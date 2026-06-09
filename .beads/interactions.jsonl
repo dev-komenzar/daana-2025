@@ -4,3 +4,10 @@
 {"id":"int-763da210","kind":"field_change","created_at":"2026-05-05T01:11:09.902995192Z","actor":"dev-komenzar","issue_id":"daana-1lv","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Closed"}}
 {"id":"int-eaa0f103","kind":"field_change","created_at":"2026-05-05T01:29:00.077733472Z","actor":"dev-komenzar","issue_id":"daana-aam","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Closed"}}
 {"id":"int-886d7e5a","kind":"field_change","created_at":"2026-05-05T01:29:00.221329173Z","actor":"dev-komenzar","issue_id":"daana-c4n","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
+{"id":"int-38002f7d","kind":"field_change","created_at":"2026-06-08T08:47:23.704331441Z","actor":"dev-komenzar","issue_id":"daana-l6o.1","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
+{"id":"int-8468983b","kind":"field_change","created_at":"2026-06-08T08:49:49.364928721Z","actor":"dev-komenzar","issue_id":"daana-l6o.2","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
+{"id":"int-51c94e64","kind":"field_change","created_at":"2026-06-08T08:52:34.683299028Z","actor":"dev-komenzar","issue_id":"daana-l6o.3","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
+{"id":"int-365f0f48","kind":"field_change","created_at":"2026-06-08T08:52:35.293193761Z","actor":"dev-komenzar","issue_id":"daana-l6o.4","extra":{"field":"status","new_value":"closed","old_value":"open"}}
+{"id":"int-fe22ba30","kind":"field_change","created_at":"2026-06-08T08:55:08.130392668Z","actor":"dev-komenzar","issue_id":"daana-l6o.5","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
+{"id":"int-12a8a939","kind":"field_change","created_at":"2026-06-08T08:55:08.787574114Z","actor":"dev-komenzar","issue_id":"daana-l6o.6","extra":{"field":"status","new_value":"closed","old_value":"open"}}
+{"id":"int-a0429df8","kind":"field_change","created_at":"2026-06-08T08:55:09.159388694Z","actor":"dev-komenzar","issue_id":"daana-l6o","extra":{"field":"status","new_value":"closed","old_value":"open"}}

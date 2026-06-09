@@ -63,14 +63,63 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Issue Tracking (bd)
 
-このプロジェクトでは **bd** (beads) で課題管理を行う。初回は `bd onboard` を実行すること。
+このプロジェクトでは **bd** (beads) で課題管理を行う。データベースは Dolt (`.beads/embeddeddolt/`) に保存される。
+
+### 基本ワークフロー
 
 ```bash
-bd ready              # 着手可能な作業を表示
-bd show <id>          # 課題の詳細を確認
-bd update <id> --claim  # 作業を開始（assignee設定 + in_progress）
-bd close <id>         # 作業を完了
+bd ready                    # 着手可能な作業を表示（ブロッカーなし）
+bd show <id>                # 課題の詳細を確認
+bd update <id> --claim      # 作業を開始（assignee設定 + in_progress）
+bd close <id>               # 作業を完了
+bd close <id1> <id2> ...    # 複数を一括close
 ```
+
+### 課題の作成
+
+```bash
+bd create --title="タイトル" --description="説明" --type=task|bug|feature --priority=2
+```
+
+- Priority: 0-4 または P0-P4（0=critical, 2=medium, 4=backlog）
+- 複数issue作成時はサブエージェントを並列実行して効率化する
+- `--validate` でdescriptionの必須セクションをチェック可能
+
+### 依存関係
+
+```bash
+bd dep add <issue> <depends-on>  # issue は depends-on に依存する
+bd blocked                        # ブロックされているissue一覧
+bd show <id>                      # 依存関係を確認
+```
+
+### 同期
+
+```bash
+bd dolt push    # Doltリモートにpush
+bd dolt pull    # Doltリモートからpull
+```
+
+### 品質管理
+
+```bash
+bd stats                          # プロジェクト統計
+bd doctor                         # 健全性チェック
+bd doctor --check=conventions     # コンベンション違反チェック
+bd preflight                      # PR前チェック（lint, stale, orphans）
+bd stale                          # 活動が停滞しているissue
+bd orphans                        # 依存関係が壊れているissue
+```
+
+### その他
+
+```bash
+bd search <query>       # キーワード検索
+bd remember "insight"   # 永続的な知識を記録
+bd memories <keyword>   # 記憶した知識を検索
+```
+
+**警告**: `bd edit` は $EDITOR (vim/nano) を開くためエージェントからは使用しないこと。
 
 ---
 
