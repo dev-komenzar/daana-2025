@@ -6,17 +6,17 @@ import { floatUp } from '$lib/actions'
 const staffs: Staff[] = [
 	{
 		name: '松波さゆり',
-		nameRomaji: 'Sayuri Matsunami',
+		nameRomaji: 'Matsunami Sayuri',
 		position: 'スタッフ',
 	},
 	{
 		name: '平井和美',
-		nameRomaji: 'Kazumi Hirai',
+		nameRomaji: 'Hirai Kazumi',
 		position: 'スタッフ',
 	},
 	{
 		name: '加藤諒佑',
-		nameRomaji: 'Ryosuke Kato',
+		nameRomaji: 'Kato Ryosuke',
 		position: 'スタッフ',
 	},
 ]

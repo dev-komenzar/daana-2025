@@ -11,7 +11,7 @@ const p = {
 `,
 	imageUrl: Photo,
 	name: '松波龍源',
-	nameRomaji: 'Ryugen Matsunami',
+	nameRomaji: 'Matsunami Ryugen',
 	positions: ['日本仏教徒協会 最高顧問 / Principal Advisor, Japan Buddhist Association', '実験寺院グループ 総監    / Master of the Order , Experimental Buddhism Order', '実験寺院 寳幢寺 僧院長 / Temple Master , Hodo-ji Temple'],
 }
 </script>
