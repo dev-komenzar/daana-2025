@@ -30,7 +30,8 @@ let { affiliation, bio, href, imageUrl, name, nameRomaji, position, reversed = f
 		<h3 class="name">{name}</h3>
 		<p class="name-romaji">{nameRomaji}</p>
 		<p class="affiliation">{affiliation}</p>
-		<p class="bio">{bio}</p>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p class="bio">{@html bio}</p>
 
 		{#if href}
 			<div
