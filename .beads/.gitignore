@@ -37,8 +37,12 @@ backup/
 embeddeddolt/
 export-state.json
 
+# JSONL 自動エクスポートを廃止し Dolt remote (refs/dolt/data) 単独構成にしたため、
+# JSONL は永続化対象から外す。bd config: export.auto=false / export.git-add=false。
+issues.jsonl
+interactions.jsonl
+
 # NOTE: Do NOT add negation patterns (e.g., !issues.jsonl) here.
 # They would override fork protection in .git/info/exclude, allowing
 # contributors to accidentally commit upstream issue databases.
-# The JSONL files (issues.jsonl, interactions.jsonl) and config files
-# are tracked by git by default since no pattern above ignores them.
+# Config files (config.yaml) remain tracked by git.
