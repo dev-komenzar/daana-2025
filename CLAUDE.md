@@ -25,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 記録先は Claude Code の memory system (`~/.claude/projects/<project>/memory/`)。`MEMORY.md` が index、各メモリは個別ファイル + frontmatter
 - 保存すべきは「将来セッションでも通用する持続的な知見」: feedback / project decision / reference / user profile
 - 保存すべきでないもの: 特定バグのデバッグ手順 (コード本体と commit message に残せば十分)、コードを読めば分かる構造情報
-- 同一セッション内の一時状態は TodoWrite または Plan で、永続すべきものだけ memory へ
+- 同一セッション内の一時状態は組み込みツール（TaskCreate 等）または Plan で、セッション横断のまとまった作業は beads issue で、永続すべき知見だけ memory へ
 
 ### 4. 完了前に必ず検証する
 
@@ -52,12 +52,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## タスク管理
 
-1. **まず計画を立てる**：チェック可能な項目として `tasks/todo.md` に計画を書く
-2. **計画を確認する**：実装を開始する前に確認する
-3. **進捗を記録する**：完了した項目を随時マークしていく
-4. **変更を説明する**：各ステップで高レベルのサマリーを提供する
-5. **結果をドキュメント化する**：`tasks/todo.md` にレビューセクションを追加する
+タスク管理は2層構成で運用する。
+
+- **beads（大きい単位）**: 機能追加・仕様変更・バグ修正などまとまった作業単位の課題管理。詳細は §Issue Tracking (bd) を参照
+- **組み込みツール（TaskCreate 等）**: 1つの beads issue を進める中で発生する細かいステップの進捗管理。同一セッション内のチェックリストとして使う
+
+ワークフロー：
+
+1. **beads issue を作る**：新しい依頼が来たらまず `bd create` で issue を起票する（タイトル・目的・受け入れ条件を記述）
+2. **計画を立てる**：3ステップ以上や設計判断を含むなら Plan モードで実装方針を固める
+3. **ステップを分解する**：実装ステップが複数に分かれるなら TaskCreate でセッション内チェックリストを作る
+4. **進捗を記録する**：TaskCreate のステータスを随時更新し、完了したら beads issue を `bd close` する
+5. **変更を説明する**：各ステップで高レベルのサマリーを提供する
 6. **学びを記録する**：修正・承認や非自明な決定は auto memory (§ワークフロー設計 3) に保存する
+
+**禁止事項**：
+
+- `tasks/todo.md` などローカルファイルでのタスク管理（beads と組み込みツールに統一）
+- 細かいステップをすべて beads issue にすること（粒度が細かすぎる）
+- 大きな作業を beads issue 化せず組み込みツールだけで進めること（セッション間で文脈が失われる）
 
 ---
 
