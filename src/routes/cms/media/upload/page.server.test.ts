@@ -117,6 +117,51 @@ describe('actions.default', () => {
 		expect(result?.status).toBe(400)
 	})
 
+	test('20MB 超のファイル → fail(413)', async () => {
+		const pb = makePb()
+		const oversized = new Uint8Array(20 * 1024 * 1024 + 1)
+		const file = new File([oversized], 'big.png', { type: 'image/png' })
+		const formData = new FormData()
+		formData.set('file', file)
+		formData.set('alt', '境内の桜')
+
+		const event = await makeEvent(formData, 'editor', pb)
+		const result = await actions.default!(event)
+		expect(result?.status).toBe(413)
+	})
+
+	test('圧縮後も 10MB 超 → fail(413)', async () => {
+		const { compressImage } = await import('$lib/cms/media/compress')
+		vi.mocked(compressImage).mockResolvedValueOnce({
+			buffer: Buffer.alloc(10 * 1024 * 1024 + 1),
+			format: 'webp',
+			height: 100,
+			width: 200,
+		})
+		const pb = makePb()
+		const buffer = await makePngBuffer()
+		const file = new File([new Uint8Array(buffer)], 'test.png', { type: 'image/png' })
+		const formData = new FormData()
+		formData.set('file', file)
+		formData.set('alt', '境内の桜')
+
+		const event = await makeEvent(formData, 'editor', pb)
+		const result = await actions.default!(event)
+		expect(result?.status).toBe(413)
+	})
+
+	test('request.formData() が BODY_SIZE_LIMIT 超過例外を投げる → fail(413)', async () => {
+		const pb = makePb()
+		const event = {
+			locals: makeLocals('editor', pb),
+			request: {
+				formData: () => Promise.reject(new Error('Content-length of 30000000 exceeds limit of 20971520 bytes.')),
+			},
+		} as unknown as Parameters<NonNullable<typeof actions>['default']>[0]
+		const result = await actions.default!(event)
+		expect(result?.status).toBe(413)
+	})
+
 	test('pb.create が例外を投げると fail(500)', async () => {
 		const create = vi.fn().mockRejectedValue(new Error('PB error'))
 		const pb = { collection: vi.fn(() => ({ create })) } as unknown as MockPb

@@ -27,6 +27,9 @@ RUN pnpm build
 FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+# adapter-node 既定 512KB は CMS の画像アップロードに不足。
+# PocketBase media maxSize 10MB に対し圧縮 (sharp→webp) 前提で 2 倍を許容。
+ENV BODY_SIZE_LIMIT=20971520
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/package.json ./package.json

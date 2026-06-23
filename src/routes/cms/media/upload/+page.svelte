@@ -22,11 +22,17 @@ $effect(() => {
 	return () => URL.revokeObjectURL(url)
 })
 
+const MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+
 function handleFiles(files: FileList | null | undefined) {
 	if (!files || files.length === 0) return
 	const file = files[0]
 	if (!file.type.startsWith('image/')) {
 		clientError = '画像ファイルを選択してください'
+		return
+	}
+	if (file.size > MAX_UPLOAD_BYTES) {
+		clientError = `画像は 20MB 以下にしてください (選択: ${(file.size / 1024 / 1024).toFixed(1)}MB)`
 		return
 	}
 	clientError = undefined
