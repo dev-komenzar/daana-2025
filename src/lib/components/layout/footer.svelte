@@ -136,7 +136,7 @@ const ACCESS = resolve('/access')
 					</svg>
 				</a>
 				<a
-					href="/llm.txt"
+					href={resolve('/llm.txt' as '/')}
 					class="llm-link">llm.txt</a
 				>
 			</div>

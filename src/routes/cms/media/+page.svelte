@@ -11,12 +11,12 @@ function confirmDelete(event: SubmitEvent) {
 	if (!confirm('削除しますか？')) event.preventDefault()
 }
 
-function paginationHref(pageNumber: number) {
+function paginationQuery(pageNumber: number): string {
 	// eslint-disable-next-line svelte/prefer-svelte-reactivity -- 非リアクティブな純関数。URLSearchParams で十分
 	const parameters = new URLSearchParams()
 	parameters.set('page', String(pageNumber))
 	if (data.q) parameters.set('q', data.q)
-	return `${resolve('/cms/media')}?${parameters.toString()}`
+	return parameters.toString()
 }
 </script>
 
@@ -91,17 +91,15 @@ function paginationHref(pageNumber: number) {
 		aria-label="ページング"
 	>
 		{#if data.page > 1}
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- query 文字列のみ動的 -->
 			<a
-				href={paginationHref(data.page - 1)}
+				href={resolve(`/cms/media?${paginationQuery(data.page - 1)}` as '/')}
 				rel="prev">前へ</a
 			>
 		{/if}
 		<span>{data.page} / {data.totalPages}</span>
 		{#if data.page < data.totalPages}
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- query 文字列のみ動的 -->
 			<a
-				href={paginationHref(data.page + 1)}
+				href={resolve(`/cms/media?${paginationQuery(data.page + 1)}` as '/')}
 				rel="next">次へ</a
 			>
 		{/if}

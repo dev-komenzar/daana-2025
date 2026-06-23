@@ -7,6 +7,7 @@ interface Properties {
 const { href, label }: Properties = $props()
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -- 外部URL専用ボタン -->
 <a
 	{href}
 	class="donation-button"

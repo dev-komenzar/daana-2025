@@ -13,6 +13,7 @@ type Properties = {
 let { class: className, href, isExternal = false, textContent }: Properties = $props()
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -- isExternal===true は外部URL想定 -->
 <a
 	href={isExternal ? href : resolve(href as '/')}
 	target={isExternal ? '_blank' : undefined}

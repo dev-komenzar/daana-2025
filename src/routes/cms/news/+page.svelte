@@ -77,17 +77,15 @@ function confirmDelete(event: SubmitEvent) {
 		aria-label="ページング"
 	>
 		{#if data.page > 1}
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- ページ遷移先のパスは resolve() 済み、query 文字列のみ動的 -->
 			<a
-				href={`${resolve('/cms/news')}?page=${data.page - 1}`}
+				href={resolve(`/cms/news?page=${data.page - 1}` as '/')}
 				rel="prev">前へ</a
 			>
 		{/if}
 		<span>{data.page} / {data.totalPages}</span>
 		{#if data.page < data.totalPages}
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- ページ遷移先のパスは resolve() 済み、query 文字列のみ動的 -->
 			<a
-				href={`${resolve('/cms/news')}?page=${data.page + 1}`}
+				href={resolve(`/cms/news?page=${data.page + 1}` as '/')}
 				rel="next">次へ</a
 			>
 		{/if}

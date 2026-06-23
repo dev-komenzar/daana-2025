@@ -115,7 +115,7 @@ $effect(() => {
 			{#each MenuItems as item (item.key)}
 				<div class="link-wrapper">
 					<a
-						href={item.href}
+						href={resolve(item.href as '/')}
 						class="item-link"
 					>
 						{item.label}
@@ -183,7 +183,7 @@ $effect(() => {
 	<nav class="menu-nav">
 		{#each MenuItems as item, index (item.key)}
 			<a
-				href={item.href}
+				href={resolve(item.href as '/')}
 				class="menu-item"
 				style="
 

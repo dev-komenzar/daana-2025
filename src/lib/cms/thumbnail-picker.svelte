@@ -1,4 +1,5 @@
 <script lang="ts">
+import { resolve } from '$app/paths'
 import { untrack } from 'svelte'
 
 import MediaGrid, { type MediaItem } from './media-grid.svelte'
@@ -94,7 +95,7 @@ function handleDialogClick(event: MouseEvent) {
 	<header>
 		<h2>サムネイルを選択</h2>
 		<a
-			href="/cms/media/upload"
+			href={resolve('/cms/media/upload')}
 			target="_blank"
 			rel="noopener"
 			class="upload-link">新規アップロード</a
