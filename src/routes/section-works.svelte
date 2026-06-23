@@ -165,33 +165,29 @@ h3 {
 
 .works-table-wrapper {
 	margin-block: 1rem;
-	overflow-x: auto;
 }
 
 .works-table {
+	width: 100%;
 	border-collapse: collapse;
 	border: none;
 }
 
+.works-table tbody,
 .works-table tr,
 .works-table td {
+	display: block;
 	padding: 0;
 	line-height: 1.5;
-	vertical-align: top;
 	border: none;
 }
 
 .works-table td:first-child {
-	width: 200px;
 	padding-left: 1em;
 	text-indent: -1em;
 }
 
-.works-table td:last-child {
-	min-width: 200px;
-}
-
-.works-table tr:not(:last-child) td {
+.works-table tr:not(:last-child) {
 	padding-bottom: 0.5rem;
 }
 
@@ -202,6 +198,39 @@ div.space {
 @media screen and (width >= 768px) {
 	.container {
 		margin-top: 300px;
+	}
+
+	.works-table-wrapper {
+		overflow: auto hidden;
+	}
+
+	.works-table tbody {
+		display: table-row-group;
+	}
+
+	.works-table tr {
+		display: table-row;
+	}
+
+	.works-table td {
+		display: table-cell;
+		vertical-align: top;
+	}
+
+	.works-table td:first-child {
+		width: 200px;
+	}
+
+	.works-table td:last-child {
+		min-width: 200px;
+	}
+
+	.works-table tr:not(:last-child) {
+		padding-bottom: 0;
+	}
+
+	.works-table tr:not(:last-child) td {
+		padding-bottom: 0.5rem;
 	}
 }
 </style>
