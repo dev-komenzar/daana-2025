@@ -106,12 +106,29 @@ bd blocked                        # ブロックされているissue一覧
 bd show <id>                      # 依存関係を確認
 ```
 
-### 同期
+### 同期（Dolt remote: GitHub）
+
+beads のデータは Dolt として `https://github.com/dev-komenzar/daana-2025.git` の `refs/dolt/data` に格納される（通常の git ブランチとは別 ref のためソースコードと競合しない）。
 
 ```bash
-bd dolt push    # Doltリモートにpush
-bd dolt pull    # Doltリモートからpull
+bd dolt push          # Dolt remote（GitHub refs/dolt/data）に push
+bd dolt pull          # Dolt remote から pull
+bd dolt remote list   # 設定中のリモート一覧
 ```
+
+新規クローンからの復元:
+
+```bash
+git clone https://github.com/dev-komenzar/daana-2025.git
+cd daana-2025
+direnv allow   # devShell で dolt CLI が入る
+bd bootstrap   # refs/dolt/data から Dolt DB を復元
+```
+
+注意:
+
+- **dolt CLI は flake.nix の devShell に同梱されている**。素のシェルでは `bd dolt push/pull` が失敗するので direnv が効いているか確認すること
+- 生の `dolt` CLI を直接叩いてジャーナルを壊さないこと。`bd dolt ...` 経由で操作する
 
 ### 品質管理
 

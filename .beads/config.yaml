@@ -62,3 +62,5 @@
 # - github.repo
 
 sync.remote: "https://github.com/dev-komenzar/daana-2025.git"
+
+federation.remote: "https://github.com/dev-komenzar/daana-2025.git"

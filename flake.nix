@@ -48,6 +48,8 @@
             # sharp dependencies
             vips
             pkg-config
+            # beads (bd) が refs/dolt/data 経由で GitHub と同期する際に必要
+            dolt
           ];
 
           shellHook = ''
