@@ -50,7 +50,6 @@
 		"msw": "^2.13.4",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.4.1",
-		"sharp": "^0.34.5",
 		"stylelint": "^16.25.0",
 		"stylelint-config-html": "^1.1.0",
 		"stylelint-config-recess-order": "^7.4.0",
@@ -104,6 +103,7 @@
 		"ky": "^1.14.0",
 		"motion": "^12.23.25",
 		"pocketbase": "^0.26.8",
+		"sharp": "^0.34.5",
 		"valibot": "^1.1.0"
 	}
 }
