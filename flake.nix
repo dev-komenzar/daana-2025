@@ -48,7 +48,8 @@
             # sharp dependencies
             vips
             pkg-config
-            # beads (bd) が refs/dolt/data 経由で GitHub と同期する際に必要
+            # 課題管理 (bd) と Dolt remote (refs/dolt/data) 同期用 CLI
+            beads
             dolt
           ];
 
