@@ -7,6 +7,7 @@ import { generateHTML, generateJSON } from '@tiptap/html/server'
 import { StarterKit } from '@tiptap/starter-kit'
 import { resolve } from 'node:path'
 
+import { FigureExtension } from '../src/lib/cms/editor/figure-extension'
 import { loadDotenv } from './lib/env'
 import { createMicrocmsClient, fetchAllNews } from './lib/microcms'
 
@@ -25,7 +26,7 @@ import { createMicrocmsClient, fetchAllNews } from './lib/microcms'
  * (daana-ajs.12 heading-id / daana-ajs.13 figure+figcaption 等) でカバーされる予定。
  */
 
-const EXTENSIONS = [StarterKit, TextAlign.configure({ types: ['heading', 'paragraph'] }), TextStyle, Color, Image, Table, TableRow, TableHeader, TableCell]
+const EXTENSIONS = [StarterKit, TextAlign.configure({ types: ['heading', 'paragraph'] }), TextStyle, Color, Image.configure({ inline: true }), Table, TableRow, TableHeader, TableCell, FigureExtension]
 
 type RoundTripResult = {
 	id: string
