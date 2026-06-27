@@ -25,7 +25,7 @@ onMount(() => {
 	editor = new Editor({
 		content,
 		element: editorElement,
-		extensions: [StarterKit.configure({ heading: false }), HeadingWithId, TextStyle, Color, Image, Table.configure({ resizable: true }), TableCell, TableHeader, TableRow, FigureExtension],
+		extensions: [StarterKit.configure({ heading: false }), HeadingWithId, TextStyle, Color, Image.configure({ inline: true }), Table.configure({ resizable: true }), TableCell, TableHeader, TableRow, FigureExtension],
 		onUpdate: ({ editor: instance }) => onUpdate?.(instance.getHTML()),
 	})
 })

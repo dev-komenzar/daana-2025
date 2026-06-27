@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/svelte'
 import { Editor } from '@tiptap/core'
 import { Color } from '@tiptap/extension-color'
+import { Image } from '@tiptap/extension-image'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { StarterKit } from '@tiptap/starter-kit'
 import { afterEach, describe, expect, test, vi } from 'vitest'
@@ -12,6 +13,14 @@ function createEditor() {
 		content: '<p>hello world</p>',
 		element: document.createElement('div'),
 		extensions: [StarterKit, TextStyle, Color],
+	})
+}
+
+function createImageEditor(content: string) {
+	return new Editor({
+		content,
+		element: document.createElement('div'),
+		extensions: [StarterKit, TextStyle, Color, Image.configure({ inline: true })],
 	})
 }
 
@@ -144,5 +153,69 @@ describe('BubbleMenu', () => {
 			expect(editor.isActive('link')).toBe(true)
 			expect(editor.getAttributes('link').href).toBe('https://example.com')
 		})
+	})
+
+	test('link-populated-on-image: リンク付き画像を NodeSelection すると Link ボタンで href が表示される', async () => {
+		editor = createImageEditor('<p><a href="https://example.com"><img src="https://example.com/x.jpg" alt="x" /></a></p>')
+		editor.commands.setNodeSelection(1)
+
+		const { getByLabelText, getByRole } = render(BubbleMenu, { editor })
+
+		const linkButton = getByRole('button', { name: /^link$/i })
+		fireEvent.click(linkButton)
+
+		const urlInput = (await vi.waitFor(() => {
+			const element = getByLabelText(/link url/i) as HTMLInputElement
+			expect(element).toBeTruthy()
+			return element
+		})) as HTMLInputElement
+
+		expect(urlInput.value).toBe('https://example.com')
+	})
+
+	test('link-empty-on-image-without-link: リンク無しの画像を NodeSelection すると Link 欄は空欄', async () => {
+		editor = createImageEditor('<p><img src="https://example.com/x.jpg" alt="x" /></p>')
+		editor.commands.setNodeSelection(1)
+
+		const { getByLabelText, getByRole } = render(BubbleMenu, { editor })
+
+		const linkButton = getByRole('button', { name: /^link$/i })
+		fireEvent.click(linkButton)
+
+		const urlInput = (await vi.waitFor(() => {
+			const element = getByLabelText(/link url/i) as HTMLInputElement
+			expect(element).toBeTruthy()
+			return element
+		})) as HTMLInputElement
+
+		expect(urlInput.value).toBe('')
+	})
+
+	test('link-applies-on-image: 画像 NodeSelection でリンクを Apply すると link mark が付与される', async () => {
+		editor = createImageEditor('<p><img src="https://example.com/x.jpg" alt="x" /></p>')
+		editor.commands.setNodeSelection(1)
+
+		const { getByLabelText, getByRole } = render(BubbleMenu, { editor })
+
+		const linkButton = getByRole('button', { name: /^link$/i })
+		fireEvent.click(linkButton)
+
+		const urlInput = (await vi.waitFor(() => {
+			const element = getByLabelText(/link url/i) as HTMLInputElement
+			expect(element).toBeTruthy()
+			return element
+		})) as HTMLInputElement
+
+		fireEvent.input(urlInput, { target: { value: 'https://example.com/link' } })
+		fireEvent.change(urlInput, { target: { value: 'https://example.com/link' } })
+
+		const applyButton = getByRole('button', { name: /^apply$/i })
+		fireEvent.click(applyButton)
+
+		await vi.waitFor(() => {
+			expect(editor.getAttributes('link').href).toBe('https://example.com/link')
+		})
+
+		expect(editor.getHTML()).toContain('https://example.com/link')
 	})
 })

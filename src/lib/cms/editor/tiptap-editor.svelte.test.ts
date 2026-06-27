@@ -22,6 +22,17 @@ describe('TipTapEditor', () => {
 		})
 	})
 
+	test('linked-image-content: <a href><img> を parse すると link mark が保持される', async () => {
+		const { container } = render(TipTapEditor, { content: '<p><a href="https://example.com"><img src="https://example.com/x.jpg" alt="x" /></a></p>' })
+
+		await vi.waitFor(() => {
+			const anchor = container.querySelector('.ProseMirror a[href="https://example.com"]')
+			expect(anchor).not.toBeNull()
+			const img = anchor?.querySelector('img')
+			expect(img?.getAttribute('src')).toBe('https://example.com/x.jpg')
+		})
+	})
+
 	test('onUpdate callback は prop として受け取れる (spec)', () => {
 		const onUpdate = vi.fn<(html: string) => void>()
 		const { container } = render(TipTapEditor, { content: '<p>hi</p>', onUpdate })
