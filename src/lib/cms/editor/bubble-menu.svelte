@@ -72,6 +72,10 @@ function refreshPosition() {
 function handleDocumentClick(event: MouseEvent) {
 	if (showLinkForm) return
 	if (bubbleElement && bubbleElement.contains(event.target as Node)) return
+	// 選択中(テキスト選択や画像NodeSelection)は閉じない
+	if (!editor.state.selection.empty) return
+	// カーソルがリンク上にある場合も維持
+	if (editor.isActive('link')) return
 	visible = false
 	showLinkForm = false
 }

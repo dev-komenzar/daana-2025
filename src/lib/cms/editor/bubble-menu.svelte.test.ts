@@ -361,4 +361,37 @@ describe('BubbleMenu', () => {
 		expect(editor.getHTML()).toContain('<img')
 		expect(editor.getHTML()).not.toContain('https://example.com/fig')
 	})
+
+	test('popover-stays-on-text-selection-mouseup: ノーマルテキスト選択中にdocument clickを発火してもpopoverが維持される', async () => {
+		editor = createEditor()
+		editor.commands.setTextSelection({ from: 1, to: 6 })
+		const { getByRole } = render(BubbleMenu, { editor })
+
+		await vi.waitFor(() => {
+			expect(getByRole('toolbar')).toBeTruthy()
+		})
+
+		document.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+
+		await vi.waitFor(() => {
+			expect(getByRole('toolbar')).toBeTruthy()
+		})
+	})
+
+	test('popover-closes-on-outside-click-when-no-selection: 選択が空のときにdocument clickを発火するとpopoverが閉じる', async () => {
+		editor = createEditor()
+		const { queryByRole } = render(BubbleMenu, { editor })
+
+		expect(queryByRole('toolbar')).toBeNull()
+
+		editor.commands.setTextSelection({ from: 1, to: 6 })
+		await vi.waitFor(() => {
+			expect(queryByRole('toolbar')).toBeTruthy()
+		})
+
+		editor.commands.setTextSelection({ from: 1, to: 1 })
+		await vi.waitFor(() => {
+			expect(queryByRole('toolbar')).toBeNull()
+		})
+	})
 })
