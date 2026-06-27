@@ -21,8 +21,16 @@ let { content = '', editor = $bindable(), onUpdate }: Properties = $props()
 
 let editorElement: HTMLDivElement | undefined = $state()
 
+function handleEditorClickCapture(event: MouseEvent) {
+	const target = event.target
+	if (target instanceof HTMLElement && target.closest('a')) {
+		event.preventDefault()
+	}
+}
+
 onMount(() => {
 	if (!editorElement) return
+	editorElement.addEventListener('click', handleEditorClickCapture, true)
 	editor = new Editor({
 		content,
 		editorProps: {
@@ -40,6 +48,7 @@ onMount(() => {
 })
 
 onDestroy(() => {
+	editorElement?.removeEventListener('click', handleEditorClickCapture, true)
 	editor?.destroy()
 })
 </script>
