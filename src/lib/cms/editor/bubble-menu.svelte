@@ -10,8 +10,11 @@ type Properties = { editor: Editor }
 let { editor }: Properties = $props()
 
 let linkHref = $state('')
-let linkOpen = $state(false)
+let showLinkForm = $state(false)
 let visible = $state(false)
+let popTop = $state(0)
+let popLeft = $state(0)
+let bubbleElement: HTMLDivElement | undefined = $state()
 
 const toggles: { label: string; mark: ToggleMark }[] = [
 	{ label: 'Bold', mark: 'bold' },
@@ -20,19 +23,74 @@ const toggles: { label: string; mark: ToggleMark }[] = [
 	{ label: 'Strike', mark: 'strike' },
 ]
 
+function isImageNodeSelection(): boolean {
+	return editor.isActive('image') || editor.isActive('figure')
+}
+
+function getLinkHrefValue(): string {
+	return editor.getAttributes('link').href ?? editor.getAttributes('figure').linkHref ?? ''
+}
+
 function refreshVisibility() {
-	visible = !editor.state.selection.empty
+	const sel = editor.state.selection
+	const isLinkActive = editor.isActive('link')
+	const isImage = isImageNodeSelection()
+
+	visible = !sel.empty || isLinkActive || isImage
+
+	// Auto-show link form only when cursor rests on a link (empty selection)
+	if (isLinkActive && sel.empty) {
+		linkHref = getLinkHrefValue()
+		showLinkForm = true
+	}
+
+	refreshPosition()
+}
+
+function refreshPosition() {
+	if (!visible) return
+
+	const sel = editor.state.selection
+	const isImage = isImageNodeSelection()
+	let rect: { bottom: number; left: number; right: number; top: number }
+
+	if (sel.empty || isImage) {
+		const coords = editor.view.coordsAtPos(sel.from)
+		rect = { bottom: coords.bottom, left: coords.left, right: coords.right, top: coords.top }
+	} else {
+		const domSel = document.getSelection()
+		if (!domSel || domSel.rangeCount === 0) return
+		rect = domSel.getRangeAt(0).getBoundingClientRect()
+	}
+
+	const popoverWidth = 400
+	const centerX = rect.left + (rect.right - rect.left) / 2 - popoverWidth / 2
+	popTop = rect.bottom + 8
+	popLeft = Math.max(8, Math.min(window.innerWidth - popoverWidth - 8, centerX))
+}
+
+function handleDocumentClick(event: MouseEvent) {
+	if (showLinkForm) return
+	if (bubbleElement && bubbleElement.contains(event.target as Node)) return
+	visible = false
+	showLinkForm = false
 }
 
 onMount(() => {
 	editor.on('selectionUpdate', refreshVisibility)
 	editor.on('transaction', refreshVisibility)
+	window.addEventListener('scroll', refreshPosition, { passive: true })
+	window.addEventListener('resize', refreshPosition, { passive: true })
+	document.addEventListener('click', handleDocumentClick)
 	refreshVisibility()
 })
 
 onDestroy(() => {
 	editor.off('selectionUpdate', refreshVisibility)
 	editor.off('transaction', refreshVisibility)
+	window.removeEventListener('scroll', refreshPosition)
+	window.removeEventListener('resize', refreshPosition)
+	document.removeEventListener('click', handleDocumentClick)
 })
 
 function toggle(mark: ToggleMark) {
@@ -45,73 +103,99 @@ function applyColor(event: Event) {
 }
 
 function openLink() {
-	linkHref = editor.getAttributes('link').href ?? ''
-	linkOpen = true
+	linkHref = getLinkHrefValue()
+	showLinkForm = true
 }
 
 function applyLink() {
-	if (linkHref) {
+	if (!linkHref) return
+
+	if (editor.isActive('figure')) {
+		editor.chain().focus().updateAttributes('figure', { linkHref }).run()
+	} else {
 		editor.chain().focus().extendMarkRange('link').setLink({ href: linkHref }).run()
+	}
+	showLinkForm = false
+}
+
+function deleteLink() {
+	if (editor.isActive('figure')) {
+		editor.chain().focus().updateAttributes('figure', { linkHref: undefined }).run()
 	} else {
 		editor.chain().focus().extendMarkRange('link').unsetLink().run()
 	}
-	linkOpen = false
+	showLinkForm = false
+}
+
+function cancelLink() {
+	showLinkForm = false
 }
 </script>
 
-<div
-	class="bubble-menu"
-	class:is-visible={visible}
-	role="toolbar"
-	aria-label="Text formatting"
->
-	{#each toggles as { label, mark } (mark)}
-		<button
-			type="button"
-			aria-label={label}
-			onclick={() => toggle(mark)}>{label[0]}</button
-		>
-	{/each}
-	<input
-		type="color"
-		aria-label="Color"
-		oninput={applyColor}
-	/>
-	<button
-		type="button"
-		aria-label="Link"
-		onclick={openLink}>Link</button
+{#if visible}
+	<div
+		bind:this={bubbleElement}
+		class="bubble-popover"
+		style="top: {popTop}px; left: {popLeft}px"
+		role="toolbar"
+		aria-label="Text formatting"
 	>
-	{#if linkOpen}
-		<form
-			onsubmit={event => {
-				event.preventDefault()
-				applyLink()
-			}}
-		>
-			<input
-				type="url"
-				aria-label="Link URL"
-				bind:value={linkHref}
-			/>
-			<button type="submit">Apply</button>
-		</form>
-	{/if}
-</div>
+		{#each toggles as { label, mark } (mark)}
+			<button
+				type="button"
+				aria-label={label}
+				onclick={() => toggle(mark)}>{label[0]}</button
+			>
+		{/each}
+		<input
+			type="color"
+			aria-label="Color"
+			oninput={applyColor}
+		/>
+		{#if !showLinkForm}
+			<button
+				type="button"
+				aria-label="Link"
+				onclick={openLink}>Link</button
+			>
+		{/if}
+		{#if showLinkForm}
+			<form
+				onsubmit={event => {
+					event.preventDefault()
+					applyLink()
+				}}
+			>
+				<input
+					type="url"
+					aria-label="Link URL"
+					bind:value={linkHref}
+				/>
+				<button type="submit">保存</button>
+				<button
+					type="button"
+					onclick={deleteLink}>削除</button
+				>
+				<button
+					type="button"
+					onclick={cancelLink}>キャンセル</button
+				>
+			</form>
+		{/if}
+	</div>
+{/if}
 
 <style>
-.bubble-menu {
-	display: none;
+.bubble-popover {
+	position: fixed;
+	z-index: 1000;
+	display: flex;
 	gap: 4px;
 	padding: 4px;
 	background: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
-}
-
-.bubble-menu.is-visible {
-	display: inline-flex;
 }
 
 button {

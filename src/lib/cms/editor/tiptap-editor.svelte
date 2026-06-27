@@ -2,6 +2,7 @@
 import { Editor } from '@tiptap/core'
 import { Color } from '@tiptap/extension-color'
 import { Image } from '@tiptap/extension-image'
+import { Link } from '@tiptap/extension-link'
 import { Table, TableCell, TableHeader, TableRow } from '@tiptap/extension-table'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { StarterKit } from '@tiptap/starter-kit'
@@ -25,7 +26,7 @@ onMount(() => {
 	editor = new Editor({
 		content,
 		element: editorElement,
-		extensions: [StarterKit.configure({ heading: false }), HeadingWithId, TextStyle, Color, Image.configure({ inline: true }), Table.configure({ resizable: true }), TableCell, TableHeader, TableRow, FigureExtension],
+		extensions: [StarterKit.configure({ heading: false, link: false }), HeadingWithId, TextStyle, Color, Link.configure({ autolink: false, openOnClick: false }), Image.configure({ inline: true }), Table.configure({ resizable: true }), TableCell, TableHeader, TableRow, FigureExtension],
 		onUpdate: ({ editor: instance }) => onUpdate?.(instance.getHTML()),
 	})
 })
