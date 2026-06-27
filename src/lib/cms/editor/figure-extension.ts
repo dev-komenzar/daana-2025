@@ -13,6 +13,11 @@ export const FigureExtension = Node.create({
 				parseHTML: element => element.querySelector('figcaption')?.textContent ?? undefined,
 				renderHTML: () => ({}),
 			},
+			linkHref: {
+				default: undefined,
+				parseHTML: element => element.querySelector('a')?.getAttribute('href') ?? undefined,
+				renderHTML: () => ({}),
+			},
 			src: {
 				default: undefined,
 				parseHTML: element => element.querySelector('img')?.getAttribute('src') ?? undefined,
@@ -36,6 +41,7 @@ export const FigureExtension = Node.create({
 					return {
 						alt: img.getAttribute('alt') ?? undefined,
 						caption: element.querySelector('figcaption')?.textContent ?? undefined,
+						linkHref: element.querySelector('a')?.getAttribute('href') ?? undefined,
 						src: img.getAttribute('src') ?? undefined,
 					}
 				},
@@ -45,11 +51,13 @@ export const FigureExtension = Node.create({
 	},
 
 	renderHTML({ node }) {
-		const attributes = node.attrs as { alt?: string; caption?: string; src?: string }
+		const attributes = node.attrs as { alt?: string; caption?: string; linkHref?: string; src?: string }
 		const imgAttributes = mergeAttributes({ alt: attributes.alt ?? '', src: attributes.src ?? '' })
+		const img = ['img', imgAttributes]
+		const inner = attributes.linkHref ? ['a', { href: attributes.linkHref }, img] : img
 		if (attributes.caption) {
-			return ['figure', {}, ['img', imgAttributes], ['figcaption', {}, attributes.caption]]
+			return ['figure', {}, inner, ['figcaption', {}, attributes.caption]]
 		}
-		return ['figure', {}, ['img', imgAttributes]]
+		return ['figure', {}, inner]
 	},
 })
