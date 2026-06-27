@@ -38,4 +38,96 @@ describe('TipTapEditor', () => {
 		const { container } = render(TipTapEditor, { content: '<p>hi</p>', onUpdate })
 		expect(container.querySelector('.tiptap-editor-root')).not.toBeNull()
 	})
+
+	test('linked-figure-prevents-navigation: <figure><a><img> クリックで navigate 抑制される', async () => {
+		const { container } = render(TipTapEditor, {
+			content: '<figure><a href="https://example.com"><img src="https://example.com/x.jpg" alt="x" /></a></figure>',
+		})
+
+		await vi.waitFor(() => {
+			const anchor = container.querySelector('.ProseMirror a')
+			expect(anchor).not.toBeNull()
+		})
+
+		const pm = container.querySelector<HTMLElement>('.ProseMirror')!
+		vi.spyOn(pm, 'getBoundingClientRect').mockReturnValue({
+			bottom: 100,
+			height: 100,
+			left: 0,
+			right: 800,
+			toJSON: () => ({}),
+			top: 0,
+			width: 800,
+			x: 0,
+			y: 0,
+		})
+		Object.defineProperty(document, 'elementFromPoint', {
+			configurable: true,
+			value: () => pm,
+			writable: true,
+		})
+
+		const anchor = container.querySelector<HTMLAnchorElement>('.ProseMirror a')!
+		const mouseDownEvent = new MouseEvent('mousedown', {
+			bubbles: true,
+			cancelable: true,
+			clientX: 10,
+			clientY: 10,
+		})
+		anchor.dispatchEvent(mouseDownEvent)
+		const mouseUpEvent = new MouseEvent('mouseup', {
+			bubbles: true,
+			cancelable: true,
+			clientX: 10,
+			clientY: 10,
+		})
+		anchor.dispatchEvent(mouseUpEvent)
+		expect(mouseUpEvent.defaultPrevented).toBe(true)
+	})
+
+	test('linked-text-prevents-navigation: <p><a>text</a> クリックでも navigate 抑制される', async () => {
+		const { container } = render(TipTapEditor, {
+			content: '<p><a href="https://example.com">hello</a></p>',
+		})
+
+		await vi.waitFor(() => {
+			const anchor = container.querySelector('.ProseMirror a')
+			expect(anchor).not.toBeNull()
+		})
+
+		const pm = container.querySelector<HTMLElement>('.ProseMirror')!
+		vi.spyOn(pm, 'getBoundingClientRect').mockReturnValue({
+			bottom: 100,
+			height: 100,
+			left: 0,
+			right: 800,
+			toJSON: () => ({}),
+			top: 0,
+			width: 800,
+			x: 0,
+			y: 0,
+		})
+		Object.defineProperty(document, 'elementFromPoint', {
+			configurable: true,
+			value: () => pm,
+			writable: true,
+		})
+
+		const anchor = container.querySelector<HTMLAnchorElement>('.ProseMirror a')!
+		const mouseDownEvent = new MouseEvent('mousedown', {
+			bubbles: true,
+			cancelable: true,
+			clientX: 10,
+			clientY: 10,
+		})
+		anchor.dispatchEvent(mouseDownEvent)
+		const mouseUpEvent = new MouseEvent('mouseup', {
+			bubbles: true,
+			cancelable: true,
+			clientX: 10,
+			clientY: 10,
+		})
+		anchor.dispatchEvent(mouseUpEvent)
+		expect(mouseUpEvent.defaultPrevented).toBe(true)
+	})
 })

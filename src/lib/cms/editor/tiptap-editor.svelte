@@ -25,6 +25,14 @@ onMount(() => {
 	if (!editorElement) return
 	editor = new Editor({
 		content,
+		editorProps: {
+			handleClick(_view, _pos, event) {
+				const target = event.target
+				if (target instanceof HTMLElement && target.closest('a')) {
+					event.preventDefault()
+				}
+			},
+		},
 		element: editorElement,
 		extensions: [StarterKit.configure({ heading: false, link: false }), HeadingWithId, TextStyle, Color, Link.configure({ autolink: false, openOnClick: false }), Image.configure({ inline: true }), Table.configure({ resizable: true }), TableCell, TableHeader, TableRow, FigureExtension],
 		onUpdate: ({ editor: instance }) => onUpdate?.(instance.getHTML()),
