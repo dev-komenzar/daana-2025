@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+思考言語は指定なし。ユーザーには日本語で話して。commit, subagents などのプログラミング用語は英語のままでよいです。
+
 ## ワークフロー設計
 
 ### 1. Planモードを基本とする
