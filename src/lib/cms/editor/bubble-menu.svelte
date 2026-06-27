@@ -144,48 +144,52 @@ function cancelLink() {
 		role="toolbar"
 		aria-label="Text formatting"
 	>
-		{#each toggles as { label, mark } (mark)}
-			<button
-				type="button"
-				aria-label={label}
-				onclick={() => toggle(mark)}>{label[0]}</button
-			>
-		{/each}
-		<input
-			type="color"
-			aria-label="Color"
-			oninput={applyColor}
-		/>
-		{#if !showLinkForm}
-			<button
-				type="button"
-				aria-label="Link"
-				onclick={openLink}>Link</button
-			>
-		{/if}
-		{#if showLinkForm}
-			<form
-				onsubmit={event => {
-					event.preventDefault()
-					applyLink()
-				}}
-			>
-				<input
-					type="url"
-					aria-label="Link URL"
-					bind:value={linkHref}
-				/>
-				<button type="submit">保存</button>
+		<div class="bubble-row">
+			{#each toggles as { label, mark } (mark)}
 				<button
 					type="button"
-					onclick={deleteLink}>削除</button
+					aria-label={label}
+					onclick={() => toggle(mark)}>{label[0]}</button
 				>
+			{/each}
+			<input
+				type="color"
+				aria-label="Color"
+				oninput={applyColor}
+			/>
+		</div>
+		<div class="bubble-row">
+			{#if !showLinkForm}
 				<button
 					type="button"
-					onclick={cancelLink}>キャンセル</button
+					aria-label="Link"
+					onclick={openLink}>Link</button
 				>
-			</form>
-		{/if}
+			{/if}
+			{#if showLinkForm}
+				<form
+					onsubmit={event => {
+						event.preventDefault()
+						applyLink()
+					}}
+				>
+					<input
+						type="url"
+						aria-label="Link URL"
+						bind:value={linkHref}
+					/>
+					<button type="submit">保存</button>
+					<button
+						type="button"
+						onclick={deleteLink}>削除</button
+					>
+					<button
+						type="button"
+						onclick={cancelLink}>キャンセル</button
+					>
+				</form>
+			{/if}
+		</div>
 	</div>
 {/if}
 
@@ -194,12 +198,18 @@ function cancelLink() {
 	position: fixed;
 	z-index: 1000;
 	display: flex;
+	flex-direction: column;
 	gap: 4px;
 	padding: 4px;
 	background: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+.bubble-row {
+	display: flex;
+	gap: 4px;
 }
 
 button {
