@@ -166,6 +166,7 @@ function formatDate(dateString: string | undefined): string {
 }
 
 .article-content :global(img) {
+	display: block;
 	max-width: 100%;
 	height: auto;
 	margin: 1rem 0;
