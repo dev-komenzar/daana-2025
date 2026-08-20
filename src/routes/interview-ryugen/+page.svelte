@@ -14,7 +14,7 @@ const p = {
 	imageUrl: Photo,
 	name: '松波龍源',
 	nameRomaji: 'Ryugen Matsunami',
-	positions: ['日本仏教徒協会 最高顧問 / Principal Advisor, Japan Buddhist Association', '実験寺院グループ 総監    / Master of the Order , Experimental Buddhism Order', '実験寺院 寳幢寺 僧院長 / Temple Master , Hōdō-ji Temple'],
+	positions: ['実験寺院 代表 / Representative, Experimental Buddhism Order'],
 }
 </script>
 
@@ -25,7 +25,7 @@ const p = {
 				class="pre-heading"
 				use:floatUp
 			>
-				実験寺院の取り組みについて、<br />実験寺院グループ総監にインタビューしてみました。
+				実験寺院の取り組みについて、<br />実験寺院 代表にインタビューしてみました。
 			</p>
 			<h1 use:floatUp>{p.name}</h1>
 			<p
