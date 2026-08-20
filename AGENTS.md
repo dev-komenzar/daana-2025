@@ -6,13 +6,6 @@ This file provides guidance to AI coding agents when working with code in this r
 
 ## ワークフロー設計
 
-### 1. Planモードを基本とする
-
-- 3ステップ以上 or アーキテクチャに関わるタスクは必ずPlanモードで開始する
-- 途中でうまくいかなくなったら、無理に進めずすぐに立ち止まって再計画する
-- 構築だけでなく、検証ステップにもPlanモードを使う
-- 曖昧さを減らすため、実装前に詳細な仕様を書く
-
 ### 2. サブエージェント戦略
 
 - あなたはタスク進行の指揮官としてふるまい、個別の作業はおこなわないこと
@@ -21,13 +14,16 @@ This file provides guidance to AI coding agents when working with code in this r
 - 複雑な問題には、サブエージェントを使ってより多くの計算リソースを投入する
 - 集中して実行するために、サブエージェント1つにつき1タスクを割り当てる
 
-### 3. 自己改善ループ（auto memory 連携）
+### 3. 自己改善ループ（beads memory 連携）
 
-- ユーザーから修正・承認を受けたり、非自明な project decision に気付いたら auto memory に記録する
-- 記録先は Claude Code の memory system (`~/.claude/projects/<project>/memory/`)。`MEMORY.md` が index、各メモリは個別ファイル + frontmatter
+- ユーザーから修正・承認を受けたり、非自明な project decision に気付いたら beads memory に記録する
+- 記録には `bd remember "知見の内容" --key <key>` を使う。`--key` で明示的なキーを指定すると、同じキーの既存メモリが更新される
+- 記録したメモリは `bd prime` でセッション開始時に自動注入されるため、手動でロードする必要はない
+- 検索は `bd memories <keyword>` でキーワード検索、`bd memories` で全件一覧
 - 保存すべきは「将来セッションでも通用する持続的な知見」: feedback / project decision / reference / user profile
 - 保存すべきでないもの: 特定バグのデバッグ手順 (コード本体と commit message に残せば十分)、コードを読めば分かる構造情報
-- 同一セッション内の一時状態は組み込みツール（TaskCreate 等）または Plan で、セッション横断のまとまった作業は beads issue で、永続すべき知見だけ memory へ
+- 同一セッション内の一時状態は組み込みツール（TaskCreate 等）または Plan で、セッション横断のまとまった作業は beads issue で、永続すべき知見だけ beads memory へ
+- beads memory は Dolt DB に保存されるため、`bd dolt push` で refs/dolt/data に同期される（issue データと同じ経路）
 
 ### 4. 完了前に必ず検証する
 
@@ -343,53 +339,6 @@ Required environment variable:
 
 - `MICROCMS_API_KEY`: API key for microCMS (set in `.env`)
 
-### Font Configuration
-
-- **English**: Futura
-- **Japanese**: Noto Sans JP (downloaded from Google Fonts, stored in `static/fonts/`)
-- Font weights are specified by font-family name (e.g., 'Noto Sans JP Light') rather than using variable fonts
-
-### Code Quality Tools
-
-- **Prettier**: Code formatter (tabs, no semicolons, single quotes)
-- **ESLint**: Extended with perfectionist, svelte, and unicorn plugins
-- **Stylelint**: Uses standard config with recess-order and HTML support
-- **Husky + lint-staged**: Pre-commit hooks run Prettier and linting automatically
-- **svelte-check**: Type-checking for Svelte components
-
-### Image Handling
-
-- **Static assets**: Use `EnhancedImage` component (`src/lib/components/ui/enhanced-image.svelte`) instead of raw `<img>` tags
-  - Automatically converts images to AVIF/WebP formats
-  - Generates multiple sizes for responsive images
-  - Prevents layout shift by auto-setting width/height
-  - Images must be imported from `$lib/assets/`
-- **External URLs** (e.g., microCMS): Use standard `<img>` tags with explicit `width` and `height` attributes
-
-### Meta Tags
-
-Use **svelte-meta-tags** for SEO meta tags instead of `<svelte:head>`. Define meta tags in `+layout.svelte` files:
-
-```svelte
-<script lang="ts">
-	import { SITE_FULL_URL } from '$lib/constants'
-	import { MetaTags } from 'svelte-meta-tags'
-
-	let { children } = $props()
-</script>
-
-<MetaTags
-	title="ページタイトル"
-	titleTemplate="%s | 日本仏教徒協会"
-	description="ページの説明"
-	canonical={`${SITE_FULL_URL}/path`}
-/>
-
-{@render children?.()}
-```
-
-**Important**: Do NOT use `<svelte:head>` for meta tags. Always use `svelte-meta-tags` in `+layout.svelte`.
-
 ### Important Notes
 
 - All routes are organized as section components imported into the main page
@@ -397,107 +346,4 @@ Use **svelte-meta-tags** for SEO meta tags instead of `<svelte:head>`. Define me
 - microCMS is used as the headless CMS for content management
 - Data fetching is done via `+page.server.ts` load functions (SSR)
 
-### CSS Architecture - Mobile First
-
-This project uses a **Mobile First** approach for responsive design:
-
-- **Default styles**: Written for mobile devices (smallest viewport)
-- **Media queries**: Use `@media screen and (width >= 768px)` to add styles for larger screens
-- **Breakpoints**:
-  - Mobile: default (< 768px)
-  - Tablet and above: `width >= 768px`
-
-```css
-/* Mobile First Example */
-.element {
-	padding: 24px; /* Mobile default */
-	font-size: 14px;
-}
-
-@media screen and (width >= 768px) {
-	.element {
-		padding: 48px; /* Tablet and above */
-		font-size: 16px;
-	}
-}
-```
-
-**Important**: Do NOT use `max-width` or `width < 768px` media queries. Always start with mobile styles and progressively enhance for larger screens.
-
-### Space Handling
-
-General principles for managing spacing between elements:
-
-- **Uniform spacing (siblings/children)**: Use the owl selector (`* + *`) to apply consistent margins between adjacent sibling elements
-- **Non-uniform spacing**:
-  - **Vertical spacing**: Apply margin/padding to the **bottom element** (use `margin-top` on the element below)
-  - **Horizontal spacing**: Apply margin/padding to the **right element** (use `margin-left` on the element to the right)
-
-```html
-<div class="my-class"></div>
-<div class="your-class"></div>
-```
-
-- Spacing such structure, use `my-class + your-calss` selector to indicate that this selector relates to two factors.
-
-### Scroll Animations
-
-Use the `floatUp` Svelte action for scroll-triggered "floating up" animations. This action uses the Motion library (`motion.dev`) which is already installed in the project.
-
-**Location**: `src/lib/actions/float-up.ts`
-
-**Usage**:
-
-```svelte
-<script>
-	import { floatUp } from '$lib/actions'
-</script>
-
-<h2 use:floatUp>タイトル</h2><p use:floatUp>コンテンツ</p><div use:floatUp={{ translateY: 10, bounce: 0.5 }}>カスタム設定</div>
-```
-
-**Animation Effect**:
-
-- Fade in (opacity: 0 → 1)
-- Translate up (Y: 6px → 0)
-- Scale up with spring (scale: 0.98 → 1)
-- Triggers on both viewport enter and exit
-
-**Available Options**:
-| Option | Default | Description |
-|--------|---------|-------------|
-| `translateY` | 6 | Y-axis movement in px |
-| `scaleFrom` | 0.98 | Initial scale value |
-| `bounce` | 0.3 | Spring bounce for scale |
-| `durationEnter` | 0.5 | Enter animation duration (seconds) |
-| `durationExit` | 0.35 | Exit animation duration (seconds) |
-| `threshold` | 0.3 | Viewport visibility ratio to trigger (0-1) |
-
-**Important**: When adding scroll animations to new pages, follow the pattern used in `src/routes/interview-ryugen/+page.svelte`.
-
-### Svelte Each Block Keys
-
-Always provide a key expression for `{#each}` blocks to help Svelte efficiently track and update list items:
-
-```svelte
-<!-- Good: with key -->
-{#each items as item (item.id)}
-	<div>{item.name}</div>
-{/each}
-
-<!-- Good: with key and index -->
-{#each items as item, index (item.id)}
-	<div>{index}: {item.name}</div>
-{/each}
-
-<!-- Bad: no key (causes linter warning) -->
-{#each items as item}
-	<div>{item.name}</div>
-{/each}
-```
-
-**Key selection**:
-
-- Use a unique identifier like `id` when available
-- The key must be unique within the list
-- Avoid using array index as the key if items can be reordered or filtered
+コーディング規約の詳細は [docs/CODING.md](./docs/CODING.md) を参照してください。
