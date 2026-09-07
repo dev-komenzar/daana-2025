@@ -2,7 +2,6 @@
 import type { NewsItem } from '$lib/news'
 
 import { resolve } from '$app/paths'
-import NewsCarousel from '$lib/components/ui/news-carousel.svelte'
 import NewsLink from '$lib/components/ui/news-link.svelte'
 import { stripHtml, truncate } from '$lib/utils/description'
 
@@ -10,17 +9,8 @@ import PinnedNews from './pinned-news.svelte'
 
 let { newsItems, pinnedNewsItems }: { newsItems: NewsItem[]; pinnedNewsItems: NewsItem[] } = $props()
 
-let currentIndex = $state(0)
-let previousIndex = $state(-1)
-let lastKnownIndex = -1
-
-$effect(() => {
-	// currentIndex が変わった時、前の値を previousIndex に保存
-	if (lastKnownIndex !== -1 && lastKnownIndex !== currentIndex) {
-		previousIndex = lastKnownIndex
-	}
-	lastKnownIndex = currentIndex
-})
+// Pick Up 表示は最新1件のみ
+const latestNews = $derived(newsItems?.at(0))
 
 function formatDate(isoDate: string): string {
 	const date = new Date(isoDate)
@@ -40,41 +30,37 @@ function formatDate(isoDate: string): string {
 			<h2 class="text-large font-gothic-bold">PICK UP</h2>
 			<p class="sub-heading">Check it UP!</p>
 
-			{#if !newsItems || newsItems.length === 0}
+			{#if !latestNews}
 				<p class="no-news-message">ニュースが取得できません</p>
 			{:else}
-				<div class="article-info-container">
-					{#each newsItems as item, index (item.id)}
-						<div
-							class="article-info"
-							class:active={currentIndex === index}
-							class:exiting={previousIndex === index}
-						>
-							<p class="date">{item.publishedAt ? formatDate(item.publishedAt) : ''}</p>
-							<a
-								href={resolve(`/news/${item.id}`)}
-								class="article-link"
-							>
-								<h3 class="article-title">{item.title ?? ''}</h3>
-								<p class="article-description">
-									{item.content ? truncate(stripHtml(item.content), 100) : ''}
-								</p>
-							</a>
-						</div>
-					{/each}
+				<div class="article-info">
+					<p class="date">{latestNews.publishedAt ? formatDate(latestNews.publishedAt) : ''}</p>
+					<a
+						href={resolve(`/news/${latestNews.id}`)}
+						class="article-link"
+					>
+						<h3 class="article-title">{latestNews.title ?? ''}</h3>
+						<p class="article-description">
+							{latestNews.content ? truncate(stripHtml(latestNews.content), 100) : ''}
+						</p>
+					</a>
 				</div>
 			{/if}
 		</div>
-		<div class="carousel">
-			{#if !newsItems || newsItems.length === 0}
-				<p class="no-news-message">ニュースが取得できません</p>
-			{:else}
-				<NewsCarousel
-					items={newsItems}
-					bind:currentIndex
-				/>
-			{/if}
-		</div>
+		{#if latestNews}
+			<div class="carousel">
+				<a
+					href={resolve(`/news/${latestNews.id}`)}
+					class="carousel-slide"
+					style:background-image={latestNews.thumbnail?.url ? `url(${latestNews.thumbnail.url})` : 'none'}
+					data-sveltekit-preload-data="tap"
+				>
+					<div class="slide-overlay">
+						<h3 class="slide-title">{latestNews.title}</h3>
+					</div>
+				</a>
+			</div>
+		{/if}
 	</div>
 	<div class="wide-content link-button">
 		<NewsLink
@@ -111,33 +97,9 @@ function formatDate(isoDate: string): string {
 	color: #3c87c0;
 }
 
-.article-info-container {
-	position: relative;
-
-	/* 子要素(.article-info)がposition: absoluteのため、
-	   width: 100%を継承させるには親に明示的な幅が必要 */
-	width: 100%;
-	height: 150px;
-	margin-top: 31px;
-}
-
 .article-info {
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
-	opacity: 0;
-	transition: opacity 0.4s ease;
-}
-
-.article-info.active {
-	z-index: 100;
-	opacity: 1;
-}
-
-.article-info.exiting {
-	z-index: 1;
-	opacity: 0;
+	margin-top: 31px;
 }
 
 .date {
@@ -191,6 +153,36 @@ function formatDate(isoDate: string): string {
 
 .carousel {
 	width: 100%;
+	height: 400px;
+	overflow: hidden;
+	border-radius: 24px;
+}
+
+.carousel-slide {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: inherit;
+	text-decoration: none;
+	background-position: center;
+	background-size: cover;
+}
+
+.slide-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 32px;
+	color: white;
+	background: linear-gradient(to top, rgb(0 0 0 / 60%), transparent);
+}
+
+.slide-title {
+	margin: 0 0 8px;
+	font-size: 24px;
+	font-weight: bold;
 }
 
 .link-button {
@@ -200,6 +192,10 @@ function formatDate(isoDate: string): string {
 @media screen and (width >= 768px) {
 	#news {
 		margin-top: 300px;
+	}
+
+	.carousel {
+		height: 370px;
 	}
 }
 
