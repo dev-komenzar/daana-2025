@@ -18,11 +18,11 @@ const formattedDate = $derived(() => {
 
 <a
 	href={resolve(`/news/${item.id}`)}
-	class="news-card"
+	class="news-row"
 	data-sveltekit-preload-data="tap"
 >
 	{#if item.thumbnail?.url}
-		<div class="card-thumbnail">
+		<div class="row-thumbnail">
 			<img
 				src={item.thumbnail.url}
 				alt={item.title || 'ニュースのサムネイル'}
@@ -31,105 +31,105 @@ const formattedDate = $derived(() => {
 			/>
 		</div>
 	{:else}
-		<div class="card-thumbnail placeholder">
+		<div class="row-thumbnail placeholder">
 			<span class="placeholder-text">No Image</span>
 		</div>
 	{/if}
-	<div class="card-content">
+	<div class="row-content">
 		<time
-			class="card-date"
+			class="row-date"
 			datetime={item.publishedAt}>{formattedDate()}</time
 		>
-		<h3 class="card-title">{item.title || '無題'}</h3>
+		<h3 class="row-title">{item.title || '無題'}</h3>
 	</div>
 </a>
 
 <style>
-.news-card {
+.news-row {
 	display: flex;
-	flex-direction: column;
-	overflow: hidden;
+	gap: 16px;
+	align-items: center;
+	padding: 16px 0;
 	color: inherit;
 	text-decoration: none;
-	cursor: pointer;
-	background-color: white;
-	border-radius: 16px;
-	box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
-	transition:
-		transform 0.3s ease,
-		box-shadow 0.3s ease;
+	border-bottom: 1px solid var(--color-secondary);
 }
 
-.news-card:hover {
-	box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
-	transform: translateY(-4px);
-}
-
-.card-thumbnail {
-	position: relative;
-	width: 100%;
-	height: 200px;
+.row-thumbnail {
+	flex-shrink: 0;
+	width: 160px;
+	aspect-ratio: 4 / 3;
 	overflow: hidden;
-	background-color: #f5f5f5;
+	background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-white));
 }
 
-.card-thumbnail img {
+.row-thumbnail img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	transition: transform 0.3s ease;
 }
 
-.news-card:hover .card-thumbnail img {
+.news-row:hover .row-thumbnail img {
 	transform: scale(1.05);
 }
 
-.card-thumbnail.placeholder {
+.row-thumbnail.placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .placeholder-text {
-	font-size: 16px;
-	color: #999;
+	font-family: var(--font-body-light);
+	font-size: 12px;
+	color: color-mix(in srgb, var(--color-text) 40%, var(--color-white));
 }
 
-.card-content {
+.row-content {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
-	padding: 20px;
+	gap: 8px;
+	min-width: 0;
 }
 
-.card-date {
-	font-family: 'Noto Sans JP Light', sans-serif;
+.row-date {
+	font-family: var(--font-heading-bold);
 	font-size: 14px;
-	color: #666;
+	line-height: 16px;
+	color: var(--color-accent-blue);
+	letter-spacing: 0.02em;
 }
 
-.card-title {
+.row-title {
 	display: -webkit-box;
-	margin: 0;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	-webkit-line-clamp: 2;
 	line-clamp: 2;
-	font-family: 'Noto Sans JP Bold', sans-serif;
-	font-size: 18px;
-	font-weight: bold;
+	font-family: var(--font-body-bold);
+	font-size: 16px;
 	line-height: 1.5;
-	color: #333;
+	color: var(--color-text);
 	-webkit-box-orient: vertical;
+	transition: color 0.2s ease;
+}
+
+.news-row:hover .row-title {
+	color: var(--color-accent-blue);
 }
 
 @media (width >= 768px) {
-	.card-thumbnail {
-		height: 220px;
+	.news-row {
+		gap: 24px;
+		padding: 24px 0;
 	}
 
-	.card-title {
-		font-size: 20px;
+	.row-thumbnail {
+		width: 200px;
+	}
+
+	.row-title {
+		font-size: 18px;
 	}
 }
 </style>

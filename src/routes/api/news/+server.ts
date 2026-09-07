@@ -1,3 +1,5 @@
+// NOTE: このエンドポイントは、/news ページの SSR ページネーション化により現在は未使用です。
+// 将来のクライアント側フェッチ用に温存しています。
 import { getNewsAsync } from '$lib/news/app'
 import { NewsItemSchema } from '$lib/news/domain/schema'
 import { json } from '@sveltejs/kit'
