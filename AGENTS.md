@@ -349,6 +349,8 @@ Required environment variable:
 
 コーディング規約の詳細は [docs/CODING.md](./docs/CODING.md) を参照してください。
 
+ブランチ運用・コミットメッセージ規約は [docs/BRANCHING.md](./docs/BRANCHING.md) を参照してください。実装作業は `main` の最新から `feature/<type>/<bd-id>-<slug>` ブランチを切って行い、PR 経由でマージする。
+
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 
 ## Beads Issue Tracker
