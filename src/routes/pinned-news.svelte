@@ -146,20 +146,36 @@ function formatDate(isoDate: string): string {
 	object-fit: cover;
 }
 
-@media screen and (width >= 1024px) {
+@media screen and (width >= 768px) {
 	.row {
-		display: grid;
 		grid-template-rows: none;
-		grid-template-columns: 1fr 1fr;
-		width: 100%;
+		grid-template-columns: 1fr auto;
+		column-gap: 16px;
+		align-items: center;
 	}
 
 	.article-info {
 		padding-right: 0;
+		padding-left: var(--wide-content-space);
 	}
 
 	.image-wrapper {
+		width: 180px;
+		max-width: 180px;
+		height: 101px;
+		margin: 0;
+	}
+}
+
+@media screen and (width >= 1024px) {
+	.row {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.image-wrapper {
+		width: 100%;
 		max-width: none;
+		height: 94px;
 		margin: 0;
 	}
 }
