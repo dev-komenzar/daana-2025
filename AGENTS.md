@@ -74,7 +74,7 @@ This file provides guidance to AI coding agents when working with code in this r
 
 ## Issue Tracking (bd)
 
-このプロジェクトでは **bd** (beads) で課題管理を行う。データベースは Dolt (`.beads/embeddeddolt/`) に保存される。
+このプロジェクトでは **bd** (beads) で課題管理を行う。データベースは embedded Dolt engine（`.beads/embeddeddolt/`）に保存される（bd v1.x は SQLite backend を廃止し Dolt に統一）。
 
 ### 基本ワークフロー
 
@@ -106,12 +106,13 @@ bd show <id>                      # 依存関係を確認
 
 ### 同期（Dolt remote: GitHub）
 
-beads のデータは Dolt として `https://github.com/dev-komenzar/daana-2025.git` の `refs/dolt/data` に格納される（通常の git ブランチとは別 ref のためソースコードと競合しない）。
+beads のデータは Dolt として `https://github.com/dev-komenzar/daana-2025.git` の `refs/dolt/data` に格納される（通常の git ブランチとは別 ref のためソースコードと競合しない）。bd v1.x は embedded Dolt engine を内蔵しており、外部の `dolt` CLI は不要。
 
 ```bash
 bd dolt push          # Dolt remote（GitHub refs/dolt/data）に push
 bd dolt pull          # Dolt remote から pull
 bd dolt remote list   # 設定中のリモート一覧
+bd dolt status        # Dolt DB の状態確認
 ```
 
 新規クローンからの復元:
@@ -119,14 +120,14 @@ bd dolt remote list   # 設定中のリモート一覧
 ```bash
 git clone https://github.com/dev-komenzar/daana-2025.git
 cd daana-2025
-direnv allow   # devShell で dolt CLI が入る
-bd bootstrap   # refs/dolt/data から Dolt DB を復元
+direnv allow   # devShell で bd CLI が入る
+bd bootstrap   # refs/dolt/data から Dolt DB を復元（clone from remote を検出）
 ```
 
 注意:
 
-- **dolt CLI は flake.nix の devShell に同梱されている**。素のシェルでは `bd dolt push/pull` が失敗するので direnv が効いているか確認すること
-- 生の `dolt` CLI を直接叩いてジャーナルを壊さないこと。`bd dolt ...` 経由で操作する
+- **Dolt DB の操作は必ず `bd dolt ...` 経由で行う**（ジャーナルを壊さないため）。生の `dolt` CLI を直接叩かないこと
+- v1.x は SQLite backend を廃止しており、`bd sync` / `bd daemon` は存在しない（v0.42 以前の旧コマンド）
 
 ### 品質管理
 
@@ -172,7 +173,7 @@ bd memories <keyword>   # 記憶した知識を検索
 **重要ルール：**
 
 - `git commit` と `bd dolt push` が成功するまで作業は完了ではない
-- beads データは git ではなく refs/dolt/data に乗る。`.beads/issues.jsonl` はもう生成されない（gitignore 済み）
+- beads データは embedded Dolt（`.beads/embeddeddolt/`）に保存され、`bd dolt push` で `refs/dolt/data` に同期する。`.beads/issues.jsonl` は git 追跡のポータブルエクスポート（`bd bootstrap` の復元用）
 - リモートへの `git push` はユーザーのタイミングで行う（エージェントからは実行しない）
 - コミットメッセージは**箇条書きで5行以内**で作成する
 
@@ -347,3 +348,52 @@ Required environment variable:
 - Data fetching is done via `+page.server.ts` load functions (SSR)
 
 コーディング規約の詳細は [docs/CODING.md](./docs/CODING.md) を参照してください。
+
+<!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
+
+## Beads Issue Tracker
+
+This project uses **bd (beads)** for issue tracking. Run `bd prime` to see full workflow context and commands.
+
+### Quick Reference
+
+```bash
+bd ready              # Find available work
+bd show <id>          # View issue details
+bd update <id> --claim  # Claim work
+bd close <id>         # Complete work
+```
+
+### Rules
+
+- Use `bd` for ALL task tracking — do NOT use TodoWrite, TaskCreate, or markdown TODO lists
+- Run `bd prime` for detailed command reference and session close protocol
+- Use `bd remember` for persistent knowledge — do NOT use MEMORY.md files
+
+## Session Completion
+
+**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
+
+**MANDATORY WORKFLOW:**
+
+1. **File issues for remaining work** - Create issues for anything that needs follow-up
+2. **Run quality gates** (if code changed) - Tests, linters, builds
+3. **Update issue status** - Close finished work, update in-progress items
+4. **PUSH TO REMOTE** - This is MANDATORY:
+   ```bash
+   git pull --rebase
+   bd dolt push
+   git push
+   git status  # MUST show "up to date with origin"
+   ```
+5. **Clean up** - Clear stashes, prune remote branches
+6. **Verify** - All changes committed AND pushed
+7. **Hand off** - Provide context for next session
+
+**CRITICAL RULES:**
+
+- Work is NOT complete until `git push` succeeds
+- NEVER stop before pushing - that leaves work stranded locally
+- NEVER say "ready to push when you are" - YOU must push
+- If push fails, resolve and retry until it succeeds
+<!-- END BEADS INTEGRATION -->

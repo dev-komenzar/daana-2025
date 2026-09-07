@@ -44,13 +44,12 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             nodejs_22
-            nodePackages.pnpm
+            pnpm
             # sharp dependencies
             vips
             pkg-config
-            # 課題管理 (bd) と Dolt remote (refs/dolt/data) 同期用 CLI
+            # 課題管理 (bd) CLI（v1.x: embedded Dolt engine 内蔵、外部 dolt 不要）
             beads
-            dolt
           ];
 
           shellHook = ''
