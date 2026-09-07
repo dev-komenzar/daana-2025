@@ -1,88 +1,98 @@
 <script lang="ts">
-import type { NewsItem } from '$lib/news'
-
+import { resolve } from '$app/paths'
 import NewsCard from '$lib/components/ui/news-card.svelte'
 
 import type { PageData } from './$types'
 
-const ITEMS_PER_PAGE = 10
+type PaginationEntry = { id: string; kind: 'ellipsis' } | { kind: 'page'; page: number }
 
 let { data }: { data: PageData } = $props()
 
-let allNewsItems = $state<NewsItem[]>([])
-let isLoadingMore = $state(false)
-
-// Track if there are more items to load based on totalCount
-const hasMoreItems = $derived(() => {
-	const currentItemCount = allNewsItems.length > 0 ? allNewsItems.length : data.newsItems.length
-	return currentItemCount < data.totalCount
-})
-
-// Merge initial query results with loaded items
-const displayedItems = $derived(() => {
-	if (allNewsItems.length > 0) {
-		return allNewsItems
+function buildPagination(current: number, total: number): PaginationEntry[] {
+	const pages: number[] = [1, total]
+	for (let page = Math.max(1, current - 2); page <= Math.min(total, current + 2); page++) {
+		if (!pages.includes(page)) pages.push(page)
 	}
-	return data.newsItems
-})
 
-async function loadMore() {
-	if (isLoadingMore) return
-
-	isLoadingMore = true
-
-	try {
-		const currentOffset = allNewsItems.length > 0 ? allNewsItems.length : ITEMS_PER_PAGE
-
-		const response = await fetch(`/api/news?offset=${currentOffset}&limit=${ITEMS_PER_PAGE}`)
-		if (!response.ok) {
-			throw new Error('Failed to fetch news')
+	const sortedPages = pages.toSorted((a, b) => a - b)
+	const entries: PaginationEntry[] = []
+	let previousPage = 0
+	for (const page of sortedPages) {
+		if (page - previousPage > 1) {
+			entries.push({ id: `ellipsis-${previousPage}-${page}`, kind: 'ellipsis' })
 		}
-
-		const moreNews: NewsItem[] = await response.json()
-
-		if (moreNews && moreNews.length > 0) {
-			// Merge initial items with new items
-			allNewsItems = allNewsItems.length === 0 ? [...data.newsItems, ...moreNews] : [...allNewsItems, ...moreNews]
-		}
-	} catch (error) {
-		console.error('Failed to load more news:', error)
-	} finally {
-		isLoadingMore = false
+		entries.push({ kind: 'page', page })
+		previousPage = page
 	}
+	return entries
+}
+
+const paginationItems = $derived(buildPagination(data.currentPage, data.totalPages))
+
+// 1ページ目は ?page=1 を付けず clean URL にする。
+function pageHref(page: number): string {
+	return resolve(`/news${page === 1 ? '' : `?page=${page}`}` as '/')
 }
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -- href は pageHref() 経由で resolve() を通している -->
 <div class="news-page">
 	<div class="container">
-		<header class="page-header">
-			<h1 class="page-title text-large font-gothic-bold">Pick Up</h1>
-			<p class="page-subtitle">お知らせ一覧</p>
-		</header>
+		<div class="wide-content">
+			<header class="page-header">
+				<h1 class="page-title text-large font-gothic-bold">News</h1>
+				<p class="page-subtitle">お知らせ一覧</p>
+			</header>
 
-		{#if displayedItems().length === 0}
-			<div class="empty-message">
-				<p>まだニュースがありません。</p>
-			</div>
-		{:else}
-			<div class="news-grid">
-				{#each displayedItems() as item (item.id)}
-					<NewsCard {item} />
-				{/each}
-			</div>
-
-			{#if hasMoreItems()}
-				<div class="load-more-container">
-					<button
-						class="load-more-button"
-						onclick={loadMore}
-						disabled={isLoadingMore}
-					>
-						{isLoadingMore ? '読み込み中...' : 'さらに読み込む'}
-					</button>
+			{#if data.newsItems.length === 0}
+				<div class="empty-message">
+					<p>まだニュースがありません。</p>
 				</div>
+			{:else}
+				<div class="news-list">
+					{#each data.newsItems as item (item.id)}
+						<NewsCard {item} />
+					{/each}
+				</div>
+
+				{#if data.totalPages > 1}
+					<nav
+						class="pagination"
+						aria-label="ページネーション"
+					>
+						{#if data.currentPage > 1}
+							<a
+								class="pagination-nav"
+								href={pageHref(data.currentPage - 1)}
+								data-sveltekit-preload-data="tap">前へ</a
+							>
+						{/if}
+						<div class="pagination-pages">
+							{#each paginationItems as entry (entry.kind === 'page' ? entry.page : entry.id)}
+								{#if entry.kind === 'ellipsis'}
+									<span class="pagination-ellipsis">…</span>
+								{:else}
+									<a
+										class="pagination-page"
+										class:active={entry.page === data.currentPage}
+										href={pageHref(entry.page)}
+										data-sveltekit-preload-data="tap"
+										aria-current={entry.page === data.currentPage ? 'page' : undefined}>{entry.page}</a
+									>
+								{/if}
+							{/each}
+						</div>
+						{#if data.currentPage < data.totalPages}
+							<a
+								class="pagination-nav"
+								href={pageHref(data.currentPage + 1)}
+								data-sveltekit-preload-data="tap">次へ</a
+							>
+						{/if}
+					</nav>
+				{/if}
 			{/if}
-		{/if}
+		</div>
 	</div>
 </div>
 
@@ -90,81 +100,101 @@ async function loadMore() {
 .news-page {
 	min-height: 100vh;
 	padding: 120px 0 80px;
-	background-color: #fafafa;
-}
-
-.container {
-	width: 100%;
-	max-width: 1200px;
-	padding: 0 20px;
-	margin: 0 auto;
+	background-color: var(--color-white);
 }
 
 .page-header {
-	margin-bottom: 60px;
 	text-align: center;
 }
 
+.page-header > * + * {
+	margin-top: 16px;
+}
+
 .page-title {
-	margin: 0 0 16px;
-	font-size: 48px;
-	color: #333;
+	color: var(--color-primary);
 }
 
 .page-subtitle {
-	margin: 0;
-	font-family: 'Noto Sans JP Light', sans-serif;
-	font-size: 18px;
-	color: #666;
+	font-family: var(--font-body-light);
+	font-size: 16px;
+	color: var(--color-accent-blue);
 }
 
-.news-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	gap: 32px;
-	margin-bottom: 40px;
+.news-list {
+	margin-top: 48px;
 }
 
 .empty-message {
-	padding: 40px 20px;
+	margin-top: 48px;
 	text-align: center;
 }
 
 .empty-message p {
-	font-family: 'Noto Sans JP Light', sans-serif;
+	font-family: var(--font-body-light);
 	font-size: 16px;
-	color: #999;
+	color: color-mix(in srgb, var(--color-text) 50%, var(--color-white));
 }
 
-.load-more-container {
+.pagination {
 	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	align-items: center;
 	justify-content: center;
-	padding: 40px 0;
+	margin-top: 48px;
 }
 
-.load-more-button {
-	padding: 16px 48px;
-	font-family: 'Noto Sans JP Regular', sans-serif;
-	font-size: 16px;
-	color: white;
-	cursor: pointer;
-	background-color: var(--color-primary);
-	border: none;
+.pagination-pages {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.pagination-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	font-family: var(--font-body);
+	font-size: 14px;
+	color: var(--color-primary);
+	text-decoration: none;
+	border: 1px solid var(--color-secondary);
 	border-radius: 8px;
 	transition:
-		background-color 0.3s ease,
-		transform 0.2s ease;
+		color 0.2s ease,
+		border-color 0.2s ease,
+		background-color 0.2s ease;
 }
 
-.load-more-button:disabled {
-	cursor: not-allowed;
-	background-color: #ccc;
-	opacity: 0.6;
+.pagination-page:hover {
+	color: var(--color-accent-blue);
+	border-color: var(--color-accent-blue);
 }
 
-.load-more-button:hover:not(:disabled) {
-	background-color: var(--color-secondary);
-	transform: translateY(-2px);
+.pagination-page.active {
+	color: var(--color-white);
+	pointer-events: none;
+	background-color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+
+.pagination-ellipsis {
+	color: var(--color-secondary);
+}
+
+.pagination-nav {
+	font-family: var(--font-body-medium);
+	font-size: 14px;
+	color: var(--color-primary);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.pagination-nav:hover {
+	color: var(--color-accent-blue);
 }
 
 @media (width >= 768px) {
@@ -172,26 +202,8 @@ async function loadMore() {
 		padding: 140px 0 100px;
 	}
 
-	.page-header {
-		margin-bottom: 80px;
-	}
-
-	.page-title {
-		font-size: 64px;
-	}
-
 	.page-subtitle {
-		font-size: 20px;
-	}
-
-	.news-grid {
-		gap: 40px;
-	}
-}
-
-@media (width >= 1024px) {
-	.news-grid {
-		grid-template-columns: repeat(3, 1fr);
+		font-size: 18px;
 	}
 }
 </style>
